@@ -1,0 +1,27 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /crm
+     
+    
+spring:
+  http:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true 
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: CRM
+    password: CRM
+    
+mybatis:
+  config-location: classpath:conf.xml        
+    
+    
+
