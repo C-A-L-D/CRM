@@ -35,12 +35,6 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- <dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency> -->
-		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
 		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
 		<dependency>
 		    <groupId>com.oracle</groupId>
