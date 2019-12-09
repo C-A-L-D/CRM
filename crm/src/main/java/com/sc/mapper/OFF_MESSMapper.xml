@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.OFF_MESSMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.OFF_MESS" >
+    <constructor >
+      <idArg column="MESSID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="TITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CONTENT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SENDER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANYID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MESSID, TITLE, CONTENT, SENDER, COMPANYID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.OFF_MESSExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OFF_MESS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OFF_MESS
+    where MESSID = #{messid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OFF_MESS
+    where MESSID = #{messid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.OFF_MESSExample" >
+    delete from OFF_MESS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.OFF_MESS" >
+    insert into OFF_MESS (MESSID, TITLE, CONTENT, 
+      SENDER, COMPANYID, LASTTIME
+      )
+    values (#{messid,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{sender,jdbcType=VARCHAR}, #{companyid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.OFF_MESS" >
+    insert into OFF_MESS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messid != null" >
+        MESSID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="sender != null" >
+        SENDER,
+      </if>
+      <if test="companyid != null" >
+        COMPANYID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messid != null" >
+        #{messid,jdbcType=DECIMAL},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.OFF_MESSExample" resultType="java.lang.Integer" >
+    select count(*) from OFF_MESS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update OFF_MESS
+    <set >
+      <if test="record.messid != null" >
+        MESSID = #{record.messid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.title != null" >
+        TITLE = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sender != null" >
+        SENDER = #{record.sender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null" >
+        COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update OFF_MESS
+    set MESSID = #{record.messid,jdbcType=DECIMAL},
+      TITLE = #{record.title,jdbcType=VARCHAR},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      SENDER = #{record.sender,jdbcType=VARCHAR},
+      COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.OFF_MESS" >
+    update OFF_MESS
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        SENDER = #{sender,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        COMPANYID = #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where MESSID = #{messid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.OFF_MESS" >
+    update OFF_MESS
+    set TITLE = #{title,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      SENDER = #{sender,jdbcType=VARCHAR},
+      COMPANYID = #{companyid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where MESSID = #{messid,jdbcType=DECIMAL}
+  </update>
+</mapper>

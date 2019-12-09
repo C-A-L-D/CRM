@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.SYS_USERS_ROLEMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.SYS_USERS_ROLE" >
+    <constructor >
+      <idArg column="ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="UID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="RID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="OPERATORID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, UID, RID, OPERATORID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SYS_USERS_ROLEExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_USERS_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USERS_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_USERS_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.SYS_USERS_ROLEExample" >
+    delete from SYS_USERS_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.SYS_USERS_ROLE" >
+    insert into SYS_USERS_ROLE (ID, UID, RID, 
+      OPERATORID, LASTTIME)
+    values (#{id,jdbcType=DECIMAL}, #{uid,jdbcType=DECIMAL}, #{rid,jdbcType=DECIMAL}, 
+      #{operatorid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.SYS_USERS_ROLE" >
+    insert into SYS_USERS_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="uid != null" >
+        UID,
+      </if>
+      <if test="rid != null" >
+        RID,
+      </if>
+      <if test="operatorid != null" >
+        OPERATORID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=DECIMAL},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null" >
+        #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.SYS_USERS_ROLEExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_USERS_ROLE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_USERS_ROLE
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.uid != null" >
+        UID = #{record.uid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.rid != null" >
+        RID = #{record.rid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operatorid != null" >
+        OPERATORID = #{record.operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_USERS_ROLE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      UID = #{record.uid,jdbcType=DECIMAL},
+      RID = #{record.rid,jdbcType=DECIMAL},
+      OPERATORID = #{record.operatorid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.SYS_USERS_ROLE" >
+    update SYS_USERS_ROLE
+    <set >
+      <if test="uid != null" >
+        UID = #{uid,jdbcType=DECIMAL},
+      </if>
+      <if test="rid != null" >
+        RID = #{rid,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null" >
+        OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.SYS_USERS_ROLE" >
+    update SYS_USERS_ROLE
+    set UID = #{uid,jdbcType=DECIMAL},
+      RID = #{rid,jdbcType=DECIMAL},
+      OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.JH_CGDMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.JH_CGD" >
+    <constructor >
+      <idArg column="CGD_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="CG_THEME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CG_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="GYS_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="HK_MONEY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="FKQK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CG_JZ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="JHTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="JHPLACE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="JHWAY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPERATOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GS_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="FPHM" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CGD_ID, CG_THEME, CG_TIME, GYS_ID, HK_MONEY, FKQK, CG_JZ, JHTIME, JHPLACE, JHWAY, 
+    OPERATOR, REMARK, GS_ID, LTIME, FPHM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.JH_CGDExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from JH_CGD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JH_CGD
+    where CGD_ID = #{cgdId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JH_CGD
+    where CGD_ID = #{cgdId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.JH_CGDExample" >
+    delete from JH_CGD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.JH_CGD" >
+    insert into JH_CGD (CGD_ID, CG_THEME, CG_TIME, 
+      GYS_ID, HK_MONEY, FKQK, 
+      CG_JZ, JHTIME, JHPLACE, 
+      JHWAY, OPERATOR, REMARK, 
+      GS_ID, LTIME, FPHM
+      )
+    values (#{cgdId,jdbcType=DECIMAL}, #{cgTheme,jdbcType=VARCHAR}, #{cgTime,jdbcType=TIMESTAMP}, 
+      #{gysId,jdbcType=VARCHAR}, #{hkMoney,jdbcType=DECIMAL}, #{fkqk,jdbcType=VARCHAR}, 
+      #{cgJz,jdbcType=VARCHAR}, #{jhtime,jdbcType=TIMESTAMP}, #{jhplace,jdbcType=VARCHAR}, 
+      #{jhway,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{gsId,jdbcType=DECIMAL}, #{ltime,jdbcType=TIMESTAMP}, #{fphm,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.JH_CGD" >
+    insert into JH_CGD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cgdId != null" >
+        CGD_ID,
+      </if>
+      <if test="cgTheme != null" >
+        CG_THEME,
+      </if>
+      <if test="cgTime != null" >
+        CG_TIME,
+      </if>
+      <if test="gysId != null" >
+        GYS_ID,
+      </if>
+      <if test="hkMoney != null" >
+        HK_MONEY,
+      </if>
+      <if test="fkqk != null" >
+        FKQK,
+      </if>
+      <if test="cgJz != null" >
+        CG_JZ,
+      </if>
+      <if test="jhtime != null" >
+        JHTIME,
+      </if>
+      <if test="jhplace != null" >
+        JHPLACE,
+      </if>
+      <if test="jhway != null" >
+        JHWAY,
+      </if>
+      <if test="operator != null" >
+        OPERATOR,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="gsId != null" >
+        GS_ID,
+      </if>
+      <if test="ltime != null" >
+        LTIME,
+      </if>
+      <if test="fphm != null" >
+        FPHM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cgdId != null" >
+        #{cgdId,jdbcType=DECIMAL},
+      </if>
+      <if test="cgTheme != null" >
+        #{cgTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="cgTime != null" >
+        #{cgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gysId != null" >
+        #{gysId,jdbcType=VARCHAR},
+      </if>
+      <if test="hkMoney != null" >
+        #{hkMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fkqk != null" >
+        #{fkqk,jdbcType=VARCHAR},
+      </if>
+      <if test="cgJz != null" >
+        #{cgJz,jdbcType=VARCHAR},
+      </if>
+      <if test="jhtime != null" >
+        #{jhtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhplace != null" >
+        #{jhplace,jdbcType=VARCHAR},
+      </if>
+      <if test="jhway != null" >
+        #{jhway,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        #{gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="ltime != null" >
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fphm != null" >
+        #{fphm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.JH_CGDExample" resultType="java.lang.Integer" >
+    select count(*) from JH_CGD
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update JH_CGD
+    <set >
+      <if test="record.cgdId != null" >
+        CGD_ID = #{record.cgdId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cgTheme != null" >
+        CG_THEME = #{record.cgTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cgTime != null" >
+        CG_TIME = #{record.cgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gysId != null" >
+        GYS_ID = #{record.gysId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hkMoney != null" >
+        HK_MONEY = #{record.hkMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fkqk != null" >
+        FKQK = #{record.fkqk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cgJz != null" >
+        CG_JZ = #{record.cgJz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jhtime != null" >
+        JHTIME = #{record.jhtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jhplace != null" >
+        JHPLACE = #{record.jhplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jhway != null" >
+        JHWAY = #{record.jhway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gsId != null" >
+        GS_ID = #{record.gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ltime != null" >
+        LTIME = #{record.ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fphm != null" >
+        FPHM = #{record.fphm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update JH_CGD
+    set CGD_ID = #{record.cgdId,jdbcType=DECIMAL},
+      CG_THEME = #{record.cgTheme,jdbcType=VARCHAR},
+      CG_TIME = #{record.cgTime,jdbcType=TIMESTAMP},
+      GYS_ID = #{record.gysId,jdbcType=VARCHAR},
+      HK_MONEY = #{record.hkMoney,jdbcType=DECIMAL},
+      FKQK = #{record.fkqk,jdbcType=VARCHAR},
+      CG_JZ = #{record.cgJz,jdbcType=VARCHAR},
+      JHTIME = #{record.jhtime,jdbcType=TIMESTAMP},
+      JHPLACE = #{record.jhplace,jdbcType=VARCHAR},
+      JHWAY = #{record.jhway,jdbcType=VARCHAR},
+      OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      GS_ID = #{record.gsId,jdbcType=DECIMAL},
+      LTIME = #{record.ltime,jdbcType=TIMESTAMP},
+      FPHM = #{record.fphm,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.JH_CGD" >
+    update JH_CGD
+    <set >
+      <if test="cgTheme != null" >
+        CG_THEME = #{cgTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="cgTime != null" >
+        CG_TIME = #{cgTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gysId != null" >
+        GYS_ID = #{gysId,jdbcType=VARCHAR},
+      </if>
+      <if test="hkMoney != null" >
+        HK_MONEY = #{hkMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="fkqk != null" >
+        FKQK = #{fkqk,jdbcType=VARCHAR},
+      </if>
+      <if test="cgJz != null" >
+        CG_JZ = #{cgJz,jdbcType=VARCHAR},
+      </if>
+      <if test="jhtime != null" >
+        JHTIME = #{jhtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jhplace != null" >
+        JHPLACE = #{jhplace,jdbcType=VARCHAR},
+      </if>
+      <if test="jhway != null" >
+        JHWAY = #{jhway,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        GS_ID = #{gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="ltime != null" >
+        LTIME = #{ltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fphm != null" >
+        FPHM = #{fphm,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where CGD_ID = #{cgdId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.JH_CGD" >
+    update JH_CGD
+    set CG_THEME = #{cgTheme,jdbcType=VARCHAR},
+      CG_TIME = #{cgTime,jdbcType=TIMESTAMP},
+      GYS_ID = #{gysId,jdbcType=VARCHAR},
+      HK_MONEY = #{hkMoney,jdbcType=DECIMAL},
+      FKQK = #{fkqk,jdbcType=VARCHAR},
+      CG_JZ = #{cgJz,jdbcType=VARCHAR},
+      JHTIME = #{jhtime,jdbcType=TIMESTAMP},
+      JHPLACE = #{jhplace,jdbcType=VARCHAR},
+      JHWAY = #{jhway,jdbcType=VARCHAR},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      GS_ID = #{gsId,jdbcType=DECIMAL},
+      LTIME = #{ltime,jdbcType=TIMESTAMP},
+      FPHM = #{fphm,jdbcType=VARCHAR}
+    where CGD_ID = #{cgdId,jdbcType=DECIMAL}
+  </update>
+</mapper>

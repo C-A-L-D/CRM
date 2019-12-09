@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.OFF_PERPLANMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.OFF_PERPLAN" >
+    <constructor >
+      <idArg column="PLANID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="PLANKIND" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PLANTHEME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="STARTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="WRITEPERID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="PLANDESC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANYID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="STARTDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PLANID, PLANKIND, PLANTHEME, STARTTIME, WRITEPERID, PLANDESC, COMPANYID, LASTTIME, 
+    STARTDATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.OFF_PERPLANExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OFF_PERPLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OFF_PERPLAN
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OFF_PERPLAN
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.OFF_PERPLANExample" >
+    delete from OFF_PERPLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.OFF_PERPLAN" >
+    insert into OFF_PERPLAN (PLANID, PLANKIND, PLANTHEME, 
+      STARTTIME, WRITEPERID, PLANDESC, 
+      COMPANYID, LASTTIME, STARTDATE
+      )
+    values (#{planid,jdbcType=DECIMAL}, #{plankind,jdbcType=VARCHAR}, #{plantheme,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{writeperid,jdbcType=DECIMAL}, #{plandesc,jdbcType=VARCHAR}, 
+      #{companyid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP}, #{startdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.OFF_PERPLAN" >
+    insert into OFF_PERPLAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="planid != null" >
+        PLANID,
+      </if>
+      <if test="plankind != null" >
+        PLANKIND,
+      </if>
+      <if test="plantheme != null" >
+        PLANTHEME,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="writeperid != null" >
+        WRITEPERID,
+      </if>
+      <if test="plandesc != null" >
+        PLANDESC,
+      </if>
+      <if test="companyid != null" >
+        COMPANYID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+      <if test="startdate != null" >
+        STARTDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="planid != null" >
+        #{planid,jdbcType=DECIMAL},
+      </if>
+      <if test="plankind != null" >
+        #{plankind,jdbcType=VARCHAR},
+      </if>
+      <if test="plantheme != null" >
+        #{plantheme,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeperid != null" >
+        #{writeperid,jdbcType=DECIMAL},
+      </if>
+      <if test="plandesc != null" >
+        #{plandesc,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.OFF_PERPLANExample" resultType="java.lang.Integer" >
+    select count(*) from OFF_PERPLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update OFF_PERPLAN
+    <set >
+      <if test="record.planid != null" >
+        PLANID = #{record.planid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.plankind != null" >
+        PLANKIND = #{record.plankind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantheme != null" >
+        PLANTHEME = #{record.plantheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.starttime != null" >
+        STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.writeperid != null" >
+        WRITEPERID = #{record.writeperid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.plandesc != null" >
+        PLANDESC = #{record.plandesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null" >
+        COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.startdate != null" >
+        STARTDATE = #{record.startdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update OFF_PERPLAN
+    set PLANID = #{record.planid,jdbcType=DECIMAL},
+      PLANKIND = #{record.plankind,jdbcType=VARCHAR},
+      PLANTHEME = #{record.plantheme,jdbcType=VARCHAR},
+      STARTTIME = #{record.starttime,jdbcType=TIMESTAMP},
+      WRITEPERID = #{record.writeperid,jdbcType=DECIMAL},
+      PLANDESC = #{record.plandesc,jdbcType=VARCHAR},
+      COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      STARTDATE = #{record.startdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.OFF_PERPLAN" >
+    update OFF_PERPLAN
+    <set >
+      <if test="plankind != null" >
+        PLANKIND = #{plankind,jdbcType=VARCHAR},
+      </if>
+      <if test="plantheme != null" >
+        PLANTHEME = #{plantheme,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="writeperid != null" >
+        WRITEPERID = #{writeperid,jdbcType=DECIMAL},
+      </if>
+      <if test="plandesc != null" >
+        PLANDESC = #{plandesc,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        COMPANYID = #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startdate != null" >
+        STARTDATE = #{startdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.OFF_PERPLAN" >
+    update OFF_PERPLAN
+    set PLANKIND = #{plankind,jdbcType=VARCHAR},
+      PLANTHEME = #{plantheme,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      WRITEPERID = #{writeperid,jdbcType=DECIMAL},
+      PLANDESC = #{plandesc,jdbcType=VARCHAR},
+      COMPANYID = #{companyid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      STARTDATE = #{startdate,jdbcType=TIMESTAMP}
+    where PLANID = #{planid,jdbcType=DECIMAL}
+  </update>
+</mapper>

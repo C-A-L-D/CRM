@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.XIAOSHOU_SELLINFOMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.XIAOSHOU_SELLINFO" >
+    <constructor >
+      <idArg column="SSID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="SID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="GID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="GNUM" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="GPRICE" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SSID, SID, GID, GNUM, GPRICE, REMARK, CID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.XIAOSHOU_SELLINFOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_SELLINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_SELLINFO
+    where SSID = #{ssid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from XIAOSHOU_SELLINFO
+    where SSID = #{ssid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.XIAOSHOU_SELLINFOExample" >
+    delete from XIAOSHOU_SELLINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.XIAOSHOU_SELLINFO" >
+    insert into XIAOSHOU_SELLINFO (SSID, SID, GID, 
+      GNUM, GPRICE, REMARK, 
+      CID, LASTTIME)
+    values (#{ssid,jdbcType=DECIMAL}, #{sid,jdbcType=DECIMAL}, #{gid,jdbcType=DECIMAL}, 
+      #{gnum,jdbcType=DECIMAL}, #{gprice,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.XIAOSHOU_SELLINFO" >
+    insert into XIAOSHOU_SELLINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ssid != null" >
+        SSID,
+      </if>
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="gid != null" >
+        GID,
+      </if>
+      <if test="gnum != null" >
+        GNUM,
+      </if>
+      <if test="gprice != null" >
+        GPRICE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ssid != null" >
+        #{ssid,jdbcType=DECIMAL},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=DECIMAL},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="gnum != null" >
+        #{gnum,jdbcType=DECIMAL},
+      </if>
+      <if test="gprice != null" >
+        #{gprice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.XIAOSHOU_SELLINFOExample" resultType="java.lang.Integer" >
+    select count(*) from XIAOSHOU_SELLINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XIAOSHOU_SELLINFO
+    <set >
+      <if test="record.ssid != null" >
+        SSID = #{record.ssid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sid != null" >
+        SID = #{record.sid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gid != null" >
+        GID = #{record.gid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gnum != null" >
+        GNUM = #{record.gnum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gprice != null" >
+        GPRICE = #{record.gprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null" >
+        CID = #{record.cid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XIAOSHOU_SELLINFO
+    set SSID = #{record.ssid,jdbcType=DECIMAL},
+      SID = #{record.sid,jdbcType=DECIMAL},
+      GID = #{record.gid,jdbcType=DECIMAL},
+      GNUM = #{record.gnum,jdbcType=DECIMAL},
+      GPRICE = #{record.gprice,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CID = #{record.cid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.XIAOSHOU_SELLINFO" >
+    update XIAOSHOU_SELLINFO
+    <set >
+      <if test="sid != null" >
+        SID = #{sid,jdbcType=DECIMAL},
+      </if>
+      <if test="gid != null" >
+        GID = #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="gnum != null" >
+        GNUM = #{gnum,jdbcType=DECIMAL},
+      </if>
+      <if test="gprice != null" >
+        GPRICE = #{gprice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        CID = #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SSID = #{ssid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.XIAOSHOU_SELLINFO" >
+    update XIAOSHOU_SELLINFO
+    set SID = #{sid,jdbcType=DECIMAL},
+      GID = #{gid,jdbcType=DECIMAL},
+      GNUM = #{gnum,jdbcType=DECIMAL},
+      GPRICE = #{gprice,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CID = #{cid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where SSID = #{ssid,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.JH_GYSXXMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.JH_GYSXX" >
+    <constructor >
+      <idArg column="GYS_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="GYS_NAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GYS_JC" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LXR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GD_PHONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="YD_PHONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LXCZ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LXDZ" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LXYB" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="MAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="KHBANK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="YHZH" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GSZY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="IS_YX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPERATOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GS_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="LTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GYS_ID, GYS_NAME, GYS_JC, LXR, GD_PHONE, YD_PHONE, LXCZ, LXDZ, LXYB, MAIL, KHBANK, 
+    YHZH, GSZY, IS_YX, OPERATOR, REMARK, GS_ID, LTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.JH_GYSXXExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from JH_GYSXX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from JH_GYSXX
+    where GYS_ID = #{gysId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from JH_GYSXX
+    where GYS_ID = #{gysId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.JH_GYSXXExample" >
+    delete from JH_GYSXX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.JH_GYSXX" >
+    insert into JH_GYSXX (GYS_ID, GYS_NAME, GYS_JC, 
+      LXR, GD_PHONE, YD_PHONE, 
+      LXCZ, LXDZ, LXYB, MAIL, 
+      KHBANK, YHZH, GSZY, 
+      IS_YX, OPERATOR, REMARK, 
+      GS_ID, LTIME)
+    values (#{gysId,jdbcType=DECIMAL}, #{gysName,jdbcType=VARCHAR}, #{gysJc,jdbcType=VARCHAR}, 
+      #{lxr,jdbcType=VARCHAR}, #{gdPhone,jdbcType=VARCHAR}, #{ydPhone,jdbcType=VARCHAR}, 
+      #{lxcz,jdbcType=VARCHAR}, #{lxdz,jdbcType=VARCHAR}, #{lxyb,jdbcType=VARCHAR}, #{mail,jdbcType=VARCHAR}, 
+      #{khbank,jdbcType=VARCHAR}, #{yhzh,jdbcType=VARCHAR}, #{gszy,jdbcType=VARCHAR}, 
+      #{isYx,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{gsId,jdbcType=DECIMAL}, #{ltime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.JH_GYSXX" >
+    insert into JH_GYSXX
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gysId != null" >
+        GYS_ID,
+      </if>
+      <if test="gysName != null" >
+        GYS_NAME,
+      </if>
+      <if test="gysJc != null" >
+        GYS_JC,
+      </if>
+      <if test="lxr != null" >
+        LXR,
+      </if>
+      <if test="gdPhone != null" >
+        GD_PHONE,
+      </if>
+      <if test="ydPhone != null" >
+        YD_PHONE,
+      </if>
+      <if test="lxcz != null" >
+        LXCZ,
+      </if>
+      <if test="lxdz != null" >
+        LXDZ,
+      </if>
+      <if test="lxyb != null" >
+        LXYB,
+      </if>
+      <if test="mail != null" >
+        MAIL,
+      </if>
+      <if test="khbank != null" >
+        KHBANK,
+      </if>
+      <if test="yhzh != null" >
+        YHZH,
+      </if>
+      <if test="gszy != null" >
+        GSZY,
+      </if>
+      <if test="isYx != null" >
+        IS_YX,
+      </if>
+      <if test="operator != null" >
+        OPERATOR,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="gsId != null" >
+        GS_ID,
+      </if>
+      <if test="ltime != null" >
+        LTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gysId != null" >
+        #{gysId,jdbcType=DECIMAL},
+      </if>
+      <if test="gysName != null" >
+        #{gysName,jdbcType=VARCHAR},
+      </if>
+      <if test="gysJc != null" >
+        #{gysJc,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr != null" >
+        #{lxr,jdbcType=VARCHAR},
+      </if>
+      <if test="gdPhone != null" >
+        #{gdPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="ydPhone != null" >
+        #{ydPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="lxcz != null" >
+        #{lxcz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdz != null" >
+        #{lxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxyb != null" >
+        #{lxyb,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="khbank != null" >
+        #{khbank,jdbcType=VARCHAR},
+      </if>
+      <if test="yhzh != null" >
+        #{yhzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gszy != null" >
+        #{gszy,jdbcType=VARCHAR},
+      </if>
+      <if test="isYx != null" >
+        #{isYx,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        #{gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="ltime != null" >
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.JH_GYSXXExample" resultType="java.lang.Integer" >
+    select count(*) from JH_GYSXX
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update JH_GYSXX
+    <set >
+      <if test="record.gysId != null" >
+        GYS_ID = #{record.gysId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gysName != null" >
+        GYS_NAME = #{record.gysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gysJc != null" >
+        GYS_JC = #{record.gysJc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxr != null" >
+        LXR = #{record.lxr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdPhone != null" >
+        GD_PHONE = #{record.gdPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ydPhone != null" >
+        YD_PHONE = #{record.ydPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxcz != null" >
+        LXCZ = #{record.lxcz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxdz != null" >
+        LXDZ = #{record.lxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lxyb != null" >
+        LXYB = #{record.lxyb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mail != null" >
+        MAIL = #{record.mail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.khbank != null" >
+        KHBANK = #{record.khbank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yhzh != null" >
+        YHZH = #{record.yhzh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gszy != null" >
+        GSZY = #{record.gszy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isYx != null" >
+        IS_YX = #{record.isYx,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gsId != null" >
+        GS_ID = #{record.gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ltime != null" >
+        LTIME = #{record.ltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update JH_GYSXX
+    set GYS_ID = #{record.gysId,jdbcType=DECIMAL},
+      GYS_NAME = #{record.gysName,jdbcType=VARCHAR},
+      GYS_JC = #{record.gysJc,jdbcType=VARCHAR},
+      LXR = #{record.lxr,jdbcType=VARCHAR},
+      GD_PHONE = #{record.gdPhone,jdbcType=VARCHAR},
+      YD_PHONE = #{record.ydPhone,jdbcType=VARCHAR},
+      LXCZ = #{record.lxcz,jdbcType=VARCHAR},
+      LXDZ = #{record.lxdz,jdbcType=VARCHAR},
+      LXYB = #{record.lxyb,jdbcType=VARCHAR},
+      MAIL = #{record.mail,jdbcType=VARCHAR},
+      KHBANK = #{record.khbank,jdbcType=VARCHAR},
+      YHZH = #{record.yhzh,jdbcType=VARCHAR},
+      GSZY = #{record.gszy,jdbcType=VARCHAR},
+      IS_YX = #{record.isYx,jdbcType=VARCHAR},
+      OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      GS_ID = #{record.gsId,jdbcType=DECIMAL},
+      LTIME = #{record.ltime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.JH_GYSXX" >
+    update JH_GYSXX
+    <set >
+      <if test="gysName != null" >
+        GYS_NAME = #{gysName,jdbcType=VARCHAR},
+      </if>
+      <if test="gysJc != null" >
+        GYS_JC = #{gysJc,jdbcType=VARCHAR},
+      </if>
+      <if test="lxr != null" >
+        LXR = #{lxr,jdbcType=VARCHAR},
+      </if>
+      <if test="gdPhone != null" >
+        GD_PHONE = #{gdPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="ydPhone != null" >
+        YD_PHONE = #{ydPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="lxcz != null" >
+        LXCZ = #{lxcz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxdz != null" >
+        LXDZ = #{lxdz,jdbcType=VARCHAR},
+      </if>
+      <if test="lxyb != null" >
+        LXYB = #{lxyb,jdbcType=VARCHAR},
+      </if>
+      <if test="mail != null" >
+        MAIL = #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="khbank != null" >
+        KHBANK = #{khbank,jdbcType=VARCHAR},
+      </if>
+      <if test="yhzh != null" >
+        YHZH = #{yhzh,jdbcType=VARCHAR},
+      </if>
+      <if test="gszy != null" >
+        GSZY = #{gszy,jdbcType=VARCHAR},
+      </if>
+      <if test="isYx != null" >
+        IS_YX = #{isYx,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        GS_ID = #{gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="ltime != null" >
+        LTIME = #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where GYS_ID = #{gysId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.JH_GYSXX" >
+    update JH_GYSXX
+    set GYS_NAME = #{gysName,jdbcType=VARCHAR},
+      GYS_JC = #{gysJc,jdbcType=VARCHAR},
+      LXR = #{lxr,jdbcType=VARCHAR},
+      GD_PHONE = #{gdPhone,jdbcType=VARCHAR},
+      YD_PHONE = #{ydPhone,jdbcType=VARCHAR},
+      LXCZ = #{lxcz,jdbcType=VARCHAR},
+      LXDZ = #{lxdz,jdbcType=VARCHAR},
+      LXYB = #{lxyb,jdbcType=VARCHAR},
+      MAIL = #{mail,jdbcType=VARCHAR},
+      KHBANK = #{khbank,jdbcType=VARCHAR},
+      YHZH = #{yhzh,jdbcType=VARCHAR},
+      GSZY = #{gszy,jdbcType=VARCHAR},
+      IS_YX = #{isYx,jdbcType=VARCHAR},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      GS_ID = #{gsId,jdbcType=DECIMAL},
+      LTIME = #{ltime,jdbcType=TIMESTAMP}
+    where GYS_ID = #{gysId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.JH_XBHMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.JH_XBH" >
+    <constructor >
+      <idArg column="ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="CP_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="JH_TIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="STATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="OPERATOR" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GS_ID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, CP_ID, JH_TIME, STATE, OPERATOR, REMARK, GS_ID, LTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.JH_XBHExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from JH_XBH
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from JH_XBH
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from JH_XBH
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.JH_XBHExample" >
+    delete from JH_XBH
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.JH_XBH" >
+    insert into JH_XBH (ID, CP_ID, JH_TIME, 
+      STATE, OPERATOR, REMARK, 
+      GS_ID, LTIME)
+    values (#{id,jdbcType=DECIMAL}, #{cpId,jdbcType=DECIMAL}, #{jhTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{gsId,jdbcType=DECIMAL}, #{ltime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.JH_XBH" >
+    insert into JH_XBH
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="cpId != null" >
+        CP_ID,
+      </if>
+      <if test="jhTime != null" >
+        JH_TIME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="operator != null" >
+        OPERATOR,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="gsId != null" >
+        GS_ID,
+      </if>
+      <if test="ltime != null" >
+        LTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="cpId != null" >
+        #{cpId,jdbcType=DECIMAL},
+      </if>
+      <if test="jhTime != null" >
+        #{jhTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        #{gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="ltime != null" >
+        #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.JH_XBHExample" resultType="java.lang.Integer" >
+    select count(*) from JH_XBH
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update JH_XBH
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cpId != null" >
+        CP_ID = #{record.cpId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.jhTime != null" >
+        JH_TIME = #{record.jhTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null" >
+        OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gsId != null" >
+        GS_ID = #{record.gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ltime != null" >
+        LTIME = #{record.ltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update JH_XBH
+    set ID = #{record.id,jdbcType=DECIMAL},
+      CP_ID = #{record.cpId,jdbcType=DECIMAL},
+      JH_TIME = #{record.jhTime,jdbcType=TIMESTAMP},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      OPERATOR = #{record.operator,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      GS_ID = #{record.gsId,jdbcType=DECIMAL},
+      LTIME = #{record.ltime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.JH_XBH" >
+    update JH_XBH
+    <set >
+      <if test="cpId != null" >
+        CP_ID = #{cpId,jdbcType=DECIMAL},
+      </if>
+      <if test="jhTime != null" >
+        JH_TIME = #{jhTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        OPERATOR = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="gsId != null" >
+        GS_ID = #{gsId,jdbcType=DECIMAL},
+      </if>
+      <if test="ltime != null" >
+        LTIME = #{ltime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.JH_XBH" >
+    update JH_XBH
+    set CP_ID = #{cpId,jdbcType=DECIMAL},
+      JH_TIME = #{jhTime,jdbcType=TIMESTAMP},
+      STATE = #{state,jdbcType=VARCHAR},
+      OPERATOR = #{operator,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      GS_ID = #{gsId,jdbcType=DECIMAL},
+      LTIME = #{ltime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

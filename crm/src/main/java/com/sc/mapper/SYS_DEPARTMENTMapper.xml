@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.SYS_DEPARTMENTMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.SYS_DEPARTMENT" >
+    <constructor >
+      <idArg column="DID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="DNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DDESCRIBE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GONGSIID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DID, DNAME, DDESCRIBE, GONGSIID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SYS_DEPARTMENTExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_DEPARTMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_DEPARTMENT
+    where DID = #{did,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_DEPARTMENT
+    where DID = #{did,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.SYS_DEPARTMENTExample" >
+    delete from SYS_DEPARTMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.SYS_DEPARTMENT" >
+    insert into SYS_DEPARTMENT (DID, DNAME, DDESCRIBE, 
+      GONGSIID, LASTTIME)
+    values (#{did,jdbcType=DECIMAL}, #{dname,jdbcType=VARCHAR}, #{ddescribe,jdbcType=VARCHAR}, 
+      #{gongsiid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.SYS_DEPARTMENT" >
+    insert into SYS_DEPARTMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="did != null" >
+        DID,
+      </if>
+      <if test="dname != null" >
+        DNAME,
+      </if>
+      <if test="ddescribe != null" >
+        DDESCRIBE,
+      </if>
+      <if test="gongsiid != null" >
+        GONGSIID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="did != null" >
+        #{did,jdbcType=DECIMAL},
+      </if>
+      <if test="dname != null" >
+        #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddescribe != null" >
+        #{ddescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiid != null" >
+        #{gongsiid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.SYS_DEPARTMENTExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_DEPARTMENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_DEPARTMENT
+    <set >
+      <if test="record.did != null" >
+        DID = #{record.did,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dname != null" >
+        DNAME = #{record.dname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ddescribe != null" >
+        DDESCRIBE = #{record.ddescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gongsiid != null" >
+        GONGSIID = #{record.gongsiid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_DEPARTMENT
+    set DID = #{record.did,jdbcType=DECIMAL},
+      DNAME = #{record.dname,jdbcType=VARCHAR},
+      DDESCRIBE = #{record.ddescribe,jdbcType=VARCHAR},
+      GONGSIID = #{record.gongsiid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.SYS_DEPARTMENT" >
+    update SYS_DEPARTMENT
+    <set >
+      <if test="dname != null" >
+        DNAME = #{dname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddescribe != null" >
+        DDESCRIBE = #{ddescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiid != null" >
+        GONGSIID = #{gongsiid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DID = #{did,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.SYS_DEPARTMENT" >
+    update SYS_DEPARTMENT
+    set DNAME = #{dname,jdbcType=VARCHAR},
+      DDESCRIBE = #{ddescribe,jdbcType=VARCHAR},
+      GONGSIID = #{gongsiid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where DID = #{did,jdbcType=DECIMAL}
+  </update>
+</mapper>

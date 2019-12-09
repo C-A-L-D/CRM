@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.SYS_POWERINFOMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.SYS_POWERINFO" >
+    <constructor >
+      <idArg column="PID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="PNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PPOWER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PCOLUMN_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PDESCRIBE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PID, PNAME, PPOWER, PCOLUMN_ID, PDESCRIBE, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SYS_POWERINFOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_POWERINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_POWERINFO
+    where PID = #{pid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_POWERINFO
+    where PID = #{pid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.SYS_POWERINFOExample" >
+    delete from SYS_POWERINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.SYS_POWERINFO" >
+    insert into SYS_POWERINFO (PID, PNAME, PPOWER, 
+      PCOLUMN_ID, PDESCRIBE, LASTTIME
+      )
+    values (#{pid,jdbcType=DECIMAL}, #{pname,jdbcType=VARCHAR}, #{ppower,jdbcType=VARCHAR}, 
+      #{pcolumnId,jdbcType=VARCHAR}, #{pdescribe,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.SYS_POWERINFO" >
+    insert into SYS_POWERINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="pname != null" >
+        PNAME,
+      </if>
+      <if test="ppower != null" >
+        PPOWER,
+      </if>
+      <if test="pcolumnId != null" >
+        PCOLUMN_ID,
+      </if>
+      <if test="pdescribe != null" >
+        PDESCRIBE,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=DECIMAL},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ppower != null" >
+        #{ppower,jdbcType=VARCHAR},
+      </if>
+      <if test="pcolumnId != null" >
+        #{pcolumnId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdescribe != null" >
+        #{pdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.SYS_POWERINFOExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_POWERINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_POWERINFO
+    <set >
+      <if test="record.pid != null" >
+        PID = #{record.pid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pname != null" >
+        PNAME = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ppower != null" >
+        PPOWER = #{record.ppower,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcolumnId != null" >
+        PCOLUMN_ID = #{record.pcolumnId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdescribe != null" >
+        PDESCRIBE = #{record.pdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_POWERINFO
+    set PID = #{record.pid,jdbcType=DECIMAL},
+      PNAME = #{record.pname,jdbcType=VARCHAR},
+      PPOWER = #{record.ppower,jdbcType=VARCHAR},
+      PCOLUMN_ID = #{record.pcolumnId,jdbcType=VARCHAR},
+      PDESCRIBE = #{record.pdescribe,jdbcType=VARCHAR},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.SYS_POWERINFO" >
+    update SYS_POWERINFO
+    <set >
+      <if test="pname != null" >
+        PNAME = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ppower != null" >
+        PPOWER = #{ppower,jdbcType=VARCHAR},
+      </if>
+      <if test="pcolumnId != null" >
+        PCOLUMN_ID = #{pcolumnId,jdbcType=VARCHAR},
+      </if>
+      <if test="pdescribe != null" >
+        PDESCRIBE = #{pdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where PID = #{pid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.SYS_POWERINFO" >
+    update SYS_POWERINFO
+    set PNAME = #{pname,jdbcType=VARCHAR},
+      PPOWER = #{ppower,jdbcType=VARCHAR},
+      PCOLUMN_ID = #{pcolumnId,jdbcType=VARCHAR},
+      PDESCRIBE = #{pdescribe,jdbcType=VARCHAR},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where PID = #{pid,jdbcType=DECIMAL}
+  </update>
+</mapper>

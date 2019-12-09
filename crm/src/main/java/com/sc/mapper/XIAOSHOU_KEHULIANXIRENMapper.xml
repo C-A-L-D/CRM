@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.XIAOSHOU_KEHULIANXIRENMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.XIAOSHOU_KEHULIANXIREN" >
+    <constructor >
+      <idArg column="LID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="KID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LIANXIRENXINGMING" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="YINGWENMING" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ZHIWU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BUMEN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHOUJI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BANGONGDIANHUA" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DIANZIYOUJIAN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="DIZHI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="BEIZHUXINXI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LID, KID, LIANXIRENXINGMING, YINGWENMING, ZHIWU, BUMEN, SHOUJI, BANGONGDIANHUA, DIANZIYOUJIAN, 
+    DIZHI, BEIZHUXINXI, GID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.XIAOSHOU_KEHULIANXIRENExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_KEHULIANXIREN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_KEHULIANXIREN
+    where LID = #{lid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from XIAOSHOU_KEHULIANXIREN
+    where LID = #{lid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.XIAOSHOU_KEHULIANXIRENExample" >
+    delete from XIAOSHOU_KEHULIANXIREN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.XIAOSHOU_KEHULIANXIREN" >
+    insert into XIAOSHOU_KEHULIANXIREN (LID, KID, LIANXIRENXINGMING, 
+      YINGWENMING, ZHIWU, BUMEN, 
+      SHOUJI, BANGONGDIANHUA, DIANZIYOUJIAN, 
+      DIZHI, BEIZHUXINXI, GID, 
+      LASTTIME)
+    values (#{lid,jdbcType=DECIMAL}, #{kid,jdbcType=DECIMAL}, #{lianxirenxingming,jdbcType=VARCHAR}, 
+      #{yingwenming,jdbcType=VARCHAR}, #{zhiwu,jdbcType=VARCHAR}, #{bumen,jdbcType=VARCHAR}, 
+      #{shouji,jdbcType=VARCHAR}, #{bangongdianhua,jdbcType=VARCHAR}, #{dianziyoujian,jdbcType=VARCHAR}, 
+      #{dizhi,jdbcType=VARCHAR}, #{beizhuxinxi,jdbcType=VARCHAR}, #{gid,jdbcType=DECIMAL}, 
+      #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.XIAOSHOU_KEHULIANXIREN" >
+    insert into XIAOSHOU_KEHULIANXIREN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        LID,
+      </if>
+      <if test="kid != null" >
+        KID,
+      </if>
+      <if test="lianxirenxingming != null" >
+        LIANXIRENXINGMING,
+      </if>
+      <if test="yingwenming != null" >
+        YINGWENMING,
+      </if>
+      <if test="zhiwu != null" >
+        ZHIWU,
+      </if>
+      <if test="bumen != null" >
+        BUMEN,
+      </if>
+      <if test="shouji != null" >
+        SHOUJI,
+      </if>
+      <if test="bangongdianhua != null" >
+        BANGONGDIANHUA,
+      </if>
+      <if test="dianziyoujian != null" >
+        DIANZIYOUJIAN,
+      </if>
+      <if test="dizhi != null" >
+        DIZHI,
+      </if>
+      <if test="beizhuxinxi != null" >
+        BEIZHUXINXI,
+      </if>
+      <if test="gid != null" >
+        GID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lid != null" >
+        #{lid,jdbcType=DECIMAL},
+      </if>
+      <if test="kid != null" >
+        #{kid,jdbcType=DECIMAL},
+      </if>
+      <if test="lianxirenxingming != null" >
+        #{lianxirenxingming,jdbcType=VARCHAR},
+      </if>
+      <if test="yingwenming != null" >
+        #{yingwenming,jdbcType=VARCHAR},
+      </if>
+      <if test="zhiwu != null" >
+        #{zhiwu,jdbcType=VARCHAR},
+      </if>
+      <if test="bumen != null" >
+        #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="shouji != null" >
+        #{shouji,jdbcType=VARCHAR},
+      </if>
+      <if test="bangongdianhua != null" >
+        #{bangongdianhua,jdbcType=VARCHAR},
+      </if>
+      <if test="dianziyoujian != null" >
+        #{dianziyoujian,jdbcType=VARCHAR},
+      </if>
+      <if test="dizhi != null" >
+        #{dizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhuxinxi != null" >
+        #{beizhuxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.XIAOSHOU_KEHULIANXIRENExample" resultType="java.lang.Integer" >
+    select count(*) from XIAOSHOU_KEHULIANXIREN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XIAOSHOU_KEHULIANXIREN
+    <set >
+      <if test="record.lid != null" >
+        LID = #{record.lid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.kid != null" >
+        KID = #{record.kid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lianxirenxingming != null" >
+        LIANXIRENXINGMING = #{record.lianxirenxingming,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yingwenming != null" >
+        YINGWENMING = #{record.yingwenming,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zhiwu != null" >
+        ZHIWU = #{record.zhiwu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bumen != null" >
+        BUMEN = #{record.bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shouji != null" >
+        SHOUJI = #{record.shouji,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bangongdianhua != null" >
+        BANGONGDIANHUA = #{record.bangongdianhua,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dianziyoujian != null" >
+        DIANZIYOUJIAN = #{record.dianziyoujian,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dizhi != null" >
+        DIZHI = #{record.dizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beizhuxinxi != null" >
+        BEIZHUXINXI = #{record.beizhuxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gid != null" >
+        GID = #{record.gid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XIAOSHOU_KEHULIANXIREN
+    set LID = #{record.lid,jdbcType=DECIMAL},
+      KID = #{record.kid,jdbcType=DECIMAL},
+      LIANXIRENXINGMING = #{record.lianxirenxingming,jdbcType=VARCHAR},
+      YINGWENMING = #{record.yingwenming,jdbcType=VARCHAR},
+      ZHIWU = #{record.zhiwu,jdbcType=VARCHAR},
+      BUMEN = #{record.bumen,jdbcType=VARCHAR},
+      SHOUJI = #{record.shouji,jdbcType=VARCHAR},
+      BANGONGDIANHUA = #{record.bangongdianhua,jdbcType=VARCHAR},
+      DIANZIYOUJIAN = #{record.dianziyoujian,jdbcType=VARCHAR},
+      DIZHI = #{record.dizhi,jdbcType=VARCHAR},
+      BEIZHUXINXI = #{record.beizhuxinxi,jdbcType=VARCHAR},
+      GID = #{record.gid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.XIAOSHOU_KEHULIANXIREN" >
+    update XIAOSHOU_KEHULIANXIREN
+    <set >
+      <if test="kid != null" >
+        KID = #{kid,jdbcType=DECIMAL},
+      </if>
+      <if test="lianxirenxingming != null" >
+        LIANXIRENXINGMING = #{lianxirenxingming,jdbcType=VARCHAR},
+      </if>
+      <if test="yingwenming != null" >
+        YINGWENMING = #{yingwenming,jdbcType=VARCHAR},
+      </if>
+      <if test="zhiwu != null" >
+        ZHIWU = #{zhiwu,jdbcType=VARCHAR},
+      </if>
+      <if test="bumen != null" >
+        BUMEN = #{bumen,jdbcType=VARCHAR},
+      </if>
+      <if test="shouji != null" >
+        SHOUJI = #{shouji,jdbcType=VARCHAR},
+      </if>
+      <if test="bangongdianhua != null" >
+        BANGONGDIANHUA = #{bangongdianhua,jdbcType=VARCHAR},
+      </if>
+      <if test="dianziyoujian != null" >
+        DIANZIYOUJIAN = #{dianziyoujian,jdbcType=VARCHAR},
+      </if>
+      <if test="dizhi != null" >
+        DIZHI = #{dizhi,jdbcType=VARCHAR},
+      </if>
+      <if test="beizhuxinxi != null" >
+        BEIZHUXINXI = #{beizhuxinxi,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        GID = #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where LID = #{lid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.XIAOSHOU_KEHULIANXIREN" >
+    update XIAOSHOU_KEHULIANXIREN
+    set KID = #{kid,jdbcType=DECIMAL},
+      LIANXIRENXINGMING = #{lianxirenxingming,jdbcType=VARCHAR},
+      YINGWENMING = #{yingwenming,jdbcType=VARCHAR},
+      ZHIWU = #{zhiwu,jdbcType=VARCHAR},
+      BUMEN = #{bumen,jdbcType=VARCHAR},
+      SHOUJI = #{shouji,jdbcType=VARCHAR},
+      BANGONGDIANHUA = #{bangongdianhua,jdbcType=VARCHAR},
+      DIANZIYOUJIAN = #{dianziyoujian,jdbcType=VARCHAR},
+      DIZHI = #{dizhi,jdbcType=VARCHAR},
+      BEIZHUXINXI = #{beizhuxinxi,jdbcType=VARCHAR},
+      GID = #{gid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where LID = #{lid,jdbcType=DECIMAL}
+  </update>
+</mapper>

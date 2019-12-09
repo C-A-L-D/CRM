@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.XIAOSHOU_KEHULIUSHIMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.XIAOSHOU_KEHULIUSHI" >
+    <constructor >
+      <idArg column="KSID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="KID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="CAOZUORENYUANBIANHAO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CHULIFANGSHI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CHULICUOSHI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SHIFOULIUSHI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    KSID, KID, CAOZUORENYUANBIANHAO, CHULIFANGSHI, CHULICUOSHI, SHIFOULIUSHI, GID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.XIAOSHOU_KEHULIUSHIExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_KEHULIUSHI
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_KEHULIUSHI
+    where KSID = #{ksid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from XIAOSHOU_KEHULIUSHI
+    where KSID = #{ksid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.XIAOSHOU_KEHULIUSHIExample" >
+    delete from XIAOSHOU_KEHULIUSHI
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.XIAOSHOU_KEHULIUSHI" >
+    insert into XIAOSHOU_KEHULIUSHI (KSID, KID, CAOZUORENYUANBIANHAO, 
+      CHULIFANGSHI, CHULICUOSHI, SHIFOULIUSHI, 
+      GID, LASTTIME)
+    values (#{ksid,jdbcType=DECIMAL}, #{kid,jdbcType=DECIMAL}, #{caozuorenyuanbianhao,jdbcType=VARCHAR}, 
+      #{chulifangshi,jdbcType=VARCHAR}, #{chulicuoshi,jdbcType=VARCHAR}, #{shifouliushi,jdbcType=VARCHAR}, 
+      #{gid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.XIAOSHOU_KEHULIUSHI" >
+    insert into XIAOSHOU_KEHULIUSHI
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ksid != null" >
+        KSID,
+      </if>
+      <if test="kid != null" >
+        KID,
+      </if>
+      <if test="caozuorenyuanbianhao != null" >
+        CAOZUORENYUANBIANHAO,
+      </if>
+      <if test="chulifangshi != null" >
+        CHULIFANGSHI,
+      </if>
+      <if test="chulicuoshi != null" >
+        CHULICUOSHI,
+      </if>
+      <if test="shifouliushi != null" >
+        SHIFOULIUSHI,
+      </if>
+      <if test="gid != null" >
+        GID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ksid != null" >
+        #{ksid,jdbcType=DECIMAL},
+      </if>
+      <if test="kid != null" >
+        #{kid,jdbcType=DECIMAL},
+      </if>
+      <if test="caozuorenyuanbianhao != null" >
+        #{caozuorenyuanbianhao,jdbcType=VARCHAR},
+      </if>
+      <if test="chulifangshi != null" >
+        #{chulifangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="chulicuoshi != null" >
+        #{chulicuoshi,jdbcType=VARCHAR},
+      </if>
+      <if test="shifouliushi != null" >
+        #{shifouliushi,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.XIAOSHOU_KEHULIUSHIExample" resultType="java.lang.Integer" >
+    select count(*) from XIAOSHOU_KEHULIUSHI
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XIAOSHOU_KEHULIUSHI
+    <set >
+      <if test="record.ksid != null" >
+        KSID = #{record.ksid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.kid != null" >
+        KID = #{record.kid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.caozuorenyuanbianhao != null" >
+        CAOZUORENYUANBIANHAO = #{record.caozuorenyuanbianhao,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chulifangshi != null" >
+        CHULIFANGSHI = #{record.chulifangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chulicuoshi != null" >
+        CHULICUOSHI = #{record.chulicuoshi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shifouliushi != null" >
+        SHIFOULIUSHI = #{record.shifouliushi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gid != null" >
+        GID = #{record.gid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XIAOSHOU_KEHULIUSHI
+    set KSID = #{record.ksid,jdbcType=DECIMAL},
+      KID = #{record.kid,jdbcType=DECIMAL},
+      CAOZUORENYUANBIANHAO = #{record.caozuorenyuanbianhao,jdbcType=VARCHAR},
+      CHULIFANGSHI = #{record.chulifangshi,jdbcType=VARCHAR},
+      CHULICUOSHI = #{record.chulicuoshi,jdbcType=VARCHAR},
+      SHIFOULIUSHI = #{record.shifouliushi,jdbcType=VARCHAR},
+      GID = #{record.gid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.XIAOSHOU_KEHULIUSHI" >
+    update XIAOSHOU_KEHULIUSHI
+    <set >
+      <if test="kid != null" >
+        KID = #{kid,jdbcType=DECIMAL},
+      </if>
+      <if test="caozuorenyuanbianhao != null" >
+        CAOZUORENYUANBIANHAO = #{caozuorenyuanbianhao,jdbcType=VARCHAR},
+      </if>
+      <if test="chulifangshi != null" >
+        CHULIFANGSHI = #{chulifangshi,jdbcType=VARCHAR},
+      </if>
+      <if test="chulicuoshi != null" >
+        CHULICUOSHI = #{chulicuoshi,jdbcType=VARCHAR},
+      </if>
+      <if test="shifouliushi != null" >
+        SHIFOULIUSHI = #{shifouliushi,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        GID = #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where KSID = #{ksid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.XIAOSHOU_KEHULIUSHI" >
+    update XIAOSHOU_KEHULIUSHI
+    set KID = #{kid,jdbcType=DECIMAL},
+      CAOZUORENYUANBIANHAO = #{caozuorenyuanbianhao,jdbcType=VARCHAR},
+      CHULIFANGSHI = #{chulifangshi,jdbcType=VARCHAR},
+      CHULICUOSHI = #{chulicuoshi,jdbcType=VARCHAR},
+      SHIFOULIUSHI = #{shifouliushi,jdbcType=VARCHAR},
+      GID = #{gid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where KSID = #{ksid,jdbcType=DECIMAL}
+  </update>
+</mapper>

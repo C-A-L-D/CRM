@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.STORE_GINFOMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.STORE_GINFO" >
+    <constructor >
+      <idArg column="GID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="GNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GCATEGOPY" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GDESP" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GUNIT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="WHID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="STORENUM" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="PRICEBUY" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="PRICESOLD" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="PRICEACT" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GID, GNAME, GCATEGOPY, GDESP, GUNIT, WHID, STORENUM, PRICEBUY, PRICESOLD, PRICEACT, 
+    REMARK, CID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.STORE_GINFOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from STORE_GINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from STORE_GINFO
+    where GID = #{gid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from STORE_GINFO
+    where GID = #{gid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.STORE_GINFOExample" >
+    delete from STORE_GINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.STORE_GINFO" >
+    insert into STORE_GINFO (GID, GNAME, GCATEGOPY, 
+      GDESP, GUNIT, WHID, 
+      STORENUM, PRICEBUY, PRICESOLD, 
+      PRICEACT, REMARK, CID, 
+      LASTTIME)
+    values (#{gid,jdbcType=DECIMAL}, #{gname,jdbcType=VARCHAR}, #{gcategopy,jdbcType=VARCHAR}, 
+      #{gdesp,jdbcType=VARCHAR}, #{gunit,jdbcType=VARCHAR}, #{whid,jdbcType=DECIMAL}, 
+      #{storenum,jdbcType=DECIMAL}, #{pricebuy,jdbcType=DECIMAL}, #{pricesold,jdbcType=DECIMAL}, 
+      #{priceact,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{cid,jdbcType=DECIMAL}, 
+      #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.STORE_GINFO" >
+    insert into STORE_GINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        GID,
+      </if>
+      <if test="gname != null" >
+        GNAME,
+      </if>
+      <if test="gcategopy != null" >
+        GCATEGOPY,
+      </if>
+      <if test="gdesp != null" >
+        GDESP,
+      </if>
+      <if test="gunit != null" >
+        GUNIT,
+      </if>
+      <if test="whid != null" >
+        WHID,
+      </if>
+      <if test="storenum != null" >
+        STORENUM,
+      </if>
+      <if test="pricebuy != null" >
+        PRICEBUY,
+      </if>
+      <if test="pricesold != null" >
+        PRICESOLD,
+      </if>
+      <if test="priceact != null" >
+        PRICEACT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gcategopy != null" >
+        #{gcategopy,jdbcType=VARCHAR},
+      </if>
+      <if test="gdesp != null" >
+        #{gdesp,jdbcType=VARCHAR},
+      </if>
+      <if test="gunit != null" >
+        #{gunit,jdbcType=VARCHAR},
+      </if>
+      <if test="whid != null" >
+        #{whid,jdbcType=DECIMAL},
+      </if>
+      <if test="storenum != null" >
+        #{storenum,jdbcType=DECIMAL},
+      </if>
+      <if test="pricebuy != null" >
+        #{pricebuy,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesold != null" >
+        #{pricesold,jdbcType=DECIMAL},
+      </if>
+      <if test="priceact != null" >
+        #{priceact,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.STORE_GINFOExample" resultType="java.lang.Integer" >
+    select count(*) from STORE_GINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update STORE_GINFO
+    <set >
+      <if test="record.gid != null" >
+        GID = #{record.gid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gname != null" >
+        GNAME = #{record.gname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gcategopy != null" >
+        GCATEGOPY = #{record.gcategopy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdesp != null" >
+        GDESP = #{record.gdesp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gunit != null" >
+        GUNIT = #{record.gunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.whid != null" >
+        WHID = #{record.whid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.storenum != null" >
+        STORENUM = #{record.storenum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pricebuy != null" >
+        PRICEBUY = #{record.pricebuy,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pricesold != null" >
+        PRICESOLD = #{record.pricesold,jdbcType=DECIMAL},
+      </if>
+      <if test="record.priceact != null" >
+        PRICEACT = #{record.priceact,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null" >
+        CID = #{record.cid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update STORE_GINFO
+    set GID = #{record.gid,jdbcType=DECIMAL},
+      GNAME = #{record.gname,jdbcType=VARCHAR},
+      GCATEGOPY = #{record.gcategopy,jdbcType=VARCHAR},
+      GDESP = #{record.gdesp,jdbcType=VARCHAR},
+      GUNIT = #{record.gunit,jdbcType=VARCHAR},
+      WHID = #{record.whid,jdbcType=DECIMAL},
+      STORENUM = #{record.storenum,jdbcType=DECIMAL},
+      PRICEBUY = #{record.pricebuy,jdbcType=DECIMAL},
+      PRICESOLD = #{record.pricesold,jdbcType=DECIMAL},
+      PRICEACT = #{record.priceact,jdbcType=DECIMAL},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CID = #{record.cid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.STORE_GINFO" >
+    update STORE_GINFO
+    <set >
+      <if test="gname != null" >
+        GNAME = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gcategopy != null" >
+        GCATEGOPY = #{gcategopy,jdbcType=VARCHAR},
+      </if>
+      <if test="gdesp != null" >
+        GDESP = #{gdesp,jdbcType=VARCHAR},
+      </if>
+      <if test="gunit != null" >
+        GUNIT = #{gunit,jdbcType=VARCHAR},
+      </if>
+      <if test="whid != null" >
+        WHID = #{whid,jdbcType=DECIMAL},
+      </if>
+      <if test="storenum != null" >
+        STORENUM = #{storenum,jdbcType=DECIMAL},
+      </if>
+      <if test="pricebuy != null" >
+        PRICEBUY = #{pricebuy,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesold != null" >
+        PRICESOLD = #{pricesold,jdbcType=DECIMAL},
+      </if>
+      <if test="priceact != null" >
+        PRICEACT = #{priceact,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        CID = #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where GID = #{gid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.STORE_GINFO" >
+    update STORE_GINFO
+    set GNAME = #{gname,jdbcType=VARCHAR},
+      GCATEGOPY = #{gcategopy,jdbcType=VARCHAR},
+      GDESP = #{gdesp,jdbcType=VARCHAR},
+      GUNIT = #{gunit,jdbcType=VARCHAR},
+      WHID = #{whid,jdbcType=DECIMAL},
+      STORENUM = #{storenum,jdbcType=DECIMAL},
+      PRICEBUY = #{pricebuy,jdbcType=DECIMAL},
+      PRICESOLD = #{pricesold,jdbcType=DECIMAL},
+      PRICEACT = #{priceact,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CID = #{cid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where GID = #{gid,jdbcType=DECIMAL}
+  </update>
+</mapper>
