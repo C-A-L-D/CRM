@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.OffMessdetailMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.OffMessdetail" >
+    <constructor >
+      <idArg column="DETAILID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="MESSID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="RECEIVERID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="MESSSTATE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="COMPANYID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DETAILID, MESSID, RECEIVERID, MESSSTATE, COMPANYID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.OffMessdetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OFF_MESSDETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OFF_MESSDETAIL
+    where DETAILID = #{detailid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OFF_MESSDETAIL
+    where DETAILID = #{detailid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.OffMessdetailExample" >
+    delete from OFF_MESSDETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.OffMessdetail" >
+    insert into OFF_MESSDETAIL (DETAILID, MESSID, RECEIVERID, 
+      MESSSTATE, COMPANYID, LASTTIME
+      )
+    values (#{detailid,jdbcType=DECIMAL}, #{messid,jdbcType=DECIMAL}, #{receiverid,jdbcType=DECIMAL}, 
+      #{messstate,jdbcType=VARCHAR}, #{companyid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.OffMessdetail" >
+    insert into OFF_MESSDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="detailid != null" >
+        DETAILID,
+      </if>
+      <if test="messid != null" >
+        MESSID,
+      </if>
+      <if test="receiverid != null" >
+        RECEIVERID,
+      </if>
+      <if test="messstate != null" >
+        MESSSTATE,
+      </if>
+      <if test="companyid != null" >
+        COMPANYID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="detailid != null" >
+        #{detailid,jdbcType=DECIMAL},
+      </if>
+      <if test="messid != null" >
+        #{messid,jdbcType=DECIMAL},
+      </if>
+      <if test="receiverid != null" >
+        #{receiverid,jdbcType=DECIMAL},
+      </if>
+      <if test="messstate != null" >
+        #{messstate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.OffMessdetailExample" resultType="java.lang.Integer" >
+    select count(*) from OFF_MESSDETAIL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update OFF_MESSDETAIL
+    <set >
+      <if test="record.detailid != null" >
+        DETAILID = #{record.detailid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.messid != null" >
+        MESSID = #{record.messid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.receiverid != null" >
+        RECEIVERID = #{record.receiverid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.messstate != null" >
+        MESSSTATE = #{record.messstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyid != null" >
+        COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update OFF_MESSDETAIL
+    set DETAILID = #{record.detailid,jdbcType=DECIMAL},
+      MESSID = #{record.messid,jdbcType=DECIMAL},
+      RECEIVERID = #{record.receiverid,jdbcType=DECIMAL},
+      MESSSTATE = #{record.messstate,jdbcType=VARCHAR},
+      COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.OffMessdetail" >
+    update OFF_MESSDETAIL
+    <set >
+      <if test="messid != null" >
+        MESSID = #{messid,jdbcType=DECIMAL},
+      </if>
+      <if test="receiverid != null" >
+        RECEIVERID = #{receiverid,jdbcType=DECIMAL},
+      </if>
+      <if test="messstate != null" >
+        MESSSTATE = #{messstate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyid != null" >
+        COMPANYID = #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DETAILID = #{detailid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.OffMessdetail" >
+    update OFF_MESSDETAIL
+    set MESSID = #{messid,jdbcType=DECIMAL},
+      RECEIVERID = #{receiverid,jdbcType=DECIMAL},
+      MESSSTATE = #{messstate,jdbcType=VARCHAR},
+      COMPANYID = #{companyid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where DETAILID = #{detailid,jdbcType=DECIMAL}
+  </update>
+</mapper>
