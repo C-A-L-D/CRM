@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 var pass=$("#password").val();
 	 if(name=="admin" && pass=="admin")
 	 {
-	  alert("登录成功！");
+	  alert("登录成功");
 	  $("#user_name").val("");
 	  $("#password").val("");
        $(location).attr('href', 'index.html');
