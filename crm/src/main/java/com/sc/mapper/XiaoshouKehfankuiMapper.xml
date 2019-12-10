@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.XiaoshouKehfankuiMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.XiaoshouKehfankui" >
+    <constructor >
+      <idArg column="FID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="JILUYOUXIANJI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="KID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="ZHUANGTAI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FANKUILEIXING" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FANKUISHIJIAN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FANKUIYUANYIN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FUZEREN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FANKUILAIYUAN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FANKUIZHUTI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FANKUIMIAOSHU" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="FENXI" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FID, JILUYOUXIANJI, KID, ZHUANGTAI, FANKUILEIXING, FANKUISHIJIAN, FANKUIYUANYIN, 
+    FUZEREN, FANKUILAIYUAN, FANKUIZHUTI, FANKUIMIAOSHU, FENXI, GID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.XiaoshouKehfankuiExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_KEHUFANKUI
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from XIAOSHOU_KEHUFANKUI
+    where FID = #{fid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from XIAOSHOU_KEHUFANKUI
+    where FID = #{fid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.XiaoshouKehfankuiExample" >
+    delete from XIAOSHOU_KEHUFANKUI
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.XiaoshouKehfankui" >
+    insert into XIAOSHOU_KEHUFANKUI (FID, JILUYOUXIANJI, KID, 
+      ZHUANGTAI, FANKUILEIXING, FANKUISHIJIAN, 
+      FANKUIYUANYIN, FUZEREN, FANKUILAIYUAN, 
+      FANKUIZHUTI, FANKUIMIAOSHU, FENXI, 
+      GID, LASTTIME)
+    values (#{fid,jdbcType=DECIMAL}, #{jiluyouxianji,jdbcType=VARCHAR}, #{kid,jdbcType=DECIMAL}, 
+      #{zhuangtai,jdbcType=VARCHAR}, #{fankuileixing,jdbcType=VARCHAR}, #{fankuishijian,jdbcType=VARCHAR}, 
+      #{fankuiyuanyin,jdbcType=VARCHAR}, #{fuzeren,jdbcType=VARCHAR}, #{fankuilaiyuan,jdbcType=VARCHAR}, 
+      #{fankuizhuti,jdbcType=VARCHAR}, #{fankuimiaoshu,jdbcType=VARCHAR}, #{fenxi,jdbcType=VARCHAR}, 
+      #{gid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.XiaoshouKehfankui" >
+    insert into XIAOSHOU_KEHUFANKUI
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        FID,
+      </if>
+      <if test="jiluyouxianji != null" >
+        JILUYOUXIANJI,
+      </if>
+      <if test="kid != null" >
+        KID,
+      </if>
+      <if test="zhuangtai != null" >
+        ZHUANGTAI,
+      </if>
+      <if test="fankuileixing != null" >
+        FANKUILEIXING,
+      </if>
+      <if test="fankuishijian != null" >
+        FANKUISHIJIAN,
+      </if>
+      <if test="fankuiyuanyin != null" >
+        FANKUIYUANYIN,
+      </if>
+      <if test="fuzeren != null" >
+        FUZEREN,
+      </if>
+      <if test="fankuilaiyuan != null" >
+        FANKUILAIYUAN,
+      </if>
+      <if test="fankuizhuti != null" >
+        FANKUIZHUTI,
+      </if>
+      <if test="fankuimiaoshu != null" >
+        FANKUIMIAOSHU,
+      </if>
+      <if test="fenxi != null" >
+        FENXI,
+      </if>
+      <if test="gid != null" >
+        GID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=DECIMAL},
+      </if>
+      <if test="jiluyouxianji != null" >
+        #{jiluyouxianji,jdbcType=VARCHAR},
+      </if>
+      <if test="kid != null" >
+        #{kid,jdbcType=DECIMAL},
+      </if>
+      <if test="zhuangtai != null" >
+        #{zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuileixing != null" >
+        #{fankuileixing,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuishijian != null" >
+        #{fankuishijian,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuiyuanyin != null" >
+        #{fankuiyuanyin,jdbcType=VARCHAR},
+      </if>
+      <if test="fuzeren != null" >
+        #{fuzeren,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuilaiyuan != null" >
+        #{fankuilaiyuan,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuizhuti != null" >
+        #{fankuizhuti,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuimiaoshu != null" >
+        #{fankuimiaoshu,jdbcType=VARCHAR},
+      </if>
+      <if test="fenxi != null" >
+        #{fenxi,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.XiaoshouKehfankuiExample" resultType="java.lang.Integer" >
+    select count(*) from XIAOSHOU_KEHUFANKUI
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XIAOSHOU_KEHUFANKUI
+    <set >
+      <if test="record.fid != null" >
+        FID = #{record.fid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.jiluyouxianji != null" >
+        JILUYOUXIANJI = #{record.jiluyouxianji,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kid != null" >
+        KID = #{record.kid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zhuangtai != null" >
+        ZHUANGTAI = #{record.zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fankuileixing != null" >
+        FANKUILEIXING = #{record.fankuileixing,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fankuishijian != null" >
+        FANKUISHIJIAN = #{record.fankuishijian,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fankuiyuanyin != null" >
+        FANKUIYUANYIN = #{record.fankuiyuanyin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuzeren != null" >
+        FUZEREN = #{record.fuzeren,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fankuilaiyuan != null" >
+        FANKUILAIYUAN = #{record.fankuilaiyuan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fankuizhuti != null" >
+        FANKUIZHUTI = #{record.fankuizhuti,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fankuimiaoshu != null" >
+        FANKUIMIAOSHU = #{record.fankuimiaoshu,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fenxi != null" >
+        FENXI = #{record.fenxi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gid != null" >
+        GID = #{record.gid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XIAOSHOU_KEHUFANKUI
+    set FID = #{record.fid,jdbcType=DECIMAL},
+      JILUYOUXIANJI = #{record.jiluyouxianji,jdbcType=VARCHAR},
+      KID = #{record.kid,jdbcType=DECIMAL},
+      ZHUANGTAI = #{record.zhuangtai,jdbcType=VARCHAR},
+      FANKUILEIXING = #{record.fankuileixing,jdbcType=VARCHAR},
+      FANKUISHIJIAN = #{record.fankuishijian,jdbcType=VARCHAR},
+      FANKUIYUANYIN = #{record.fankuiyuanyin,jdbcType=VARCHAR},
+      FUZEREN = #{record.fuzeren,jdbcType=VARCHAR},
+      FANKUILAIYUAN = #{record.fankuilaiyuan,jdbcType=VARCHAR},
+      FANKUIZHUTI = #{record.fankuizhuti,jdbcType=VARCHAR},
+      FANKUIMIAOSHU = #{record.fankuimiaoshu,jdbcType=VARCHAR},
+      FENXI = #{record.fenxi,jdbcType=VARCHAR},
+      GID = #{record.gid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.XiaoshouKehfankui" >
+    update XIAOSHOU_KEHUFANKUI
+    <set >
+      <if test="jiluyouxianji != null" >
+        JILUYOUXIANJI = #{jiluyouxianji,jdbcType=VARCHAR},
+      </if>
+      <if test="kid != null" >
+        KID = #{kid,jdbcType=DECIMAL},
+      </if>
+      <if test="zhuangtai != null" >
+        ZHUANGTAI = #{zhuangtai,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuileixing != null" >
+        FANKUILEIXING = #{fankuileixing,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuishijian != null" >
+        FANKUISHIJIAN = #{fankuishijian,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuiyuanyin != null" >
+        FANKUIYUANYIN = #{fankuiyuanyin,jdbcType=VARCHAR},
+      </if>
+      <if test="fuzeren != null" >
+        FUZEREN = #{fuzeren,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuilaiyuan != null" >
+        FANKUILAIYUAN = #{fankuilaiyuan,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuizhuti != null" >
+        FANKUIZHUTI = #{fankuizhuti,jdbcType=VARCHAR},
+      </if>
+      <if test="fankuimiaoshu != null" >
+        FANKUIMIAOSHU = #{fankuimiaoshu,jdbcType=VARCHAR},
+      </if>
+      <if test="fenxi != null" >
+        FENXI = #{fenxi,jdbcType=VARCHAR},
+      </if>
+      <if test="gid != null" >
+        GID = #{gid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FID = #{fid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.XiaoshouKehfankui" >
+    update XIAOSHOU_KEHUFANKUI
+    set JILUYOUXIANJI = #{jiluyouxianji,jdbcType=VARCHAR},
+      KID = #{kid,jdbcType=DECIMAL},
+      ZHUANGTAI = #{zhuangtai,jdbcType=VARCHAR},
+      FANKUILEIXING = #{fankuileixing,jdbcType=VARCHAR},
+      FANKUISHIJIAN = #{fankuishijian,jdbcType=VARCHAR},
+      FANKUIYUANYIN = #{fankuiyuanyin,jdbcType=VARCHAR},
+      FUZEREN = #{fuzeren,jdbcType=VARCHAR},
+      FANKUILAIYUAN = #{fankuilaiyuan,jdbcType=VARCHAR},
+      FANKUIZHUTI = #{fankuizhuti,jdbcType=VARCHAR},
+      FANKUIMIAOSHU = #{fankuimiaoshu,jdbcType=VARCHAR},
+      FENXI = #{fenxi,jdbcType=VARCHAR},
+      GID = #{gid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where FID = #{fid,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.OffAssesstaskMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.OffAssesstask" >
+    <constructor >
+      <idArg column="TASKID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="TASKTITLE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASKDETAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASKPUBLISHER" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ASSESSTARGET" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="TASKSTARTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="TASKENDTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="COMPANYID" jdbcType="DECIMAL" javaType="java.lang.Long" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TASKID, TASKTITLE, TASKDETAIL, TASKPUBLISHER, ASSESSTARGET, TASKSTARTTIME, TASKENDTIME, 
+    COMPANYID, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.OffAssesstaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from OFF_ASSESSTASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from OFF_ASSESSTASK
+    where TASKID = #{taskid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from OFF_ASSESSTASK
+    where TASKID = #{taskid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.OffAssesstaskExample" >
+    delete from OFF_ASSESSTASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.OffAssesstask" >
+    insert into OFF_ASSESSTASK (TASKID, TASKTITLE, TASKDETAIL, 
+      TASKPUBLISHER, ASSESSTARGET, TASKSTARTTIME, 
+      TASKENDTIME, COMPANYID, LASTTIME
+      )
+    values (#{taskid,jdbcType=DECIMAL}, #{tasktitle,jdbcType=VARCHAR}, #{taskdetail,jdbcType=VARCHAR}, 
+      #{taskpublisher,jdbcType=VARCHAR}, #{assesstarget,jdbcType=VARCHAR}, #{taskstarttime,jdbcType=TIMESTAMP}, 
+      #{taskendtime,jdbcType=TIMESTAMP}, #{companyid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.OffAssesstask" >
+    insert into OFF_ASSESSTASK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskid != null" >
+        TASKID,
+      </if>
+      <if test="tasktitle != null" >
+        TASKTITLE,
+      </if>
+      <if test="taskdetail != null" >
+        TASKDETAIL,
+      </if>
+      <if test="taskpublisher != null" >
+        TASKPUBLISHER,
+      </if>
+      <if test="assesstarget != null" >
+        ASSESSTARGET,
+      </if>
+      <if test="taskstarttime != null" >
+        TASKSTARTTIME,
+      </if>
+      <if test="taskendtime != null" >
+        TASKENDTIME,
+      </if>
+      <if test="companyid != null" >
+        COMPANYID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskid != null" >
+        #{taskid,jdbcType=DECIMAL},
+      </if>
+      <if test="tasktitle != null" >
+        #{tasktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="taskdetail != null" >
+        #{taskdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="taskpublisher != null" >
+        #{taskpublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="assesstarget != null" >
+        #{assesstarget,jdbcType=VARCHAR},
+      </if>
+      <if test="taskstarttime != null" >
+        #{taskstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskendtime != null" >
+        #{taskendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyid != null" >
+        #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.OffAssesstaskExample" resultType="java.lang.Integer" >
+    select count(*) from OFF_ASSESSTASK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update OFF_ASSESSTASK
+    <set >
+      <if test="record.taskid != null" >
+        TASKID = #{record.taskid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tasktitle != null" >
+        TASKTITLE = #{record.tasktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskdetail != null" >
+        TASKDETAIL = #{record.taskdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskpublisher != null" >
+        TASKPUBLISHER = #{record.taskpublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assesstarget != null" >
+        ASSESSTARGET = #{record.assesstarget,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taskstarttime != null" >
+        TASKSTARTTIME = #{record.taskstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.taskendtime != null" >
+        TASKENDTIME = #{record.taskendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyid != null" >
+        COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update OFF_ASSESSTASK
+    set TASKID = #{record.taskid,jdbcType=DECIMAL},
+      TASKTITLE = #{record.tasktitle,jdbcType=VARCHAR},
+      TASKDETAIL = #{record.taskdetail,jdbcType=VARCHAR},
+      TASKPUBLISHER = #{record.taskpublisher,jdbcType=VARCHAR},
+      ASSESSTARGET = #{record.assesstarget,jdbcType=VARCHAR},
+      TASKSTARTTIME = #{record.taskstarttime,jdbcType=TIMESTAMP},
+      TASKENDTIME = #{record.taskendtime,jdbcType=TIMESTAMP},
+      COMPANYID = #{record.companyid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.OffAssesstask" >
+    update OFF_ASSESSTASK
+    <set >
+      <if test="tasktitle != null" >
+        TASKTITLE = #{tasktitle,jdbcType=VARCHAR},
+      </if>
+      <if test="taskdetail != null" >
+        TASKDETAIL = #{taskdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="taskpublisher != null" >
+        TASKPUBLISHER = #{taskpublisher,jdbcType=VARCHAR},
+      </if>
+      <if test="assesstarget != null" >
+        ASSESSTARGET = #{assesstarget,jdbcType=VARCHAR},
+      </if>
+      <if test="taskstarttime != null" >
+        TASKSTARTTIME = #{taskstarttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="taskendtime != null" >
+        TASKENDTIME = #{taskendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyid != null" >
+        COMPANYID = #{companyid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where TASKID = #{taskid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.OffAssesstask" >
+    update OFF_ASSESSTASK
+    set TASKTITLE = #{tasktitle,jdbcType=VARCHAR},
+      TASKDETAIL = #{taskdetail,jdbcType=VARCHAR},
+      TASKPUBLISHER = #{taskpublisher,jdbcType=VARCHAR},
+      ASSESSTARGET = #{assesstarget,jdbcType=VARCHAR},
+      TASKSTARTTIME = #{taskstarttime,jdbcType=TIMESTAMP},
+      TASKENDTIME = #{taskendtime,jdbcType=TIMESTAMP},
+      COMPANYID = #{companyid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where TASKID = #{taskid,jdbcType=DECIMAL}
+  </update>
+</mapper>

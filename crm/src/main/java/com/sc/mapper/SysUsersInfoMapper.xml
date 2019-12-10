@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.SysUsersInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.SysUsersInfo" >
+    <constructor >
+      <idArg column="SID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="SNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SSEX" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SPHOTO" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SIDCARD" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SADDRESS_HOME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SADDRESS_NOW" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SXL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SZZMM" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SSCHOOL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SPHONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SPHONE_LINE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SCHAT_LINE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SSH_STATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SJOBID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="SSTATUS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="SDESCRIBE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GONGSIID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SID, SNAME, SSEX, SPHOTO, SIDCARD, SADDRESS_HOME, SADDRESS_NOW, SXL, SZZMM, SSCHOOL, 
+    SPHONE, SPHONE_LINE, SCHAT_LINE, SSH_STATUS, SJOBID, SSTATUS, SDESCRIBE, GONGSIID, 
+    LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SysUsersInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_USERSINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_USERSINFO
+    where SID = #{sid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_USERSINFO
+    where SID = #{sid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.SysUsersInfoExample" >
+    delete from SYS_USERSINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.SysUsersInfo" >
+    insert into SYS_USERSINFO (SID, SNAME, SSEX, 
+      SPHOTO, SIDCARD, SADDRESS_HOME, 
+      SADDRESS_NOW, SXL, SZZMM, 
+      SSCHOOL, SPHONE, SPHONE_LINE, 
+      SCHAT_LINE, SSH_STATUS, SJOBID, 
+      SSTATUS, SDESCRIBE, GONGSIID, 
+      LASTTIME)
+    values (#{sid,jdbcType=DECIMAL}, #{sname,jdbcType=VARCHAR}, #{ssex,jdbcType=VARCHAR}, 
+      #{sphoto,jdbcType=VARCHAR}, #{sidcard,jdbcType=VARCHAR}, #{saddressHome,jdbcType=VARCHAR}, 
+      #{saddressNow,jdbcType=VARCHAR}, #{sxl,jdbcType=VARCHAR}, #{szzmm,jdbcType=VARCHAR}, 
+      #{sschool,jdbcType=VARCHAR}, #{sphone,jdbcType=VARCHAR}, #{sphoneLine,jdbcType=VARCHAR}, 
+      #{schatLine,jdbcType=VARCHAR}, #{sshStatus,jdbcType=VARCHAR}, #{sjobid,jdbcType=DECIMAL}, 
+      #{sstatus,jdbcType=VARCHAR}, #{sdescribe,jdbcType=VARCHAR}, #{gongsiid,jdbcType=DECIMAL}, 
+      #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.SysUsersInfo" >
+    insert into SYS_USERSINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        SID,
+      </if>
+      <if test="sname != null" >
+        SNAME,
+      </if>
+      <if test="ssex != null" >
+        SSEX,
+      </if>
+      <if test="sphoto != null" >
+        SPHOTO,
+      </if>
+      <if test="sidcard != null" >
+        SIDCARD,
+      </if>
+      <if test="saddressHome != null" >
+        SADDRESS_HOME,
+      </if>
+      <if test="saddressNow != null" >
+        SADDRESS_NOW,
+      </if>
+      <if test="sxl != null" >
+        SXL,
+      </if>
+      <if test="szzmm != null" >
+        SZZMM,
+      </if>
+      <if test="sschool != null" >
+        SSCHOOL,
+      </if>
+      <if test="sphone != null" >
+        SPHONE,
+      </if>
+      <if test="sphoneLine != null" >
+        SPHONE_LINE,
+      </if>
+      <if test="schatLine != null" >
+        SCHAT_LINE,
+      </if>
+      <if test="sshStatus != null" >
+        SSH_STATUS,
+      </if>
+      <if test="sjobid != null" >
+        SJOBID,
+      </if>
+      <if test="sstatus != null" >
+        SSTATUS,
+      </if>
+      <if test="sdescribe != null" >
+        SDESCRIBE,
+      </if>
+      <if test="gongsiid != null" >
+        GONGSIID,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=DECIMAL},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sphoto != null" >
+        #{sphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sidcard != null" >
+        #{sidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="saddressHome != null" >
+        #{saddressHome,jdbcType=VARCHAR},
+      </if>
+      <if test="saddressNow != null" >
+        #{saddressNow,jdbcType=VARCHAR},
+      </if>
+      <if test="sxl != null" >
+        #{sxl,jdbcType=VARCHAR},
+      </if>
+      <if test="szzmm != null" >
+        #{szzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="sschool != null" >
+        #{sschool,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null" >
+        #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sphoneLine != null" >
+        #{sphoneLine,jdbcType=VARCHAR},
+      </if>
+      <if test="schatLine != null" >
+        #{schatLine,jdbcType=VARCHAR},
+      </if>
+      <if test="sshStatus != null" >
+        #{sshStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sjobid != null" >
+        #{sjobid,jdbcType=DECIMAL},
+      </if>
+      <if test="sstatus != null" >
+        #{sstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sdescribe != null" >
+        #{sdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiid != null" >
+        #{gongsiid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.SysUsersInfoExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_USERSINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_USERSINFO
+    <set >
+      <if test="record.sid != null" >
+        SID = #{record.sid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sname != null" >
+        SNAME = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssex != null" >
+        SSEX = #{record.ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sphoto != null" >
+        SPHOTO = #{record.sphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sidcard != null" >
+        SIDCARD = #{record.sidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saddressHome != null" >
+        SADDRESS_HOME = #{record.saddressHome,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saddressNow != null" >
+        SADDRESS_NOW = #{record.saddressNow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sxl != null" >
+        SXL = #{record.sxl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.szzmm != null" >
+        SZZMM = #{record.szzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sschool != null" >
+        SSCHOOL = #{record.sschool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sphone != null" >
+        SPHONE = #{record.sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sphoneLine != null" >
+        SPHONE_LINE = #{record.sphoneLine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schatLine != null" >
+        SCHAT_LINE = #{record.schatLine,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sshStatus != null" >
+        SSH_STATUS = #{record.sshStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sjobid != null" >
+        SJOBID = #{record.sjobid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sstatus != null" >
+        SSTATUS = #{record.sstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sdescribe != null" >
+        SDESCRIBE = #{record.sdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gongsiid != null" >
+        GONGSIID = #{record.gongsiid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_USERSINFO
+    set SID = #{record.sid,jdbcType=DECIMAL},
+      SNAME = #{record.sname,jdbcType=VARCHAR},
+      SSEX = #{record.ssex,jdbcType=VARCHAR},
+      SPHOTO = #{record.sphoto,jdbcType=VARCHAR},
+      SIDCARD = #{record.sidcard,jdbcType=VARCHAR},
+      SADDRESS_HOME = #{record.saddressHome,jdbcType=VARCHAR},
+      SADDRESS_NOW = #{record.saddressNow,jdbcType=VARCHAR},
+      SXL = #{record.sxl,jdbcType=VARCHAR},
+      SZZMM = #{record.szzmm,jdbcType=VARCHAR},
+      SSCHOOL = #{record.sschool,jdbcType=VARCHAR},
+      SPHONE = #{record.sphone,jdbcType=VARCHAR},
+      SPHONE_LINE = #{record.sphoneLine,jdbcType=VARCHAR},
+      SCHAT_LINE = #{record.schatLine,jdbcType=VARCHAR},
+      SSH_STATUS = #{record.sshStatus,jdbcType=VARCHAR},
+      SJOBID = #{record.sjobid,jdbcType=DECIMAL},
+      SSTATUS = #{record.sstatus,jdbcType=VARCHAR},
+      SDESCRIBE = #{record.sdescribe,jdbcType=VARCHAR},
+      GONGSIID = #{record.gongsiid,jdbcType=DECIMAL},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.SysUsersInfo" >
+    update SYS_USERSINFO
+    <set >
+      <if test="sname != null" >
+        SNAME = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null" >
+        SSEX = #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sphoto != null" >
+        SPHOTO = #{sphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="sidcard != null" >
+        SIDCARD = #{sidcard,jdbcType=VARCHAR},
+      </if>
+      <if test="saddressHome != null" >
+        SADDRESS_HOME = #{saddressHome,jdbcType=VARCHAR},
+      </if>
+      <if test="saddressNow != null" >
+        SADDRESS_NOW = #{saddressNow,jdbcType=VARCHAR},
+      </if>
+      <if test="sxl != null" >
+        SXL = #{sxl,jdbcType=VARCHAR},
+      </if>
+      <if test="szzmm != null" >
+        SZZMM = #{szzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="sschool != null" >
+        SSCHOOL = #{sschool,jdbcType=VARCHAR},
+      </if>
+      <if test="sphone != null" >
+        SPHONE = #{sphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sphoneLine != null" >
+        SPHONE_LINE = #{sphoneLine,jdbcType=VARCHAR},
+      </if>
+      <if test="schatLine != null" >
+        SCHAT_LINE = #{schatLine,jdbcType=VARCHAR},
+      </if>
+      <if test="sshStatus != null" >
+        SSH_STATUS = #{sshStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sjobid != null" >
+        SJOBID = #{sjobid,jdbcType=DECIMAL},
+      </if>
+      <if test="sstatus != null" >
+        SSTATUS = #{sstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="sdescribe != null" >
+        SDESCRIBE = #{sdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="gongsiid != null" >
+        GONGSIID = #{gongsiid,jdbcType=DECIMAL},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SID = #{sid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.SysUsersInfo" >
+    update SYS_USERSINFO
+    set SNAME = #{sname,jdbcType=VARCHAR},
+      SSEX = #{ssex,jdbcType=VARCHAR},
+      SPHOTO = #{sphoto,jdbcType=VARCHAR},
+      SIDCARD = #{sidcard,jdbcType=VARCHAR},
+      SADDRESS_HOME = #{saddressHome,jdbcType=VARCHAR},
+      SADDRESS_NOW = #{saddressNow,jdbcType=VARCHAR},
+      SXL = #{sxl,jdbcType=VARCHAR},
+      SZZMM = #{szzmm,jdbcType=VARCHAR},
+      SSCHOOL = #{sschool,jdbcType=VARCHAR},
+      SPHONE = #{sphone,jdbcType=VARCHAR},
+      SPHONE_LINE = #{sphoneLine,jdbcType=VARCHAR},
+      SCHAT_LINE = #{schatLine,jdbcType=VARCHAR},
+      SSH_STATUS = #{sshStatus,jdbcType=VARCHAR},
+      SJOBID = #{sjobid,jdbcType=DECIMAL},
+      SSTATUS = #{sstatus,jdbcType=VARCHAR},
+      SDESCRIBE = #{sdescribe,jdbcType=VARCHAR},
+      GONGSIID = #{gongsiid,jdbcType=DECIMAL},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where SID = #{sid,jdbcType=DECIMAL}
+  </update>
+</mapper>

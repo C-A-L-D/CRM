@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.SysGongsiinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.SysGongsiinfo" >
+    <constructor >
+      <idArg column="ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="GNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GCODE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GEMAIL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GLINKMAN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GADDRESS" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GTEL" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GPHONE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GCHUANZHEN" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GOPENYINGHANG" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GYINGHANGACCOUNT" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GTF" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="GDESCRIBE" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, GNAME, GCODE, GEMAIL, GLINKMAN, GADDRESS, GTEL, GPHONE, GCHUANZHEN, GOPENYINGHANG, 
+    GYINGHANGACCOUNT, GTF, GDESCRIBE, LASTTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SysGongsiinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from SYS_GONGSIINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_GONGSIINFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from SYS_GONGSIINFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.SysGongsiinfoExample" >
+    delete from SYS_GONGSIINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.SysGongsiinfo" >
+    insert into SYS_GONGSIINFO (ID, GNAME, GCODE, 
+      GEMAIL, GLINKMAN, GADDRESS, 
+      GTEL, GPHONE, GCHUANZHEN, 
+      GOPENYINGHANG, GYINGHANGACCOUNT, GTF, 
+      GDESCRIBE, LASTTIME)
+    values (#{id,jdbcType=DECIMAL}, #{gname,jdbcType=VARCHAR}, #{gcode,jdbcType=VARCHAR}, 
+      #{gemail,jdbcType=VARCHAR}, #{glinkman,jdbcType=VARCHAR}, #{gaddress,jdbcType=VARCHAR}, 
+      #{gtel,jdbcType=VARCHAR}, #{gphone,jdbcType=VARCHAR}, #{gchuanzhen,jdbcType=VARCHAR}, 
+      #{gopenyinghang,jdbcType=VARCHAR}, #{gyinghangaccount,jdbcType=VARCHAR}, #{gtf,jdbcType=VARCHAR}, 
+      #{gdescribe,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.SysGongsiinfo" >
+    insert into SYS_GONGSIINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="gname != null" >
+        GNAME,
+      </if>
+      <if test="gcode != null" >
+        GCODE,
+      </if>
+      <if test="gemail != null" >
+        GEMAIL,
+      </if>
+      <if test="glinkman != null" >
+        GLINKMAN,
+      </if>
+      <if test="gaddress != null" >
+        GADDRESS,
+      </if>
+      <if test="gtel != null" >
+        GTEL,
+      </if>
+      <if test="gphone != null" >
+        GPHONE,
+      </if>
+      <if test="gchuanzhen != null" >
+        GCHUANZHEN,
+      </if>
+      <if test="gopenyinghang != null" >
+        GOPENYINGHANG,
+      </if>
+      <if test="gyinghangaccount != null" >
+        GYINGHANGACCOUNT,
+      </if>
+      <if test="gtf != null" >
+        GTF,
+      </if>
+      <if test="gdescribe != null" >
+        GDESCRIBE,
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gcode != null" >
+        #{gcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gemail != null" >
+        #{gemail,jdbcType=VARCHAR},
+      </if>
+      <if test="glinkman != null" >
+        #{glinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="gaddress != null" >
+        #{gaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="gtel != null" >
+        #{gtel,jdbcType=VARCHAR},
+      </if>
+      <if test="gphone != null" >
+        #{gphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gchuanzhen != null" >
+        #{gchuanzhen,jdbcType=VARCHAR},
+      </if>
+      <if test="gopenyinghang != null" >
+        #{gopenyinghang,jdbcType=VARCHAR},
+      </if>
+      <if test="gyinghangaccount != null" >
+        #{gyinghangaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="gtf != null" >
+        #{gtf,jdbcType=VARCHAR},
+      </if>
+      <if test="gdescribe != null" >
+        #{gdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.SysGongsiinfoExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_GONGSIINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_GONGSIINFO
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.gname != null" >
+        GNAME = #{record.gname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gcode != null" >
+        GCODE = #{record.gcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gemail != null" >
+        GEMAIL = #{record.gemail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.glinkman != null" >
+        GLINKMAN = #{record.glinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gaddress != null" >
+        GADDRESS = #{record.gaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gtel != null" >
+        GTEL = #{record.gtel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gphone != null" >
+        GPHONE = #{record.gphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gchuanzhen != null" >
+        GCHUANZHEN = #{record.gchuanzhen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gopenyinghang != null" >
+        GOPENYINGHANG = #{record.gopenyinghang,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gyinghangaccount != null" >
+        GYINGHANGACCOUNT = #{record.gyinghangaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gtf != null" >
+        GTF = #{record.gtf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdescribe != null" >
+        GDESCRIBE = #{record.gdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lasttime != null" >
+        LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_GONGSIINFO
+    set ID = #{record.id,jdbcType=DECIMAL},
+      GNAME = #{record.gname,jdbcType=VARCHAR},
+      GCODE = #{record.gcode,jdbcType=VARCHAR},
+      GEMAIL = #{record.gemail,jdbcType=VARCHAR},
+      GLINKMAN = #{record.glinkman,jdbcType=VARCHAR},
+      GADDRESS = #{record.gaddress,jdbcType=VARCHAR},
+      GTEL = #{record.gtel,jdbcType=VARCHAR},
+      GPHONE = #{record.gphone,jdbcType=VARCHAR},
+      GCHUANZHEN = #{record.gchuanzhen,jdbcType=VARCHAR},
+      GOPENYINGHANG = #{record.gopenyinghang,jdbcType=VARCHAR},
+      GYINGHANGACCOUNT = #{record.gyinghangaccount,jdbcType=VARCHAR},
+      GTF = #{record.gtf,jdbcType=VARCHAR},
+      GDESCRIBE = #{record.gdescribe,jdbcType=VARCHAR},
+      LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.SysGongsiinfo" >
+    update SYS_GONGSIINFO
+    <set >
+      <if test="gname != null" >
+        GNAME = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="gcode != null" >
+        GCODE = #{gcode,jdbcType=VARCHAR},
+      </if>
+      <if test="gemail != null" >
+        GEMAIL = #{gemail,jdbcType=VARCHAR},
+      </if>
+      <if test="glinkman != null" >
+        GLINKMAN = #{glinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="gaddress != null" >
+        GADDRESS = #{gaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="gtel != null" >
+        GTEL = #{gtel,jdbcType=VARCHAR},
+      </if>
+      <if test="gphone != null" >
+        GPHONE = #{gphone,jdbcType=VARCHAR},
+      </if>
+      <if test="gchuanzhen != null" >
+        GCHUANZHEN = #{gchuanzhen,jdbcType=VARCHAR},
+      </if>
+      <if test="gopenyinghang != null" >
+        GOPENYINGHANG = #{gopenyinghang,jdbcType=VARCHAR},
+      </if>
+      <if test="gyinghangaccount != null" >
+        GYINGHANGACCOUNT = #{gyinghangaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="gtf != null" >
+        GTF = #{gtf,jdbcType=VARCHAR},
+      </if>
+      <if test="gdescribe != null" >
+        GDESCRIBE = #{gdescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.SysGongsiinfo" >
+    update SYS_GONGSIINFO
+    set GNAME = #{gname,jdbcType=VARCHAR},
+      GCODE = #{gcode,jdbcType=VARCHAR},
+      GEMAIL = #{gemail,jdbcType=VARCHAR},
+      GLINKMAN = #{glinkman,jdbcType=VARCHAR},
+      GADDRESS = #{gaddress,jdbcType=VARCHAR},
+      GTEL = #{gtel,jdbcType=VARCHAR},
+      GPHONE = #{gphone,jdbcType=VARCHAR},
+      GCHUANZHEN = #{gchuanzhen,jdbcType=VARCHAR},
+      GOPENYINGHANG = #{gopenyinghang,jdbcType=VARCHAR},
+      GYINGHANGACCOUNT = #{gyinghangaccount,jdbcType=VARCHAR},
+      GTF = #{gtf,jdbcType=VARCHAR},
+      GDESCRIBE = #{gdescribe,jdbcType=VARCHAR},
+      LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
