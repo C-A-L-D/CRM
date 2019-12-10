@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sc.mapper.StoreWhinfoMapper" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.StoreWhinfo" >
+    <constructor >
+      <idArg column="WHID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="WHNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="REMARK" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="CID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="LASTDATE" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    WHID, WHNAME, REMARK, CID, LASTDATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.StoreWhinfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from STORE_WHINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from STORE_WHINFO
+    where WHID = #{whid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from STORE_WHINFO
+    where WHID = #{whid,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sc.entity.StoreWhinfoExample" >
+    delete from STORE_WHINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sc.entity.StoreWhinfo" >
+    insert into STORE_WHINFO (WHID, WHNAME, REMARK, 
+      CID, LASTDATE)
+    values (#{whid,jdbcType=DECIMAL}, #{whname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=DECIMAL}, #{lastdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sc.entity.StoreWhinfo" >
+    insert into STORE_WHINFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="whid != null" >
+        WHID,
+      </if>
+      <if test="whname != null" >
+        WHNAME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="lastdate != null" >
+        LASTDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="whid != null" >
+        #{whid,jdbcType=DECIMAL},
+      </if>
+      <if test="whname != null" >
+        #{whname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="lastdate != null" >
+        #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sc.entity.StoreWhinfoExample" resultType="java.lang.Integer" >
+    select count(*) from STORE_WHINFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update STORE_WHINFO
+    <set >
+      <if test="record.whid != null" >
+        WHID = #{record.whid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.whname != null" >
+        WHNAME = #{record.whname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null" >
+        CID = #{record.cid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lastdate != null" >
+        LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update STORE_WHINFO
+    set WHID = #{record.whid,jdbcType=DECIMAL},
+      WHNAME = #{record.whname,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CID = #{record.cid,jdbcType=DECIMAL},
+      LASTDATE = #{record.lastdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.StoreWhinfo" >
+    update STORE_WHINFO
+    <set >
+      <if test="whname != null" >
+        WHNAME = #{whname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        CID = #{cid,jdbcType=DECIMAL},
+      </if>
+      <if test="lastdate != null" >
+        LASTDATE = #{lastdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where WHID = #{whid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sc.entity.StoreWhinfo" >
+    update STORE_WHINFO
+    set WHNAME = #{whname,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CID = #{cid,jdbcType=DECIMAL},
+      LASTDATE = #{lastdate,jdbcType=TIMESTAMP}
+    where WHID = #{whid,jdbcType=DECIMAL}
+  </update>
+</mapper>
