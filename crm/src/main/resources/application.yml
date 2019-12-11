@@ -16,7 +16,7 @@ spring:
       suffix: .jsp
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@192.168.99.211:1521:orcl
+    url: jdbc:oracle:thin:@42.51.78.12:1521:orcl
     username: CRM
     password: CRM
     
