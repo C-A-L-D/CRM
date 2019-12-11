@@ -11,18 +11,18 @@ import com.sc.entity.OffMess;
 import com.sc.service.OffMessService;
 
 @Controller
-@RequestMapping("/offctrl")
-public class OffController {
+@RequestMapping("/offmessctrl")
+public class OffMessController {
 	@Autowired
 	OffMessService offMessService;
-	@RequestMapping("/list.do")
+	@RequestMapping("/offmesslist.do")
 	public ModelAndView test(ModelAndView mav){
 		System.out.println("查看短消息列表！");
 		
 		//查询list集合
 		List<OffMess>list=this.offMessService.select();
 		mav.addObject("list", list);
-		mav.setViewName("userslist");//路径是：/WEB-INF/userslist.jsp
+		mav.setViewName("off/offmesslist");//路径是：/WEB-INF/off/offmesslist.jsp
 		return mav;
      }
 }
