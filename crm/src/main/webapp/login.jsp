@@ -26,73 +26,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <button id="create">创建账户</button>
 <p class="message">已经有了一个账户? <a href="#">立刻登录</a></p>
 </form>
-<form class="login-form">
+<form  action="loginController/login.do" method="post">
  <h2>管理登录</h2>
-<input type="text" placeholder="用户名" value="admin" id="user_name" />
-<input type="password" placeholder="密码" id="password" />
-<button id="login">登　录</button>
+<input type="text" placeholder="用户名" name="uname" value="" id="user_name" />
+<input type="password" placeholder="密码" name="upassword" value="" id="password" />
+<button type="submit" id="login">登　录</button>
 <p class="message">还没有账户? <a href="#">立刻创建</a></p>
 </form>
+<script type="text/javascript">
+
+</script>
 </div>
 </div>
 
 <script src="js/jquery.min.js"></script>
-<script type="text/javascript">
-	function check_login()
-	{
-	 var name=$("#user_name").val();
-	 var pass=$("#password").val();
-	 if(name=="admin" && pass=="admin")
-	 {
-	  alert("登录成功");
-	  $("#user_name").val("");
-	  $("#password").val("");
-       $(location).attr('href', 'index.html');
-	 }
-	 else
-	 {
-	  $("#login_form").removeClass('shake_effect');  
-	  setTimeout(function()
-	  {
-	   $("#login_form").addClass('shake_effect')
-	  },1);  
-	 }
-	}
-	function check_register(){
-		var name = $("#r_user_name").val();
-		var pass = $("#r_password").val();
-		var email = $("r_email").val();
-		if(name!="" && pass=="" && email != "")
-		 {
-		  alert("注册成功！");
-		  $("#user_name").val("");
-		  $("#password").val("");
-		 }
-		 else
-		 {
-		  $("#login_form").removeClass('shake_effect');  
-		  setTimeout(function()
-		  {
-		   $("#login_form").addClass('shake_effect')
-		  },1);  
-		 }
-	}
-	$(function(){
-		$("#create").click(function(){
-			check_register();
-			return false;
-		})
-		$("#login").click(function(){
-			check_login();
-			return false;
-		})
-		$('.message a').click(function () {
-		    $('form').animate({
-		        height: 'toggle',
-		        opacity: 'toggle'
-		    }, 'slow');
-		});
-	})
-	</script>
+<!-- <script type="text/javascript"> -->
+// 	function check_login()
+// 	{
+// 	 var name=$("#user_name").val();
+// 	 var pass=$("#password").val();
+// 	 if(name=="admin" && pass=="admin")
+// 	 {
+// 	  alert("登录成功");
+// 	  $("#user_name").val("");
+// 	  $("#password").val("");
+//        $(location).attr('href', 'index.html');
+// 	 }
+// 	 else
+// 	 {
+// 	  $("#login_form").removeClass('shake_effect');  
+// 	  setTimeout(function()
+// 	  {
+// 	   $("#login_form").addClass('shake_effect')
+// 	  },1);  
+// 	 }
+// 	}
+// 	function check_register(){
+// 		var name = $("#r_user_name").val();
+// 		var pass = $("#r_password").val();
+// 		var email = $("r_email").val();
+// 		if(name!="" && pass=="" && email != "")
+// 		 {
+// 		  alert("注册成功！");
+// 		  $("#user_name").val("");
+// 		  $("#password").val("");
+// 		 }
+// 		 else
+// 		 {
+// 		  $("#login_form").removeClass('shake_effect');  
+// 		  setTimeout(function()
+// 		  {
+// 		   $("#login_form").addClass('shake_effect')
+// 		  },1);  
+// 		 }
+// 	}
+// 	$(function(){
+// 		$("#create").click(function(){
+// 			check_register();
+// 			return false;
+// 		})
+// 		$("#login").click(function(){
+// 			check_login();
+// 			return false;
+// 		})
+// 		$('.message a').click(function () {
+// 		    $('form').animate({
+// 		        height: 'toggle',
+// 		        opacity: 'toggle'
+// 		    }, 'slow');
+// 		});
+// 	})
+<!-- 	</script> -->
 </body>
 </html>
