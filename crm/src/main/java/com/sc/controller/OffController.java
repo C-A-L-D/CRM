@@ -14,7 +14,7 @@ import com.sc.service.OffMessService;
 @RequestMapping("/offctrl")
 public class OffController {
 	@Autowired
-OffMessService offMessService;
+	OffMessService offMessService;
 	@RequestMapping("/list.do")
 	public ModelAndView test(ModelAndView mav){
 		System.out.println("查看短消息列表！");

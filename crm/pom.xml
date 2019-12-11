@@ -55,14 +55,14 @@
 			</exclusions>
 		</dependency>
 		
-		<!-- 配置解析jsp的依赖 -->
+		<!-- 添加解析jsp的依赖 -->
 		<dependency>
 		    <groupId>org.apache.tomcat.embed</groupId>
 		    <artifactId>tomcat-embed-jasper</artifactId>
 		    <version>8.5.20</version>
 		</dependency>
 		
-		<!-- 配置jstl的依赖 -->
+		<!-- 添加jstl的依赖 -->
 		<dependency>
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>jstl</artifactId>
