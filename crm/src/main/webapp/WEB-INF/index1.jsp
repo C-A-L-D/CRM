@@ -170,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/gslist.html">
+                        <a _href="html/member-list.html">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>公司信息列表</cite>
                             
