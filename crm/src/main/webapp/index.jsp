@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 中部开始 -->
      <!-- 左侧菜单开始 -->
     <div class="left-nav">
-      <div id="side-nav">
+      <div id="side-nav" class="layui-side-scroll">
         <ul id="nav">
              <li >
                 <a href="javascript:;">
