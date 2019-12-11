@@ -15,7 +15,7 @@ public class JhGysxxController {
 	@Autowired
 	JhGysxxService jhGysxxService;
 	
-	@RequestMapping("/order-list.html")
+	@RequestMapping("/order-list.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
 			@RequestParam(defaultValue="10")Integer pageSize){
