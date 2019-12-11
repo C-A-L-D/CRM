@@ -17,10 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/font.css">
 	<link rel="stylesheet" href="css/xadmin.css">
+	<link rel="stylesheet" href="css/main.css">
 	
     <script src="js/jquery.min.js"></script>
     <script src="lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
+    
 
 </head>
 <body>
@@ -109,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="KehuJsp/Kehuxinxi.html"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
+                    <li><a _href="Kehuxinxictrl/KehuxinxiListPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
                     <li><a _href="KehuJsp/Kehuliushi.html"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
                 </ul>
             </li>
@@ -117,14 +119,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe69e;</i>
-                    <cite>办公-黄静怡</cite>
+                    <cite>办公管理-黄静怡</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
                         <a _href="html/order-list.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表</cite>
+                            <cite>办公短消息</cite>
+                        </a>
+                    </li >
+                </ul>
+                 <ul class="sub-menu">
+                    <li>
+                        <a _href="html/order-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>个人日程表</cite>
+                        </a>
+                    </li >
+                </ul>
+                 <ul class="sub-menu">
+                    <li>
+                        <a _href="html/order-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>考核任务</cite>
                         </a>
                     </li >
                 </ul>
@@ -218,7 +236,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/echarts1.html">
+                        <a _href="loginController/person.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>个人信息</cite>
                         </a>
@@ -226,25 +244,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li>
                         <a _href="html/echarts2.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>柱状图</cite>
+                            <cite>账户管理</cite>
                         </a>
                     </li>
                     <li>
                         <a _href="html/echarts3.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>地图</cite>
+                            <cite>角色管理</cite>
                         </a>
                     </li>
                     <li>
                         <a _href="html/echarts4.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>饼图</cite>
+                            <cite>权限管理</cite>
                         </a>
                     </li>
                     <li>
                         <a _href="html/echarts5.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>雷达图</cite>
+                            <cite>系统日志</cite>
                         </a>
                     </li>
                     <li>
