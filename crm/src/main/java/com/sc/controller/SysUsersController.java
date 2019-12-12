@@ -11,6 +11,7 @@ import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.SysUsers;
@@ -32,7 +33,7 @@ public class SysUsersController {
 		
 		String fail="";
 		if(msg!=null){
-			if(msg.equals(UnknownAccountException.class.getName())){
+			if(msg.equals(UnknownAccountException.class.getName())) {
 				fail="unknown";//用户名不存在
 			}else if(msg.equals(IncorrectCredentialsException.class.getName())){
 				fail="error";//密码不正确
@@ -49,7 +50,7 @@ public class SysUsersController {
 	}
 	
 	@RequestMapping("/index.do")
-	public ModelAndView index(ModelAndView mav, HttpSession session){
+	public ModelAndView index(ModelAndView mav, HttpSession session) {
 		System.out.println("登录认证成功，将跳到主页...");
 		
 		Subject subject = SecurityUtils.getSubject();
@@ -59,6 +60,18 @@ public class SysUsersController {
 		
 		mav.setViewName("redirect:../index.jsp");
 		return mav;
+	}
+	
+	@RequestMapping("/zhuce.do")
+	@ResponseBody
+	public ModelAndView zhuCe(ModelAndView mav, SysUsers user) {
+		if (sysUsersServiceImpl.login(user.getUname()) != null) {
+			return null;
+		}
+		sysUsersServiceImpl.addUser(user);
+		System.out.println("注册成功！");
+		mav.setViewName("redirect:../login.jsp");
+		return mav;	
 	}
 	
 	@RequestMapping("/person.do")

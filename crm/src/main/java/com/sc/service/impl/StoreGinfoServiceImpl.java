@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sc.entity.StoreGinfo;
 import com.sc.mapper.StoreGinfoMapper;
 import com.sc.service.StoreGinfoService;
@@ -49,6 +51,14 @@ public class StoreGinfoServiceImpl implements StoreGinfoService{
 			System.err.println("对象为空！");
 		}
 		
+	}
+
+	@Override
+	public PageInfo<StoreGinfo> selectPage(Integer pageNum,Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		PageInfo<StoreGinfo> page=new PageInfo<StoreGinfo>(this.selectAll());
+		System.err.println(page);
+		return page;
 	}
 	
 }
