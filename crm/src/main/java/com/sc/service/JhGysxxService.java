@@ -9,8 +9,13 @@ import com.sc.entity.JhGysxx;
 public interface JhGysxxService {
 	
 	
-	public PageInfo<JhGysxx> selectpage(Integer pageNum,Integer pageSize);
+	  public PageInfo<JhGysxx> selectpage(Integer pageNum,Integer pageSize);
 
-	public JhGysxx get(BigDecimal gysId);
+	  public JhGysxx get(BigDecimal gysId);
+	 
+	  public void update(JhGysxx u);
 	
+	  public void delete(JhGysxx u);
+	  
+	  public void add(JhGysxx u);
 }

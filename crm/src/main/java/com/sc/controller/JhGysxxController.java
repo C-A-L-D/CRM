@@ -1,5 +1,9 @@
 package com.sc.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +42,17 @@ public class JhGysxxController {
 		return mav;
 	}
 	
+	
+	@RequestMapping("/update.do")
+	public ModelAndView update(ModelAndView mav,
+			HttpServletRequest req,
+			JhGysxx u) throws IllegalStateException, IOException{
+		System.out.println("开始上传文件"+u);
+	
+		this.jhGysxxService.update(u);
+		mav.setViewName("redirect:listpage.do");//重定向到listpage方法
+		return mav;
+	}
 	
 	
 }
