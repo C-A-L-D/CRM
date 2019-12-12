@@ -22,10 +22,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="../../css/font.css">
-    <link rel="stylesheet" type="text/css" href="../../lib/layui/css/layui.css">
-    <script src="../../js/jquery.min.js"></script>
-	<script src="../../lib/layui/layui.js"></script>
+    <link rel="stylesheet" href="../../CRM/css/font.css">
+    <script src="../../CRM/js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../CRM/lib/layui/css/layui.css">
+	<script src="../../CRM/lib/layui/layui.js"></script>
   </head>
   
 <body>

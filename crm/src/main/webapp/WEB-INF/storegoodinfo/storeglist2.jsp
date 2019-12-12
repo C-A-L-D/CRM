@@ -31,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div class="layui-card">
 
+<!-- 导航 -->
 <div class="x-nav">
       <span class="layui-breadcrumb" style="visibility: visible;">
         <a href="">库存</a><span lay-separator="">/</span>
@@ -38,29 +39,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a>
           <cite>导航元素</cite></a>
       </span>
-      <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
 </div>
 
 
-
+<!-- 查询 -->
 <form class="layui-form">
-<input type="text" name="gid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="display:inline; width:400px;">
-<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="display:inline; width:400px;">
+<input type="text" name="gid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="display:inline; width:530px;">
+<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="display:inline; width:530px;">
 <button type="submit" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查找</button>  
 <button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
 </form>
 
+<!-- 表格 -->
   <table class="layui-table">
     <colgroup>
-      <col width="100">
-      <col width="100">
-      <col width="100">
-      <col width="100">
-      <col width="100">
-      <col width="100">
-	  <col width="100">
-      <col width="100">
+      <col width="200">
+      <col width="200">
+      <col width="200">
+      <col width="200">
+      <col width="200">
+      <col width="200">
+	  <col width="200">
+      <col width="250">
       <col>
     </colgroup>
     <thead>
@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr> 
     </thead>
     <tbody>
-		 <c:forEach items="${sgilist.list }" var="storeginfo">
+		 <c:forEach items="${sgilistPage.list}" var="storeginfo">
 	  		<tr>
 		  		<td><center>${storeginfo.gid}</center></td>
 		  		<td><center>${storeginfo.gname}</center></td>
@@ -115,8 +115,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</c:forEach>
 	</tbody>
   </table>
-<input type="hidden" id="tatol" readonly="readonly" value="${sgilist.total}">
+  
+<!-- 分页 -->
+<input type="hidden" readonly="readonly" id="total" value='${sgilistPage.total}'>
 <center><div id="demo7"></div></center>
+
 </div>
 </body>
+
+
 </html>
