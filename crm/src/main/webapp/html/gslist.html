@@ -52,19 +52,14 @@
             <th>主键</th>
             <th>公司名称</th>
             <th>公司代码</th>
-            <th>邮箱</th>
             <th>联系人</th>
             <th>公司地址</th>
             <th>固定电话</th>
             <th>移动电话</th>
-            <th>传真</th>
-            <th>开户银行</th>
-            <th>银行账户</th>
-            <th>是否有效</th>
             <th>备注信息</th>
             <th>最后修改时间</th>
             <th>操作</th>
-            <!-- 15个th -->
+          
             </tr>
         </thead>
         <tbody>
@@ -72,16 +67,17 @@
             <td>1</td>
             <td>张氏集团</td>
             <td>q</td>
-            <td>1231@qq.com</td>
+       
             <td>张总</td>
             <td>堕落街</td>
             <td>1388</td>
             <td>1388</td>
-            <td>fax</td>
-            <td>1</td>
-            <td>12414</td>
-            <td>1</td>
-            <td>详细</td>
+            
+            <td>
+		<a title="详细"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详细信息','gsxxinfo.html',600,400)" href="javascript:;">
+                详细信息
+    </a>
+		</td>
             <td>
             2017-01-01 11:11:42
             </td>
@@ -89,18 +85,16 @@
          
          
             <td class="td-manage">
-  <div style="position: relative;">
-  <div style="position: absolute;">
-    <button title="编辑"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+  
+    <a title="编辑"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
                 编辑
-    </button>
-   </div>
-   <div style="position: absolute; left:20px;top:10;">
-   <button title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,'要删除的id')" href="javascript:;">
+    </a>
+  
+   
+   <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,'要删除的id')" href="javascript:;">
                 删除
-  </button>
-  </div>
- </div>
+  </a>
+  
             </td>
           </tr>
           <tr>
