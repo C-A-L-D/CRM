@@ -18,7 +18,7 @@ public interface SysGongsiinfoService {
     public void delete(SysGongsiinfo g);
     
     //获取对象
-    public SysDepartment get(BigDecimal id);
+    public SysGongsiinfo get(BigDecimal id);
     
     //查询
     public List<SysGongsiinfo > select();

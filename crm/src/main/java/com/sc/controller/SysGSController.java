@@ -24,8 +24,11 @@ import com.sc.service.SysUsersInfoService;
 public class SysGSController {
 	@Autowired
 	SysGongsiinfoService sysGongsiinfoService;
+	@Autowired
 	SysDepartmentService sysDepartmentService;
+	@Autowired
 	SysJobinfoService sysJobinfoService;
+	@Autowired
 	SysUsersInfoService  sysUsersInfoService;
 	//公司分页list
 	@RequestMapping("/gspage.do")
@@ -45,11 +48,11 @@ public class SysGSController {
 	public ModelAndView gsxx(ModelAndView mav,HttpServletRequest req){
 		System.out.println("查询用户列表！");
 		
-		BigDecimal id = (BigDecimal)req.getParameter("id");
-		SysGongsiinfo gsinfo=sysGongsiinfoService.get(id);
+		BigDecimal id = new BigDecimal(req.getParameter("id"));
+		//SysGongsiinfo gsinfo=sysGongsiinfoService.get(id);
 		//查询list集合
-		List<SysGongsiinfo> list = this.sysGongsiinfoService.get(id);
-		mav.addObject("list", list);//list集合存入模型
+		SysGongsiinfo info =sysGongsiinfoService.get(id);
+		mav.addObject("u", info);//list集合存入模型
 		mav.setViewName("gs/gsxxlist");// 路径是：/WEB-INF/userslist.jsp
 		return mav;
 	}

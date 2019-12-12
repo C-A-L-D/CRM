@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
       <table class="layui-table" style="text-align: center">
-        <c:forEach items="${list }" var="u">
+        
       <tr>
       <td style="background-color:#f2f2f2"> 
               公司名称
@@ -150,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </td>
      </tr>
 
- </c:forEach>
+ 
 </table>
   </body>
 </html>
