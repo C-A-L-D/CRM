@@ -1,5 +1,7 @@
 package com.sc.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +18,11 @@ public class SysUsersController {
 	SysUsersServiceImpl sysUsersServiceImpl;
 	
 	@RequestMapping("/login.do")
-	public ModelAndView Login(SysUsers u,ModelAndView mav){
-		System.out.println(u.getUname());
-		if (this.sysUsersServiceImpl.login(u) != null) {
+	public ModelAndView Login(SysUsers u,ModelAndView mav,HttpServletRequest req){
+		SysUsers user = this.sysUsersServiceImpl.login(u);
+		if (user != null) {
 			System.out.println("登录成功...");
+			req.getSession().setAttribute("user", user);
 			mav.setViewName("redirect:../index.jsp");
 		}
 		else {
@@ -28,4 +31,11 @@ public class SysUsersController {
 		}
 		return mav;
 	}
+	
+	@RequestMapping("/person.do")
+	public ModelAndView person(SysUsers u,ModelAndView mav){
+		mav.setViewName("sys/person");
+		return mav;
+	}
+	
 }
