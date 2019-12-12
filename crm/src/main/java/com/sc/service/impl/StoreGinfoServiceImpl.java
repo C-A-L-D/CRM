@@ -1,4 +1,4 @@
-package com.sc.service;
+package com.sc.service.impl;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sc.entity.StoreGinfo;
 import com.sc.mapper.StoreGinfoMapper;
-import com.sc.service.impl.StoreGinfoService;
+import com.sc.service.StoreGinfoService;
 
 @Service
 public class StoreGinfoServiceImpl implements StoreGinfoService{
