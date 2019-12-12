@@ -284,26 +284,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <cite>系统日志</cite>
                         </a>
                     </li>
-                    <li>
-                        <a _href="html/echarts6.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>k线图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="html/echarts7.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>热力图</cite>
-                        </a>
-                    </li>
-                    <li>
-                        <a _href="html/echarts8.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>仪表图</cite>
-                        </a>
-                    </li>
                 </ul>
-            </li>            </ul>
+            </li>            
+         </ul>
       </div>
     </div>
     <!-- <div class="x-slide_left"></div> -->

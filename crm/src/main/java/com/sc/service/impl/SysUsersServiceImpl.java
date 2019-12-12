@@ -18,15 +18,13 @@ public class SysUsersServiceImpl implements SysUsersService{
 	SysUsersMapper sysUsersMapper;
 
 	@Override
-	public SysUsers login(SysUsers u) {
+	public SysUsers login(String uname) {
 		// TODO Auto-generated method stub
 		SysUsersExample example = new SysUsersExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andUnameEqualTo(u.getUname());
-		criteria.andUpasswordEqualTo(u.getUpassword());
+		criteria.andUnameEqualTo(uname);
 		List<SysUsers> list = this.sysUsersMapper.selectByExample(example);
 		if(list != null && list.size() > 0){
-			System.out.println(list.toString());
 			return list.get(0);
 		}
 		return null;
