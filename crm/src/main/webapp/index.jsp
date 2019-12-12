@@ -17,10 +17,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/font.css">
 	<link rel="stylesheet" href="css/xadmin.css">
+	<link rel="stylesheet" href="css/main.css">
 	
     <script src="js/jquery.min.js"></script>
     <script src="lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/xadmin.js"></script>
+    
 
 </head>
 <body>
@@ -57,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!-- 中部开始 -->
      <!-- 左侧菜单开始 -->
     <div class="left-nav">
-      <div id="side-nav">
+      <div id="side-nav" class="layui-side-scroll">
         <ul id="nav">
              <li >
                 <a href="javascript:;">
@@ -104,27 +106,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
              <li >
                 <a href="javascript:;">
-                    <i class="iconfont">&#xe6b4;</i>
-                    <cite>销售-金鸣</cite>
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>客户管理-金鸣</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/grid.html"><i class="iconfont">&#xe6a7;</i><cite>栅格</cite></a></li>
-                    <li><a _href="html/welcome2.html"><i class="iconfont">&#xe6a7;</i><cite>排版</cite></a></li>
+                    <li><a _href="KehuJsp/Kehuxinxi.html"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
+                    <li><a _href="Kehuxinxictrl/KehuxinxiListPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
+                    <li><a _href="KehuJsp/Kehuliushi.html"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
                 </ul>
             </li>
                    
             <li>
                 <a href="javascript:;">
+                    <i class="iconfont">&#xe6f5;</i>
                     <i class="iconfont">&#xe69e;</i>
-                    <cite>订单管理</cite>
+                    <cite>办公管理-黄静怡</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
+                        <a href="offmessctrl/offmesslist.do">                 
+                             <i class="iconfont">&#xe69b;</i>
+                            <cite>办公短消息</cite>
+                        </a>
+                    </li >
+                </ul>
+                 <ul class="sub-menu">
+                    <li>
+                        <a _href="html/admin-list.html">
+                            <i class="iconfont">&#xe6bf;</i>
+                            <cite>个人日程表</cite>
+                        </a>
+                    </li >
+                </ul>
+                 <ul class="sub-menu">
+                    <li>
+                        <a _href="html/order-list.html">
+                            <i class="iconfont">&#xe6b3;</i>
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>办公短消息</cite>
+                        </a>
+                    </li >
+                </ul>
+                 <ul class="sub-menu">
+                    <li>
                         <a _href="html/order-list.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>订单列表</cite>
+                            <cite>个人日程表</cite>
+                        </a>
+                    </li >
+                </ul>
+                 <ul class="sub-menu">
+                    <li>
+                        <a _href="html/order-list.html">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>考核任务</cite>
                         </a>
                     </li >
                 </ul>
@@ -213,38 +250,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6ae;</i>
-                    <cite>系统统计-pj-朱志远</cite>
+                    <cite>系统管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/echarts1.html">
+                        <a _href="loginController/person.do">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>拆线图</cite>
+                            <cite>个人信息</cite>
                         </a>
-                    </li >
+                    </li>
                     <li>
                         <a _href="html/echarts2.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>柱状图</cite>
+                            <cite>账户管理</cite>
                         </a>
                     </li>
                     <li>
                         <a _href="html/echarts3.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>地图</cite>
+                            <cite>角色管理</cite>
                         </a>
                     </li>
                     <li>
                         <a _href="html/echarts4.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>饼图</cite>
+                            <cite>权限管理</cite>
                         </a>
                     </li>
                     <li>
                         <a _href="html/echarts5.html">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>雷达图</cite>
+                            <cite>系统日志</cite>
                         </a>
                     </li>
                     <li>
