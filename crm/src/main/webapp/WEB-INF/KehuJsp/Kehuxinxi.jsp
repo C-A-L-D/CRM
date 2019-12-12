@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,10 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">演示</a>
         <a>
-          <cite>导航元素</cite></a>
+          <cite style="color: red;"><h2>客户信息管理</h2></cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -40,96 +40,87 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
           <div class="layui-input-inline">
             <select name="contrller">
-              <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
+              <option>客户状态</option>
+              <option>合作客户</option>
+              <option>潜在客户</option>
             </select>
           </div>
           <div class="layui-input-inline">
             <select name="contrller">
               <option>支付方式</option>
-              <option>支付宝</option>
-              <option>微信</option>
+              <option>现付全额</option>
+              <option>分批支付</option>
               <option>货到付款</option>
             </select>
           </div>
           <div class="layui-input-inline">
             <select name="contrller">
-              <option value="">订单状态</option>
-              <option value="0">待确认</option>
-              <option value="1">已确认</option>
-              <option value="2">已收货</option>
-              <option value="3">已取消</option>
-              <option value="4">已完成</option>
-              <option value="5">已作废</option>
+              <option>订单状态</option>
+              <option value="0">有效</option>
+              <option value="1">无效</option>
             </select>
           </div>
-          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
+          <input type="text" name="username"  placeholder="请输入客户名称" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加客户</button>
+        <span class="x-right" style="line-height:40px;font-size:20px;">共有数据：${klp.total } 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
           <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
             <th>客户编号</th>
             <th>客户名称</th>
             <th>客户属性</th>
             <th>客户状态</th>
-            <th>订单状态</th>
-            <th>支付状态</th>
-            <th>发货状态</th>
             <th>支付方式</th>
-            <th>配送方式</th>
-            <th>下单时间</th>
-            <th >操作</th>
+            <th>订单状态</th>
+            <th>固定电话</th>
+            <th>移动电话</th>
+            <th>公司编号</th>
+            <th>下次联系时间</th>
+            <th>操作</th>
             </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>2017009171822298053</td>
-            <td>老王:18925139194</td>
-            <td>7829.10</td>
-            <td>7854.10</td>
-            <td>待确认</td>
-            <td>未支付</td>
-            <td>未发货</td>
-            <td>其他方式</td>
-            <td>申通物流</td>
-            <td>2017-08-17 18:22</td>
-            <td class="td-manage">
-              <a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
+        	<c:forEach items="${klp.list}" var="k">
+		          <tr>
+		            <td>${k.kid }</td>
+		            <td>${k.kname }</td>
+		            <td>${k.kshuxin }</td>
+		            <td>${k.kehuzhuangtai }</td>
+		            <td>${k.zhifufangshi }</td>
+		            <td>${k.shifouyouxiao }</td>
+		            <td>${k.gudingdianhua }</td>
+		            <td>${k.yidongdianhua }</td>
+		            <td>${k.gid }</td>
+		            <td>${k.xiacilianxishijian }</td>
+		            <td class="td-manage">
+		              <a title="详细信息"  onclick="x_admin_show('详细信息','order-view.html')" href="javascript:;">
+		                <i class="layui-icon">&#xe63c;</i>
+		              </a>
+		              <a title="联系人" onclick="x_admin_show('客户联系人','order-view.html')" href="javascript:;">
+		                <i class="layui-icon">&#xe63c;</i>
+		              </a>
+		              <a title="反馈记录"  onclick="x_admin_show('客户反馈记录','order-view.html')" href="javascript:;">
+		                <i class="layui-icon">&#xe63c;</i>
+		              </a>
+		            </td>
+		          </tr>
+        	</c:forEach>
         </tbody>
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+          <a class="prev" href="Kehuxinxictrl/KehuxinxiListPage.do?pageNum=${klp.prePage }" title="上一页">&lt;&lt;</a>
+          <a class="num" href="Kehuxinxictrl/KehuxinxiListPage.do?pageNum=${klp.firstPage }">首页</a>
+          <span class="current"> 当前${klp.pageNum }/${klp.pages }页</span>
+          <a class="num" href="Kehuxinxictrl/KehuxinxiListPage.do?pageNum=${klp.lastPage }">尾页</a>
+          <a class="next" href="Kehuxinxictrl/KehuxinxiListPage.do?pageNum=${klp.nextPage }" title="下一页">&gt;&gt;</a>
         </div>
       </div>
 

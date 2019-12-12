@@ -23,7 +23,7 @@ public class KehuxinxiController {
 		System.out.println("查询客户信息列表！");
 		
 		mav.addObject("klp", kehuxinxiService.selectKehuxinxiPage(pageNum, pageSize));
-		mav.setViewName("KehuXinxi");
+		mav.setViewName("KehuJsp/Kehuxinxi");
 		return mav;
 	};
 }
