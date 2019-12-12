@@ -1,5 +1,6 @@
 package com.sc.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,14 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 		PageInfo<JhGysxx>page=new PageInfo<JhGysxx>(list);
 		
 		return page;
+	}
+
+
+
+	@Override
+	public JhGysxx get(BigDecimal gysId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
