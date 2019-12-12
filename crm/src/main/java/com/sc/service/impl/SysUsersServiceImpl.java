@@ -29,6 +29,12 @@ public class SysUsersServiceImpl implements SysUsersService{
 		}
 		return null;
 	}
+
+	@Override
+	public void addUser(SysUsers u) {
+		// TODO Auto-generated method stub
+		sysUsersMapper.insert(u);
+	}
 	
 	
 }

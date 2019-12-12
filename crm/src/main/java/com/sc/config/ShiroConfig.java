@@ -71,13 +71,13 @@ public class ShiroConfig {
 		filterMap.put("/validatecode.jsp", "anon");
 		//匿名用户可以访问登录注册页面
 		filterMap.put("/login.jsp", "anon");
-		filterMap.put("/loginctrl/checkuname.do", "anon");
+		filterMap.put("/loginController/checkuname.do", "anon");
 		
 		//easyUI表格的页面和请求方法，可匿名访问
 		filterMap.put("/datagrid.jsp", "anon");
 		filterMap.put("/usersctrl/listjson.do", "anon");
 		
-//		filterMap.put("/**", "authc");
+		filterMap.put("/**", "authc");
 		//将匿名用户可访问页面的map集合放入过滤器链
 		shiroFilter.setFilterChainDefinitionMap(filterMap);
 		

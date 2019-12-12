@@ -27,14 +27,14 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
 
 </head>
 <body>
-<p class="center">登录用户名为：admin，密码为admin</p>
-<p class="center">在用户名和密码错误时，点击登录按钮可以看到表单的摇晃效果。</p>
 <div id="wrapper" class="login-page">
 <div id="login_form" class="form">
-<form class="register-form">
-<input type="text" placeholder="用户名" value="admin" id="r_user_name" />
-<input type="password" placeholder="密码" id="r_password" />
-<input type="text" placeholder="电子邮件" id="r_emial" />
+<form action="loginController/zhuce.do" method="post" class="register-form">
+<input type="text" placeholder="用户名" name="uname" value="" id="r_user_name" />
+<input type="password" placeholder="密码" name="upassword" id="r_password" />
+<input type="text" placeholder="验证码" name="rand" id="randomcode" size="8">
+<img src="validatecode.jsp" id="imgcode" width="56" height="20"
+     onclick="refreshcode(this)" title="点击刷新">
 <button id="create">创建账户</button>
 <p class="message">已经有了一个账户? <a href="#">立刻登录</a></p>
 </form>
@@ -77,7 +77,7 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
   	  },1);  
   	 }
   	} */
-  	function check_register(){
+  	/* function check_register(){
   		var name = $("#r_user_name").val();
   		var pass = $("#r_password").val();
   		var email = $("r_email").val();
@@ -95,7 +95,7 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
   		   $("#login_form").addClass('shake_effect')
   		  },1);  
   		 }
-  	}
+  	} */
   	$(function(){
   		$("#create").click(function(){
   			check_register();
