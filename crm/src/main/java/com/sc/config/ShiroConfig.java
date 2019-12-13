@@ -73,6 +73,7 @@ public class ShiroConfig {
 		filterMap.put("/login.jsp", "anon");
 		filterMap.put("/validatecode.jsp", "anon");
 		
+		//放开的权限
 		filterMap.put("/index.jsp", "anon");
 		filterMap.put("/gs/**", "anon");
 		filterMap.put("/jh/**", "anon");
@@ -82,7 +83,7 @@ public class ShiroConfig {
 		
 		filterMap.put("/**", "authc");
 		//将匿名用户可访问页面的map集合放入过滤器链
-		shiroFilter.setFilterChainDefinitionMap(filterMap);
+//		shiroFilter.setFilterChainDefinitionMap(filterMap);
 		
 		return shiroFilter;
 	}
