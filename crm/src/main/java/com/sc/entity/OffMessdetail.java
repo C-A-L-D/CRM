@@ -20,8 +20,20 @@ public class OffMessdetail implements Serializable {
     private Date lasttime;
 
     private static final long serialVersionUID = 1L;
+    
+    //一对一配置start
+    private OffMess offMess;//在一的一方定义另外一方的对象
+    
+    public OffMess getOffMess() {
+		return offMess;
+	}
 
-    public OffMessdetail(Long detailid, Long messid, Long receiverid, String messstate, Long companyid, Date lasttime) {
+	public void setOffMess(OffMess offMess) {
+		this.offMess = offMess;
+	}
+	//一对一配置end
+
+	public OffMessdetail(Long detailid, Long messid, Long receiverid, String messstate, Long companyid, Date lasttime) {
         this.detailid = detailid;
         this.messid = messid;
         this.receiverid = receiverid;
