@@ -73,7 +73,7 @@ public class ShiroConfig {
 		filterMap.put("/login.jsp", "anon");
 		filterMap.put("/validatecode.jsp", "anon");
 		
-		filterMap.put("/index.do", "anon");
+		filterMap.put("/index.jsp", "anon");
 		filterMap.put("/gs/**", "anon");
 		filterMap.put("/jh/**", "anon");
 		filterMap.put("/off/**", "anon");
