@@ -30,14 +30,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+   <form  action="gstj.do" method="post"
+            enctype="multipart/form-data">
       <table class="layui-table" style="text-align: center">
-        
+       
       <tr>
       <td style="background-color:#f2f2f2"> 
               公司名称
       </td>
        <td> 
-      ${u.gname }
+       <input type="hidden" name="id" >
+        <input type="text" name="gname" >
+      
       </td>
      </tr>
      
@@ -46,7 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      公司代码
       </td>
        <td> 
-       ${u.gcode }
+       <input type="text" name="gcode" >
+       
       </td>
      </tr>
      
@@ -55,7 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      邮箱
       </td>
        <td> 
-       ${u.gemail }
+       <input type="text" name="gemail" >
+       
       </td>
      </tr>
      
@@ -64,7 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      联系人
       </td>
        <td> 
-      ${u.glinkman }
+       <input type="text" name="glinkman" >
+     
       </td>
      </tr>
      
@@ -73,7 +80,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      公司地址
       </td>
        <td> 
-       ${u.gaddress }
+       <input type="text" name="gaddress"  >
+       
       </td>
      </tr>
      
@@ -82,7 +90,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      固定电话
       </td>
        <td> 
-       ${u.gtel }
+       <input type="text" name="gtel" >
+       
       </td>
      </tr>
      
@@ -91,7 +100,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      移动电话
       </td>
        <td> 
-       ${u.gphone }
+       <input type="text" name="gphone" >
+      
       </td>
      </tr>
      
@@ -103,7 +113,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       </td>
        <td> 
-        ${u.gchuanzhen }
+       <input type="text" name="gchuanzhen" >
+        
        
       </td>
      </tr>
@@ -115,7 +126,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
       </td>
        <td> 
-       ${u.gopenyinghang }
+       <input type="text" name="gopenyinghang">
+       
        
       </td>
      </tr>
@@ -125,8 +137,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     银行账户
        
       </td>
-       <td> 
-       ${u.gyinghangaccount }
+       <td>
+       <input type="text" name="gyinghangaccount" > 
+      
        
       </td>
      </tr>
@@ -136,23 +149,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             是否有效
        
       </td>
-       <td> 
-       ${u.gtf }
+       <td>
+       <input type="text" name="gtf" > 
+      
        
       </td>
         </tr>
-        <tr>
-        <td style="background-color:#f2f2f2"> 
-            最后修改时间
-       
-      </td>
-       <td> 
-       ${u.lasttime }
-       
-      </td>
-   </tr>
-
+  
+     <tr>
+                    <td colspan="2" style="text-align: center;">
+                      <input type="submit" value="提交">
+                      
+                   </td>
+                </tr>
  
 </table>
+</form>
+<script type="text/javascript">
+  //监听提交
+  
+     /* function c(){
+       alert("添加成功");
+       var index = parent.layer.getFrameIndex(window.name);
+       parent.layer.close(index);
+     } */
+          /* form.on('submit(add)', function(data){
+            console.log(data);
+            //发异步，把数据提交给php
+            layer.alert("增加成功", {icon: 6},function () {
+                // 获得frame索引
+                var index = parent.layer.getFrameIndex(window.name);
+                //关闭当前frame
+                parent.layer.close(index);
+            });
+            return false;
+          }); */
+</script>
   </body>
 </html>

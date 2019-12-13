@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','gsgotj.do',600,400)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
       <table class="layui-table">
@@ -72,8 +72,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>操作</th>
           
     </tr>
-        
+        </thead>
         <c:forEach items="${p.list }" var="u">
+        
            <tr>
            <td>
            ${u.id }
@@ -111,32 +112,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </td>
             
          
-         
             <td class="td-manage">
   
-    <a title="编辑"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','gsgoupdate.do?id=${u.id }')" href="javascript:;">
                 编辑
     </a>
   
    
-   <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,'要删除的id')" href="javascript:;">
+  <%--  <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,'要删除的id')" href="gsdelete.do?id=${u.id }"> --%>
+         <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="return gsdel()" href="gsdelete.do?id=${u.id }">      
                 删除
   </a>
   
             </td>
           </tr>
+          
         </c:forEach>
+       
               <tr>
-             <td style="text-align: center;" colspan="8">
-                <a href="usersctrl/listpage.do?pageNum=${p.firstPage }">首页</a>
-                <a href="usersctrl/listpage.do?pageNum=${p.prePage }">上一页</a>
-                <a href="usersctrl/listpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="usersctrl/listpage.do?pageNum=${p.lastPage }">尾页</a>
+             <td style="text-align: center;" colspan="11">
+                <a href="../sysgsctrl/gspage.do?pageNum=${p.firstPage }">首页</a>
+                <a href="../sysgsctrl/gspage.do?pageNum=${p.prePage }">上一页</a>
+                <a href="../sysgsctrl/gspage.do?pageNum=${p.nextPage }">下一页</a>
+                <a href="../sysgsctrl/gspage.do?pageNum=${p.lastPage }">尾页</a>
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr>   
   </body>
      <script>
+     function gsdel(){
+     return window.confirm('确认要删除吗？');
+     }
+     
+     
       layui.use('laydate', function(){
         var laydate = layui.laydate;
         
@@ -193,6 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
             layer.msg('删除成功', {icon: 1});
+           
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }

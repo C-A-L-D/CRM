@@ -45,9 +45,9 @@ public class SysGongsiinfoServiceImpl implements SysGongsiinfoService {
 		}
 
 		@Override
-		public SysGongsiinfo get(BigDecimal gid) {
-			if(gid!=null){
-				this.sysGongsiinfoMapper.selectByPrimaryKey(gid);
+		public SysGongsiinfo get(BigDecimal id) {
+			if(id!=null){
+				return	this.sysGongsiinfoMapper.selectByPrimaryKey(id);
 			}
 			return null;
 		}

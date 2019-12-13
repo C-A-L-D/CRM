@@ -24,4 +24,6 @@ public interface SysGongsiinfoService {
     public List<SysGongsiinfo > select();
     
     public PageInfo<SysGongsiinfo> selectpage(Integer pageNum,Integer pageSize);
+
+	
 }
