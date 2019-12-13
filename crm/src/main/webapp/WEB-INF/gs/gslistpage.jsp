@@ -34,9 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+        <a href="">公司管理</a>
         <a>
-          <cite>导航元素</cite></a>
+          <cite>公司信息列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','gsgotj.do',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','gsgotj.do',480,560)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
       <table class="layui-table">
@@ -67,7 +67,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>公司地址</th>
             <th>固定电话</th>
             <th>移动电话</th>
-            <th>备注信息</th>
             <th>最后修改时间</th>
             <th>操作</th>
           
@@ -79,9 +78,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <td>
            ${u.id }
            </td>
-            
             <td>
-             ${u.gname }
+             
+             <a title="查看详情"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详情信息','gsxxlist.do?id=${u.id }',460,520)" href="javascript:;">
+                ${u.gname }
+            </a>
             </td>
             <td>
              ${u.gcode }
@@ -102,25 +103,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              ${u.gphone }
             </td>
             <td>
-		<a title="详细"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详细信息','gsxxlist.do?id=${u.id }',800,600)" href="javascript:;">
-                详细信息
-    </a>
-		</td>
-            <td>
            
-           <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd"/>
+           <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd :mm:ss"/>
             </td>
             
          
             <td class="td-manage">
   
-    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','gsgoupdate.do?id=${u.id }')" href="javascript:;">
+    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','gsgoupdate.do?id=${u.id }',480,560)" href="javascript:;">
                 编辑
     </a>
   
    
-  <%--  <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,'要删除的id')" href="gsdelete.do?id=${u.id }"> --%>
-         <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="return gsdel()" href="gsdelete.do?id=${u.id }">      
+  <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,${u.id })" href="javascript:;">
+         <%-- <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="return gsdel()" href="gsdelete.do?id=${u.id }"> --%>      
                 删除
   </a>
   
@@ -137,9 +133,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a href="../sysgsctrl/gspage.do?pageNum=${p.lastPage }">尾页</a>
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
-          </tr>   
+          </tr>  
+          <div id="demo2"></div> 
   </body>
      <script>
+     //自定义样式
+  laypage.render({
+    elem: 'demo2'
+    ,count: 100
+    ,theme: '#1E9FFF'
+  });
+     
+     
+     
      function gsdel(){
      return window.confirm('确认要删除吗？');
      }
@@ -185,10 +191,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       /*用户-删除*/
       function member_del(obj,id){
+      
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              $.ajax({
+		        type: 'post',
+		        url: "gsdelete.do",
+		        data: "id="+id,
+		        success: function (res) {
+		           //$(obj).parents("tr").remove();
+		           layer.msg('已删除!',{icon:1,time:1000},function () {
+		              //刷新页面
+		              location.reload();
+		           });
+		        }
+		    });
           });
       }
 

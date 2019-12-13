@@ -9,196 +9,186 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    
-    
-    <title>My JSP 'gsxxinfo.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <title>欢迎页面-L-admin1.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/xadmin.css">
     <script src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
   
   <body>
-   <form>
-      <table class="layui-table" style="text-align: center">
-       
-      <tr>
-      <td style="background-color:#f2f2f2"> 
-              公司名称
-      </td>
-       <td> 
-       <input type="hidden" name="id" value="${u.id }">
-        <input type="text" name="gname" value="${u.gname }" >
-      
-      </td>
-     </tr>
-     
-          <tr>
-      <td style="background-color:#f2f2f2"> 
-     公司代码
-      </td>
-       <td> 
-       <input type="text" name="gcode" value="${u.gcode }">
-       
-      </td>
-     </tr>
-     
-          <tr>
-      <td style="background-color:#f2f2f2"> 
-     邮箱
-      </td>
-       <td> 
-       <input type="text" name="gemail" value="${u.gemail }">
-       
-      </td>
-     </tr>
-     
-          <tr>
-      <td style="background-color:#f2f2f2"> 
-     联系人
-      </td>
-       <td> 
-       <input type="text" name="glinkman" value=" ${u.glinkman }">
-     
-      </td>
-     </tr>
-     
-          <tr>
-      <td style="background-color:#f2f2f2"> 
-     公司地址
-      </td>
-       <td> 
-       <input type="text" name="gaddress" value="${u.gaddress }" style="boder=0">
-       
-      </td>
-     </tr>
-     
-          <tr>
-      <td style="background-color:#f2f2f2"> 
-     固定电话
-      </td>
-       <td> 
-       <input type="text" name="gtel" value="${u.gtel }">
-       
-      </td>
-     </tr>
-     
-              <tr>
-      <td style="background-color:#f2f2f2"> 
-     移动电话
-      </td>
-       <td> 
-       <input type="text" name="gphone" value=" ${u.gphone }">
-      
-      </td>
-     </tr>
-     
-     
-    
-     <tr>
-      <td style="background-color:#f2f2f2"> 
-       传真
-       
-      </td>
-       <td> 
-       <input type="text" name="gchuanzhen" value="${u.gchuanzhen }">
-        
-       
-      </td>
-     </tr>
-     
-     
-    <tr >
-      <td style="background-color:#f2f2f2"> 
-       开户银行
-       
-      </td>
-       <td> 
-       <input type="text" name="gopenyinghang" value="${u.gopenyinghang }">
-       ${u.gopenyinghang }
-       
-      </td>
-     </tr>
   
-    <tr >
-      <td style="background-color:#f2f2f2"> 
-    银行账户
+   <div class="x-body">
+        <form class="layui-form">
+          <div class="layui-form-item">
+              <label for="username" class="layui-form-label">
+                  <span class="x-red">*</span>公司名称
+              </label>
+              <div class="layui-input-inline">
+                  <input type="hidden" name="id" value="${u.id }">
+                  <input type="text" id="gname" name="gname" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.gname }">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>公司代码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gcode" name="gcode" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.gcode }">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>邮箱
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gemail" name="gemail" required lay-verify="email"
+                  autocomplete="off" class="layui-input" value="${u.gemail }">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>联系人
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="glinkman" name="glinkman" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.glinkman }">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>公司地址
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gaddress" name="gaddress" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.gaddress }">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          
+           <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>移动电话
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gphone" name="gphone" required lay-verify="phone"
+                  autocomplete="off" class="layui-input" value="${u.gphone }">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		固定电话
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gtel" name="gtel"
+                  autocomplete="off" class="layui-input" value="${u.gtel }">
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		传真
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gchuanzhen" name="gchuanzhen"
+                  autocomplete="off" class="layui-input" value="${u.gchuanzhen }">
+              </div>
+          </div>
        
-      </td>
-       <td>
-       <input type="text" name="gyinghangaccount" value="${u.gyinghangaccount }"> 
-       ${u.gyinghangaccount }
-       
-      </td>
-     </tr>
-     
-       <tr >
-      <td style="background-color:#f2f2f2"> 
-            是否有效
-       
-      </td>
-       <td>
-       <input type="text" name="gtf" value=" ${u.gtf }"> 
-       ${u.gtf }
-       
-      </td>
-        </tr>
-        <tr>
-        <td style="background-color:#f2f2f2"> 
-            最后修改时间
-       
-      </td>
-       <td> 
-       <input type="text" name="lasttime" value="<fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>">
-       
-       
-      </td>
-   </tr>
-     <tr>
-                    <td colspan="2" style="text-align: center;">
-                      <input type="submit" value="提交">
-                      <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  增加
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+              </label>
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  修改
               </button>
-                   </td>
-                </tr>
- 
-</table>
-</form>
+          </div>
+      </form>
+    </div>
+    
 <script type="text/javascript">
-  //监听提交
-       layui.use(['form','layer'], function(){
+  layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
         
           //自定义验证规则
-        
+          /* form.verify({
+            nikename: function(value){
+              if(value.length < 5){
+                return '昵称至少得5个字符啊';
+              }
+            }
+            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,repass: function(value){
+                if($('#L_pass').val()!=$('#L_repass').val()){
+                    return '两次密码不一致';
+                }
+            }
+          }); */
 
           //监听提交
-          form.on('submit(gsupdate.do)', function(data){
+          form.on('submit(add)', function(data){
             console.log(data);
-            //发异步，把数据提交给php
-            layer.alert("增加成功", {icon: 6},function () {
-                // 获得frame索引
-                var index = parent.layer.getFrameIndex(window.name);
-                //关闭当前frame
-                parent.layer.close(index);
-            });
-            return false;
+            $.ajax({
+		        type: 'post',
+		        url: "gsupdate.do",
+		        data: data.field,
+		        success: function (res) {
+		            if (res.status == 200) {
+		                layer.alert(res.msg, {icon: 6}, function () {
+		                    // 获得frame索引
+		                    var index = parent.layer.getFrameIndex(window.name);
+		                    //关闭当前frame
+		                    parent.layer.close(index);
+		                   //刷新页面
+		                    parent.location.reload();
+		                });
+		                 //parent.layer.reload();
+		               
+		            } else {
+		                layer.alert(res.msg, {icon: 5}, function () {
+		                    // 获得frame索引
+		                    var index = parent.layer.getFrameIndex(window.name);
+		                    //关闭当前frame
+		                    parent.layer.close(index);
+		                    //刷新页面
+		                    parent.location.reload();
+		                });
+		            }
+		        }
+		    });
+		    return false;
           });
-          
           
         });
 </script>
