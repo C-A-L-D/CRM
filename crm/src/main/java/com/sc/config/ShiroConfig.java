@@ -47,7 +47,7 @@ public class ShiroConfig {
 		ShiroFilterFactoryBean shiroFilter=new ShiroFilterFactoryBean();
 		shiroFilter.setSecurityManager(this.securityManager());
 		shiroFilter.setLoginUrl("/login.jsp");
-		shiroFilter.setSuccessUrl("/loginController/index.do");//认证成功跳转页面
+		shiroFilter.setSuccessUrl("/loginController/index.do");//登陆成功成功跳转页面
 		
 		Map<String, Filter> filters=new HashMap<String, Filter>();
 		filters.put("authc", form);//
@@ -60,23 +60,18 @@ public class ShiroConfig {
 		
 		
 		LinkedHashMap<String, String> filterMap = new LinkedHashMap<String, String>();
-		//匿名用户可以访问资源页面
 		filterMap.put("/logout.do", "logout");
-		filterMap.put("/images/**", "anon");
+		//匿名用户可以访问资源页面
 		filterMap.put("/css/**", "anon");
+		filterMap.put("/fonts/**", "anon");
+		filterMap.put("/html/**", "anon");
+		filterMap.put("/images/**", "anon");
 		filterMap.put("/js/**", "anon");
+		filterMap.put("/lib/**", "anon");
 		filterMap.put("/upload/**", "anon");
-		filterMap.put("/login.jsp", "anon");
-		filterMap.put("/index.jsp", "anon");
-		filterMap.put("/validatecode.jsp", "anon");
 		//匿名用户可以访问登录注册页面
 		filterMap.put("/login.jsp", "anon");
-		filterMap.put("/loginController/checkuname.do", "anon");
-		
-		//easyUI表格的页面和请求方法，可匿名访问
-		filterMap.put("/datagrid.jsp", "anon");
-		filterMap.put("/usersctrl/listjson.do", "anon");
-		
+		filterMap.put("/validatecode.jsp", "anon");
 		filterMap.put("/**", "authc");
 		//将匿名用户可访问页面的map集合放入过滤器链
 		shiroFilter.setFilterChainDefinitionMap(filterMap);
