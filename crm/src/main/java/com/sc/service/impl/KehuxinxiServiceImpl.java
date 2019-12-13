@@ -9,16 +9,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.XiaoshouKehuxinxi;
 import com.sc.mapper.XiaoshouKehuxinxiMapper;
-import com.sc.service.SelectKehuxinxiService;
+import com.sc.service.KehuxinxiService;
 
 @Service
-public class SelectKehuxinxiServiceImpl implements SelectKehuxinxiService {
+public class KehuxinxiServiceImpl implements KehuxinxiService {
 	
 	@Autowired
 	XiaoshouKehuxinxiMapper xiaoshouKehuxinxiMapper;
 	
 	@Override
-	public PageInfo<XiaoshouKehuxinxi> selectpage(Integer pageNum, Integer pageSize) {
+	public PageInfo<XiaoshouKehuxinxi> selectKehuxinxiPage(Integer pageNum, Integer pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		List<XiaoshouKehuxinxi> list=this.xiaoshouKehuxinxiMapper.selectByExample(null);
 		PageInfo<XiaoshouKehuxinxi> page=new PageInfo<XiaoshouKehuxinxi>(list);
