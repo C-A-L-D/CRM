@@ -2,13 +2,21 @@
 <!DOCTYPE configuration
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-   
+ <configuration>
+  
    <settings>
       <!-- 启用驼峰命名法则,自动把形如stu_name列映射到stuName属性 -->
       <setting name="mapUnderscoreToCamelCase" value="true"/>
    </settings>
    
+   <!-- 实体类起别名 -->
+   <typeAliases>
+	<!-- <typeAlias type="com.sc.entity.Users" alias="Users"/> -->
+	
+	<!-- 配置实体所在的包，起别名 ，默认就是类名-->
+	<package name="com.sc.entity"/>
+</typeAliases>
+
    <plugins>
       <!-- 分页插件 -->
       <plugin interceptor="com.github.pagehelper.PageInterceptor">

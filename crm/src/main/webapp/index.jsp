@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="offmessctrl/offmesslist.do">                 
+                        <a _href="offmessctrl/offmesslist.do">                 
                              <i class="iconfont">&#xe69b;</i>
                             <cite>办公短消息</cite>
                         </a>
