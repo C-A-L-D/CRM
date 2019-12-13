@@ -202,14 +202,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>用户管理</cite>
+                    <cite>公司管理-朱志远</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/member-list.html">
+                        <a _href="sysgsctrl/gspage.do">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
+                            <cite>公司信息列表</cite>
                             
                         </a>
                     </li >
