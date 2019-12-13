@@ -28,15 +28,16 @@ public class CustomRealmMD5 extends AuthorizingRealm{
 		/*String username=(String)arg0.getPrimaryPrincipal();
 		System.out.println("��Ҫ��Ȩ���û����ǣ�"+username);
 		
-		//�Ժ�����ݿ��ѯ���û�ӵ�е�Ȩ�ޣ���������
-		//������ģ��һЩȨ��
+		//模拟权限
 		List<String> allperms=new ArrayList<String>();
 		allperms.add("users:add");
 		allperms.add("users:delete");
 		
+		//权限信息对象info,用来存放查出的用户的所有的角色（role）及权限（permission）  
 		SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-		info.addRole("admin");
-		info.addStringPermissions(allperms);
+		//模拟角色
+		info.addRole("admin");//这里应该插入数据库查出来的角色
+		info.addStringPermissions(allperms);//这里应该插入数据库查出来的权限（单个用户有很多权限，所以是个集合）
 		
 		return info;*/
 		return null;

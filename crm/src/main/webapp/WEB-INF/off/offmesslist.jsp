@@ -55,11 +55,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>发送信息</button>
+        <button class="layui-btn" onclick="addmess('发送短信','./admin-add.html')"><i class="layui-icon"></i>发送信息</button>
          <button class="layui-btn" onclick="send()"><i class="layui-icon">&#xe615;</i>查看已发送信息</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：${p.total }条</span>
       </xblock>
       <div id="jieshou">
+      
+      <!-- 显示已接收短信 -->
       <table class="layui-table">
         <thead>
           <tr>
@@ -74,43 +76,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>操作</th>
         </thead>
         <tbody>
-          <c:forEach items="${list }" var="u">
+          <c:forEach items="${p.list }" var="u">
           <tr>
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${u.messid}</td>
-            <td>${u.title }</td>
-            <td>${u.sender}</td>
+            <td>${u.offMess.title }</td>
+            <td>${u.offMess.sender}</td>
              <td>
 	         <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 	        </td>
             <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已读</span></td>
+            <c:if test="${u.messstate=='1'}"><span id="weidu" class="layui-btn layui-btn-normal layui-btn-mini">未读</span></c:if>
+            <c:if test="${u.messstate=='2'}"><span id="yidu" class="layui-btn layui-btn-normal layui-btn-mini">已读</span></c:if>
+            
+              </td>
             <td class="td-manage">
-              <a title="查看详情"  onclick="x_admin_show('查看详情','admin-edit.html')" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
+              <a title="查看详情"  href="offmessctrl/showdetail.do?detailid=${u.detailid }">
+                <i class="layui-icon">&#xe642;</i>查看详情
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
+              <a title="删除" onclick="return confirm('是否确定删除？')" href="offmessctrl/delete.do?detailid=${u.detailid }">
+                <i class="layui-icon">&#xe640;</i>删除
               </a>
             </td>
           </tr>
            </c:forEach>
         </tbody>
       </table>
-     
+           
       <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
+          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.firstPage}">首页</a>
+          <a class="num" href="offmessctrl/offmesslist.do?pageNum=${p.prePage}">&lt;&lt;上一页</a>
+          <span class="current"> 当前${p.pageNum }/${p.pages }页</span>
+          <a class="next" href="offmessctrl/offmesslist.do?pageNum=${p.nextPage}">下一页&gt;&gt;</a>
+          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.lastPage }">尾页</a>       
       </div>
+     
  </div>
+ 
+ <!-- 显示已发送短信 -->
   <div id="send" style="display:none">
       <table class="layui-table">
         <thead>
@@ -132,8 +137,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${u.messid}</td>
-            <td>${u.title }</td>
-            <td>${u.sender}</td>
+            <td>${u.offMess.title }</td>
+            <td>${u.offMess.sender}</td>
              <td>
 	         <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 	        </td>
@@ -149,26 +154,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </td>
           </tr>
            </c:forEach>
+   
+     
         </tbody>
       </table>
-     
       <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
+          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.firstPage}">首页</a>
+          <a class="num" href="offmessctrl/offmesslist.do?pageNum=${p.prePage}">&lt;&lt;上一页</a>
+          <span class="current"> 当前${p.pageNum }/${p.pages }页</span>
+          <a class="next" href="offmessctrl/offmesslist.do?pageNum=${p.nextPage}">下一页&gt;&gt;</a>
+          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.lastPage }">尾页</a>       
       </div>
  </div>
     </div>
+            
+     
     <script>
     function send(){
      document.getElementById("jieshou").style.display="none";
-       document.getElementById("send").style.display="block";
-    
+       document.getElementById("send").style.display="block"; 
     }
       layui.use('laydate', function(){
         var laydate = layui.laydate;

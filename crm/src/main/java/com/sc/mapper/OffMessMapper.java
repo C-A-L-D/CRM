@@ -2,10 +2,14 @@ package com.sc.mapper;
 
 import com.sc.entity.OffMess;
 import com.sc.entity.OffMessExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OffMessMapper {
+	 //回复短消息
+    int huifu(OffMess mess);
+    
     int countByExample(OffMessExample example);
 
     int deleteByExample(OffMessExample example);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.OffMessdetailMapper" >
-  <resultMap id="BaseResultMap" type="com.sc.entity.OffMessdetail" >
+  <resultMap id="BaseResultMap" type="com.sc.entity.OffMessdetail"  autoMapping="true" >
     <constructor >
       <idArg column="DETAILID" jdbcType="DECIMAL" javaType="java.lang.Long" />
       <arg column="MESSID" jdbcType="DECIMAL" javaType="java.lang.Long" />
@@ -10,6 +10,7 @@
       <arg column="COMPANYID" jdbcType="DECIMAL" javaType="java.lang.Long" />
       <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
+   
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -228,4 +229,27 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where DETAILID = #{detailid,jdbcType=DECIMAL}
   </update>
+  
+     <!-- 结果映射 -->
+  <resultMap type="OffMessdetail" id="offmessMap1" autoMapping="true">
+  <id column="DETAILID" property="detailid"></id>
+  <!-- 一对一的配置start -->
+  <association property="offMess" javaType="OffMess" autoMapping="true">
+  <id column="MESSID" property="messid"></id>
+  </association>
+   <!--  一对一的配置end -->
+  </resultMap>
+<!--   <select id="select" resultMap="offmessMap1">
+  select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID
+  </select> -->
+  <select id="select" resultMap="offmessMap1" >
+    select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
+    where OFF_MESSDETAIL.RECEIVERID=1 and OFF_MESSDETAIL.MESSSTATE!=0
+</select>
+<select id="showdetail" resultMap="offmessMap1" parameterType="java.lang.Long">
+    select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
+    where OFF_MESSDETAIL.RECEIVERID=1 and OFF_MESSDETAIL.MESSSTATE!=0 
+    and OFF_MESSDETAIL.DETAILID=#{detailid,jdbcType=DECIMAL}
+</select>
+ 
 </mapper>
