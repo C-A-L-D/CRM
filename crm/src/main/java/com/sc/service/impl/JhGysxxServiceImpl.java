@@ -35,8 +35,42 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 
 	@Override
 	public JhGysxx get(BigDecimal gysId) {
+
 		// TODO Auto-generated method stub
 		return null;
+
+		if(gysId!=null){
+			   return this.jhGysxxMapper.selectByPrimaryKey(gysId);
+			}
+			return null;
+	}
+
+
+
+	@Override
+	public void update(JhGysxx u) {
+		if(u!=null&&u.getGysId()!=null){
+			this.jhGysxxMapper.updateByPrimaryKey(u);
+		}
+	}
+
+
+
+	@Override
+	public void delete(JhGysxx u) {
+		if(u!=null){
+			this.jhGysxxMapper.deleteByPrimaryKey(u.getGysId());
+		}
+	}
+
+
+
+	@Override
+	public void add(JhGysxx u) {
+		if(u!=null){
+			  this.jhGysxxMapper.insert(u);
+			}
+
 	}
 
 }

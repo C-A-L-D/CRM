@@ -2,15 +2,25 @@ package com.sc.mapper;
 
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.OffMessdetailExample;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OffMessdetailMapper {
+	//查询短消息-已接收
+	public List<OffMessdetail> select();
+	
+	//删除短信
+    int deleteByPrimaryKey(Long detailid);
+	
+    //查看短消息详情
+    public List<OffMessdetail> showdetail(Long detailid);
+    
+    
     int countByExample(OffMessdetailExample example);
 
     int deleteByExample(OffMessdetailExample example);
 
-    int deleteByPrimaryKey(Long detailid);
 
     int insert(OffMessdetail record);
 

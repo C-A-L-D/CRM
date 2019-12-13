@@ -31,14 +31,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
       <xblock> 
-        <button class="layui-btn" onclick=""><i class="layui-icon"></i>添加供应商</button>
-         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+       <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','../gysxxctrl/goadd.do')" >
+       <i class="layui-icon"></i>	添加供应商</a>
       </xblock>
       <table class="layui-table">    
           <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
             <th>供应商编号</th>
             <th>供应商名称</th>
             <th>联系人</th>
@@ -51,9 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
           <c:forEach items="${p.list }" var="u">
             <tr>
-            <td>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </td>
+           
                <td>
                  ${u.gysId }
                </td>
@@ -79,10 +74,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  <a href="#">查看详情</a>
                </td>
               <td class="td-manage">
-              <a title="修改" href="gysxxctrl/goupdate.do?gysId=${u.gysId }"><input type="image" src="<%=basePath %>images/jt.jpg" height="45px" width="45px" >
+              <a title="修改" onclick="x_admin_show('编辑','../gysxxctrl/goupdate.do?gysId=${u.gysId }')" >
+              <input type="image" src="<%=basePath %>images/jt.jpg" height="30px" width="30px" >
 				</a>
-              <a title="删除" href="gysxxctrl/delete.do?gysId=${u.gysId }" onclick="return confirm('是否确定删除？')" >
-              <input type="image" src="<%=basePath %>images/dl.jpg" height="45px" width="45px" >
+              <a title="删除" href="../gysxxctrl/delete.do?gysId=${u.gysId }" onclick="return confirm('是否确定删除？')" >
+              <input type="image" src="<%=basePath %>images/dl.jpg" height="30px" width="30px" >
                 
               </a>
               </td>  
@@ -90,20 +86,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </c:forEach>
             <tr>
              <td style="text-align: center;" colspan="10">
-                <a href="gysxxctrl/listpage.do?pageNum=${p.firstPage }">首页</a>
-                <a href="gysxxctrl/listpage.do?pageNum=${p.prePage }">上一页</a>
-                <a href="gysxxctrl/listpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="gysxxctrl/listpage.do?pageNum=${p.lastPage }">尾页</a>
+                <a href="../gysxxctrl/listpage.do?pageNum=${p.firstPage }">首页</a>
+                <a href="../gysxxctrl/listpage.do?pageNum=${p.prePage }">上一页</a>
+                <a href="../gysxxctrl/listpage.do?pageNum=${p.nextPage }">下一页</a>
+                <a href="../gysxxctrl/listpage.do?pageNum=${p.lastPage }">尾页</a>
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr> 
           
 
-      </table>
-    
+      </table>   
+ 
 
  
    
      </body>
-     </html>
+    </html>
     

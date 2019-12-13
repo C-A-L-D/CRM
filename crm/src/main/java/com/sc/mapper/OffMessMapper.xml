@@ -228,4 +228,17 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where MESSID = #{messid,jdbcType=DECIMAL}
   </update>
+  
+   <!-- 结果映射 -->
+  <resultMap type="OffMess" id="offmessMap1" autoMapping="true">
+  <id column="MESSID" property="messid"></id>
+  </resultMap>
+  <insert id="huifu" parameterType="com.sc.entity.OffMess" >
+  insert into OFF_MESS (MESSID, TITLE, CONTENT, 
+      SENDER, COMPANYID, LASTTIME
+      )
+    values (#{messid,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{sender,jdbcType=VARCHAR}, #{companyid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
 </mapper>
