@@ -1,5 +1,6 @@
 package com.sc.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,43 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 		PageInfo<JhGysxx>page=new PageInfo<JhGysxx>(list);
 		
 		return page;
+	}
+
+
+
+	@Override
+	public JhGysxx get(BigDecimal gysId) {
+		if(gysId!=null){
+			   return this.jhGysxxMapper.selectByPrimaryKey(gysId);
+			}
+			return null;
+	}
+
+
+
+	@Override
+	public void update(JhGysxx u) {
+		if(u!=null&&u.getGysId()!=null){
+			this.jhGysxxMapper.updateByPrimaryKey(u);
+		}
+	}
+
+
+
+	@Override
+	public void delete(JhGysxx u) {
+		if(u!=null){
+			this.jhGysxxMapper.deleteByPrimaryKey(u.getGysId());
+		}
+	}
+
+
+
+	@Override
+	public void add(JhGysxx u) {
+		if(u!=null){
+			  this.jhGysxxMapper.insert(u);
+			}
 	}
 
 }

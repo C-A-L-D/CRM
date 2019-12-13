@@ -4,5 +4,7 @@ import com.sc.entity.SysUsers;
 
 public interface SysUsersService {
 
-	public SysUsers login(SysUsers u);
+	public SysUsers login(String u);
+	
+	public void addUser(SysUsers u);
 }
