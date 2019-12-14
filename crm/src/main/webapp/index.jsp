@@ -14,14 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/font.css">
-	<link rel="stylesheet" href="css/xadmin.css">
-	<link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="<%=basePath %>favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="<%=basePath %>css/font.css">
+	<link rel="stylesheet" href="<%=basePath %>css/xadmin.css">
+	<link rel="stylesheet" href="<%=basePath %>css/main.css">
 	
-    <script src="js/jquery.min.js"></script>
-    <script src="lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="js/xadmin.js"></script>
+    <script src="<%=basePath %>js/jquery.min.js"></script>
+    <script src="<%=basePath %>lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="<%=basePath %>js/xadmin.js"></script>
     
 
 </head>
@@ -78,8 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/unicode.html"><i class="iconfont">&#xe6a7;</i><cite>图标字体</cite></a></li>
-                    <li><a _href="html/form1.html"><i class="iconfont">&#xe6a7;</i><cite>表单元素</cite></a></li>
+                    <li><a _href="gysxxctrl/gyslistpage.do"><i class="iconfont">&#xe6a7;</i><cite>图标字体</cite></a></li>
+                    <li><a _href="cgdctrl/cgdlistpage.do"><i class="iconfont">&#xe6a7;</i><cite>表单元素</cite></a></li>
                     <li> <a _href="html/form2.html"><i class="iconfont">&#xe6a7;</i><cite>表单组合</cite></a></li>
                     <li><a _href="html/buttons.html"><i class="iconfont">&#xe6a7;</i><cite>按钮</cite></a></li>
                     <li><a _href="html/nav.html"><i class="iconfont">&#xe6a7;</i><cite>导航/面包屑</cite></a></li>
@@ -261,7 +261,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                     </li>
                     <li>
-                        <a _href="html/echarts2.html">
+                        <a _href="loginController/allUsersInfo.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>账户管理</cite>
                         </a>
