@@ -2,6 +2,8 @@ package com.sc.mapper;
 
 import com.sc.entity.XiaoshouKehuxinxi;
 import com.sc.entity.XiaoshouKehuxinxiExample;
+
+import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
