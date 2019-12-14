@@ -103,9 +103,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		              <a title="详细信息"  onclick="x_admin_show('详细信息','KehuxiangxiPage.do?kid=${k.kid}')" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
+		              &nbsp;
+		              <a title="编辑信息"  onclick="x_admin_show('编辑信息','KehuxiangxiGoUpdatePage.do?kid=${k.kid}')" href="javascript:;">
+		                <i class="layui-icon">&#xe63c;</i>
+		              </a>
+		              &nbsp;
 		              <a title="联系人" onclick="x_admin_show('客户联系人','order-view.html')" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
+		              &nbsp;
+		              <a title="联系记录"  onclick="x_admin_show('客户联系记录','order-view.html')" href="javascript:;">
+		                <i class="layui-icon">&#xe63c;</i>
+		              </a>
+		              &nbsp;
 		              <a title="反馈记录"  onclick="x_admin_show('客户反馈记录','order-view.html')" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
@@ -116,11 +126,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="KehuxinxiListPage.do?pageNum=${klp.prePage }" title="上一页">&lt;&lt;</a>
           <a class="num" href="KehuxinxiListPage.do?pageNum=${klp.firstPage }">首页</a>
+          <a class="prev" href="KehuxinxiListPage.do?pageNum=${klp.prePage }" title="上一页">&lt;&lt;</a>
           <span class="current"> 当前${klp.pageNum }/${klp.pages }页</span>
-          <a class="num" href="KehuxinxiListPage.do?pageNum=${klp.lastPage }">尾页</a>
           <a class="next" href="KehuxinxiListPage.do?pageNum=${klp.nextPage }" title="下一页">&gt;&gt;</a>
+          <a class="num" href="KehuxinxiListPage.do?pageNum=${klp.lastPage }">尾页</a>
         </div>
       </div>
 

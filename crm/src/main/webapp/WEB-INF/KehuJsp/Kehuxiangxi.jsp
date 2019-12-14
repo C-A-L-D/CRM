@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div class="x-body">
+    <div class="x-body" style="position: relative;">
         <form class="layui-form">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
@@ -102,6 +102,186 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-input-inline">
                   <input type="text" id="yuangongshu" name="yuangongshu"
                   autocomplete="off" class="layui-input" value="${khxx.yuangongshu }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   	行业编号
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.hangyebianhao }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   	客户类型
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.kehuleixing }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   	客户状态
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.kehuzhuangtai }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:19px;">
+              <label for="L_pass" class="layui-form-label">
+                   	客户来源
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.kehulaiyuan }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:72px;">
+              <label for="L_pass" class="layui-form-label">
+                   	负责人编号
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.fuzerenbianhao }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:125px;">
+              <label for="L_pass" class="layui-form-label">
+                   	固定电话
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.gudingdianhua }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:178px;">
+              <label for="L_pass" class="layui-form-label">
+                   	移动电话
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.yidongdianhua }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:231px;">
+              <label for="L_pass" class="layui-form-label">
+                   	客户传真
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.kehuchuangzhen }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:284px;">
+              <label for="L_pass" class="layui-form-label">
+                   	开户银行
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.kaihuyinhang }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:337px;">
+              <label for="L_pass" class="layui-form-label">
+                   	银行账户
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.yinhangzhanghu }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:389px;">
+              <label for="L_pass" class="layui-form-label">
+                   	下次联系时间
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.xiacilianxishijian }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:442px;">
+              <label for="L_pass" class="layui-form-label">
+                   	电子邮件
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.dianziyoujian }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:495px;">
+              <label for="L_pass" class="layui-form-label">
+                   	SIC编码
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.sicbianma }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:400px;top:548px;">
+              <label for="L_pass" class="layui-form-label">
+                   	支付方式
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.zhifufangshi }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:800px;top:19px;">
+              <label for="L_pass" class="layui-form-label">
+                   	是否有效
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.shifouyouxiao }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:800px;top:72px;">
+              <label for="L_pass" class="layui-form-label">
+                   	详细地址
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.xiangxidizhi }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:800px;top:125px;">
+              <label for="L_pass" class="layui-form-label">
+                   	备注信息
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.beizhuxinxi }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item" style="position: absolute;left:800px;top:178px;">
+              <label for="L_pass" class="layui-form-label">
+                   	公司编号
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="yuangongshu" name="yuangongshu"
+                  autocomplete="off" class="layui-input" value="${khxx.gid }" disabled="disabled">
               </div>
           </div>
       </form>

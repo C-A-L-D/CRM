@@ -34,4 +34,11 @@ public class KehuxinxiServiceImpl implements KehuxinxiService {
 		return null;
 	}
 
+	@Override
+	public void updateKehuxinxi(XiaoshouKehuxinxi xk) {
+		if(xk!=null){
+			this.xiaoshouKehuxinxiMapper.updateByPrimaryKey(xk);
+		}
+	}
+
 }
