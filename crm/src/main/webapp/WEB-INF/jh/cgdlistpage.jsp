@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,15 +28,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  
        <div class="layui-row">
        
-      
-        <form class="layui-form layui-col-md12 x-so" action="../gysxxctrl/gyslistpage.do">
-        <input type="text" name="gysName"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
-        <input type="submit" value="搜索" class="layui-btn" >&emsp;&emsp;
-         <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','gysgoadd.do',750,750)" >
-       <i class="layui-icon"></i>	添加供应商</a>
+        <form class="layui-form layui-col-md12 x-so">
+        <input type="text" name="gysName"  placeholder="请输入采购单主题" autocomplete="off" class="layui-input">
+          <a class="layui-btn" onclick=""><i class="layui-icon">&#xe615;</i></a>
+        
+       <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','cgdgoadd.do')" >
+       <i class="layui-icon"></i>	添加采购单</a>
           
         </form>
       </div>
@@ -45,48 +43,75 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       <table class="layui-table">    
           <tr>
+            <th>采购单编号</th>
+            <th>采购主题</th>
+            <th>采购日期</th>
             <th>供应商编号</th>
-            <th>供应商名称</th>
-            <th>联系人</th>
-            <th>联系电话</th>
-            <th>开户银行</th>
-            <th>银行账号</th>
+            <th>货款金额</th>
+            <th>发票号码</th>
+            <th>付款情况</th>
+            <th>采购进展</th>
+            <th>交货时间</th>
+            <th>交货地点</th>
+            <th>交货方式</th>
+            <th>操作人员</th>
             <th>备注信息</th>
-            <th>详细信息</th>
-            <th >操作</th>
+            <th>公司编号</th>
+            <th>最后修改时间</th>
+            <th>查看</th>
+            
             </tr>
           <c:forEach items="${p.list }" var="u">
             <tr>
            
                <td>
-                 ${u.gysId }
+                 ${u.cgdId }
                </td>
                <td>
-                ${u.gysName }
+                ${u.cgTheme }
                </td>
                <td>
-                ${u.lxr }
+                ${u.cgTime }
                </td>
                <td>
-                 ${u.ydPhone}
+                 ${u.gysId}
                </td>
                <td>
-                 ${u.khbank }
+                 ${u.hkMoney }
                </td>
                <td>
-                 ${u.yhzh }
+                 ${u.fkqk }
                </td>
                 <td>
+                 ${u.cgJz }
+               </td>
+                <td>
+                 ${u.jhtime }
+               </td>
+                 <td>
+                 ${u.jhplace }
+               </td>
+                  <td>
+                 ${u.jhway }
+               </td>
+                  <td>
+                 ${u.operator }
+               </td>
+                  <td>
                  ${u.remark }
                </td>
-                <td>
-                 <a onclick="x_admin_show('','../gysxxctrl/gysxq.do?gysId=${u.gysId }')" >查看详情</a>
+                   <td>
+                 ${u.gsId }
                </td>
+                   <td>
+                 ${u.ltime }
+               </td>
+                    <td>
+                                              查看详单
+               </td>
+                    
               <td class="td-manage">
-              <a title="修改" onclick="x_admin_show('编辑','../gysxxctrl/gysgoupdate.do?gysId=${u.gysId }',750,750)" >
-              <input type="image" src="<%=basePath %>images/jt.jpg" height="30px" width="30px" >
-				</a>
-              <a title="删除" href="../gysxxctrl/gysdelete.do?gysId=${u.gysId }" onclick="return confirm('是否确定删除？') " >
+              <a title="删除" href="../cgdxxctrl/cgddelete.do?cgdId=${u.cgdId }" onclick="return confirm('是否确定删除？') " >
               <input type="image" src="<%=basePath %>images/dl.jpg" height="30px" width="30px" >
                 
               </a>
@@ -95,10 +120,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </c:forEach>
             <tr>
              <td style="text-align: center;" colspan="10">
-                <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.firstPage }">首页</a>
-                <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.prePage }">上一页</a>
-                <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.lastPage }">尾页</a>
+                <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.firstPage }">首页</a>
+                <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.prePage }">上一页</a>
+                <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.nextPage }">下一页</a>
+                <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.lastPage }">尾页</a>
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr> 
@@ -111,10 +136,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </body>
      
    </html>  
-    
-     
-     
-     
-     
-
     

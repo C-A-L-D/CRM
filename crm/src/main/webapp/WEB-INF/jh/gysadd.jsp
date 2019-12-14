@@ -29,17 +29,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
  
   <div class="x-body" cols>
-        <form class="layui-form" action="../gysxxctrl/update.do" method="post"
-            enctype="multipart/form-data">
+        <form class="layui-form" method="post">
           <div class="layui-form-item">
               <label  class="layui-form-label">
                                        供应商名称：
               </label>
               <div class="layui-input-inline">
-                  <input type="hidden"  name="gysId" required lay-verify="required"
-                  autocomplete="off" value="${u.gysId }" class="layui-input">
+                
                   <input type="text"  name="gysName" required lay-verify="required"
-                  autocomplete="off" value="${u.gysName }" class="layui-input">
+                  autocomplete="off" class="layui-input">
               </div>     
           </div>
           <div class="layui-form-item">
@@ -47,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         供应商简称：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.gysJc }" name="gysJc" required 
+                  <input type="text"  name="gysJc" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -56,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                        联系人：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.lxr }" name="lxr" required 
+                  <input type="text"  name="lxr" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -66,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         固定电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.gdPhone }" name="gdPhone" required 
+                  <input type="text"  name="gdPhone" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -76,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         移动电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.ydPhone }" name="ydPhone" required 
+                  <input type="text"  name="ydPhone" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -88,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         联系传真：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.lxcz }" name="lxcz" required 
+                  <input type="text"  name="lxcz" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -98,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         联系地址：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.lxdz }" name="lxdz" required 
+                  <input type="text"  name="lxdz" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -108,17 +106,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         联系邮编：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.lxyb }" name="lxyb" required 
+                  <input type="text"  name="lxyb" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
           
-              <div class="layui-form-item" >
+              <div class="layui-form-item">
               <label  class="layui-form-label">
                                         邮箱：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.mail }" name="mail" required 
+                  <input type="text"  name="mail" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -128,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         开户银行：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.khbank }" name="khbank" required 
+                  <input type="text"  name="khbank" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -138,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         银行账号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.yhzh }" name="yhzh" required 
+                  <input type="text"  name="yhzh" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -148,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         公司账号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.gszy }" name="gszy" required 
+                  <input type="text"  name="gszy" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -159,17 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                    <input type="text" name="isYx"
-                  autocomplete="off" class="layui-input" value="${u.isYx }" >
-              </div>
-          </div>
-        
-           <div class="layui-form-item">
-              <label  class="layui-form-label">
-                                        操作员：
-              </label>
-              <div class="layui-input-inline">
-                   <input type="text" name="isYx"
-                  autocomplete="off" class="layui-input" value="${u.operator }" >
+                  autocomplete="off" class="layui-input" " >
               </div>
           </div>
         
@@ -178,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         备注：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.remark}" name="remark" required 
+                  <input type="text"  name="remark" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -188,7 +176,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         公司编号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.gsId}" name="gsId" required 
+                  <input type="text"  name="gsId" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -196,8 +184,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="update" lay-submit="">
-                  修改
+              <button  class="layui-btn" lay-filter="add" lay-submit="">
+                  添加
               </button>
           </div>
       </form>
@@ -208,11 +196,11 @@ layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
- form.on('submit(update)', function(data){
+ form.on('submit(add)', function(data){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "gysupdate.do",
+		        url: "gysadd.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
@@ -249,8 +237,4 @@ layui.use(['form','layer'], function(){
   </body>
 
 </html>
-
-
-
-
 
