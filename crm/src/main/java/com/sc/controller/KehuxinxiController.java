@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sc.entity.XiaoshouKehuxinxi;
 import com.sc.service.KehuxinxiService;
 
 @Controller
@@ -26,4 +27,14 @@ public class KehuxinxiController {
 		mav.setViewName("KehuJsp/Kehuxinxi");
 		return mav;
 	};
+	
+	@RequestMapping("/KehuxiangxiPage.do")
+	public ModelAndView getKehuxiangxi(ModelAndView mav,XiaoshouKehuxinxi xx){
+		System.out.println("查询"+xx.getKname()+"详细信息");
+		XiaoshouKehuxinxi xxx=kehuxinxiService.getKehuxiangxi(xx.getKid());
+		System.out.println(xxx);
+		mav.addObject("khxx", xxx);
+		mav.setViewName("KehuJsp/Kehuxiangxi");
+		return mav;
+	}
 }

@@ -1,5 +1,6 @@
 package com.sc.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,14 @@ public class KehuxinxiServiceImpl implements KehuxinxiService {
 		List<XiaoshouKehuxinxi> list=this.xiaoshouKehuxinxiMapper.selectByExample(null);
 		PageInfo<XiaoshouKehuxinxi> page=new PageInfo<XiaoshouKehuxinxi>(list);
 		return page;
+	}
+
+	@Override
+	public XiaoshouKehuxinxi getKehuxiangxi(Long kid) {
+		if(kid!=null){
+			return this.xiaoshouKehuxinxiMapper.selectByPrimaryKey(kid);
+		}
+		return null;
 	}
 
 }
