@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="hidden"  name="gysId" required lay-verify="required"
                   autocomplete="off" value="${u.gysId }" class="layui-input">
                   <input type="text"  name="gysName" required lay-verify="required"
-                  autocomplete="off" value="${u.gysName }" class="layui-input">
+                  autocomplete="off" value="${u.gysName }" class="layui-input" disabled="disabled">
               </div>     
           </div>
           <div class="layui-form-item">
@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.gysJc }" name="gysJc" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
            <div class="layui-form-item">
@@ -57,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.lxr }" name="lxr" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
         
@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.gdPhone }" name="gdPhone" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.ydPhone }" name="ydPhone" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.lxcz }" name="lxcz" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.lxdz }" name="lxdz" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
@@ -109,17 +109,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.lxyb }" name="lxyb" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
-              <div class="layui-form-item" >
+              <div class="layui-form-item">
               <label  class="layui-form-label">
                                         邮箱：
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.mail }" name="mail" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
@@ -129,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.khbank }" name="khbank" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
@@ -139,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.yhzh }" name="yhzh" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           
@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.gszy }" name="gszy" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
         
@@ -158,18 +158,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         是否有效：
               </label>
               <div class="layui-input-inline">
-                   <input type="text" name="isYx"
-                  autocomplete="off" class="layui-input" value="${u.isYx }" >
-              </div>
-          </div>
-        
-           <div class="layui-form-item">
-              <label  class="layui-form-label">
-                                        操作员：
-              </label>
-              <div class="layui-input-inline">
-                   <input type="text" name="isYx"
-                  autocomplete="off" class="layui-input" value="${u.operator }" >
+                  <input type="text" value="${u.isYx }" name="isYx" required 
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
         
@@ -179,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.remark}" name="remark" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
         
@@ -189,66 +179,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.gsId}" name="gsId" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled" >
               </div>
           </div>
           
-         <div class="layui-form-item">
-              <label for="L_repass" class="layui-form-label">
-              </label>
-              <button  class="layui-btn" lay-filter="update" lay-submit="">
-                  修改
-              </button>
-          </div>
+
       </form>
     </div>
-  
- <script>
-layui.use(['form','layer'], function(){
-            $ = layui.jquery;
-          var form = layui.form
-          ,layer = layui.layer;
- form.on('submit(update)', function(data){
-            console.log(data);
-            $.ajax({
-		        type: 'post',
-		        url: "gysupdate.do",
-		        data: data.field,
-		        success: function (res) {
-		            if (res.status == 200) {
-		                layer.alert(res.msg, {icon: 6}, function () {
-		                    // 获得frame索引
-		                    var index = parent.layer.getFrameIndex(window.name);
-		                    //关闭当前frame
-		                    parent.layer.close(index);
-		                   //刷新页面
-		                    parent.location.reload();
-		                });
-		                 //parent.layer.reload();
-		               
-		            } else {
-		                layer.alert(res.msg, {icon: 5}, function () {
-		                    // 获得frame索引
-		                    var index = parent.layer.getFrameIndex(window.name);
-		                    //关闭当前frame
-		                    parent.layer.close(index);
-		                    //刷新页面
-		                    parent.location.reload();
-		                });
-		            }
-		        }
-		    });
-		    return false;
-          });
-          
-    });
-
-</script>
-  
   
   </body>
 
 </html>
+
 
 
 

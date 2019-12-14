@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.JhGysxx;
+import com.sc.entity.JhGysxxExample;
+import com.sc.entity.JhGysxxExample.Criteria;
 import com.sc.mapper.JhGysxxMapper;
 import com.sc.service.JhGysxxService;
 @Service
@@ -20,15 +22,21 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 	
 
 	@Override
-	public PageInfo<JhGysxx> selectpage(Integer pageNum, Integer pageSize) {
+	public PageInfo<JhGysxx> selectpage(Integer pageNum,Integer pageSize,JhGysxx u){
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
+		JhGysxxExample e=new JhGysxxExample();
+		Criteria criteria = e.createCriteria();
 		//查询当前页的集合数据
-		List<JhGysxx> list = this.jhGysxxMapper.selectByExample(null);
-		//封装成pageinfo对象
+        if(u.getGysName()!=null&&!u.getGysName().equals("")){
+			criteria.andGysNameLike("%"+u.getGysName()+"%");
+		}
+        List<JhGysxx> list = this.jhGysxxMapper.selectByExample(e);
 		PageInfo<JhGysxx>page=new PageInfo<JhGysxx>(list);
+		return page;	
 		
-		return page;
+		
+	
 	}
 
 
@@ -67,5 +75,12 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 			  this.jhGysxxMapper.insert(u);
 			}
 	}
+
+
+
+	
+
+
+
 
 }
