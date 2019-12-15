@@ -55,7 +55,7 @@ public class SysUsersController {
 		}
 		
 		mav.setViewName("redirect:../login.jsp?isfail="+fail);
-		
+		System.out.println("跳了....");
 		return mav;
 	}
 	
@@ -78,39 +78,8 @@ public class SysUsersController {
 		return mav;
 	}
 	
-	/**
-	 * 注册失去焦点弹框反馈信息
-	 * @param user	表单用户信息
-	 * @return
-	 */
-	@RequestMapping("/zhuce.do")
-	@ResponseBody()
-	public Result zhuCe( SysUsers user) {
-		if (user.getUname() != null && user.getUname().length() != 0) {
-			if (sysUsersServiceImpl.login(user.getUname()) != null) {
-				System.out.println("用户名已注册！");
-				return new Result(400, "该用户已被注册！");
-			}
-			System.out.println("注册成功！");	
-		}
-		return null;
-	}
 	
-	/**
-	 * 注册
-	 * @param mav	模板视图
-	 * @param user	表单提交用户信息
-	 * @return
-	 */
-	@RequestMapping("/ZHUCE.do")
-	public ModelAndView ZHUCE(ModelAndView mav, SysUsers user) {
-		System.out.println("注册成功！");
-		System.out.println(user);
-		user.setUpassword(new Md5Hash(user.getUpassword(), "qwerty", 3).toString());
-		sysUsersServiceImpl.addUser(user);
-		mav.setViewName("redirect:../login.jsp");
-		return mav;
-	}
+
 	
 	/**
 	 * 个人信息
