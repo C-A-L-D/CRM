@@ -28,4 +28,6 @@ public interface SysUsersMapper {
     int updateByPrimaryKeySelective(SysUsers record);
 
     int updateByPrimaryKey(SysUsers record);
+    
+    SysUsers login(String uname, BigDecimal id);
 }

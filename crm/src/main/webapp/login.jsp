@@ -1,5 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" import="java.util.*,com.sc.service.impl.SysGongsiinfoServiceImpl,com.sc.entity.SysGongsiinfo" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
+<%@page import="org.springframework.web.context.WebApplicationContext" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+": "+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -42,20 +44,27 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
   	});
 	
  </script>
-
+	<%
+		WebApplicationContext context=WebApplicationContextUtils.getWebApplicationContext(application);
+ 		SysGongsiinfoServiceImpl sysGongsiinfoServiceImpl = (SysGongsiinfoServiceImpl)context.getBean("sysGongsiinfoServiceImpl");
+ 		List<SysGongsiinfo> gslist = sysGongsiinfoServiceImpl.select();
+ 		request.setAttribute("list", gslist);
+	 %>
 </head>
 <body>
 <div id="wrapper" class="login-page">
 <div id="login_form" class="form">
 
-<form  action="loginController/login.do" method="post">
+<form  action="loginController/login.do"  method="post">
  <h2>管理登录</h2>
-<%-- <select>
-	<c:forEach items="${ }">
-	
+<select lay-verify="" lay-filter="sel" id="sel" style="background-color: RGB(232,240,254);border:none;margin-bottom: 15px;font-weight: bold;">
+	<option value="">请选择</option>	
+	<c:forEach items="${list }" var="l">
+		<option style="font-size: 18px;" name="${l.id }" value="${l.gcode }">${l.gname }</option> 
 	</c:forEach>
-	<option></option>
-</select> --%>
+</select>
+<textarea id="gsDIV" name="id" style="display: none;"></textarea>
+<input type="text" placeholder="公司代码" name="gcode" value="" id="gsCode" style="background-color: RGB(232,240,254);" readonly>
 <input type="text" placeholder="用户名" name="uname" value="" id="user_name">
 <input type="password" placeholder="密码" name="upassword" value="" id="password" />
 <input type="text" placeholder="验证码" name="randomcode" id="randomcode" size="8" style="width: 50%;float: left;">
@@ -122,9 +131,12 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
   		    }, 'slow');
   		});
   	})
-  	
-  	 
-      
+  
+  $("#sel").change(function () {
+    $("#gsCode").val($("#sel").find("option:selected").val());
+    /*把下拉选项选中ID传给div*/
+    $("#gsDIV").html($("#sel").find("option:selected").attr("name"));
+   });
+  
 </script>
-</body>
 </html>

@@ -744,6 +744,66 @@ public class JhCgdxqExample {
             addCriterion("ISRK not between", value1, value2, "isrk");
             return (Criteria) this;
         }
+
+        public Criteria andCpPriceIsNull() {
+            addCriterion("CP_PRICE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceIsNotNull() {
+            addCriterion("CP_PRICE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceEqualTo(Long value) {
+            addCriterion("CP_PRICE =", value, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceNotEqualTo(Long value) {
+            addCriterion("CP_PRICE <>", value, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceGreaterThan(Long value) {
+            addCriterion("CP_PRICE >", value, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceGreaterThanOrEqualTo(Long value) {
+            addCriterion("CP_PRICE >=", value, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceLessThan(Long value) {
+            addCriterion("CP_PRICE <", value, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceLessThanOrEqualTo(Long value) {
+            addCriterion("CP_PRICE <=", value, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceIn(List<Long> values) {
+            addCriterion("CP_PRICE in", values, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceNotIn(List<Long> values) {
+            addCriterion("CP_PRICE not in", values, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceBetween(Long value1, Long value2) {
+            addCriterion("CP_PRICE between", value1, value2, "cpPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andCpPriceNotBetween(Long value1, Long value2) {
+            addCriterion("CP_PRICE not between", value1, value2, "cpPrice");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

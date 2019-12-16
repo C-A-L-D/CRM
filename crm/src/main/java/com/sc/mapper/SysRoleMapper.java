@@ -3,6 +3,7 @@ package com.sc.mapper;
 import com.sc.entity.SysRole;
 import com.sc.entity.SysRoleExample;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +29,6 @@ public interface SysRoleMapper {
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+    
+    ArrayList<SysRole> selectAllRoleAndPower();
 }

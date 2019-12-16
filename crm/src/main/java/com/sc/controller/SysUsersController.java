@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.Result;
+import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysUsers;
 import com.sc.service.impl.SysUsersServiceImpl;
 
@@ -35,8 +36,8 @@ public class SysUsersController {
 	 * @return
 	 */
 	@RequestMapping("/login.do")
-	public ModelAndView Login(ModelAndView mav,HttpServletRequest req){
-		System.out.println("您认证失败，将跳转到登录页面，完成认证...");
+	public ModelAndView Login(ModelAndView mav,HttpServletRequest req, SysUsers u, SysGongsiinfo sysGongsiinfo){
+		System.out.println("您认证失败，将跳转到登录页面，完成认证..."+ u + "----" + sysGongsiinfo);
 		
 		String msg=(String)req.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 		System.out.println("认证失败异常信息："+msg);
@@ -55,7 +56,6 @@ public class SysUsersController {
 		}
 		
 		mav.setViewName("redirect:../login.jsp?isfail="+fail);
-		System.out.println("跳了....");
 		return mav;
 	}
 	
@@ -77,8 +77,6 @@ public class SysUsersController {
 		mav.setViewName("redirect:../index.jsp");
 		return mav;
 	}
-	
-	
 
 	
 	/**

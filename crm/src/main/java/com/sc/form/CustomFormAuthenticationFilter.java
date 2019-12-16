@@ -5,7 +5,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
 
 public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
 
@@ -21,5 +26,12 @@ public class CustomFormAuthenticationFilter extends FormAuthenticationFilter {
 			return true;
 		}
 		return super.onAccessDenied(request, response);
+	}
+	
+	@Override
+	protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request,
+			ServletResponse response) throws Exception {
+		WebUtils.getAndClearSavedRequest(request);
+		return super.onLoginSuccess(token, subject, request, response);
 	}
 }
