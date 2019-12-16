@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <center>
      <h2>
-        <a href="gysxxctrl/listpage.do" style="color:violet;">查看供应商列表-分页</a>
+        <a href="gysxxctrl/gyslistpage.do" style="color:violet;">查看供应商列表-分页</a>
       </h2></center>
   </body>
 </html>

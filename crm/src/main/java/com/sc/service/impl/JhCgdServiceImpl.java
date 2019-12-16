@@ -2,6 +2,7 @@ package com.sc.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
@@ -13,7 +14,7 @@ import com.sc.service.JhCgdService;
 @Service
 public class JhCgdServiceImpl implements JhCgdService {
 
-	
+	@Autowired
 	JhCgdMapper jhCgdMapper;
 	
 	@Override
@@ -22,17 +23,15 @@ public class JhCgdServiceImpl implements JhCgdService {
 		PageHelper.startPage(pageNum, pageSize);
 		JhCgdExample ex=new JhCgdExample();
 		com.sc.entity.JhCgdExample.Criteria criteria = ex.createCriteria();
-		//查询当前页的集合数据
-        if(jc.getCgdId()!=null&&!(jc.getCgdId().equals(""))){
+		//查询当前页的集合数据	
+        if(jc.getCgTheme()!=null){
 			criteria.andCgThemeLike("%"+jc.getCgTheme()+"%");
+				
+		}
 			List<JhCgd> list = this.jhCgdMapper.selectByExample(ex);
 			PageInfo<JhCgd>page=new PageInfo<JhCgd>(list);
-			return page;	
-		}else{
-			List<JhCgd> list1 = this.jhCgdMapper.selectByExample(null);
-			PageInfo<JhCgd>page1=new PageInfo<JhCgd>(list1);
-			return page1;
-		}
+		return page;
+
 	}
 
 	@Override
