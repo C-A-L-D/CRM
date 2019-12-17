@@ -1,9 +1,10 @@
 package com.sc.mapper;
 
-import com.sc.entity.JhCgdxq;
-import com.sc.entity.JhCgdxqExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import com.sc.entity.JhCgdxq;
+import com.sc.entity.JhCgdxqExample;
 
 public interface JhCgdxqMapper {
     int countByExample(JhCgdxqExample example);

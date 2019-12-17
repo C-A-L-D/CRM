@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysUsersMapper" >
+	<resultMap type="SysUsers" id="sysUsersMapper" autoMapping="true">
+      <id column="uid" property="uid"/>
+      <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
+          <id column="id" property="id"/>
+      </association>
+   </resultMap>
+	<select id="login" resultMap="sysUsersMapper">
+      SELECT * FROM SYS_USERS u
+	  LEFT JOIN SYS_GONGSIINFO g
+	  ON u.GONGSIID=t.ID
+	  <where>
+	  	<if test="UNAME != null">
+	  		and UNAME = #{uname }
+	  	</if>
+	  	<if test="ID != null">
+	  		and UNAME = #{id }
+	  	</if>
+	  </where>
+   </select>
+
+
+
+
+
   <resultMap id="BaseResultMap" type="com.sc.entity.SysUsers" >
     <constructor >
       <idArg column="UID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />

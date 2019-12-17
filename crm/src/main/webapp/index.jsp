@@ -78,8 +78,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/unicode.html"><i class="iconfont">&#xe6a7;</i><cite>图标字体</cite></a></li>
-                    <li><a _href="html/form1.html"><i class="iconfont">&#xe6a7;</i><cite>表单元素</cite></a></li>
+                    <li><a _href="gysxxctrl/gyslistpage.do"><i class="iconfont">&#xe6a7;</i><cite>图标字体</cite></a></li>
+                    <li><a _href="cgdctrl/cgdlistpage.do"><i class="iconfont">&#xe6a7;</i><cite>表单元素</cite></a></li>
                     <li> <a _href="html/form2.html"><i class="iconfont">&#xe6a7;</i><cite>表单组合</cite></a></li>
                     <li><a _href="html/buttons.html"><i class="iconfont">&#xe6a7;</i><cite>按钮</cite></a></li>
                     <li><a _href="html/nav.html"><i class="iconfont">&#xe6a7;</i><cite>导航/面包屑</cite></a></li>
@@ -202,14 +202,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>用户管理</cite>
+                    <cite>公司管理-朱志远</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a _href="html/member-list.html">
+                        <a _href="sysgsctrl/gspage.do">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员列表</cite>
+                            <cite>公司信息列表</cite>
                             
                         </a>
                     </li >
@@ -261,13 +261,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                     </li>
                     <li>
-                        <a _href="html/echarts2.html">
+                        <a _href="loginController/allUsersInfo.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>账户管理</cite>
                         </a>
                     </li>
                     <li>
-                        <a _href="html/echarts3.html">
+                        <a _href="rap/selectAllRoleAndPower.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>

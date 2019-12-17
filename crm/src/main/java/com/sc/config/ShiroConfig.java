@@ -5,8 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.Filter;
-
-import org.apache.commons.collections.map.LinkedMap;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
@@ -60,7 +58,6 @@ public class ShiroConfig {
 		
 		
 		LinkedHashMap<String, String> filterMap = new LinkedHashMap<String, String>();
-		filterMap.put("/logout.do", "logout");
 		//匿名用户可以访问资源页面
 		filterMap.put("/css/**", "anon");
 		filterMap.put("/fonts/**", "anon");
@@ -69,17 +66,19 @@ public class ShiroConfig {
 		filterMap.put("/js/**", "anon");
 		filterMap.put("/lib/**", "anon");
 		filterMap.put("/upload/**", "anon");
+		filterMap.put("/favicon.ico", "anon");
 		//匿名用户可以访问登录注册页面
-		filterMap.put("/login.jsp", "anon");
 		filterMap.put("/validatecode.jsp", "anon");
+		filterMap.put("/login.jsp", "anon");
 		
-		//放开的权限
+		filterMap.put("/logout.do", "logout");
+/*		//放开的权限
 		filterMap.put("/index.jsp", "anon");
 		filterMap.put("/gs/**", "anon");
 		filterMap.put("/jh/**", "anon");
 		filterMap.put("/off/**", "anon");
 		filterMap.put("/storegoodinfo/**", "anon");
-		filterMap.put("/sys/**", "anon");
+		filterMap.put("/sys/**", "anon");*/
 		
 		filterMap.put("/**", "authc");
 		//将匿名用户可访问页面的map集合放入过滤器链

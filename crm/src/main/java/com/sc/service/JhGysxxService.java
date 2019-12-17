@@ -9,7 +9,7 @@ import com.sc.entity.JhGysxx;
 public interface JhGysxxService {
 	
 	
-	  public PageInfo<JhGysxx> selectpage(Integer pageNum,Integer pageSize);
+	  public PageInfo<JhGysxx> selectpage(Integer pageNum,Integer pageSize,JhGysxx u);
 
 	  public JhGysxx get(BigDecimal gysId);
 	 
@@ -18,4 +18,7 @@ public interface JhGysxxService {
 	  public void delete(JhGysxx u);
 	  
 	  public void add(JhGysxx u);
+	  
+	
+	  
 }

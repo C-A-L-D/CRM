@@ -1,10 +1,14 @@
 package com.sc.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersExample;
 import com.sc.entity.SysUsersExample.Criteria;
@@ -18,23 +22,37 @@ public class SysUsersServiceImpl implements SysUsersService{
 	SysUsersMapper sysUsersMapper;
 
 	@Override
-	public SysUsers login(String uname) {
+	public SysUsers login(String u) {
 		// TODO Auto-generated method stub
 		SysUsersExample example = new SysUsersExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andUnameEqualTo(uname);
-		List<SysUsers> list = this.sysUsersMapper.selectByExample(example);
-		if(list != null && list.size() > 0){
-			return list.get(0);
-		}
-		return null;
+		criteria.andUnameEqualTo(u);
+		List<SysUsers> selectByExample = this.sysUsersMapper.selectByExample(example);
+		return selectByExample.get(0) ;
+	}
+	
+	
+	@Override
+	public SysUsers login(String uname, BigDecimal id) {
+		// TODO Auto-generated method stub
+		SysUsers sysUsers = this.sysUsersMapper.login(uname, id);
+		return sysUsers;
 	}
 
 	@Override
 	public void addUser(SysUsers u) {
 		// TODO Auto-generated method stub
-		sysUsersMapper.insert(u);
+		sysUsersMapper.insertSelective(u);
 	}
-	
-	
+
+	@Override
+	public PageInfo<SysUsers> selectAllUsers(int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		PageHelper.startPage(pageNum, pageSize);
+		SysUsersExample example = new SysUsersExample();
+		example.setOrderByClause(" uid asc ");
+		List<SysUsers> list = sysUsersMapper.selectByExample(example);
+		return new PageInfo<SysUsers>(list);
+	}
+		
 }
