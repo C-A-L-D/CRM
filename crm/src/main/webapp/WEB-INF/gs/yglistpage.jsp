@@ -34,25 +34,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">公司管理</a>
+        <a href="">员工管理</a>
         <a>
-          <cite>公司信息列表</cite></a>
+          <cite>员工信息列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="gspage.do">
+        <form class="layui-form layui-col-md12 x-so" action="ygpage.do">
         <!--   <input class="layui-input" placeholder="开始日" name="start" id="start">
           <input class="layui-input" placeholder="截止日" name="end" id="end"> -->
-          <input type="text" name="gname"  placeholder="请输入公司名称" autocomplete="off" class="layui-input">
+          <input type="text" name="sname"  placeholder="请输入员工名称" autocomplete="off" class="layui-input">
           <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" ><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','gsgotj.do',500,670)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加员工','yggotj.do',900,670)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：${p.total } 条</span>
       </xblock>
       <table class="layui-table">
@@ -61,14 +61,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>主键</th>
-            <th>公司名称</th>
-            <th>公司代码</th>
-            <th>邮箱</th>
-            <th>联系人</th>
-            <th>公司地址</th>
-            <th>固定电话</th>
-            <th>移动电话</th>
+            <th>员工编号</th>
+            <th>员工姓名</th>
+            <th>员工性别</th>
+            <th>员工照片</th>
+            <th>身份证件</th>
+ <!--       <th>家庭地址</th>
+            <th>现在地址</th>
+            <th>员工简历</th>
+            <th>政治面貌</th>
+            <th>毕业学校</th> -->
+            <th>联系电话</th>
+        <!--     <th>网上联系方式</th>
+            <th>网上联系详情</th>
+            <th>审核状态</th> -->
+            <th>职务编号</th>
+            <th>员工状态</th>
+         <!--    <th>备注</th> -->
+            <th>公司编号</th>
             <th>最后修改时间</th>
             <th>操作</th>
           
@@ -78,35 +88,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
            <tr>
                  <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${u.id }'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${u.sid }'><i class="layui-icon">&#xe605;</i></div>
             </td>
            <td>
-           ${u.id }
+           ${u.sid }
            </td>
             <td>
              
-             <a title="查看详情"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详情信息','gsxxlist.do?id=${u.id }',500,670)" href="javascript:;">
-                ${u.gname }
+             <a title="查看详情"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详情信息','ygxxlist.do?sid=${u.sid }',900,670)" href="javascript:;">
+                ${u.sname }
             </a>
             </td>
             <td>
-             ${u.gcode }
+             ${u.ssex }
             </td>
            <td>
-             ${u.gemail }
+             
+                <img alt="暂无图片" src="<%=basePath %>upload/${u.sphoto }" 
+                    width="40px" height="40px">
             </td>
             <td>
-             ${u.glinkman }
+             ${u.sidcard }
             </td>
             <td>
-             ${u.gaddress }
+             ${u.sphone }
             </td>
              <td>
-             ${u.gtel }
+             ${u.sjobid }
             </td>
              <td>
-             ${u.gphone }
+             ${u.sstatus }
             </td>
+            
+            <td>
+             ${u.gongsiid }
+            </td>
+           
             <td>
            
            <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -115,12 +132,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          
             <td class="td-manage">
   
-    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','gsgoupdate.do?id=${u.id }',500,670)" href="javascript:;">
+    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','yggoupdate.do?sid=${u.sid }',900,670)" href="javascript:;">
                 修改
     </a>
   
    
-  <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,${u.id })" href="javascript:;">
+  <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,${u.sid })" href="javascript:;">
          <%-- <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="return gsdel()" href="gsdelete.do?id=${u.id }"> --%>      
                 删除
   </a>
@@ -131,15 +148,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </c:forEach>
        
               <tr>
-             <td style="text-align: center;" colspan="11">
-                <a href="../sysgsctrl/gspage.do?pageNum=${p.firstPage }">首页</a>
-                <a href="../sysgsctrl/gspage.do?pageNum=${p.prePage }">上一页</a>
-                <a href="../sysgsctrl/gspage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../sysgsctrl/gspage.do?pageNum=${p.lastPage }">尾页</a>
+             <td style="text-align: center;" colspan="12">
+                <a href="../sysygctrl/ygpage.do?pageNum=${p.firstPage }">首页</a>
+                <a href="../sysygctrl/ygpage.do?pageNum=${p.prePage }">上一页</a>
+                <a href="../sysygctrl/ygpage.do?pageNum=${p.nextPage }">下一页</a>
+                <a href="../sysygctrl/ygpage.do?pageNum=${p.lastPage }">尾页</a>
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr>  
-          <div id="demo2"></div> 
+         
   </body>
      <script>
      //自定义样式
@@ -149,9 +166,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     ,theme: '#1E9FFF'
   });
      
-     
-     
-   
      
       layui.use('laydate', function(){
         var laydate = layui.laydate;
@@ -192,18 +206,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }
 
       /*用户-删除*/
-      function member_del(obj,id){
-      
+      function member_del(obj,sid){
+       
+        console.log(sid);
+        
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
               $.ajax({
 		        type: 'post',
-		        url: "gsdelete.do",
-		        data: "id="+id,
+		        url: "ygdelete.do",
+		        data: "sid="+sid,
 		        success: function (res) {
 		           //$(obj).parents("tr").remove();
 		           layer.msg('已删除!',{icon:1,time:1000},function () {
 		              //刷新页面
+		             
 		              location.reload();
 		           });
 		        }
@@ -223,7 +240,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             layer.msg('删除成功', {icon: 1});
             $.ajax({
 		        type: 'post',
-		        url: "gsdeletesy.do",
+		        url: "ygdeletesy.do",
 		        data: "aa="+data,
 		        success: function (res) {
 		           //$(obj).parents("tr").remove();

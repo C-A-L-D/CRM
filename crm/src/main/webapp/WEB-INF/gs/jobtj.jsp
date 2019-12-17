@@ -32,143 +32,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <form class="layui-form">
           <div class="layui-form-item">
               <label for="username" class="layui-form-label">
-                  <span class="x-red">*</span>公司名称
+                  <span class="x-red">*</span>职务名
               </label>
               <div class="layui-input-inline">
-                  <input type="hidden" name="id" >
-                  <input type="text" id="gname" name="gname" required lay-verify="required"
+                  <input type="hidden" name="jid" >
+                  <input type="text" id="jname" name="jname" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
               </div>
           </div>
+          
+            <div class="layui-form-item">
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>部门编号
+              </label>
+              <div class="layui-input-inline">
+              <!--     <input type="text" id="did" name="did" required lay-verify="required"
+                  autocomplete="off" class="layui-input"> -->
+                  
+                 <select id="did" name="did" class="layui-input"> 
+                   <c:forEach items="${p2 }" var="v2">
+                    <option value="${v2.did }">${v2.did }</option>
+                   </c:forEach>
+                   </select>      
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          
           <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>公司代码
+                  <span class="x-red">*</span>备注说明
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="gcode" name="gcode" required lay-verify="required"
+                  <input type="text" id="jdescribe" name="jdescribe" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
               </div>
           </div>
+          
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>邮箱
+                  <span class="x-red">*</span>公司编号
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="gemail" name="gemail" required lay-verify="email"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>联系人
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="glinkman" name="glinkman" required lay-verify="required"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>公司地址
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="gaddress" name="gaddress" required lay-verify="required"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          
-           <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>移动电话
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="gphone" name="gphone" required lay-verify="phone"
-                  autocomplete="off" class="layui-input">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                   		固定电话
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="gtel" name="gtel"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>
-          
-       
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                   		传真
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="gchuanzhen" name="gchuanzhen"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>
-         
-         <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                   		开户银行
-              </label>
-              <div class="layui-input-inline">
-                <!--   <input type="text" id="gopenyinghang" name="gopenyinghang"
-                  autocomplete="off" class="layui-input" > -->
-                  <select id="gopenyinghang" name="gopenyinghang" autocomplete="off" class="layui-input" >
-                  <option value="建设银行">建设银行</option>
-                  <option value="农业银行">农业银行</option>
-                  <option value="交通银行">交通银行</option>
-                  <option value="中国银行">中国银行</option>
-                  </select>
-              </div>
-          </div>
-          
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                   		银行账户
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="gyinghangaccount" name="gyinghangaccount"
-                  autocomplete="off" class="layui-input" >
-              </div>
-          </div>
-          
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                   		是否有效
-              </label>
-              <div class="layui-input-inline">
-                 <!--  <input type="text" id="gtf" name="gtf"
-                  autocomplete="off" class="layui-input" > -->
+                <!--   <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
+                  autocomplete="off" class="layui-input"> -->
+                    <select id="gongsiid" name="gongsiid" class="layui-input">
                   
-                  <select id="gtf" name="gtf" autocomplete="off" class="layui-input" >
-                  <option value="是">是</option>
-                  <option value="否">否</option>
-                 
-                  </select>
+                   <c:forEach items="${p1 }" var="v1">
+                    <option value="${v1.id }">${v1.id }</option>
+                   </c:forEach>
+                   
+                   </select>
+                  
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
               </div>
           </div>
-         
-          <div class="layui-form-item">
+          
+               <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
@@ -204,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "gstj.do",
+		        url: "jobtj.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {

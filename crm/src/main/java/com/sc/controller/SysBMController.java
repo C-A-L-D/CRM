@@ -14,98 +14,91 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.Result;
-import com.sc.entity.SysGongsiinfo;
-import com.sc.service.SysGongsiinfoService;
+import com.sc.entity.SysDepartment;
+
+import com.sc.service.SysDepartmentService;
+
 
 @Controller
-@RequestMapping("/sysgsctrl")
-public class SysGSController {
+@RequestMapping("/sysbmctrl")
+public class SysBMController {
 	@Autowired
-	SysGongsiinfoService sysGongsiinfoService;
+	SysDepartmentService sysDepartmentService;
 	
 	//公司分页list
-	@RequestMapping("/gspage.do")
-	public ModelAndView gspage(ModelAndView mav,SysGongsiinfo info1,
+	@RequestMapping("/bmpage.do")
+	public ModelAndView gspage(ModelAndView mav,SysDepartment info1,
 			@RequestParam(defaultValue="1")Integer pageNum,
 			@RequestParam(defaultValue="5")Integer pageSize) throws IOException{
 		System.out.println("公司列表-分页！");
-        System.out.println("要查询的公司"+info1);
-		
-		mav.addObject("p", sysGongsiinfoService.selectpage(pageNum, pageSize, info1));
-		
-		mav.setViewName("gs/gslistpage");
+		//查询list集合-分页     ${p.list}
+		mav.addObject("p", sysDepartmentService.selectpage(pageNum, pageSize, info1));
+		mav.setViewName("gs/bmlistpage");// 路径是：/WEB-INF/gs/gslistpage.jsp
 		return mav;
 	}
 	
-	//公司详情
-	@RequestMapping("/gsxxlist.do")
-	public ModelAndView gsxx(ModelAndView mav,SysGongsiinfo info1){
-		System.out.println("查询公司详情"+info1.getId());
-		//查询list集合
-		SysGongsiinfo info =sysGongsiinfoService.get(info1.getId());
-		System.out.println(info);
-		mav.addObject("u", info);//list集合存入模型
-		mav.setViewName("gs/gsxxlist");// 路径是：/WEB-INF/gs/gsxxlist.jsp
-		return mav;
-	}
+	
 	
 	
 
 	//添加公司
-	@RequestMapping("/gsgotj.do")
+	@RequestMapping("/bmgotj.do")
 	public ModelAndView gsgotj(ModelAndView mav){
-		System.out.println("公司去添加！");
-		mav.setViewName("gs/gstj");
+		System.out.println("部门去添加！");
+		mav.addObject("p", sysDepartmentService.select1());
+		mav.setViewName("gs/bmtj");
 		return mav;
 	}
 	
 	//添加公司后
-	@RequestMapping("/gstj.do")
+	@RequestMapping("/bmtj.do")
 	@ResponseBody
 	public Result gsadd(ModelAndView mav,
 			HttpServletRequest req,
-			SysGongsiinfo info)throws IllegalStateException, IOException {
+			SysDepartment info)throws IllegalStateException, IOException {
 		System.out.println("开始添加公司"+info);
 		//设置添加时间
 		info.setLasttime(new Date());
-		sysGongsiinfoService.add(info);
+		sysDepartmentService.add(info);
 		return new Result(200,"添加成功！");
 	}
 	
 	//公司修改信息
-	@RequestMapping("/gsgoupdate.do")
-	public ModelAndView goupdate(ModelAndView mav,SysGongsiinfo info1){
+	@RequestMapping("/bmgoupdate.do")
+	public ModelAndView goupdate(ModelAndView mav,SysDepartment info1){
 		System.out.println("跳转到修改页面！"+info1);
-		SysGongsiinfo info = this.sysGongsiinfoService.get(info1.getId());
+		SysDepartment info = this.sysDepartmentService.get(info1.getDid());
+		System.out.println("修改页面！"+info);
+		mav.addObject("p", sysDepartmentService.select1());
 		mav.addObject("u", info);
-		mav.setViewName("gs/gsupdate");
+		mav.setViewName("gs/bmupdate");
 		return mav;
 	}
 	
 	//公司修改
-	@RequestMapping("/gsupdate.do")
+	@RequestMapping("/bmupdate.do")
 	@ResponseBody
 	public Result update(ModelAndView mav,
-			SysGongsiinfo info) throws IllegalStateException, IOException{
+			SysDepartment info) throws IllegalStateException, IOException{
 		System.out.println("修改"+info);
 		//设置修改时间
 		info.setLasttime(new Date());
-		sysGongsiinfoService.update(info);
+		sysDepartmentService.update(info);
 		return new Result(200,"修改成功！");
 	}
 	
 	//删除公司
-	@RequestMapping("/gsdelete.do")
+	@RequestMapping("/bmdelete.do")
 	@ResponseBody
-	public void gsdelete(ModelAndView mav,SysGongsiinfo info1){
+	public void gsdelete(ModelAndView mav,SysDepartment info1){
 		System.out.println("公司删除！"+info1);
-		SysGongsiinfo info = this.sysGongsiinfoService.get(info1.getId());
+		SysDepartment info = this.sysDepartmentService.get(info1.getDid());
 		
-		this.sysGongsiinfoService.delete(info);
+		this.sysDepartmentService.delete(info);
 	}
 	
 	//删除所有公司
-	@RequestMapping("/gsdeletesy.do")
+	@RequestMapping("/bmdeletesy.do")
 	@ResponseBody
 	public void gsdelete(ModelAndView mav,String aa){
 		System.out.println("公司删除！"+aa);
@@ -114,11 +107,11 @@ public class SysGSController {
 		//删除字符串的 “,”  比如aa={a,b,c}  之后 ["a","b","c"]
 		//如果是split("")  比如aa={abc de}  之后["a","b","c" ,"d","e"]
 		for (String xx : ss) {
-			SysGongsiinfo info = this.sysGongsiinfoService.get(new BigDecimal(xx));
-			this.sysGongsiinfoService.delete(info);
+			SysDepartment info = this.sysDepartmentService.get(new BigDecimal(xx));
+			this.sysDepartmentService.delete(info);
 		}
 		
 		
 	}
-		
+	
 }

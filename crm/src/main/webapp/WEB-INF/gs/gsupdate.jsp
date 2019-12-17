@@ -124,6 +124,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   autocomplete="off" class="layui-input" value="${u.gchuanzhen }">
               </div>
           </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		开户银行
+              </label>
+              <div class="layui-input-inline">
+        <%--           <input type="text" id="gopenyinghang" name="gopenyinghang"
+                  autocomplete="off" class="layui-input" value="${u.gopenyinghang }" > --%>
+                <select name="gopenyinghang" class="layui-input">    
+                  <option value="建设银行" ${u.gopenyinghang eq "建设银行" ? "selected":""} >建设银行</option>
+                  <option value="农业银行" ${u.gopenyinghang eq "农业银行" ? "selected":""}>农业银行</option>
+                  <option value="交通银行" ${u.gopenyinghang eq "交通银行" ? "selected":""}>交通银行</option>
+                  <option value="中国银行" ${u.gopenyinghang eq "中国银行" ? "selected":""}>中国银行</option>
+                  </select>
+              
+              
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		银行账户
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gyinghangaccount" name="gyinghangaccount"
+                  autocomplete="off" class="layui-input" value="${u.gyinghangaccount }" >
+              
+              
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		是否有效
+              </label>
+              <div class="layui-input-inline">
+                  <%-- <input type="text" id="gtf" name="gtf"
+                  autocomplete="off" class="layui-input" value="${u.gtf }"> --%>
+                   <select id="gtf" name="gtf" autocomplete="off" class="layui-input" value="${u.gtf }">
+                  <option value="是" ${u.gtf eq "是" ? "selected":""} >是</option>
+                  <option value="否" ${u.gtf eq "否" ? "selected":""}>否</option>
+                  </select>
+             
+              </div>
+          </div>
        
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
@@ -140,22 +185,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
-        
-          //自定义验证规则
-          /* form.verify({
-            nikename: function(value){
-              if(value.length < 5){
-                return '昵称至少得5个字符啊';
-              }
-            }
-            ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-            ,repass: function(value){
-                if($('#L_pass').val()!=$('#L_repass').val()){
-                    return '两次密码不一致';
-                }
-            }
-          }); */
-
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);

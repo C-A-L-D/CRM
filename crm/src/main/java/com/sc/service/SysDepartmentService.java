@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysDepartment;
+import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysUsersInfo;
 
 public interface SysDepartmentService {
@@ -23,6 +24,7 @@ public interface SysDepartmentService {
     //查询
     public List<SysDepartment > select();
 
+    public List<SysGongsiinfo > select1();
     
-    public PageInfo<SysDepartment > selectpage(Integer pageNum,Integer pageSize);
+    public PageInfo<SysDepartment> selectpage(Integer pageNum,Integer pageSize,SysDepartment info1);
 }
