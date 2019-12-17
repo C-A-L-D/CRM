@@ -30,11 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div class="x-nav">
-      <span class="layui-breadcrumb">
+		      <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+        <a href="">角色管理</a>
         <a>
-          <cite>导航元素88</cite></a>
+          <cite>角色信息列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -67,12 +67,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </select>
           </div>
           <input class="layui-input" placeholder="权限名" name="cate_name" >
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon"></i>增加</button>
+          <a title="添加角色" class="layui-btn"  onclick="x_admin_show('编辑','goAddRole.do')" href="javascript:;">
+                <i class="layui-icon"></i>增加角色
+              </a>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">总共 ${RP.total } 条数据</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -90,17 +92,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <c:forEach items="${RP.list }" var="r">
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${r.rid }'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${r.rname }</td>
             <td>${r.rdescribe }</td>
-            <td>${r.sysPowerinfo[0] }</td>
+            <td>
+            <c:forEach items="${r.sysPowerinfo }" var="rr">
+            	${rr.ppower }
+            </c:forEach>
+            </td>
             <td>${r.headrid }</td>
             <td class="td-manage">
-              <a title="编辑"  onclick="x_admin_show('编辑','xxx.html')" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('编辑','goUpdateRle.do?rid='+${r.rid })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'${r.rid }')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -110,11 +116,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </table>
       <div class="page">
         <div>
-			<a class="num" href="rap/selectAllRoleAndPower.do?pageNum=${RP.firstPage }">首页</a>
-			<a href="rap/selectAllRoleAndPower.do?pageNum=${RP.prePage }">上一页</a>
-			<a href="rap/selectAllRoleAndPower.do?pageNum=${RP.pageNum }" ><span class="current">${RP.pageNum }</span></a>
-			<a class="next" href="rap/selectAllRoleAndPower.do?pageNum=${RP.nextPage }">&gt;&gt;</a>
-			<a class="num" href="rap/selectAllRoleAndPower.do?pageNum=${RP.lastPage }">尾页</a>   当前${RP.pageNum }/${RP.pages }页，共${RP.total }条
+			<a class="num" href="selectAllRoleAndPower.do?pageNum=${RP.firstPage }">首页</a>
+			<a href="selectAllRoleAndPower.do?pageNum=${RP.prePage }">上一页</a>
+			<a href="selectAllRoleAndPower.do?pageNum=${RP.pageNum }" style="background-color: RGB(21,193,66)">${RP.pageNum }</a>
+			<a class="next" href="selectAllRoleAndPower.do?pageNum=${RP.nextPage }">下一页</a>
+			<a class="num" href="selectAllRoleAndPower.do?pageNum=${RP.lastPage }">尾页</a>
         </div>
       </div>
 
@@ -160,12 +166,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           });
       }
 
-      /*用户-删除*/
+      /*删除角色*/
       function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+          layer.confirm('确认要删除吗？',function(data){
+          		$.ajax({
+		        type: 'get',
+		        url: "delRole.do?rid="+id,
+		        data: data.field,
+		        success: function (res) {
+		            if (res.status == 200) {
+		               //发异步删除数据
+		              $(obj).parents("tr").remove();
+		              layer.msg(res.msg,{icon:1,time:1000});
+		               
+		            } else {
+		                layer.alert(res.msg, {icon: 5}, function () {
+		                    
+		                });
+		            }
+		        }
+		    });
           });
       }
 
@@ -173,11 +193,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       function delAll (argument) {
 
-        var data = tableCheck.getData();
+        var dataID = tableCheck.getData();
   
-        layer.confirm('确认要删除吗？'+data,function(index){
+        layer.confirm('确认要删除吗？',function(index){
+        	layer.msg('删除成功', {icon: 1});
+      		$.ajax({
+		        type: 'get',
+		        url: "delAllRole.do",
+		        data: "aa="+dataID,
+		        success: function (res) {
+		           //$(obj).parents("tr").remove();
+		           layer.msg('已删除!',{icon:1,time:1000},function () {
+		              //刷新页面
+		              location.reload();
+		           });
+		        }
+		    });
+        	 
             //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }

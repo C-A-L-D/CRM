@@ -226,11 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        url: "gsdeletesy.do",
 		        data: "aa="+data,
 		        success: function (res) {
-		           //$(obj).parents("tr").remove();
-		           layer.msg('已删除!',{icon:1,time:1000},function () {
-		              //刷新页面
-		              location.reload();
-		           });
+		           location.reload();
 		        }
 		    });
              $(".layui-form-checked").not('.header').parents('tr').remove(); 

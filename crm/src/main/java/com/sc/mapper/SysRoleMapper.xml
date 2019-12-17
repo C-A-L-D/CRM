@@ -241,6 +241,6 @@
 		LEFT JOIN SYS_POWER_ROLE rp
 		ON r.RID=rp.ROLE_ID
 		LEFT JOIN SYS_POWERINFO p
-		ON rp.PCOLUMN_ID=p.PID
+		ON rp.PID=p.PID
   </select>
 </mapper>
