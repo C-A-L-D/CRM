@@ -1,14 +1,16 @@
 package com.sc.service;
 
-import java.util.ArrayList;
-
+import java.math.BigDecimal;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysUsers;
 
 public interface SysUsersService {
 
-	//根据用户名查询单个用户
+	//查询单个用户
 	public SysUsers login(String u);
+	
+	//用户账户表和公司信息表连接查询
+	public SysUsers login(String u, BigDecimal id);
 	
 	//查询全部用户列表
 	public PageInfo<SysUsers> selectAllUsers(int pageNum, int pageSize);

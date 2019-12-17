@@ -24,6 +24,8 @@ public class SysUsers implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private SysGongsiinfo sysGongsiinfo;
+    
     public SysUsers(BigDecimal uid, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate, Date lasttime) {
         this.uid = uid;
         this.uname = uname;
@@ -34,7 +36,36 @@ public class SysUsers implements Serializable {
         this.lasttime = lasttime;
     }
 
-    public SysUsers() {
+    
+    
+    public SysUsers(BigDecimal uid, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate,
+			Date lasttime, SysGongsiinfo sysGongsiinfo) {
+		super();
+		this.uid = uid;
+		this.uname = uname;
+		this.upassword = upassword;
+		this.sid = sid;
+		this.gongsiid = gongsiid;
+		this.ustate = ustate;
+		this.lasttime = lasttime;
+		this.sysGongsiinfo = sysGongsiinfo;
+	}
+
+
+
+	public SysGongsiinfo getSysGongsiinfo() {
+		return sysGongsiinfo;
+	}
+
+
+
+	public void setSysGongsiinfo(SysGongsiinfo sysGongsiinfo) {
+		this.sysGongsiinfo = sysGongsiinfo;
+	}
+
+
+
+	public SysUsers() {
         super();
     }
 

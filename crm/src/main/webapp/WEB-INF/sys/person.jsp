@@ -25,22 +25,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <tbody>
                         <tr>
                             <th>用户名</th>
-                            <td>${sessionScope.user.uname }</td></tr>
+                            <td>${nowuser.uname }</td></tr>
                         <tr>
                             <th>密码</th>
-                            <td>***********</td></tr>
+                            <td id="pass" style="padding-left: 15%">
+                            	<input type="password" value="${nowuser.upassword }" style="width: 50%;border: none;"readonly="readonly">
+                            </td>
                         <tr>
                             <th>角色</th>
                             <td></td></tr>
                         <tr>
                             <th>状态</th>
-                            <td></td></tr>
+                            <td>${nowuser.ustate }</td></tr>
                         
                     </tbody>
                 </table>
             </div>
         </fieldset>
-    
-    
 </body>
 </html>

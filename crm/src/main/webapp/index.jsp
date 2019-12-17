@@ -14,14 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <link rel="shortcut icon" href="<%=basePath %>favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="<%=basePath %>css/font.css">
-	<link rel="stylesheet" href="<%=basePath %>css/xadmin.css">
-	<link rel="stylesheet" href="<%=basePath %>css/main.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/font.css">
+	<link rel="stylesheet" href="css/xadmin.css">
+	<link rel="stylesheet" href="css/main.css">
 	
-    <script src="<%=basePath %>js/jquery.min.js"></script>
-    <script src="<%=basePath %>lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="<%=basePath %>js/xadmin.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/xadmin.js"></script>
     
 
 </head>
@@ -267,7 +267,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                     </li>
                     <li>
-                        <a _href="html/echarts3.html">
+                        <a _href="rap/selectAllRoleAndPower.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>角色管理</cite>
                         </a>

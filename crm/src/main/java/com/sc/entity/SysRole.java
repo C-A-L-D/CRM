@@ -3,6 +3,7 @@ package com.sc.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,6 +23,9 @@ public class SysRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    
+    private List<SysPowerinfo> sysPowerinfo;
+    
     public SysRole(BigDecimal rid, String rname, String rdescribe, BigDecimal headrid, BigDecimal opertorid, Date lasttime) {
         this.rid = rid;
         this.rname = rname;
@@ -31,7 +35,41 @@ public class SysRole implements Serializable {
         this.lasttime = lasttime;
     }
 
-    public SysRole() {
+
+
+	public SysRole(BigDecimal rid, String rname, String rdescribe, BigDecimal headrid, BigDecimal opertorid,
+			Date lasttime, List<SysPowerinfo> sysPowerinfo) {
+		super();
+		this.rid = rid;
+		this.rname = rname;
+		this.rdescribe = rdescribe;
+		this.headrid = headrid;
+		this.opertorid = opertorid;
+		this.lasttime = lasttime;
+		this.sysPowerinfo = sysPowerinfo;
+	}
+
+
+
+	public List<SysPowerinfo> getSysPowerinfo() {
+		return sysPowerinfo;
+	}
+
+
+
+	public void setSysPowerinfo(List<SysPowerinfo> sysPowerinfo) {
+		this.sysPowerinfo = sysPowerinfo;
+	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
+	public SysRole() {
         super();
     }
 
@@ -83,10 +121,14 @@ public class SysRole implements Serializable {
         this.lasttime = lasttime;
     }
 
+
+
 	@Override
 	public String toString() {
 		return "SysRole [rid=" + rid + ", rname=" + rname + ", rdescribe=" + rdescribe + ", headrid=" + headrid
-				+ ", opertorid=" + opertorid + ", lasttime=" + lasttime + "]";
+				+ ", opertorid=" + opertorid + ", lasttime=" + lasttime + ", sysPowerinfo=" + sysPowerinfo + "]";
 	}
+
+
     
 }

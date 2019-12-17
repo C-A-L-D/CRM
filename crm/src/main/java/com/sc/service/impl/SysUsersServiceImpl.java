@@ -1,5 +1,6 @@
 package com.sc.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,16 +22,21 @@ public class SysUsersServiceImpl implements SysUsersService{
 	SysUsersMapper sysUsersMapper;
 
 	@Override
-	public SysUsers login(String uname) {
+	public SysUsers login(String u) {
 		// TODO Auto-generated method stub
 		SysUsersExample example = new SysUsersExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andUnameEqualTo(uname);
-		List<SysUsers> list = this.sysUsersMapper.selectByExample(example);
-		if(list != null && list.size() > 0){
-			return list.get(0);
-		}
-		return null;
+		criteria.andUnameEqualTo(u);
+		List<SysUsers> selectByExample = this.sysUsersMapper.selectByExample(example);
+		return selectByExample.get(0) ;
+	}
+	
+	
+	@Override
+	public SysUsers login(String uname, BigDecimal id) {
+		// TODO Auto-generated method stub
+		SysUsers sysUsers = this.sysUsersMapper.login(uname, id);
+		return sysUsers;
 	}
 
 	@Override
@@ -48,6 +54,5 @@ public class SysUsersServiceImpl implements SysUsersService{
 		List<SysUsers> list = sysUsersMapper.selectByExample(example);
 		return new PageInfo<SysUsers>(list);
 	}
-	
-	
+		
 }
