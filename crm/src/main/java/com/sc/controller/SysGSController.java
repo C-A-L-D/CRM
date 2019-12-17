@@ -32,7 +32,7 @@ public class SysGSController {
         System.out.println("要查询的公司"+info1);
 		
 		mav.addObject("p", sysGongsiinfoService.selectpage(pageNum, pageSize, info1));
-		
+		mav.addObject("info1", info1);
 		mav.setViewName("gs/gslistpage");
 		return mav;
 	}

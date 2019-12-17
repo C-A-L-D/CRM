@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
             <div class="layui-form-item">
               <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>部门编号
+                  <span class="x-red">*</span>部门名称
               </label>
               <div class="layui-input-inline">
               <!--     <input type="text" id="did" name="did" required lay-verify="required"
@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   
                  <select id="did" name="did" class="layui-input"> 
                    <c:forEach items="${p2 }" var="v2">
-                    <option value="${v2.did }">${v2.did }</option>
+                    <option value="${v2.did }"> ${v2.dname }</option>
                    </c:forEach>
                    </select>      
               </div>
@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
           <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>公司编号
+                  <span class="x-red">*</span>公司名称
               </label>
               <div class="layui-input-inline">
                 <!--   <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <select id="gongsiid" name="gongsiid" class="layui-input">
                   
                    <c:forEach items="${p1 }" var="v1">
-                    <option value="${v1.id }">${v1.id }</option>
+                    <option value="${v1.id }">${v1.gname }</option>
                    </c:forEach>
                    
                    </select>

@@ -131,14 +131,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="layui-row ">
                       <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
-                   	 <span class="x-red">*</span>	公司编号
+                   	 <span class="x-red">*</span>	公司名称
               </label>
               <div class="layui-input-inline">
                  <!--  <input type="text" id="gongsiid" name="gongsiid"
                   autocomplete="off" class="layui-input"  lay-verify="required"> -->
                 <select id="gongsiid" name="gongsiid" class="layui-input"> 
                    <c:forEach items="${p1 }" var="v1">
-                    <option value="${v1.id }">${v1.id }</option>
+                    <option value="${v1.id }">${v1.gname }</option>
                    </c:forEach>
                    
                    </select>
@@ -236,14 +236,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
                        <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
-                   		<span class="x-red">*</span> 职务编号
+                   		<span class="x-red">*</span> 职务名称
               </label>
               <div class="layui-input-inline">
                 <!--   <input type="text" id="sjobid" name="sjobid"
                   autocomplete="off" class="layui-input" lay-verify="required"> -->
                <select id="sjobid" name="sjobid" class="layui-input"> 
                    <c:forEach items="${p3 }" var="v3">
-                    <option value="${v3.jid }">${v3.jid }</option>
+                    <option value="${v3.jid }"> ${v3.jname }</option>
                    </c:forEach>
                    
                    </select>
