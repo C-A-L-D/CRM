@@ -33,6 +33,7 @@ public class SysBMController {
 		System.out.println("公司列表-分页！");
 		//查询list集合-分页     ${p.list}
 		mav.addObject("p", sysDepartmentService.selectpage(pageNum, pageSize, info1));
+		mav.addObject("info1", info1);
 		mav.setViewName("gs/bmlistpage");// 路径是：/WEB-INF/gs/gslistpage.jsp
 		return mav;
 	}

@@ -78,7 +78,7 @@ public class SysGongsiinfoServiceImpl implements SysGongsiinfoService {
 			List<SysGongsiinfo> list = this.sysGongsiinfoMapper.selectByExample(example);
 			//封装成pageinfo对象
 			PageInfo<SysGongsiinfo> page=new PageInfo<SysGongsiinfo>(list);
-			
+			System.out.println(page);
 			return page;
 		}
 
