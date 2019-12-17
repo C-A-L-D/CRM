@@ -1,5 +1,6 @@
 package com.sc.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.StoreGinfo;
+import com.sc.entity.StoreGinfoExample;
 import com.sc.mapper.StoreGinfoMapper;
 import com.sc.service.StoreGinfoService;
 
@@ -18,7 +20,9 @@ public class StoreGinfoServiceImpl implements StoreGinfoService{
 	
 	@Override
 	public ArrayList<StoreGinfo> selectAll() {
-		ArrayList<StoreGinfo> list=(ArrayList<StoreGinfo>) this.storeGinfoMapper.selectByExample(null);
+		StoreGinfoExample example=new StoreGinfoExample();
+		example.setOrderByClause("GID DESC");
+		ArrayList<StoreGinfo> list=(ArrayList<StoreGinfo>) this.storeGinfoMapper.selectByExample(example);
 		return list;
 	}
 	
@@ -33,15 +37,18 @@ public class StoreGinfoServiceImpl implements StoreGinfoService{
 	}
 
 	@Override
-	public void del(StoreGinfo sinfo) {
-		if(sinfo!=null) {
-			this.storeGinfoMapper.deleteByPrimaryKey(sinfo.getGid());
+	public void del(int gid) {
+		BigDecimal tmp=BigDecimal.valueOf((Integer)gid);
+		if(gid!=0&&gid!=-1) {
+			this.storeGinfoMapper.deleteByPrimaryKey(tmp);
 		}
 		else {
 			System.err.println("对象为空！");
 		}
 	}
-
+	
+	
+	
 	@Override
 	public void update(StoreGinfo sinfo) {
 		if(sinfo!=null) {
@@ -60,5 +67,18 @@ public class StoreGinfoServiceImpl implements StoreGinfoService{
 		System.err.println(page);
 		return page;
 	}
+
+	@Override
+	public StoreGinfo getsgi(BigDecimal gid) {
+		if(gid!=null) {
+			StoreGinfo sgi = this.storeGinfoMapper.selectByPrimaryKey(gid);
+			return sgi;
+		}
+		else {
+			System.err.println("对象为空！");
+		}
+		return null;
+	}
+	
 	
 }
