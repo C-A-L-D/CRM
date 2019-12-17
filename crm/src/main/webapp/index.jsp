@@ -210,41 +210,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <a _href="sysgsctrl/gspage.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>公司信息列表</cite>
-                            
                         </a>
                     </li >
                     <li>
-                        <a _href="html/member-del.html">
+                        <a _href="sysbmctrl/bmpage.do">
                             <i class="iconfont">&#xe6a7;</i>
-                            <cite>会员删除</cite>
-                            
+                            <cite>部门信息表</cite>
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe70b;</i>
-                            <cite>会员管理</cite>
-                            <i class="iconfont nav_right">&#xe6a7;</i>
+                        <a _href="sysjobctrl/jobpage.do">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>职务信息表</cite>
                         </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="html/member-del.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员列表</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="html/member-del.html">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员删除</cite>
-                                    
-                                </a>
-                            </li>
-                            
-                        </ul>
                     </li>
-                    
+                    <li>
+                         <a _href="sysygctrl/ygpage.do">
+                             <i class="iconfont">&#xe6a7;</i>
+                             <cite>员工信息表</cite>
+                         </a>
+                    </li>
                 </ul>
             </li>             
 <li>

@@ -237,10 +237,10 @@
       </collection>
    </resultMap>  
     <select id="selectAllRoleAndPower" resultMap="roleAndPower" >
-      SELECT * FROM SYS_ROLE r
-	  INNER JOIN SYS_POWER_ROLE rp
-	  ON r.RID=rp.ROLE_ID
-	  INNER JOIN SYS_POWERINFO pp
-	  ON rp.ID=pp.PCOLUMN_ID
+    	SELECT * FROM SYS_ROLE r
+		LEFT JOIN SYS_POWER_ROLE rp
+		ON r.RID=rp.ROLE_ID
+		LEFT JOIN SYS_POWERINFO p
+		ON rp.PCOLUMN_ID=p.PID
   </select>
 </mapper>

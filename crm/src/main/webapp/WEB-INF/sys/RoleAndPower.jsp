@@ -87,14 +87,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>操作</th>
         </thead>
         <tbody>
-<c:forEach items="${RP }" var="r">
+<c:forEach items="${RP.list }" var="r">
           <tr>
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${r.rname }</td>
             <td>${r.rdescribe }</td>
-            <td>${r.sysPowerinfo.ppower }</td>
+            <td>${r.sysPowerinfo[0] }</td>
             <td>${r.headrid }</td>
             <td class="td-manage">
               <a title="编辑"  onclick="x_admin_show('编辑','xxx.html')" href="javascript:;">
@@ -110,12 +110,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </table>
       <div class="page">
         <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
+			<a class="num" href="rap/selectAllRoleAndPower.do?pageNum=${RP.firstPage }">首页</a>
+			<a href="rap/selectAllRoleAndPower.do?pageNum=${RP.prePage }">上一页</a>
+			<a href="rap/selectAllRoleAndPower.do?pageNum=${RP.pageNum }" ><span class="current">${RP.pageNum }</span></a>
+			<a class="next" href="rap/selectAllRoleAndPower.do?pageNum=${RP.nextPage }">&gt;&gt;</a>
+			<a class="num" href="rap/selectAllRoleAndPower.do?pageNum=${RP.lastPage }">尾页</a>   当前${RP.pageNum }/${RP.pages }页，共${RP.total }条
         </div>
       </div>
 
