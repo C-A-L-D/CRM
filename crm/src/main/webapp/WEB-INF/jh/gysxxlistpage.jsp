@@ -35,8 +35,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
         <form class="layui-form layui-col-md12 x-so" action="../gysxxctrl/gyslistpage.do">
         <input type="text" name="gysName"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
-        <input type="submit" value="搜索" class="layui-btn" >&emsp;&emsp;
-         <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','gysgoadd.do',750,750)" >
+        <button class="layui-btn"  lay-submit="" lay-filter="submit"><i class="layui-icon">&#xe615;</i></button>
+        &emsp;&emsp;
+         <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','gysgoadd.do',700,700)" >
        <i class="layui-icon"></i>	添加供应商</a>
           
         </form>
@@ -79,17 +80,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td>
                  ${u.remark }
                </td>
-                <td>
-                 <a onclick="x_admin_show('','../gysxxctrl/gysxq.do?gysId=${u.gysId }')" >查看详情</a>
+                <td class="td-status">
+                 <a  onclick="x_admin_show('','../gysxxctrl/gysxq.do?gysId=${u.gysId }')" >
+                
+                 <span class="layui-btn layui-btn-normal layui-btn-mini">查看详情</span></a>
                </td>
               <td class="td-manage">
-              <a title="修改" onclick="x_admin_show('编辑','../gysxxctrl/gysgoupdate.do?gysId=${u.gysId }',750,750)" >
-              <input type="image" src="<%=basePath %>images/jt.jpg" height="30px" width="30px" >
+              <a title="修改" onclick="x_admin_show('编辑','../gysxxctrl/gysgoupdate.do?gysId=${u.gysId }',700,700)" >
+               <i class="layui-icon">&#xe642;</i>
 				</a>
               <a title="删除" href="../gysxxctrl/gysdelete.do?gysId=${u.gysId }" onclick="return confirm('是否确定删除？') " >
-              <input type="image" src="<%=basePath %>images/dl.jpg" height="30px" width="30px" >
-                
-              </a>
+              <i class="layui-icon">&#xe640;</i>
+               </a>
               </td>  
             </tr>
          </c:forEach>

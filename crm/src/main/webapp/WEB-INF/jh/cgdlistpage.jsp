@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -30,16 +31,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
        <div class="layui-row">
        
-        <form class="layui-form layui-col-md12 x-so">
-        <input type="text" name="gysName"  placeholder="请输入采购单主题" autocomplete="off" class="layui-input">
-          <a class="layui-btn" onclick=""><i class="layui-icon">&#xe615;</i></a>
+        <form class="layui-form layui-col-md12 x-so" action="../cgdctrl/cgdlistpage.do">
+        <input type="text" name="cgTheme"  placeholder="请输入采购单主题" autocomplete="off" class="layui-input">
+        <button class="layui-btn"  lay-submit="" lay-filter="submit"><i class="layui-icon">&#xe615;</i></button>
         
-       <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','cgdgoadd.do')" >
-       <i class="layui-icon"></i>	添加采购单</a>
-          
         </form>
-      </div>
-  
+        </div>
+
+<div class="layui-btn-container">
 
       <table class="layui-table">    
           <tr>
@@ -58,6 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>备注信息</th>
             <th>公司编号</th>
             <th>最后修改时间</th>
+            <th>操作</th>
             <th>查看</th>
             
             </tr>
@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 ${u.cgTheme }
                </td>
                <td>
-                ${u.cgTime }
+               <fmt:formatDate value="${u.cgTime}" pattern="yyyy-MM-dd"/>
                </td>
                <td>
                  ${u.gysId}
@@ -79,6 +79,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <td>
                  ${u.hkMoney }
                </td>
+                <td>
+                 ${u.fphm }
+               </td>  
                <td>
                  ${u.fkqk }
                </td>
@@ -86,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  ${u.cgJz }
                </td>
                 <td>
-                 ${u.jhtime }
+             <fmt:formatDate value="${u.jhtime}" pattern="yyyy-MM-dd"/>
                </td>
                  <td>
                  ${u.jhplace }
@@ -104,22 +107,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  ${u.gsId }
                </td>
                    <td>
-                 ${u.ltime }
+               <fmt:formatDate value="${u.ltime}" pattern="yyyy-MM-dd"/>   
+                 
                </td>
-                    <td>
-                                              查看详单
+                  <td >
+                 ${u.fkqk=="已付款" ? "已付款":"<a 
+                 class='layui-btn layui-btn-sm' onclick=
+                 'x_admin_show('添加','cgdgoadd.do',700,700)'>
+                 <i class='layui-icon'>&#xe654;</i></a>
+                  <a class='layui-btn layui-btn-sm'onclick=
+                 'x_admin_show('删除','cgddelete.do',700,700)' >
+                  <i class='layui-icon'>&#xe640;</i></a>
+                 " }
                </td>
-                    
-              <td class="td-manage">
-              <a title="删除" href="../cgdxxctrl/cgddelete.do?cgdId=${u.cgdId }" onclick="return confirm('是否确定删除？') " >
-              <input type="image" src="<%=basePath %>images/dl.jpg" height="30px" width="30px" >
                 
-              </a>
-              </td>  
+                <td class="td-status">
+                <a  onclick="x_admin_show('','../cgdxxctrl/cgdxq.do?cgdId =${u.cgdId  }')" >
+                
+                 <span class="layui-btn layui-btn-normal layui-btn-mini">查看详单</span></a>
+               </td>
+                     
             </tr>
          </c:forEach>
             <tr>
-             <td style="text-align: center;" colspan="10">
+             <td style="text-align: center;" colspan="17">
                 <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.firstPage }">首页</a>
                 <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.prePage }">上一页</a>
                 <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.nextPage }">下一页</a>
@@ -131,9 +142,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       </table>   
  
-
+ </div>
 
      </body>
      
    </html>  
+    
+
+    
     

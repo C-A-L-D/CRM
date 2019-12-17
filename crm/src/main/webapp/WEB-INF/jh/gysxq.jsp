@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -181,6 +182,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="text" value="${u.gsId}" name="gsId" required 
                   autocomplete="off" class="layui-input" disabled="disabled" >
               </div>
+          </div>
+          
+              <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        最后修改时间：
+              </label>
+               <div class="layui-input-inline" style="margin-top: 15px;">
+              <fmt:formatDate value="${u.ltime }" pattern="yyyy-MM-dd" /> 
+               </div>
+                 
+                 
+             
           </div>
           
 
