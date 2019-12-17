@@ -27,8 +27,11 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 		PageHelper.startPage(pageNum, pageSize);
 		JhGysxxExample ex=new JhGysxxExample();
 		Criteria criteria = ex.createCriteria();
-		if(u.getGysName()!=null){
+		
+		if(u!=null){
+		if(u.getGysName()!=null&&!u.getGysName().equals("")){
 			criteria.andGysNameLike("%"+u.getGysName()+"%");
+		}
 		}
 		//查询当前页的集合数据
 		List<JhGysxx> list = this.jhGysxxMapper.selectByExample(ex);
