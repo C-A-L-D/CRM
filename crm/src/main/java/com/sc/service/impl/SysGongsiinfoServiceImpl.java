@@ -40,6 +40,7 @@ public class SysGongsiinfoServiceImpl implements SysGongsiinfoService {
 
 		@Override
 		public void delete(SysGongsiinfo g) {
+			
 			if(g!=null){
 				this.sysGongsiinfoMapper.deleteByPrimaryKey(g.getId());
 			}
@@ -59,14 +60,20 @@ public class SysGongsiinfoServiceImpl implements SysGongsiinfoService {
 			// TODO Auto-generated method stub
 			return	this.sysGongsiinfoMapper.selectByExample(null);
 		}
-
+		
 		@Override
-		public PageInfo<SysGongsiinfo> selectpage(Integer pageNum, Integer pageSize) {
+		public PageInfo<SysGongsiinfo> selectpage(Integer pageNum, Integer pageSize,SysGongsiinfo info1) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 		    SysGongsiinfoExample example=new SysGongsiinfoExample();
 		     example.setOrderByClause(" id desc ");//通过id编号降序排列，注意名称一定是列名
-		   
+		     
+		     if(info1!=null){
+			     Criteria c = example.createCriteria();
+			     if(info1.getGname()!=null&&!info1.getGname().equals("")){
+			        c.andGnameLike("%"+info1.getGname() +"%");
+			     }
+		     }
 			//查询当前页的集合数据
 			List<SysGongsiinfo> list = this.sysGongsiinfoMapper.selectByExample(example);
 			//封装成pageinfo对象

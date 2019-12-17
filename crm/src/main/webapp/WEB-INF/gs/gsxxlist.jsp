@@ -105,6 +105,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   autocomplete="off" class="layui-input" value="${u.gchuanzhen }" disabled="disabled">
               </div>
           </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		开户银行
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gopenyinghang" name="gopenyinghang"
+                  autocomplete="off" class="layui-input" value="${u.gopenyinghang }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		银行账户
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gyinghangaccount" name="gyinghangaccount"
+                  autocomplete="off" class="layui-input" value="${u.gyinghangaccount }" disabled="disabled">
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		是否有效
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gtf" name="gtf"
+                  autocomplete="off" class="layui-input" value="${u.gtf }" disabled="disabled">
+              </div>
+          </div>
       </form>
     </div>
     

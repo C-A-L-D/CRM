@@ -23,7 +23,6 @@ public interface SysGongsiinfoService {
     //查询
     public List<SysGongsiinfo > select();
     
-    public PageInfo<SysGongsiinfo> selectpage(Integer pageNum,Integer pageSize);
-
-	
+    //分页、条件查询等
+    public PageInfo<SysGongsiinfo> selectpage(Integer pageNum,Integer pageSize,SysGongsiinfo info1);
 }

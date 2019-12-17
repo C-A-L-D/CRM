@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysDepartment;
+import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysJobinfo;
+import com.sc.entity.SysJobinfoExample;
+import com.sc.entity.SysJobinfoExample.Criteria;
 import com.sc.mapper.SysDepartmentMapper;
+import com.sc.mapper.SysGongsiinfoMapper;
 import com.sc.mapper.SysJobinfoMapper;
 import com.sc.service.SysJobinfoService;
 @Service
@@ -18,6 +22,10 @@ public class SysJobinfoServiceImpl implements SysJobinfoService {
 
 	@Autowired
 	SysJobinfoMapper sysJobinfoMapper;
+	@Autowired
+	SysGongsiinfoMapper sysGongsiinfoMapper;
+	@Autowired
+	SysDepartmentMapper sysDepartmentMapper;
 		
 		@Override
 		public void add(SysJobinfo j) {
@@ -46,7 +54,7 @@ public class SysJobinfoServiceImpl implements SysJobinfoService {
 		@Override
 		public SysJobinfo get(BigDecimal jid) {
 			if(jid!=null){
-				this.sysJobinfoMapper.selectByPrimaryKey(jid);
+				return	this.sysJobinfoMapper.selectByPrimaryKey(jid);
 			}
 			return null;
 		}
@@ -56,17 +64,47 @@ public class SysJobinfoServiceImpl implements SysJobinfoService {
 			// TODO Auto-generated method stub
 			return	this.sysJobinfoMapper.selectByExample(null);
 		}
+		
+		@Override
+		public List<SysGongsiinfo> select1() {
+			// TODO Auto-generated method stub
+		
+			return	this.sysGongsiinfoMapper.selectByExample(null);
+		}
+		
+		@Override
+		public List<SysDepartment> select2() {
+			// TODO Auto-generated method stub
+		
+			return	this.sysDepartmentMapper.selectByExample(null);
+		}
+		
+		
 
 		@Override
-		public PageInfo<SysJobinfo> selectpage(Integer pageNum, Integer pageSize) {
-			//设置分页数据，开始分页
+		public PageInfo<SysJobinfo> selectpage(Integer pageNum, Integer pageSize,SysJobinfo info1) {
+			//设置分页数据，开始分页,模糊查询
 			PageHelper.startPage(pageNum, pageSize);
+			SysJobinfoExample example=new SysJobinfoExample();
+			
+		     example.setOrderByClause(" jid desc ");//通过id编号降序排列，注意名称一定是列名
+			 if(info1!=null){
+	
+              Criteria c = example.createCriteria();
+              if(info1.getJname()!=null&&!info1.getJname().equals("")){
+              c.andJnameLike("%"+info1.getJname() +"%"); 
+              System.out.println(info1.getJname());
+              }
+			 }
 			//查询当前页的集合数据
-			List<SysJobinfo> list = this.sysJobinfoMapper.selectByExample(null);
+			 List<SysJobinfo> list = this.sysJobinfoMapper.selectByExample(example);
+			 
 			//封装成pageinfo对象
 			PageInfo<SysJobinfo> page=new PageInfo<SysJobinfo>(list);
 			
 			return page;
 		}
-
+		
+		
+		
 }
