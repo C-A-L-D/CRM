@@ -35,6 +35,7 @@ public ModelAndView gspage(ModelAndView mav,
 	System.out.println("公司列表-分页！");
 	//查询list集合-分页     ${p.list}
 	mav.addObject("p", sysUsersInfoService.selectpage(pageNum, pageSize,info1));
+	mav.addObject("info1", info1);
 	mav.setViewName("gs/yglistpage");// 路径是：/WEB-INF/gs/gslistpage.jsp
 	
 	return mav;
@@ -102,10 +103,11 @@ public Result gsadd(ModelAndView mav,
 
 //公司修改信息
 @RequestMapping("/yggoupdate.do")
-public ModelAndView goupdate(ModelAndView mav,SysUsersInfo info1){
+public ModelAndView goupdate(ModelAndView mav,SysUsersInfo info1,MultipartFile upload,HttpServletRequest req) throws IllegalStateException, IOException{
 	System.out.println("跳转到修改页面！"+info1);
 	SysUsersInfo info = this.sysUsersInfoService.get(info1.getSid());
 	System.out.println("原有的数据"+info);
+	
 	mav.addObject("p1", sysUsersInfoService.select1());
 	mav.addObject("p3", sysUsersInfoService.select3());
 	mav.addObject("u", info);

@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  ${u.remark }
                </td>
                 <td class="td-status">
-                 <a  onclick="x_admin_show('','../gysxxctrl/gysxq.do?gysId=${u.gysId }')" >
+                 <a  onclick="x_admin_show('','../gysxxctrl/gysxq.do?gysId=${u.gysId }',600,600)" >
                 
                  <span class="layui-btn layui-btn-normal layui-btn-mini">查看详情</span></a>
                </td>

@@ -15,6 +15,8 @@ public class JhCgdController {
 	@Autowired
 	JhCgdService jhCgdService;
 	
+	
+	
 	@RequestMapping("/cgdlistpage.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
@@ -27,4 +29,9 @@ public class JhCgdController {
 		mav.setViewName("jh/cgdlistpage");// 路径是：/WEB-INF/jh/gysxxlistpage.jsp
 		return mav;
 	}
+	
+	
+	
+	
+	
 }

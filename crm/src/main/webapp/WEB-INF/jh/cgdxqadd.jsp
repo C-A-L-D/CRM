@@ -1,14 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
+  
   <head>
+    <meta charset="UTF-8">
     <title>欢迎页面-L-admin1.0</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -27,78 +27,103 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  
-   <div class="x-body">
-        <form class="layui-form">
+ 
+  <div class="x-body" cols>
+        <form class="layui-form" method="post">
+          <div class="layui-form-item">
+              <label>
+                                       产品编号：
+              </label>
+            <select name="cpId">
+              <option></option>
+              <option></option>
+              <option></option>
+              <option></option>
+            </select>
          
-          <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>部门名
-              </label>
-              <div class="layui-input-inline">
-              <input type="hidden" name="did" value="${u.did}">
-                  <input type="text" id="dname" name="dname" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.dname }">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
           </div>
           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>备注说明
+              <label  class="layui-form-label">
+                                       产品名称：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="ddescribe" name="ddescribe" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.ddescribe }">
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
+                  <input type="text"  name="gysJc" required 
+                  autocomplete="off" class="layui-input">
               </div>
           </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>公司名称
+           <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                       单价：
               </label>
               <div class="layui-input-inline">
-                 <%--  <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.gongsiid }"> --%>
-              <select name="gongsiid">
-                   <c:forEach items="${p}" var="v">
-                    <option value="${v.id }" ${v.id==u.gongsiid ? "selected":"" }>${v.gname }</option>
-                   </c:forEach>
-                </select>
+                  <input type="text"  name="lxr" required 
+                  autocomplete="off" class="layui-input">
               </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
+          </div>
+        
+           <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        购买数量：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text"  name="cpNumber" required 
+                  autocomplete="off" class="layui-input">
               </div>
           </div>
           
-          
-       
-       
+            <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        总价：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text"  name="ydPhone" required 
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+              
           <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        备注信息：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text"  name="lxcz" required 
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+       
+         
+          
+                                       是否入库：
+           
+              <select name="isrk">
+              <option>已入库</option>
+              <option>未入库</option>
+           
+            </select>
+         
+       
+       
+            
+         <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
               <button  class="layui-btn" lay-filter="add" lay-submit="">
-                  修改
+                  添加
               </button>
           </div>
-          
       </form>
     </div>
-    
-<script type="text/javascript">
-  layui.use(['form','layer'], function(){
+  
+ <script>
+layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
-          //监听提交
-          form.on('submit(add)', function(data){
+ form.on('submit(add)', function(data){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "bmupdate.do",
+		        url: "cgdxqadd.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
@@ -127,7 +152,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    return false;
           });
           
-        });
+    });
+
 </script>
+  
+  
   </body>
+
 </html>
+
