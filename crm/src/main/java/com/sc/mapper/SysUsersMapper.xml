@@ -21,7 +21,20 @@
 	  </where>
    </select>
 
-
+	<resultMap type="SysUsers" id="sysAllUsersMapper" autoMapping="true">
+      <id column="uid" property="uid"/>
+      <association property="sysRole" javaType="SysRole" autoMapping="true">
+          <id column="RID" property="rid"/>
+      </association>
+   </resultMap>
+	<select id="selectAllUsersAndRole" resultMap="sysAllUsersMapper">
+		SELECT * FROM SYS_USERS u
+		LEFT JOIN SYS_USERS_ROLE ur
+		ON u."UID"=ur."UID"
+		LEFT JOIN SYS_ROLE r
+		ON ur."RID"=r."RID"
+   </select>
+	
 
 
 

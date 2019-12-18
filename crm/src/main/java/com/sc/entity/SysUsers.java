@@ -26,6 +26,8 @@ public class SysUsers implements Serializable {
 
     private SysGongsiinfo sysGongsiinfo;
     
+    private SysRole sysRole;
+    
     public SysUsers(BigDecimal uid, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate, Date lasttime) {
         this.uid = uid;
         this.uname = uname;
@@ -49,6 +51,34 @@ public class SysUsers implements Serializable {
 		this.ustate = ustate;
 		this.lasttime = lasttime;
 		this.sysGongsiinfo = sysGongsiinfo;
+	}
+
+
+
+	public SysUsers(BigDecimal uid, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate,
+			Date lasttime, SysGongsiinfo sysGongsiinfo, SysRole sysRole) {
+		super();
+		this.uid = uid;
+		this.uname = uname;
+		this.upassword = upassword;
+		this.sid = sid;
+		this.gongsiid = gongsiid;
+		this.ustate = ustate;
+		this.lasttime = lasttime;
+		this.sysGongsiinfo = sysGongsiinfo;
+		this.sysRole = sysRole;
+	}
+
+
+
+	public SysRole getSysRole() {
+		return sysRole;
+	}
+
+
+
+	public void setSysRole(SysRole sysRole) {
+		this.sysRole = sysRole;
 	}
 
 
@@ -125,10 +155,15 @@ public class SysUsers implements Serializable {
         this.lasttime = lasttime;
     }
 
+
+
 	@Override
 	public String toString() {
 		return "SysUsers [uid=" + uid + ", uname=" + uname + ", upassword=" + upassword + ", sid=" + sid + ", gongsiid="
-				+ gongsiid + ", ustate=" + ustate + ", lasttime=" + lasttime + "]";
+				+ gongsiid + ", ustate=" + ustate + ", lasttime=" + lasttime + ", sysGongsiinfo=" + sysGongsiinfo
+				+ ", sysRole=" + sysRole + "]";
 	}
+
+	
     
 }

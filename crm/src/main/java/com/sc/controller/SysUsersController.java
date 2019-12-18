@@ -73,6 +73,7 @@ public class SysUsersController {
 		
 		SysUsers sysUser=(SysUsers)subject.getPrincipal();
 		session.setAttribute("nowuser", sysUser);
+		System.out.println("..............."+sysUser);
 		
 		mav.setViewName("redirect:../index.jsp");
 		return mav;
@@ -86,16 +87,27 @@ public class SysUsersController {
 	 * @return
 	 */
 	@RequestMapping("/person.do")
-	public ModelAndView person(SysUsers u,ModelAndView mav){
+	public ModelAndView person(HttpServletRequest req,ModelAndView mav){
+		SysUsers sysUser = (SysUsers) req.getSession().getAttribute("nowuser");
+		System.out.println("个人信息："+sysUser);
 		mav.setViewName("sys/person");
 		return mav;
 	}
 	
+	/**
+	 * 全部用户信息
+	 * @param mav	模板视图
+	 * @param pageNum	当前页码
+	 * @param pageSize	页长
+	 * @return
+	 */
 	@RequestMapping("/allUsersInfo.do")
 	public ModelAndView allUsersInfo(ModelAndView mav, @RequestParam(defaultValue="1")int pageNum, @RequestParam(defaultValue="2")int pageSize) {
 		System.out.println("所有用户信息...");
-		mav.addObject("allUsers", sysUsersServiceImpl.selectAllUsers(pageNum, pageSize));
+		mav.addObject("allUsers", sysUsersServiceImpl.selectAllUsersAndRole(pageNum, pageSize));
 		mav.setViewName("sys/admin-list");
 		return mav;
 	}
+	
+	
 }

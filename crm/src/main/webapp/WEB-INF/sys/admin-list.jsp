@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -30,9 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">演示</a>
+        <a href="">用户管理</a>
         <a>
-          <cite>导航元素</cite></a>
+          <cite>用户列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -49,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">总共 ${allUsers.total } 条数据</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -57,24 +58,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>ID</th>
-            <th>登录名</th>
-            <th>手机</th>
-            <th>邮箱</th>
-            <th>角色</th>
-            <th>加入时间</th>
-            <th>状态</th>
+            <th>用户账号</th>
+            <th>用户姓名</th>
+            <th>联系电话</th>
+            <th>身份</th>
+            <th>用户状态</th>
+            <th>简介</th>
+            <th>上次操作时间</th>
             <th>操作</th>
         </thead>
         <tbody>
+<%--   <c:forEach items="${allUsers }" var="all"> --%>
           <tr>
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>1</td>
+            <td>113664000@qq.com</td>
             <td>admin</td>
             <td>18925139194</td>
-            <td>113664000@qq.com</td>
             <td>超级管理员</td>
             <td>2017-01-01 11:11:42</td>
             <td class="td-status">
@@ -91,6 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </a>
             </td>
           </tr>
+<%--   </c:forEach> --%>
         </tbody>
       </table>
       <div class="page">

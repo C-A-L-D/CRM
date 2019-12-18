@@ -46,12 +46,10 @@ public class SysUsersServiceImpl implements SysUsersService{
 	}
 
 	@Override
-	public PageInfo<SysUsers> selectAllUsers(int pageNum, int pageSize) {
+	public PageInfo<SysUsers> selectAllUsersAndRole(int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(pageNum, pageSize);
-		SysUsersExample example = new SysUsersExample();
-		example.setOrderByClause(" uid asc ");
-		List<SysUsers> list = sysUsersMapper.selectByExample(example);
+		List<SysUsers> list = sysUsersMapper.selectAllUsersAndRole();
 		return new PageInfo<SysUsers>(list);
 	}
 		
