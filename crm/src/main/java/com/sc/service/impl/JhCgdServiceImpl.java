@@ -56,4 +56,12 @@ public class JhCgdServiceImpl implements JhCgdService {
 
 	}
 
+	@Override
+	public void update(JhCgd jc) {
+		if(jc!=null&&jc.getCgdId()!=null){
+			this.jhCgdMapper.updateByPrimaryKey(jc);
+		}
+		
+	}
+
 }
