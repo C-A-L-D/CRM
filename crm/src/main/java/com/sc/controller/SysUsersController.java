@@ -1,5 +1,7 @@
 package com.sc.controller;
 
+import java.math.BigDecimal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -88,8 +90,6 @@ public class SysUsersController {
 	 */
 	@RequestMapping("/person.do")
 	public ModelAndView person(HttpServletRequest req,ModelAndView mav){
-		SysUsers sysUser = (SysUsers) req.getSession().getAttribute("nowuser");
-		System.out.println("个人信息："+sysUser);
 		mav.setViewName("sys/person");
 		return mav;
 	}
@@ -102,12 +102,33 @@ public class SysUsersController {
 	 * @return
 	 */
 	@RequestMapping("/allUsersInfo.do")
-	public ModelAndView allUsersInfo(ModelAndView mav, @RequestParam(defaultValue="1")int pageNum, @RequestParam(defaultValue="2")int pageSize) {
-		System.out.println("所有用户信息...");
-		mav.addObject("allUsers", sysUsersServiceImpl.selectAllUsersAndRole(pageNum, pageSize));
+	public ModelAndView allUsersInfo(ModelAndView mav, @RequestParam(defaultValue="1")int pageNum, @RequestParam(defaultValue="5")int pageSize) {
+		PageInfo<SysUsers> info = sysUsersServiceImpl.selectAllUsersAndRoleAndUsersInfo(pageNum, pageSize);
+		mav.addObject("allUsersInfo", info);
 		mav.setViewName("sys/admin-list");
 		return mav;
 	}
 	
+	/**
+	 * 修改用户状态
+	 * @param sysUsers
+	 * @return
+	 */
+	@RequestMapping("/updateUserStatus.do")
+	@ResponseBody
+	public Result updateUserStatus(SysUsers sysUsers) {
+		sysUsersServiceImpl.updateUserStatus(sysUsers.getUserId());
+		return new Result(200, "");
+	}
+	
+	@RequestMapping("/goUpdateUser.do")
+	public ModelAndView goUpdateUserOne(ModelAndView mav, SysUsers sysUsers){
+		System.out.println(sysUsers);
+		SysUsers userOne = sysUsersServiceImpl.goUpdateUserOne(sysUsers.getUserId());
+		System.out.println("对象："+userOne);
+		mav.addObject("user", userOne);
+		mav.setViewName("sys/updateUser");
+		return mav;
+	}
 	
 }

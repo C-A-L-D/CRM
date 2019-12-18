@@ -7,7 +7,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class SysUsers implements Serializable {
-    private BigDecimal uid;
+    private BigDecimal userId;
 
     private String uname;
 
@@ -28,8 +28,10 @@ public class SysUsers implements Serializable {
     
     private SysRole sysRole;
     
-    public SysUsers(BigDecimal uid, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate, Date lasttime) {
-        this.uid = uid;
+    private SysUsersInfo sysUsersInfo;
+    
+    public SysUsers(BigDecimal userId, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate, Date lasttime) {
+        this.userId = userId;
         this.uname = uname;
         this.upassword = upassword;
         this.sid = sid;
@@ -37,13 +39,12 @@ public class SysUsers implements Serializable {
         this.ustate = ustate;
         this.lasttime = lasttime;
     }
-
     
     
-    public SysUsers(BigDecimal uid, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate,
+    public SysUsers(BigDecimal userId, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate,
 			Date lasttime, SysGongsiinfo sysGongsiinfo) {
 		super();
-		this.uid = uid;
+		this.userId = userId;
 		this.uname = uname;
 		this.upassword = upassword;
 		this.sid = sid;
@@ -52,13 +53,11 @@ public class SysUsers implements Serializable {
 		this.lasttime = lasttime;
 		this.sysGongsiinfo = sysGongsiinfo;
 	}
-
-
-
-	public SysUsers(BigDecimal uid, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate,
+    
+    public SysUsers(BigDecimal userId, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate,
 			Date lasttime, SysGongsiinfo sysGongsiinfo, SysRole sysRole) {
 		super();
-		this.uid = uid;
+		this.userId = userId;
 		this.uname = uname;
 		this.upassword = upassword;
 		this.sid = sid;
@@ -68,25 +67,27 @@ public class SysUsers implements Serializable {
 		this.sysGongsiinfo = sysGongsiinfo;
 		this.sysRole = sysRole;
 	}
-
-
-
-	public SysRole getSysRole() {
-		return sysRole;
-	}
-
-
-
-	public void setSysRole(SysRole sysRole) {
+    
+    
+    public SysUsers(BigDecimal userId, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid, String ustate,
+			Date lasttime, SysGongsiinfo sysGongsiinfo, SysRole sysRole, SysUsersInfo sysUsersInfo) {
+		super();
+		this.userId = userId;
+		this.uname = uname;
+		this.upassword = upassword;
+		this.sid = sid;
+		this.gongsiid = gongsiid;
+		this.ustate = ustate;
+		this.lasttime = lasttime;
+		this.sysGongsiinfo = sysGongsiinfo;
 		this.sysRole = sysRole;
+		this.sysUsersInfo = sysUsersInfo;
 	}
 
-
-
+    
 	public SysGongsiinfo getSysGongsiinfo() {
 		return sysGongsiinfo;
 	}
-
 
 
 	public void setSysGongsiinfo(SysGongsiinfo sysGongsiinfo) {
@@ -94,17 +95,36 @@ public class SysUsers implements Serializable {
 	}
 
 
+	public SysRole getSysRole() {
+		return sysRole;
+	}
+
+
+	public void setSysRole(SysRole sysRole) {
+		this.sysRole = sysRole;
+	}
+
+
+	public SysUsersInfo getSysUsersInfo() {
+		return sysUsersInfo;
+	}
+
+
+	public void setSysUsersInfo(SysUsersInfo sysUsersInfo) {
+		this.sysUsersInfo = sysUsersInfo;
+	}
+
 
 	public SysUsers() {
         super();
     }
 
-    public BigDecimal getUid() {
-        return uid;
+    public BigDecimal getUserId() {
+        return userId;
     }
 
-    public void setUid(BigDecimal uid) {
-        this.uid = uid;
+    public void setUserId(BigDecimal userId) {
+        this.userId = userId;
     }
 
     public String getUname() {
@@ -156,14 +176,12 @@ public class SysUsers implements Serializable {
     }
 
 
-
 	@Override
 	public String toString() {
-		return "SysUsers [uid=" + uid + ", uname=" + uname + ", upassword=" + upassword + ", sid=" + sid + ", gongsiid="
-				+ gongsiid + ", ustate=" + ustate + ", lasttime=" + lasttime + ", sysGongsiinfo=" + sysGongsiinfo
-				+ ", sysRole=" + sysRole + "]";
+		return "SysUsers [userId=" + userId + ", uname=" + uname + ", upassword=" + upassword + ", sid=" + sid
+				+ ", gongsiid=" + gongsiid + ", ustate=" + ustate + ", lasttime=" + lasttime + ", sysGongsiinfo="
+				+ sysGongsiinfo + ", sysRole=" + sysRole + ", sysUsersInfo=" + sysUsersInfo + "]";
 	}
-
-	
+    
     
 }

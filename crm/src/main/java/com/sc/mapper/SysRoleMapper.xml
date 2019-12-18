@@ -233,7 +233,7 @@
   <resultMap type="SysRole" id="roleAndPower" autoMapping="true">
       <id column="RID" property="rid"/>
       <collection property="sysPowerinfo" ofType="SysPowerinfo" autoMapping="true">
-          <id column="PCOLUMN_ID" property="pcolumId"/>
+          <id column="PCOLUMN_ID" property="pcolumnId"/>
       </collection>
    </resultMap>  
     <select id="selectAllRoleAndPower" resultMap="roleAndPower" >

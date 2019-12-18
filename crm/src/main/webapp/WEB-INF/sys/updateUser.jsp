@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>修改角色信息</title>
+    <title>修改用户信息</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
-      <div class="layui-card-header">您所修改的角色编号：${RPOne.rid }</div>
+      <div class="layui-card-header">您所使用的角色编号：${user.uid }</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">        
           <div class="layui-form-item">

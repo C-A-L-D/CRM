@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysPowerinfoMapper" >
+	<resultMap type="SysPowerinfo" id="sysPowerColMapper" autoMapping="true">
+      <id column="PID" property="pid"/>
+      <association property="sysPowercolumn" javaType="SysPowercolumn" autoMapping="true">
+          <id column="CID" property="cid"/>
+      </association>
+   </resultMap>
+	<select id="selectAllPowerAndCol" resultMap="sysPowerColMapper">
+SELECT * FROM SYS_POWERINFO p
+		RIGHT JOIN SYS_POWERCOLUMN pc
+		ON p.PCOLUMN_ID=PC.CID
+   </select>
+
+
+
+
   <resultMap id="BaseResultMap" type="com.sc.entity.SysPowerinfo" >
     <constructor >
       <idArg column="PID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />

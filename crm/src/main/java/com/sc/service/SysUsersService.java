@@ -1,6 +1,8 @@
 package com.sc.service;
 
 import java.math.BigDecimal;
+import java.util.List;
+
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysUsers;
 
@@ -16,8 +18,14 @@ public interface SysUsersService {
 	
 	
 	//查询全部用户列表
-	public PageInfo<SysUsers> selectAllUsersAndRole(int pageNum, int pageSize);
+	public PageInfo<SysUsers> selectAllUsersAndRoleAndUsersInfo(int pageNum, int pageSize);
 	
 	//添加一条用户记录
 	public void addUser(SysUsers u);
+	
+	//修改用户状态
+	public void updateUserStatus(BigDecimal userId);
+	
+	//修改制定ID的用户
+	public SysUsers goUpdateUserOne(BigDecimal userId);
 }
