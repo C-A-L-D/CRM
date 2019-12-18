@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'offmesslist.jsp' starting page</title>
+    <title>My JSP starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
     <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="lib/layui/css/modules/layer/default/layer.css">
     <link rel="stylesheet" type="text/css" href="lib/layui/css/layui.css">
     <script src="js/jquery.min.js"></script>
 	<script src="lib/layui/layui.js"></script>
@@ -44,11 +45,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 查询 -->
 <form class="layui-form">
-<input type="text" name="gid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="display:inline; width:530px;">
-<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="display:inline; width:530px;">
+<input type="text" name="gid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="display:inline; width:500px;">
+<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="display:inline; width:500px;">
 <button type="submit" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查找</button>  
-<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
+<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button>  
+<a type="reset" class="layui-btn layui-btn-danger" href="../CRM/storegoodsinfo/jsp/addsginfo.jsp"><i class="layui-icon">&#xe654;</i></a>
 </form>
+
 
 <!-- 表格 -->
   <table class="layui-table">
@@ -105,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          				<i class="layui-icon">&#xe65f;</i>
 	          			</button>
 	          			<button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe642;</i></button>
-	          			<button type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck()">
+	          			<button type="button" class="btn layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck(${storeginfo.gid})">
 	          				<i class="layui-icon">&#xe640;</i>
 	          			</button>
 	          		</div>
@@ -118,6 +121,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
 <!-- 分页 -->
 <input type="hidden" readonly="readonly" id="total" value='${sgilistPage.total}'>
+<input type="hidden" readonly="readonly" id="size" value='${sgilistPage.pageSize}'>
+<input type="hidden" readonly="readonly" id="paging" value='${sgilistPage.pageNum}'>
 <center><div id="demo7"></div></center>
 
 </div>

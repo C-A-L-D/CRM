@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <form class="layui-form layui-col-md12 x-so" action="bmpage.do">
         <!--   <input class="layui-input" placeholder="开始日" name="start" id="start">
           <input class="layui-input" placeholder="截止日" name="end" id="end"> -->
-          <input type="text" name="dname"  placeholder="请输入部门名称" autocomplete="off" class="layui-input">
+          <input type="text" name="dname" id="dname"  value="${info1.dname }" placeholder="请输入部门名称" autocomplete="off" class="layui-input">
           <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" ><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
@@ -116,16 +116,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
               <tr>
              <td style="text-align: center;" colspan="11">
-                <a href="../sysbmctrl/bmpage.do?pageNum=${p.firstPage }">首页</a>
+ <%--                <a href="../sysbmctrl/bmpage.do?pageNum=${p.firstPage }">首页</a>
                 <a href="../sysbmctrl/bmpage.do?pageNum=${p.prePage }">上一页</a>
                 <a href="../sysbmctrl/bmpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../sysbmctrl/bmpage.do?pageNum=${p.lastPage }">尾页</a>
+                <a href="../sysbmctrl/bmpage.do?pageNum=${p.lastPage }">尾页</a> --%>
+                <a onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+                <a onclick="aa('${p.prePage }')" href="javascript:;">上一页</a>
+                <a onclick="aa('${p.nextPage }')" href="javascript:;">下一页</a>
+                <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>                         
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr>  
          
   </body>
      <script>
+         function aa(pageNum){
+var url="../sysbmctrl/bmpage.do?pageNum="+pageNum+"&dname="+$("#dname").val();
+   console.log(url);
+     window.location.href=url;
+     }
+     
+     
+     
      //自定义样式
   laypage.render({
     elem: 'demo2'

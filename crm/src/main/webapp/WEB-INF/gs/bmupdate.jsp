@@ -58,14 +58,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           <div class="layui-form-item">
               <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>公司编号
+                  <span class="x-red">*</span>公司名称
               </label>
               <div class="layui-input-inline">
                  <%--  <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
                   autocomplete="off" class="layui-input" value="${u.gongsiid }"> --%>
               <select name="gongsiid">
                    <c:forEach items="${p}" var="v">
-                    <option value="${v.id }" ${v.id==u.gongsiid ? "selected":"" }>${v.id }</option>
+                    <option value="${v.id }" ${v.id==u.gongsiid ? "selected":"" }>${v.gname }</option>
                    </c:forEach>
                 </select>
               </div>
