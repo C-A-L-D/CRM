@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -39,17 +40,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="hidden"  name="cgXqId" required lay-verify="required"
                   autocomplete="off" value="${u.cgXqId }" class="layui-input">
                   <input type="text"  name="cgdId" required lay-verify="required"
-                  autocomplete="off" value="${u.cgdId }" class="layui-input">
+                  autocomplete="off" value="${u.cgdId }" class="layui-input" disabled="disabled">
               </div>     
           </div>
-          <div class="layui-form-item">
+          
+         
+             <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        产品编号：
+                                       产品编号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.cpId }" name="cpId" required 
-                  autocomplete="off" class="layui-input">
-              </div>
+              <select id="cpId" name="cpId" class="layui-input" > 
+              <option value=""></option>
+              <c:forEach items="${st }" var="s">
+               <option ${u.cpId==s.gid ? "selected":"" }>${s.gid }</option>
+               
+              </c:forEach>             
+              </select>
+               </div>
           </div>
            <div class="layui-form-item">
               <label  class="layui-form-label">
@@ -71,13 +79,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           
-            <div class="layui-form-item">
+              <div class="layui-form-item">
               <label  class="layui-form-label">
                                         是否入库：
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.isrk }" name="isrk" required 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" disabled="disabled">
               </div>
           </div>
           

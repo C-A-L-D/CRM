@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,12 +16,15 @@ import com.sc.entity.JhCgd;
 import com.sc.entity.JhCgdxq;
 import com.sc.entity.Result;
 import com.sc.service.JhCgdxqService;
+import com.sc.service.StoreGinfoService;
 @RequestMapping("/cgdxqctrl")
 @Controller
 public class JhCgdxqController {
 
 	@Autowired
 	JhCgdxqService jhCgdxqService;
+	@Autowired
+	StoreGinfoService storeGinfoService;
 	
 	
 	@RequestMapping("/cgdxq.do")
@@ -41,6 +43,7 @@ public class JhCgdxqController {
 		System.out.println("跳转到修改页面！"+u);
 		JhCgdxq users = this.jhCgdxqService.get(u.getCgXqId());
 		mav.addObject("u", users);
+		mav.addObject("st",storeGinfoService.selectAll()); 
 		mav.setViewName("jh/cgdxqupdate");// 路径是：/WEB-INF/jh/cgdxqupdate.jsp
 		return mav;
 	}
@@ -59,9 +62,12 @@ public class JhCgdxqController {
 	
 	//添加采购单详情
 	@RequestMapping("/cgdxqgoadd.do")
-	public ModelAndView cgdxqgoadd(ModelAndView mav,HttpSession session){
+	public ModelAndView cgdxqgoadd(ModelAndView mav,Long id,String rk
+			){
 		System.out.println("采购单详情去添加！");
-	
+		mav.addObject("ck",storeGinfoService.selectAll()); 
+		mav.addObject("x", id);
+		mav.addObject("xx", rk);
 		mav.setViewName("jh/cgdxqadd");
 		return mav;
 	}
@@ -82,14 +88,16 @@ public class JhCgdxqController {
 		
 		//删除采购单详情
 		@RequestMapping("/cgdxqdelete.do")
-		public ModelAndView gysdelete(ModelAndView mav,JhCgdxq u){
+		@ResponseBody
+		public void cgdxqdelete(JhCgdxq u){
 			System.out.println("采购单详情删除！"+u);
 			JhCgdxq u1 = this.jhCgdxqService.get(u.getCgXqId());
 			this.jhCgdxqService.delete(u1);
-			mav.setViewName("redirect:cgdxq.do");
-			return mav;
+			
 		}
 	
+	
+		
 	
 	
 }

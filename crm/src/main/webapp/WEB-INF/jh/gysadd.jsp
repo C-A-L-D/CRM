@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <form class="layui-form" method="post">
           <div class="layui-form-item">
               <label  class="layui-form-label">
-                                       供应商名称：
+             <span class="x-red">*</span>供应商名称：
               </label>
               <div class="layui-input-inline">
                 
@@ -41,20 +41,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>     
           </div>
           <div class="layui-form-item">
-              <label  class="layui-form-label">
-                                        供应商简称：
+              <label for="L_pass" class="layui-form-label">
+              <span class="x-red">*</span>供应商简称：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="gysJc" required 
+                  <input type="text"  name="gysJc" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
            <div class="layui-form-item">
               <label  class="layui-form-label">
-                                       联系人：
+            <span class="x-red">*</span> 联系人：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="lxr" required 
+                  <input type="text"  name="lxr" lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -64,17 +64,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         固定电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="gdPhone" required 
+                  <input type="text"  name="gdPhone"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
           
             <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        移动电话：
+              <span class="x-red">*</span>移动电话：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="ydPhone" required 
+                  <input type="text" id="mbphone"  name="ydPhone" lay-verify="required" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         联系传真：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="lxcz" required 
+                  <input type="text"  name="lxcz" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -96,69 +96,78 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         联系地址：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="lxdz" required 
+                  <input type="text"  name="lxdz" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
           
             <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        联系邮编：
+             <span class="x-red">*</span> 联系邮编：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="lxyb" required 
+                  <input type="text"  name="lxyb" lay-verify="required" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
           
               <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        邮箱：
+            <span class="x-red">*</span>  邮箱：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="mail" required 
+                  <input type="text" id="mail" name="mail" lay-verify="required" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
           
             <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        开户银行：
+           <span class="x-red">*</span>     开户银行：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="khbank" required 
-                  autocomplete="off" class="layui-input">
-              </div>
+              <select id="khbank" name="khbank" class="layui-input" > 
+              <option>中国人民银行</option>             
+              <option>中国工商银行</option>
+               <option>中国农业银行</option>
+               <option>中国建设银行</option>
+               <option>中国邮政储蓄银行</option>
+               <option>中国交通银行</option>          
+              </select>
+               </div>
+           
           </div>
           
               <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        银行账号：
+           <span class="x-red">*</span>  银行账号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="yhzh" required 
+                  <input type="text"  name="yhzh" lay-verify="required" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
           
                <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        公司账号：
+           <span class="x-red">*</span>  公司账号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="gszy" required 
+                  <input type="text"  name="gszy"lay-verify="required" 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
         
              <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        是否有效：
+           <span class="x-red">*</span>   是否有效：
               </label>
-              <div class="layui-input-inline">
-                   <input type="text" name="isYx"
-                  autocomplete="off" class="layui-input" " >
-              </div>
+                <div class="layui-input-inline">
+              <select id="isYx" name="isYx" class="layui-input" > 
+              <option>是</option>             
+              <option>否</option>                      
+              </select>
+               </div>            
           </div>
         
            <div class="layui-form-item">
@@ -166,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         备注：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="remark" required 
+                  <input type="text"  name="remark"  
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -176,7 +185,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         公司编号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="gsId" required 
+                  <input type="text"  name="gsId"  
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -230,6 +239,12 @@ layui.use(['form','layer'], function(){
           });
           
     });
+
+   function check(){
+       var a=document.getElementById("mail");
+       var b=document.getElementById("mbphone");
+       
+   }
 
 </script>
   
