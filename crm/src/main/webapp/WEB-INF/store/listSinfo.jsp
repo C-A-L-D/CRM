@@ -46,10 +46,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 查询 -->
 <div class="layui-form">
 <form>
-<input type="text" name="whinfo" placeholder="请输入要查询的仓库信息......" autocomplete="off" class="layui-input" style="display:inline; width:1000px;">
-<button type="submit" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查找</button>  
-<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
-<a display="inline-block" style="float:right;" class="layui-btn layui-btn-danger" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
+<input type="text" name="whinfo" placeholder="请输入要查询的仓库信息......" autocomplete="off" class="layui-input" style="display:inline; width:800px;">
+<button type="submit" class="layui-btn layui-btn-normal sm"><i class="layui-icon">&#xe615;</i>查找</button>  
+<button type="reset" class="layui-btn sm"><i class="layui-icon">&#xe669;</i>清空</button> 
+<a display="inline-block" style="float:right;" class="layui-btn layui-btn-danger sm" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
 </form>
 </div>
 

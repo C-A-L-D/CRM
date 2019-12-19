@@ -29,13 +29,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
 <body>
+    <div class="layui-card-header"><h2>修改仓库信息</h2></div>
     <div class="layui-card">
-        <div class="layui-card-header"><h2>修改仓库信息</h2></div>
         <form class="layui-form" action="http://localhost:8080/CRM/storeWhinfo/updateSwi.do" method="post">
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="color: grey;">仓库编号</label>
+                    <label class="layui-form-label" >仓库编号</label>
                     <div class="layui-input-block">
-                        <input type="text" style="color: grey;" name="whid" readonly="readonly" value="${selected.whid }" autocomplete="off" class="layui-input">
+                        <input type="text" name="whid" placeholder="${selected.whid }" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -53,13 +53,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">公司编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="cid" required  placeholder="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="cid" required readonly="readonly"  value="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label" style="color: grey;">修改时间</label>
+                    <label class="layui-form-label">修改时间</label>
                     <div class="layui-input-block">
-                        <input type="text" style="color: grey;" name="lastdate" readonly="readonly" value="<fmt:formatDate value="${selected.lastdate }" pattern="yyyy-MM-dd HH:mm:ss"/>" autocomplete="off" class="layui-input">
+                        <input type="text" name="lastdate" readonly="readonly" value="<fmt:formatDate value="${selected.lastdate }" pattern="yyyy-MM-dd HH:mm:ss"/>" autocomplete="off" class="layui-input">
                     		
                     </div>
                 </div>

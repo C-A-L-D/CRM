@@ -20,7 +20,7 @@ import com.sc.entity.SysGongsiinfo;
 import com.sc.service.StoreGinfoService;
 
 @Controller
-@RequestMapping("/storefinfo")
+@RequestMapping("/storeGinfo")
 public class StoreGinfoController {
 	@Autowired
 	StoreGinfoService storeGinfoService;
@@ -32,9 +32,9 @@ public class StoreGinfoController {
 			@RequestParam(defaultValue="1")Integer pageNum,
 			@RequestParam(defaultValue="10")Integer pageSize){
 		PageInfo<StoreGinfo> sgilistPage = storeGinfoService.selectPage(pageNum, pageSize);
-		mav.addObject("sgilistPage",sgilistPage);
+		mav.addObject("listpage",sgilistPage);
 		mav.addObject("total",sgilistPage.getTotal());
-		mav.setViewName("store/storeglist2");
+		mav.setViewName("store/listSgi");
 		return mav;
 	}
 	

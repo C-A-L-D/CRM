@@ -22,16 +22,18 @@ public class StoreWhinfoController {
 	StoreWhinfoService storeWhinfoService;
 	
 	@RequestMapping("/listpageSwi.do")
+	@ResponseBody
 	public ModelAndView listpageSwi(ModelAndView mav,
-			@RequestParam(defaultValue="1")Integer pages,
-			@RequestParam(defaultValue="10")Integer limit){
-		PageInfo<StoreWhinfo> sgilistPage = storeWhinfoService.selectPage(pages, limit);
+			@RequestParam(defaultValue="1")Integer pageNum,
+			@RequestParam(defaultValue="10")Integer pageSize){
+		System.err.println(pageNum+":"+pageSize);
+		PageInfo<StoreWhinfo> sgilistPage = storeWhinfoService.selectPage(pageNum, pageSize);
 		mav.addObject("listpage",sgilistPage);
 		mav.addObject("total",sgilistPage.getTotal());
 		mav.setViewName("store/listSwi");
 		return mav;
 	}	
-
+	
 	
 	@RequestMapping("/selectSwi.do")
 	public ModelAndView selectSwi(ModelAndView mav,Integer whid) {
@@ -48,6 +50,22 @@ public class StoreWhinfoController {
 		mav.setViewName("store/updateSwi");
 		System.err.println(mav.getViewName());
 		return mav;
+	}
+	
+	@RequestMapping("/selectInfo.do")
+	@ResponseBody
+	public StoreWhinfo selectInfo(Integer whid) {
+		System.err.println("要修改的对象(int)id："+whid);
+		BigDecimal id=BigDecimal.valueOf(whid);
+		System.err.println("要修改的对象(bigDecimal)id："+whid);
+		StoreWhinfo info=storeWhinfoService.selectObj(id);
+		if(info==null) {
+			System.err.println("未查询到该对象！");
+		}
+		else {
+		}
+		System.err.println(info);
+		return info;
 	}
 	
 	@RequestMapping("/updateSwi.do")
@@ -80,19 +98,6 @@ public class StoreWhinfoController {
 		return mav;
 	}	
 	
-//	@RequestMapping("/addSwi.do")
-//	@ResponseBody
-//	public ModelAndView addSwi(ModelAndView mav,StoreWhinfo storeWhinfo) {
-//		//storeWhinfoService.add(storeWhinfo);
-//		storeWhinfo.setLastdate(new Date());
-//		System.err.println(storeWhinfo);
-//		mav.setViewName("redirect:/storeWhinfo/listpageSwi.do");
-//		System.err.println(mav.getViewName());
-//		return mav;
-//	}
-	
-	
-	
 	
 	@RequestMapping("/addSwi.do")
 	@ResponseBody
@@ -102,10 +107,6 @@ public class StoreWhinfoController {
 		storeWhinfoService.add(storeWhinfo);
 		return new Result(200,"status");
 	}	
-	
-	
-	
-	
 	
 	
 	@RequestMapping("/delSwi.do")
