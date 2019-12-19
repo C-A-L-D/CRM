@@ -29,12 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-      <div class="layui-row">
+    
       
-         <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','cgdxqgoadd.do',700,700)" >
-       <i class="layui-icon"></i>	添加采购单详情</a>
-        
-      </div>
+   
   
    
    
@@ -93,13 +90,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  <c:if test="${u.isrk=='已入库' }">已入库
                  </c:if>
 				 <c:if test="${u.isrk=='未入库' }">
-				  <a title="修改" 
-                 onclick="x_admin_show('修改','../cgdxqctrl/cgdxqgoupdate.do?cgXqId=${u.cgXqId }',700,700)">
-                 <i class='layui-icon'>&#xe642;</i>
-				 </a>
-				 <a title='删除' href="../cgdxqctrl/cgdxqdelete.do?cgXqId=${u.cgXqId }" onclick="return confirm('是否确定删除？') ">
-                 <i class='layui-icon'>&#xe640;</i>
-                 </a></c:if>
+			  <div class="layui-btn-container">
+              <div class="layui-btn-group">
+                <a title="添加" onclick="x_admin_show('添加','cgdxqgoadd.do?id=${u.cgdId }&rk=${u.isrk }',650,650)" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe654;</i></a>
+                <a class="layui-btn layui-btn-sm" title="修改" 
+                onclick="x_admin_show('修改','../cgdxqctrl/cgdxqgoupdate.do?cgXqId=${u.cgXqId }',700,700)"><i class="layui-icon">&#xe642;</i></a>
+                <a title='删除'  onclick="member_del(this,${u.cgXqId })"   class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe640;</i></a>
+               </div>
+              </div>
+			  </c:if>
            
                </td>
             </tr>
@@ -122,4 +121,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </body>
      
    </html>  
+   
+<script>
+  function member_del(obj,cgXqId){
+      
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $.ajax({
+		        type: 'post',
+		        url: "cgdxqdelete.do",
+		        data: "cgXqId="+cgXqId,
+		        success: function (res) {
+		           //$(obj).parents("tr").remove();
+		           layer.msg('已删除!',{icon:1,time:1000},function () {
+		              //刷新页面
+		              location.reload();
+		           });
+		        }
+		    });
+          });
+      }
+
+
+</script>
     

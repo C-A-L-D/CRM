@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,39 +25,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript" >
+
+    //var ck="${ck }";
+   
+    $(function(){
+       console.log($("#cpId"));
+       $("#cpId").click(function(e) {
+       	  console.log(111);
+       })
+    })
+</script>
   </head>
   
   <body>
  
   <div class="x-body" cols>
         <form class="layui-form" method="post">
-          <div class="layui-form-item">
-              <label>
+            <div class="layui-form-item">
+              <label  class="layui-form-label">
                                        产品编号：
               </label>
-            <select name="cpId">
-              <option></option>
-              <option></option>
-              <option></option>
-              <option></option>
-            </select>
-         
+              <div class="layui-input-inline">
+              <select id="cpId" name="cpId" class="layui-input" > 
+              <option value=""></option>
+              <c:forEach items="${ck }" var="u">
+               <option >${u.gid }</option>
+              </c:forEach>             
+              </select>
+               </div>
           </div>
+               
           <div class="layui-form-item">
               <label  class="layui-form-label">
                                        产品名称：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="gysJc" required 
+              <input type="text"  required 
                   autocomplete="off" class="layui-input">
-              </div>
+              
+               </div>
           </div>
            <div class="layui-form-item">
               <label  class="layui-form-label">
                                        单价：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="lxr" required 
+                  <input type="text" id="cpPrice" name="cpPrice" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -66,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         购买数量：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="cpNumber" required 
+                  <input type="text" id="cpNumber"  name="cpNumber" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -76,31 +92,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         总价：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="ydPhone" required 
+                  <input type="text"  required 
                   autocomplete="off" class="layui-input">
+                  <input type="hidden"  value="${x}" 
+                  name="cgdId" autocomplete="off" class="layui-input">
+                  <input type="hidden"  value="${xx}" 
+                  name="isrk" autocomplete="off" class="layui-input">
               </div>
           </div>
+              
+               <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        操作员：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text"  name="operator" required 
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>       
               
           <div class="layui-form-item">
               <label  class="layui-form-label">
                                         备注信息：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="lxcz" required 
+                  <input type="text"  name="remark" required 
                   autocomplete="off" class="layui-input">
               </div>
-          </div>
-       
-         
-          
-                                       是否入库：
-           
-              <select name="isrk">
-              <option>已入库</option>
-              <option>未入库</option>
-           
-            </select>
-         
+          </div>          
+                                
+             <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        公司编号：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text"  name="gsId" required 
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>    
        
        
             
@@ -154,10 +183,13 @@ layui.use(['form','layer'], function(){
           
     });
 
+  
+
 </script>
   
   
   </body>
 
 </html>
+
 

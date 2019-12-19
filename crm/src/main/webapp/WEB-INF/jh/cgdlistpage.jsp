@@ -110,26 +110,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <fmt:formatDate value="${u.ltime}" pattern="yyyy-MM-dd"/>   
                  
                </td>
-                  <td >
+                  <td  class="td-status">
                
-                 <c:if test="${u.fkqk=='未付款' }">
-                 <a title='添加' 
-                 class='layui-btn layui-btn-sm' onclick="x_admin_show('添加','../cgdxqctrl/cgdxqgoadd.do',700,700)">
-                 <i class='layui-icon'>&#xe654;</i></a>
-                  <a title='删除' class='layui-btn layui-btn-sm' onclick="x_admin_show('删除','../cgdxqctrl/cgdxqdelete.do',700,700)" >
-                  <i class='layui-icon'>&#xe640;</i></a>
+                 <c:if test="${u.fkqk=='未付款' }"> 
+                 <a href="../cgdctrl/fk.do?cgdId=${u.cgdId  }" >
+                 <span class="layui-btn layui-btn-normal layui-btn-mini">付款</span>
+                 </a>   
                  </c:if>
+                 
                  <c:if test="${u.fkqk=='已付款' }">
                                                已付款
                  </c:if>
                  
+                 <c:if test="${u.cgJz=='已入库' }">                           
+                 </c:if>
                  
+                 <c:if test="${u.cgJz=='待采购' }">
+                 <a href="../cgdctrl/rk.do?id=${u.cgdId}" >
+                 <span class="layui-btn layui-btn-normal layui-btn-mini">入库</span>
+                 </a>                    
+                 </c:if>                 
                </td>
                 
                 <td class="td-status">
                 <a href="../cgdxqctrl/cgdxq.do?cgdId=${u.cgdId  }" >
-                
-                 <span class="layui-btn layui-btn-normal layui-btn-mini">查看详单</span></a>
+                <span class="layui-btn layui-btn-normal layui-btn-mini">查看详单</span>
+                </a>
                </td>
                      
             </tr>
@@ -152,7 +158,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </body>
      
    </html>  
-    
-
+    	 
     
     

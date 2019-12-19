@@ -32,13 +32,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="x-body" cols>
         <form class="layui-form" action="../gysxxctrl/update.do" method="post"
             enctype="multipart/form-data">
+              <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                       供应商编号：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text"  name="gysId" required lay-verify="required"
+                  autocomplete="off" value="${u.gysId }" class="layui-input" disabled="disabled">
+                 
+              </div>     
+          </div>
+            
           <div class="layui-form-item">
               <label  class="layui-form-label">
                                        供应商名称：
               </label>
-              <div class="layui-input-inline">
-                  <input type="hidden"  name="gysId" required lay-verify="required"
-                  autocomplete="off" value="${u.gysId }" class="layui-input">
+              <div class="layui-input-inline">                 
                   <input type="text"  name="gysName" required lay-verify="required"
                   autocomplete="off" value="${u.gysName }" class="layui-input" disabled="disabled">
               </div>     
