@@ -1,6 +1,7 @@
 package com.sc.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.Result;
 import com.sc.entity.SysGongsiinfo;
+import com.sc.entity.SysRole;
 import com.sc.entity.SysUsers;
+import com.sc.service.impl.SysRoleServiceImpl;
 import com.sc.service.impl.SysUsersServiceImpl;
 
 @Controller
@@ -30,6 +33,8 @@ public class SysUsersController {
 
 	@Autowired
 	SysUsersServiceImpl sysUsersServiceImpl;
+	@Autowired
+	SysRoleServiceImpl sysRoleServiceImpl;
 	
 	/**
 	 * 登录失败
@@ -121,12 +126,19 @@ public class SysUsersController {
 		return new Result(200, "");
 	}
 	
+	/**
+	 * 弹出用户修改窗口
+	 * @param mav
+	 * @param sysUsers
+	 * @return
+	 */
 	@RequestMapping("/goUpdateUser.do")
 	public ModelAndView goUpdateUserOne(ModelAndView mav, SysUsers sysUsers){
-		System.out.println(sysUsers);
-		SysUsers userOne = sysUsersServiceImpl.goUpdateUserOne(sysUsers.getUserId());
-		System.out.println("对象："+userOne);
+		SysUsers userOne = sysUsersServiceImpl.selectUsersAndRoleAndUsersInfoOne(sysUsers.getUserId());
+		System.out.println(userOne);
+		List<SysRole> selectAllRole = sysRoleServiceImpl.selectAllRole();
 		mav.addObject("user", userOne);
+		mav.addObject("allRole", selectAllRole);
 		mav.setViewName("sys/updateUser");
 		return mav;
 	}

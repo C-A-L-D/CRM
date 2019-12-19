@@ -7,6 +7,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysUsersMapper {
+	
+	//查询员工信息-	办公
+	List<SysUsers> selectuser(BigDecimal uid);
+	
+	//查询接受者姓名-办公
+	SysUsers selectu(String uname);
+	
     int countByExample(SysUsersExample example);
 
     int deleteByExample(SysUsersExample example);
@@ -32,4 +39,6 @@ public interface SysUsersMapper {
     SysUsers login(String uname, BigDecimal id);
     
     List<SysUsers> selectAllUsersAndRoleAndUsersInfo();
+    
+    SysUsers selectUsersAndRoleAndUsersInfoOne(BigDecimal userId);
 }
