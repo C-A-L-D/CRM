@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysUsersMapper" >
 	<select id="selectuser" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
-	  select * from SYS_USERS where SYS_USERS."UID" != #{uid,jdbcType=DECIMAL}
+	  select * from SYS_USERS where SYS_USERS."USER_ID" != #{userId,jdbcType=DECIMAL}
 	  </select>
 	  
 	 <select id="selectu" resultMap="BaseResultMap" parameterType="java.lang.String">
-	  select * from SYS_USERS where SYS_USERS.UNAME=#{uname,jdbcType=VARCHAR},
+	  select * from SYS_USERS where SYS_USERS.UNAME=#{uname,jdbcType=VARCHAR}
 	 </select>
 	
 

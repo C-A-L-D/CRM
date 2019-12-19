@@ -3,6 +3,7 @@ package com.sc.mapper;
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.OffMessdetailExample;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,12 +11,20 @@ public interface OffMessdetailMapper {
 	//查询短消息-已接收
 	public List<OffMessdetail> select();
 	
+	//更改短消息状态
+	int updatestate(Long detailid);
+	
 	//删除短信
     int deleteByPrimaryKey(Long detailid);
 	
     //查看短消息详情
-    public List<OffMessdetail> showdetail(Long detailid);
+    public OffMessdetail showdetail(Long detailid);
     
+   //回复短消息
+    int  huifuone(OffMessdetail detail);
+    
+    //查询短消息-已发送
+    public List<OffMessdetail> selectsend();
     
     int countByExample(OffMessdetailExample example);
 

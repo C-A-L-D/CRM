@@ -54,15 +54,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
       </div>
       <xblock>
+      
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="addmess('发送短信','./admin-add.html')"><i class="layui-icon"></i>发送信息</button>
+        <button class="layui-btn" onclick="x_admin_show('发送短信','offmessctrl/goadd.do',600,600)" href="javascript:;"><i class="layui-icon"></i>发送信息</button>
          <button class="layui-btn" onclick="send()"><i class="layui-icon">&#xe615;</i>查看已发送信息</button>
         <span class="x-right" style="line-height:40px">共有数据：${p.total }条</span>
       </xblock>
+      
       <div id="jieshou">
       
       <!-- 显示已接收短信 -->
       <table class="layui-table">
+      <center>
+      
         <thead>
           <tr>
             <th>
@@ -81,8 +85,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>${u.messid}</td>
-            <td>${u.offMess.title }</td>
+            <td>${u.detailid}</td>
+            <td style="color:red">${u.offMess.title }</td>
             <td>${u.offMess.sender}</td>
              <td>
 	         <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -92,19 +96,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <c:if test="${u.messstate=='2'}"><span id="yidu" class="layui-btn layui-btn-normal layui-btn-mini">已读</span></c:if>
             
               </td>
-            <td class="td-manage">
-              <a title="查看详情"  href="offmessctrl/showdetail.do?detailid=${u.detailid }">
+            <td class="td-manage"> 
+            <a title="查看详情"  onclick="x_admin_show('查看详情','offmessctrl/showdetail.do?detailid=${u.detailid}',600,600)" href="javascript:;">
+            
+          
                 <i class="layui-icon">&#xe642;</i>查看详情
               </a>
-              <a title="删除" onclick="return confirm('是否确定删除？')" href="offmessctrl/delete.do?detailid=${u.detailid }">
+              <a title="删除" onclick="mess_del(this,'${u.detailid}')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>删除
               </a>
             </td>
           </tr>
            </c:forEach>
+         
         </tbody>
+         </center>
       </table>
-           
+         
       <div class="page">
           <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.firstPage}">首页</a>
           <a class="num" href="offmessctrl/offmesslist.do?pageNum=${p.prePage}">&lt;&lt;上一页</a>
@@ -170,6 +178,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
      
     <script>
+    /*用户-删除*/
+      function mess_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              location.href="offmessctrl/delete.do?detailid="+id;
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+             
+          });
+      }
+      
     function send(){
      document.getElementById("jieshou").style.display="none";
        document.getElementById("send").style.display="block"; 
@@ -212,14 +231,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           });
       }
 
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
-          });
-      }
+      
 
 
 
