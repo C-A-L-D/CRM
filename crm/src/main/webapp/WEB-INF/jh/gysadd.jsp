@@ -117,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="mail" name="mail" lay-verify="required" 
-                  autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input" placeholder="格式：xxx@qq.com">
               </div>
           </div>
           
@@ -243,6 +243,12 @@ layui.use(['form','layer'], function(){
    function check(){
        var a=document.getElementById("mail");
        var b=document.getElementById("mbphone");
+       var f=/^\d{10}@qq.com$/;
+       if(a.test(f)){
+       
+       }else{
+         alert("邮箱格式错误，请重新输入！")    
+       }
        
    }
 

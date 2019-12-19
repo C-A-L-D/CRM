@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <input type="text" name="gysName"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
         <button class="layui-btn"  lay-submit="" lay-filter="submit"><i class="layui-icon">&#xe615;</i></button>
         &emsp;&emsp;
-         <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','gysgoadd.do',700,700)" >
+         <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','gysgoadd.do',650,650)" >
        <i class="layui-icon"></i>	添加供应商</a>
           
         </form>
@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>供应商编号</th>
             <th>供应商名称</th>
             <th>联系人</th>
-            <th>联系电话</th>
+            <th>联系电话</th>      
             <th>开户银行</th>
             <th>银行账号</th>
             <th>备注信息</th>
@@ -81,12 +81,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  ${u.remark }
                </td>
                 <td class="td-status">
-                 <a  onclick="x_admin_show('','../gysxxctrl/gysxq.do?gysId=${u.gysId }',600,600)" >
+                 <a  onclick="x_admin_show('','../gysxxctrl/gysxq.do?gysId=${u.gysId }',650,650)" >
                 
                  <span class="layui-btn layui-btn-normal layui-btn-mini">查看详情</span></a>
                </td>
               <td class="td-manage">
-              <a title="修改" onclick="x_admin_show('编辑','../gysxxctrl/gysgoupdate.do?gysId=${u.gysId }',700,700)" >
+              <a title="修改" onclick="x_admin_show('编辑','../gysxxctrl/gysgoupdate.do?gysId=${u.gysId }',650,650)" >
                <i class="layui-icon">&#xe642;</i>
 				</a>
               <a title="删除" href="../gysxxctrl/gysdelete.do?gysId=${u.gysId }" onclick="return confirm('是否确定删除？') " >
@@ -111,7 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
      </body>
-     
+
    </html>  
     
      
