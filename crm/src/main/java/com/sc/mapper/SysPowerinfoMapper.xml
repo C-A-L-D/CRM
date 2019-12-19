@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysPowerinfoMapper" >
+	<resultMap type="SysPowerinfo" id="sysPowerColMapper" autoMapping="true">
+      <id column="PID" property="pid"/>
+      <association property="sysPowercolumn" javaType="SysPowercolumn" autoMapping="true">
+          <id column="CID" property="cid"/>
+      </association>
+   </resultMap>
+	<select id="selectAllPowerAndCol" resultMap="sysPowerColMapper">
+SELECT * FROM SYS_POWERINFO p
+		RIGHT JOIN SYS_POWERCOLUMN pc
+		ON p.PCOLUMN_ID=PC.CID
+   </select>
+
+
+
+
   <resultMap id="BaseResultMap" type="com.sc.entity.SysPowerinfo" >
     <constructor >
       <idArg column="PID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="PNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="PPOWER" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="PCOLUMN_ID" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="PCOLUMN_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="PDESCRIBE" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
@@ -108,7 +123,7 @@
       PCOLUMN_ID, PDESCRIBE, LASTTIME
       )
     values (#{pid,jdbcType=DECIMAL}, #{pname,jdbcType=VARCHAR}, #{ppower,jdbcType=VARCHAR}, 
-      #{pcolumnId,jdbcType=VARCHAR}, #{pdescribe,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP}
+      #{pcolumnId,jdbcType=DECIMAL}, #{pdescribe,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sc.entity.SysPowerinfo" >
@@ -144,7 +159,7 @@
         #{ppower,jdbcType=VARCHAR},
       </if>
       <if test="pcolumnId != null" >
-        #{pcolumnId,jdbcType=VARCHAR},
+        #{pcolumnId,jdbcType=DECIMAL},
       </if>
       <if test="pdescribe != null" >
         #{pdescribe,jdbcType=VARCHAR},
@@ -173,7 +188,7 @@
         PPOWER = #{record.ppower,jdbcType=VARCHAR},
       </if>
       <if test="record.pcolumnId != null" >
-        PCOLUMN_ID = #{record.pcolumnId,jdbcType=VARCHAR},
+        PCOLUMN_ID = #{record.pcolumnId,jdbcType=DECIMAL},
       </if>
       <if test="record.pdescribe != null" >
         PDESCRIBE = #{record.pdescribe,jdbcType=VARCHAR},
@@ -191,7 +206,7 @@
     set PID = #{record.pid,jdbcType=DECIMAL},
       PNAME = #{record.pname,jdbcType=VARCHAR},
       PPOWER = #{record.ppower,jdbcType=VARCHAR},
-      PCOLUMN_ID = #{record.pcolumnId,jdbcType=VARCHAR},
+      PCOLUMN_ID = #{record.pcolumnId,jdbcType=DECIMAL},
       PDESCRIBE = #{record.pdescribe,jdbcType=VARCHAR},
       LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
@@ -208,7 +223,7 @@
         PPOWER = #{ppower,jdbcType=VARCHAR},
       </if>
       <if test="pcolumnId != null" >
-        PCOLUMN_ID = #{pcolumnId,jdbcType=VARCHAR},
+        PCOLUMN_ID = #{pcolumnId,jdbcType=DECIMAL},
       </if>
       <if test="pdescribe != null" >
         PDESCRIBE = #{pdescribe,jdbcType=VARCHAR},
@@ -223,7 +238,7 @@
     update SYS_POWERINFO
     set PNAME = #{pname,jdbcType=VARCHAR},
       PPOWER = #{ppower,jdbcType=VARCHAR},
-      PCOLUMN_ID = #{pcolumnId,jdbcType=VARCHAR},
+      PCOLUMN_ID = #{pcolumnId,jdbcType=DECIMAL},
       PDESCRIBE = #{pdescribe,jdbcType=VARCHAR},
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where PID = #{pid,jdbcType=DECIMAL}

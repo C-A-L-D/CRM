@@ -166,63 +166,63 @@ public class SysPowerRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdIsNull() {
-            addCriterion("PCOLUMN_ID is null");
+        public Criteria andPidIsNull() {
+            addCriterion("PID is null");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdIsNotNull() {
-            addCriterion("PCOLUMN_ID is not null");
+        public Criteria andPidIsNotNull() {
+            addCriterion("PID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdEqualTo(BigDecimal value) {
-            addCriterion("PCOLUMN_ID =", value, "pcolumnId");
+        public Criteria andPidEqualTo(BigDecimal value) {
+            addCriterion("PID =", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdNotEqualTo(BigDecimal value) {
-            addCriterion("PCOLUMN_ID <>", value, "pcolumnId");
+        public Criteria andPidNotEqualTo(BigDecimal value) {
+            addCriterion("PID <>", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdGreaterThan(BigDecimal value) {
-            addCriterion("PCOLUMN_ID >", value, "pcolumnId");
+        public Criteria andPidGreaterThan(BigDecimal value) {
+            addCriterion("PID >", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("PCOLUMN_ID >=", value, "pcolumnId");
+        public Criteria andPidGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("PID >=", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdLessThan(BigDecimal value) {
-            addCriterion("PCOLUMN_ID <", value, "pcolumnId");
+        public Criteria andPidLessThan(BigDecimal value) {
+            addCriterion("PID <", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("PCOLUMN_ID <=", value, "pcolumnId");
+        public Criteria andPidLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("PID <=", value, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdIn(List<BigDecimal> values) {
-            addCriterion("PCOLUMN_ID in", values, "pcolumnId");
+        public Criteria andPidIn(List<BigDecimal> values) {
+            addCriterion("PID in", values, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdNotIn(List<BigDecimal> values) {
-            addCriterion("PCOLUMN_ID not in", values, "pcolumnId");
+        public Criteria andPidNotIn(List<BigDecimal> values) {
+            addCriterion("PID not in", values, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("PCOLUMN_ID between", value1, value2, "pcolumnId");
+        public Criteria andPidBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("PID between", value1, value2, "pid");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("PCOLUMN_ID not between", value1, value2, "pcolumnId");
+        public Criteria andPidNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("PID not between", value1, value2, "pid");
             return (Criteria) this;
         }
 

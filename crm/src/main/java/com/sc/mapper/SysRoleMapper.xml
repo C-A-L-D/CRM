@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysRoleMapper" >
+		
   <resultMap id="BaseResultMap" type="com.sc.entity.SysRole" >
     <constructor >
       <idArg column="RID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -228,4 +229,18 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where RID = #{rid,jdbcType=DECIMAL}
   </update>
+  
+  <resultMap type="SysRole" id="roleAndPower" autoMapping="true">
+      <id column="RID" property="rid"/>
+      <collection property="sysPowerinfo" ofType="SysPowerinfo" autoMapping="true">
+          <id column="PCOLUMN_ID" property="pcolumnId"/>
+      </collection>
+   </resultMap>  
+    <select id="selectAllRoleAndPower" resultMap="roleAndPower" >
+    	SELECT * FROM SYS_ROLE r
+		LEFT JOIN SYS_POWER_ROLE rp
+		ON r.RID=rp.ROLE_ID
+		LEFT JOIN SYS_POWERINFO p
+		ON rp.PID=p.PID
+  </select>
 </mapper>

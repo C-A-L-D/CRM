@@ -34,7 +34,8 @@ public class JhCgd implements Serializable {
     private String remark;
 
     private Long gsId;
-
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date ltime;
 
     private String fphm;

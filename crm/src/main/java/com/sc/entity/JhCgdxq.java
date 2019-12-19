@@ -21,22 +21,17 @@ public class JhCgdxq implements Serializable {
     private String remark;
 
     private Long gsId;
-
+    
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date ltime;
 
-    @Override
-	public String toString() {
-		return "JhCgdxq [cgXqId=" + cgXqId + ", cgdId=" + cgdId + ", cpId=" + cpId + ", cpNumber=" + cpNumber
-				+ ", isRk=" + isRk + ", operator=" + operator + ", remark=" + remark + ", gsId=" + gsId + ", ltime="
-				+ ltime + ", isrk=" + isrk + "]";
-	}
+    private String isrk;
 
-	private String isrk;
+    private Long cpPrice;
 
     private static final long serialVersionUID = 1L;
 
-    public JhCgdxq(Long cgXqId, Long cgdId, Long cpId, Long cpNumber, String isRk, String operator, String remark, Long gsId, Date ltime, String isrk) {
+    public JhCgdxq(Long cgXqId, Long cgdId, Long cpId, Long cpNumber, String isRk, String operator, String remark, Long gsId, Date ltime, String isrk, Long cpPrice) {
         this.cgXqId = cgXqId;
         this.cgdId = cgdId;
         this.cpId = cpId;
@@ -47,6 +42,7 @@ public class JhCgdxq implements Serializable {
         this.gsId = gsId;
         this.ltime = ltime;
         this.isrk = isrk;
+        this.cpPrice = cpPrice;
     }
 
     public JhCgdxq() {
@@ -132,4 +128,21 @@ public class JhCgdxq implements Serializable {
     public void setIsrk(String isrk) {
         this.isrk = isrk == null ? null : isrk.trim();
     }
+
+    public Long getCpPrice() {
+        return cpPrice;
+    }
+
+    public void setCpPrice(Long cpPrice) {
+        this.cpPrice = cpPrice;
+    }
+
+	@Override
+	public String toString() {
+		return "JhCgdxq [cgXqId=" + cgXqId + ", cgdId=" + cgdId + ", cpId=" + cpId + ", cpNumber=" + cpNumber
+				+ ", isRk=" + isRk + ", operator=" + operator + ", remark=" + remark + ", gsId=" + gsId + ", ltime="
+				+ ltime + ", isrk=" + isrk + ", cpPrice=" + cpPrice + "]";
+	}
+    
+    
 }

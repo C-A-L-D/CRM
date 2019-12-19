@@ -11,9 +11,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'offmesslist.jsp' starting page</title>
+    <title>My JSP starting page</title>
     
-	<meta http-equiv="pragma" content="no-cache">
+	 <meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
@@ -105,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          				<i class="layui-icon">&#xe65f;</i>
 	          			</button>
 	          			<button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe642;</i></button>
-	          			<button type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck()">
+	          			<button  type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck()">
 	          				<i class="layui-icon">&#xe640;</i>
 	          			</button>
 	          		</div>

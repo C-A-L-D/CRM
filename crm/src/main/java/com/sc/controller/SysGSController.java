@@ -1,6 +1,7 @@
 package com.sc.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,13 +25,15 @@ public class SysGSController {
 	
 	//公司分页list
 	@RequestMapping("/gspage.do")
-	public ModelAndView gspage(ModelAndView mav,
+	public ModelAndView gspage(ModelAndView mav,SysGongsiinfo info1,
 			@RequestParam(defaultValue="1")Integer pageNum,
 			@RequestParam(defaultValue="5")Integer pageSize) throws IOException{
 		System.out.println("公司列表-分页！");
-		//查询list集合-分页     ${p.list}
-		mav.addObject("p", sysGongsiinfoService.selectpage(pageNum, pageSize));
-		mav.setViewName("gs/gslistpage");// 路径是：/WEB-INF/gs/gslistpage.jsp
+        System.out.println("要查询的公司"+info1);
+		
+		mav.addObject("p", sysGongsiinfoService.selectpage(pageNum, pageSize, info1));
+		mav.addObject("info1", info1);
+		mav.setViewName("gs/gslistpage");
 		return mav;
 	}
 	
@@ -97,8 +100,25 @@ public class SysGSController {
 	public void gsdelete(ModelAndView mav,SysGongsiinfo info1){
 		System.out.println("公司删除！"+info1);
 		SysGongsiinfo info = this.sysGongsiinfoService.get(info1.getId());
+		
 		this.sysGongsiinfoService.delete(info);
 	}
 	
-	
+	//删除所有公司
+	@RequestMapping("/gsdeletesy.do")
+	@ResponseBody
+	public void gsdelete(ModelAndView mav,String aa){
+		System.out.println("公司删除！"+aa);
+		
+		String[] ss = aa.split(",");
+		//删除字符串的 “,”  比如aa={a,b,c}  之后 ["a","b","c"]
+		//如果是split("")  比如aa={abc de}  之后["a","b","c" ,"d","e"]
+		for (String xx : ss) {
+			SysGongsiinfo info = this.sysGongsiinfoService.get(new BigDecimal(xx));
+			this.sysGongsiinfoService.delete(info);
+		}
+		
+		
+	}
+		
 }

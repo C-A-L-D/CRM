@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class SysPowerinfo implements Serializable {
     private BigDecimal pid;
 
@@ -13,16 +11,17 @@ public class SysPowerinfo implements Serializable {
 
     private String ppower;
 
-    private String pcolumnId;
+    private BigDecimal pcolumnId;
 
     private String pdescribe;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lasttime;
 
+    private SysPowercolumn sysPowercolumn;
+    
     private static final long serialVersionUID = 1L;
 
-    public SysPowerinfo(BigDecimal pid, String pname, String ppower, String pcolumnId, String pdescribe, Date lasttime) {
+    public SysPowerinfo(BigDecimal pid, String pname, String ppower, BigDecimal pcolumnId, String pdescribe, Date lasttime) {
         this.pid = pid;
         this.pname = pname;
         this.ppower = ppower;
@@ -30,8 +29,29 @@ public class SysPowerinfo implements Serializable {
         this.pdescribe = pdescribe;
         this.lasttime = lasttime;
     }
+    
+    public SysPowerinfo(BigDecimal pid, String pname, String ppower, BigDecimal pcolumnId, String pdescribe,
+			Date lasttime, SysPowercolumn sysPowercolumn) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.ppower = ppower;
+		this.pcolumnId = pcolumnId;
+		this.pdescribe = pdescribe;
+		this.lasttime = lasttime;
+		this.sysPowercolumn = sysPowercolumn;
+	}
 
-    public SysPowerinfo() {
+
+	public SysPowercolumn getSysPowercolumn() {
+		return sysPowercolumn;
+	}
+
+	public void setSysPowercolumn(SysPowercolumn sysPowercolumn) {
+		this.sysPowercolumn = sysPowercolumn;
+	}
+
+	public SysPowerinfo() {
         super();
     }
 
@@ -59,12 +79,12 @@ public class SysPowerinfo implements Serializable {
         this.ppower = ppower == null ? null : ppower.trim();
     }
 
-    public String getPcolumnId() {
+    public BigDecimal getPcolumnId() {
         return pcolumnId;
     }
 
-    public void setPcolumnId(String pcolumnId) {
-        this.pcolumnId = pcolumnId == null ? null : pcolumnId.trim();
+    public void setPcolumnId(BigDecimal pcolumnId) {
+        this.pcolumnId = pcolumnId;
     }
 
     public String getPdescribe() {
@@ -86,7 +106,7 @@ public class SysPowerinfo implements Serializable {
 	@Override
 	public String toString() {
 		return "SysPowerinfo [pid=" + pid + ", pname=" + pname + ", ppower=" + ppower + ", pcolumnId=" + pcolumnId
-				+ ", pdescribe=" + pdescribe + ", lasttime=" + lasttime + "]";
+				+ ", pdescribe=" + pdescribe + ", lasttime=" + lasttime + ", sysPowercolumn=" + sysPowercolumn + "]";
 	}
     
 }

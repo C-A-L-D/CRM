@@ -27,6 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+ 
   <div class="x-body" cols>
         <form class="layui-form" action="../gysxxctrl/update.do" method="post"
             enctype="multipart/form-data">
@@ -112,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           
-              <div class="layui-form-item">
+              <div class="layui-form-item" >
               <label  class="layui-form-label">
                                         邮箱：
               </label>
@@ -157,10 +158,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         是否有效：
               </label>
               <div class="layui-input-inline">
-                      <select name="isYx">
-                          <option ${u.isYx=="0" ? "selected":"" }>否</option>
-                          <option ${u.isYx=="1" ? "selected":"" }>是</option>
-                      </select>
+                   <input type="text" name="isYx"
+                  autocomplete="off" class="layui-input" value="${u.isYx }" >
+              </div>
+          </div>
+        
+           <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        操作员：
+              </label>
+              <div class="layui-input-inline">
+                   <input type="text" name="isYx"
+                  autocomplete="off" class="layui-input" value="${u.operator }" >
               </div>
           </div>
         
@@ -184,15 +193,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           
-          <div class="layui-form-item">
-              <label  class="layui-form-label">
+         <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
               </label>
-              <input type="submit" value="确定"  class="layui-btn" onclick="return confirm('是否确定修改')"  >
-                                          
+              <button  class="layui-btn" lay-filter="update" lay-submit="">
+                  修改
+              </button>
           </div>
       </form>
     </div>
-   
+  
+ <script>
+layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+ form.on('submit(update)', function(data){
+            console.log(data);
+            $.ajax({
+		        type: 'post',
+		        url: "gysupdate.do",
+		        data: data.field,
+		        success: function (res) {
+		            if (res.status == 200) {
+		                layer.alert(res.msg, {icon: 6}, function () {
+		                    // 获得frame索引
+		                    var index = parent.layer.getFrameIndex(window.name);
+		                    //关闭当前frame
+		                    parent.layer.close(index);
+		                   //刷新页面
+		                    parent.location.reload();
+		                });
+		                 //parent.layer.reload();
+		               
+		            } else {
+		                layer.alert(res.msg, {icon: 5}, function () {
+		                    // 获得frame索引
+		                    var index = parent.layer.getFrameIndex(window.name);
+		                    //关闭当前frame
+		                    parent.layer.close(index);
+		                    //刷新页面
+		                    parent.location.reload();
+		                });
+		            }
+		        }
+		    });
+		    return false;
+          });
+          
+    });
+
+</script>
+  
+  
   </body>
 
 </html>
+
+
+
+
+

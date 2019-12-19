@@ -126,6 +126,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
          
+         <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		开户银行
+              </label>
+              <div class="layui-input-inline">
+                <!--   <input type="text" id="gopenyinghang" name="gopenyinghang"
+                  autocomplete="off" class="layui-input" > -->
+                  <select id="gopenyinghang" name="gopenyinghang" autocomplete="off" class="layui-input" >
+                  <option value="建设银行">建设银行</option>
+                  <option value="农业银行">农业银行</option>
+                  <option value="交通银行">交通银行</option>
+                  <option value="中国银行">中国银行</option>
+                  </select>
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		银行账户
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="gyinghangaccount" name="gyinghangaccount"
+                  autocomplete="off" class="layui-input" >
+              </div>
+          </div>
+          
+          <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                   		是否有效
+              </label>
+              <div class="layui-input-inline">
+                 <!--  <input type="text" id="gtf" name="gtf"
+                  autocomplete="off" class="layui-input" > -->
+                  
+                  <select id="gtf" name="gtf" autocomplete="off" class="layui-input" >
+                  <option value="是">是</option>
+                  <option value="否">否</option>
+                 
+                  </select>
+              </div>
+          </div>
+         
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>

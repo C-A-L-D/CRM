@@ -316,62 +316,52 @@ public class SysPowerinfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdEqualTo(String value) {
+        public Criteria andPcolumnIdEqualTo(BigDecimal value) {
             addCriterion("PCOLUMN_ID =", value, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdNotEqualTo(String value) {
+        public Criteria andPcolumnIdNotEqualTo(BigDecimal value) {
             addCriterion("PCOLUMN_ID <>", value, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdGreaterThan(String value) {
+        public Criteria andPcolumnIdGreaterThan(BigDecimal value) {
             addCriterion("PCOLUMN_ID >", value, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdGreaterThanOrEqualTo(String value) {
+        public Criteria andPcolumnIdGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("PCOLUMN_ID >=", value, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdLessThan(String value) {
+        public Criteria andPcolumnIdLessThan(BigDecimal value) {
             addCriterion("PCOLUMN_ID <", value, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdLessThanOrEqualTo(String value) {
+        public Criteria andPcolumnIdLessThanOrEqualTo(BigDecimal value) {
             addCriterion("PCOLUMN_ID <=", value, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdLike(String value) {
-            addCriterion("PCOLUMN_ID like", value, "pcolumnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPcolumnIdNotLike(String value) {
-            addCriterion("PCOLUMN_ID not like", value, "pcolumnId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPcolumnIdIn(List<String> values) {
+        public Criteria andPcolumnIdIn(List<BigDecimal> values) {
             addCriterion("PCOLUMN_ID in", values, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdNotIn(List<String> values) {
+        public Criteria andPcolumnIdNotIn(List<BigDecimal> values) {
             addCriterion("PCOLUMN_ID not in", values, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdBetween(String value1, String value2) {
+        public Criteria andPcolumnIdBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("PCOLUMN_ID between", value1, value2, "pcolumnId");
             return (Criteria) this;
         }
 
-        public Criteria andPcolumnIdNotBetween(String value1, String value2) {
+        public Criteria andPcolumnIdNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("PCOLUMN_ID not between", value1, value2, "pcolumnId");
             return (Criteria) this;
         }

@@ -43,22 +43,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
-          <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        <form class="layui-form layui-col-md12 x-so" action="gspage.do">
+        <!--   <input class="layui-input" placeholder="开始日" name="start" id="start">
+          <input class="layui-input" placeholder="截止日" name="end" id="end"> -->
+          <input type="text" name="gname" id="gname" value="${info1.gname }" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
+          <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" ><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','gsgotj.do',480,560)"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','gsgotj.do',500,670)"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：${p.total } 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
           <tr>
-         
+           <th>
+              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
             <th>主键</th>
             <th>公司名称</th>
             <th>公司代码</th>
@@ -75,12 +77,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <c:forEach items="${p.list }" var="u">
         
            <tr>
+                 <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${u.id }'><i class="layui-icon">&#xe605;</i></div>
+            </td>
            <td>
            ${u.id }
            </td>
             <td>
              
-             <a title="查看详情"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详情信息','gsxxlist.do?id=${u.id }',460,520)" href="javascript:;">
+             <a title="查看详情"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详情信息','gsxxlist.do?id=${u.id }',500,670)" href="javascript:;">
                 ${u.gname }
             </a>
             </td>
@@ -104,14 +109,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </td>
             <td>
            
-           <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd :mm:ss"/>
+           <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
             </td>
             
          
             <td class="td-manage">
   
-    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','gsgoupdate.do?id=${u.id }',480,560)" href="javascript:;">
-                编辑
+    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','gsgoupdate.do?id=${u.id }',500,670)" href="javascript:;">
+                修改
     </a>
   
    
@@ -127,16 +132,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
               <tr>
              <td style="text-align: center;" colspan="11">
-                <a href="../sysgsctrl/gspage.do?pageNum=${p.firstPage }">首页</a>
+             
+          <%--       <a href="../sysgsctrl/gspage.do?pageNum=${p.firstPage }">首页</a>
+                
                 <a href="../sysgsctrl/gspage.do?pageNum=${p.prePage }">上一页</a>
-                <a href="../sysgsctrl/gspage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../sysgsctrl/gspage.do?pageNum=${p.lastPage }">尾页</a>
+                 <a href="../sysgsctrl/gspage.do?pageNum=${p.nextPage }">下一页</a> 
+                <a href="../sysgsctrl/gspage.do?pageNum=${p.lastPage }">尾页</a> --%>
+                <a onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+                <a onclick="aa('${p.prePage }')" href="javascript:;">上一页</a>
+                <a onclick="aa('${p.nextPage }')" href="javascript:;">下一页</a>
+                <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>
+                
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr>  
           <div id="demo2"></div> 
   </body>
      <script>
+     function aa(pageNum){
+     /* var gname=document.getElementById("gname").value; */
+    /*  console.log(gname); */
+
+var url="../sysgsctrl/gspage.do?pageNum="+pageNum+"&gname="+$("#gname").val();
+   console.log(url);
+     window.location.href=url;
+ 
+     }
+     
+     
+     
      //自定义样式
   laypage.render({
     elem: 'demo2'
@@ -146,10 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      
      
      
-     function gsdel(){
-     return window.confirm('确认要删除吗？');
-     }
-     
+   
      
       layui.use('laydate', function(){
         var laydate = layui.laydate;
@@ -214,13 +235,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       function delAll (argument) {
 
         var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
+      console.log(data);
+         layer.confirm('确认要删除吗？'+data,function(index){
             //捉到所有被选中的，发异步进行删除
+            
             layer.msg('删除成功', {icon: 1});
-           
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
+            $.ajax({
+		        type: 'post',
+		        url: "gsdeletesy.do",
+		        data: "aa="+data,
+		        success: function (res) {
+		           location.reload();
+		        }
+		    });
+             $(".layui-form-checked").not('.header').parents('tr').remove(); 
+        }); 
+        
+        
+       } 
+    
     </script>
 </html>

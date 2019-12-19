@@ -54,11 +54,13 @@ public class CustomRealmMD5 extends AuthorizingRealm{
 			System.out.println("没有此用户...");
 			return null;
 		}
-		
+				
 		String password=sysUser.getUpassword();
 		String salt="qwerty";
 		
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(sysUser, password, ByteSource.Util.bytes(salt), this.getName());
+		
+		System.out.println("认证比对结果：" + info);
 		
 		return info;
 	}
