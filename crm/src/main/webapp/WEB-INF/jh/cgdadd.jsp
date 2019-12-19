@@ -26,15 +26,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <script type="text/javascript" >
-
-    //var ck="${ck }";
-   
-    /* $(document).on("change", "#cpId", function(){
-       	  alert(111);
-    }); */
-    
-</script>
   </head>
   
   <body>
@@ -43,56 +34,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <form class="layui-form" method="post">
             <div class="layui-form-item">
               <label  class="layui-form-label">
-                                       产品编号：
+            <span class="x-red">*</span>  采购主题：
               </label>
               <div class="layui-input-inline">
-              
-              <select name="cpId" id="cpId" lay-filter="cpId" lay-select="">
-              <option value=""></option>          
-              <c:forEach items="${ck }" var="u">
-               <option value="${u.gid }">${u.gid }</option>
-              </c:forEach>             
-              </select>
+              <input type="text"  id="cgTheme" name="cgTheme" 
+                  autocomplete="off" class="layui-input" lay-verify="required">
+             
                </div>
           </div> 
                   
           <div class="layui-form-item">
               <label  class="layui-form-label">
-                                       产品名称：
+            <span class="x-red">*</span>  供应商编号：
               </label>
               <div class="layui-input-inline">
-              <input type="text"  id="cpname" disabled="disabled"
-                  autocomplete="off" class="layui-input">
+              <input type="text"  name="gysId" id="gysId" 
+                  autocomplete="off" class="layui-input" lay-verify="required">
               
                </div>
           </div>
            <div class="layui-form-item">
               <label  class="layui-form-label">
-                                       单价：
+          <span class="x-red">*</span> 交货时间：
               </label>
               <div class="layui-input-inline">
-                  <input  type="text" id="cpPrice" name="cpPrice" required 
-                  autocomplete="off" class="layui-input" disabled="disabled">
+                  <input type="text" id="jhtime" name="jhtime" required 
+                  autocomplete="off" class="layui-input" lay-verify="required">
               </div>
           </div>
         
            <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        购买数量：
+           <span class="x-red">*</span>交货地点：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="cpNumber"  name="cpNumber" required 
-                  autocomplete="off" class="layui-input">
+                  <input type="text" id="jhplace"  name="jhplace" required 
+                  autocomplete="off" class="layui-input" lay-verify="required">
               </div>
           </div>
           
             <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        总价：
+           <span class="x-red">*</span>交货方式：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="zj" required disabled="disabled"
-                  autocomplete="off" class="layui-input">
+                  <input type="text"  required name="jhway"
+                  autocomplete="off" class="layui-input" lay-verify="required">
                  
               </div>
           </div>
@@ -103,11 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text"  name="operator" required 
-                  autocomplete="off" class="layui-input">
-                   <input type="hidden"  value="${x}" 
-                  name="cgdId" autocomplete="off" class="layui-input">
-                  <input type="hidden"  value="${xx}" 
-                  name="isrk" autocomplete="off" class="layui-input">
+                  autocomplete="off" class="layui-input">               
               </div>
           </div>       
               
@@ -123,11 +106,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 
              <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        公司编号：
+          <span class="x-red">*</span> 公司编号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="gsId" required id="gsid" disabled="disabled"
-                  autocomplete="off" class="layui-input">
+                  <input type="text"  name="gsId" required 
+                  autocomplete="off" class="layui-input" lay-verify="required">
               </div>
           </div>    
        
@@ -144,26 +127,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   
  <script>
-     $(document).ready(function() {
-     
-     	$("#cpNumber").keyup(function() {
-     		$("#zj").val($("#cpPrice").val()*$("#cpNumber").val())
-     	})
-     	
-     })
-     
-
-          
+               
 layui.use(['form','layer'], function(){
-          $ = layui.jquery;
+            $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
-          
-          form.on('submit(add)', function(data){
+ form.on('submit(add)', function(data){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "cgdxqadd.do",
+		        url: "cgdadd.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
@@ -192,21 +165,6 @@ layui.use(['form','layer'], function(){
 		    return false;
           });
           
-		 form.on('select(cpId)', function(data){
-            console.log(data.value);
-            var id=data.value;
-            $.ajax({
-		        type: 'post',
-		        url: "getStoreInfo.do",
-		        data: "gid="+id,
-		        success: function (info) {
-		            console.log(info);
-		            $("#cpname").val(info.gname);
-		            $("#cpPrice").val(info.pricesold);
-		            $("#gsid").val(info.cid);
-		        }
-		    });
-         });
     });
 
   

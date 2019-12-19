@@ -94,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-btn-group">
                 <a title="添加" onclick="x_admin_show('添加','cgdxqgoadd.do?id=${u.cgdId }&rk=${u.isrk }',650,650)" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe654;</i></a>
                 <a class="layui-btn layui-btn-sm" title="修改" 
-                onclick="x_admin_show('修改','../cgdxqctrl/cgdxqgoupdate.do?cgXqId=${u.cgXqId }',700,700)"><i class="layui-icon">&#xe642;</i></a>
+                onclick="x_admin_show('修改','../cgdxqctrl/cgdxqgoupdate.do?cgXqId=${u.cgXqId }',650,650)"><i class="layui-icon">&#xe642;</i></a>
                 <a title='删除'  onclick="member_del(this,${u.cgXqId })"   class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe640;</i></a>
                </div>
               </div>

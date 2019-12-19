@@ -1,6 +1,7 @@
 package com.sc.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sc.entity.JhCgd;
 import com.sc.entity.JhCgdxq;
 import com.sc.entity.Result;
+import com.sc.entity.StoreGinfo;
 import com.sc.service.JhCgdxqService;
 import com.sc.service.StoreGinfoService;
 @RequestMapping("/cgdxqctrl")
@@ -82,7 +84,10 @@ public class JhCgdxqController {
 			System.out.println("开始添加采购单详情"+u);
 			//设置添加时间
 			u.setLtime(new Date());
+			
 			jhCgdxqService.add(u);
+			Long cp = u.getCpNumber() * u.getCpPrice();
+			
 			return new Result(200,"添加成功！");
 		}
 		
@@ -96,8 +101,12 @@ public class JhCgdxqController {
 			
 		}
 	
-	
-		
+		//通过产品id获取产品对象
+		@RequestMapping("/getStoreInfo.do")
+		@ResponseBody
+		public StoreGinfo getStoreInfo(BigDecimal gid){
+			return storeGinfoService.getsgi(gid);
+		}
 	
 	
 }
