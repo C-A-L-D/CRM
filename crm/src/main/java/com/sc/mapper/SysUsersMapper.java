@@ -11,7 +11,7 @@ public interface SysUsersMapper {
 
     int deleteByExample(SysUsersExample example);
 
-    int deleteByPrimaryKey(BigDecimal uid);
+    int deleteByPrimaryKey(BigDecimal userId);
 
     int insert(SysUsers record);
 
@@ -19,7 +19,7 @@ public interface SysUsersMapper {
 
     List<SysUsers> selectByExample(SysUsersExample example);
 
-    SysUsers selectByPrimaryKey(BigDecimal uid);
+    SysUsers selectByPrimaryKey(BigDecimal userId);
 
     int updateByExampleSelective(@Param("record") SysUsers record, @Param("example") SysUsersExample example);
 
@@ -30,4 +30,6 @@ public interface SysUsersMapper {
     int updateByPrimaryKey(SysUsers record);
     
     SysUsers login(String uname, BigDecimal id);
+    
+    List<SysUsers> selectAllUsersAndRoleAndUsersInfo();
 }

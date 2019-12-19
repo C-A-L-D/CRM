@@ -233,7 +233,7 @@
   <resultMap type="SysRole" id="roleAndPower" autoMapping="true">
       <id column="RID" property="rid"/>
       <collection property="sysPowerinfo" ofType="SysPowerinfo" autoMapping="true">
-          <id column="PCOLUMN_ID" property="pcolumId"/>
+          <id column="PCOLUMN_ID" property="pcolumnId"/>
       </collection>
    </resultMap>  
     <select id="selectAllRoleAndPower" resultMap="roleAndPower" >
@@ -241,6 +241,6 @@
 		LEFT JOIN SYS_POWER_ROLE rp
 		ON r.RID=rp.ROLE_ID
 		LEFT JOIN SYS_POWERINFO p
-		ON rp.PCOLUMN_ID=p.PID
+		ON rp.PID=p.PID
   </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.sc.controller;
 
+import java.math.BigDecimal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -73,6 +75,7 @@ public class SysUsersController {
 		
 		SysUsers sysUser=(SysUsers)subject.getPrincipal();
 		session.setAttribute("nowuser", sysUser);
+		System.out.println("..............."+sysUser);
 		
 		mav.setViewName("redirect:../index.jsp");
 		return mav;
@@ -86,16 +89,46 @@ public class SysUsersController {
 	 * @return
 	 */
 	@RequestMapping("/person.do")
-	public ModelAndView person(SysUsers u,ModelAndView mav){
+	public ModelAndView person(HttpServletRequest req,ModelAndView mav){
 		mav.setViewName("sys/person");
 		return mav;
 	}
 	
+	/**
+	 * 全部用户信息
+	 * @param mav	模板视图
+	 * @param pageNum	当前页码
+	 * @param pageSize	页长
+	 * @return
+	 */
 	@RequestMapping("/allUsersInfo.do")
-	public ModelAndView allUsersInfo(ModelAndView mav, @RequestParam(defaultValue="1")int pageNum, @RequestParam(defaultValue="2")int pageSize) {
-		System.out.println("所有用户信息...");
-		mav.addObject("allUsers", sysUsersServiceImpl.selectAllUsers(pageNum, pageSize));
+	public ModelAndView allUsersInfo(ModelAndView mav, @RequestParam(defaultValue="1")int pageNum, @RequestParam(defaultValue="5")int pageSize) {
+		PageInfo<SysUsers> info = sysUsersServiceImpl.selectAllUsersAndRoleAndUsersInfo(pageNum, pageSize);
+		mav.addObject("allUsersInfo", info);
 		mav.setViewName("sys/admin-list");
 		return mav;
 	}
+	
+	/**
+	 * 修改用户状态
+	 * @param sysUsers
+	 * @return
+	 */
+	@RequestMapping("/updateUserStatus.do")
+	@ResponseBody
+	public Result updateUserStatus(SysUsers sysUsers) {
+		sysUsersServiceImpl.updateUserStatus(sysUsers.getUserId());
+		return new Result(200, "");
+	}
+	
+	@RequestMapping("/goUpdateUser.do")
+	public ModelAndView goUpdateUserOne(ModelAndView mav, SysUsers sysUsers){
+		System.out.println(sysUsers);
+		SysUsers userOne = sysUsersServiceImpl.goUpdateUserOne(sysUsers.getUserId());
+		System.out.println("对象："+userOne);
+		mav.addObject("user", userOne);
+		mav.setViewName("sys/updateUser");
+		return mav;
+	}
+	
 }

@@ -93,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <span class="x-red">*</span>身份证件
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="sidcard" name="sidcard" required lay-verify="required"
+                  <input type="text" id="sidcard" name="sidcard" required lay-verify="sfz"
                   autocomplete="off" class="layui-input" value="${u.sidcard }">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -315,6 +315,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
+          
+          
+              //自定义验证规则
+          form.verify({
+            sfz: function(value){
+              if(value.length!=18){
+                return '身份证必须得18个数字啊';
+              }
+            }
+           /*  ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,repass: function(value){
+                if($('#L_pass').val()!=$('#L_repass').val()){
+                    return '两次密码不一致';
+                }
+            } */
+          }); 
           //监听提交
         form.on('submit(update)', function(data){
               console.log(data.field);

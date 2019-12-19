@@ -54,7 +54,7 @@ public class CustomRealmMD5 extends AuthorizingRealm{
 			System.out.println("没有此用户...");
 			return null;
 		}
-		
+				
 		String password=sysUser.getUpassword();
 		String salt="qwerty";
 		

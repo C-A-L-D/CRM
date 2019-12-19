@@ -2,23 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysUsersMapper" >
 	<resultMap type="SysUsers" id="sysUsersMapper" autoMapping="true">
-      <id column="uid" property="uid"/>
+      <id column="USER_ID" property="userId"/>
       <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
           <id column="id" property="id"/>
       </association>
    </resultMap>
 	<select id="login" resultMap="sysUsersMapper">
-      SELECT * FROM SYS_USERS u
-	  LEFT JOIN SYS_GONGSIINFO g
-	  ON u.GONGSIID=t.ID
+		SELECT * FROM SYS_USERS u
+		LEFT JOIN SYS_GONGSIINFO g
+		ON u.GONGSIID=g.ID
 	  <where>
 	  	<if test="UNAME != null">
-	  		and UNAME = #{uname }
+	  		and u.UNAME = #{uname }
 	  	</if>
 	  	<if test="ID != null">
-	  		and UNAME = #{id }
+	  		and u.GONGSIID = #{id }
 	  	</if>
 	  </where>
+   </select>
+
+	<resultMap type="SysUsers" id="sysAllUsersMapper" autoMapping="true">
+      <id column="USER_ID" property="userId"/>
+      <association property="sysRole" javaType="SysRole" autoMapping="true">
+          <id column="RID" property="rid"/>
+      </association>
+      <association property="sysUsersInfo" javaType="SysUsersInfo" autoMapping="true">
+          <id column="SID" property="sid"/>
+      </association>
+      <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
+          <id column="ID" property="id"/>
+      </association>
+   </resultMap>
+	<select id="selectAllUsersAndRoleAndUsersInfo" resultMap="sysAllUsersMapper">
+		SELECT u.*,r.rname,UI.SNAME,UI.SPHONE,UI.SDESCRIBE FROM SYS_USERS u
+		LEFT JOIN SYS_USERS_ROLE ur
+		ON u."USER_ID"=ur."UID"
+		LEFT JOIN SYS_ROLE r
+		ON ur."RID"=r."RID",SYS_USERSINFO ui,SYS_GONGSIINFO g
+		WHERE u.SID=ui.SID AND u.GONGSIID=g.ID
    </select>
 
 
@@ -27,7 +48,7 @@
 
   <resultMap id="BaseResultMap" type="com.sc.entity.SysUsers" >
     <constructor >
-      <idArg column="UID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <idArg column="USER_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="UNAME" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="UPASSWORD" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="SID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -95,7 +116,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    UID, UNAME, UPASSWORD, SID, GONGSIID, USTATE, LASTTIME
+    USER_ID, UNAME, UPASSWORD, SID, GONGSIID, USTATE, LASTTIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SysUsersExample" >
     select
@@ -116,11 +137,11 @@
     select 
     <include refid="Base_Column_List" />
     from SYS_USERS
-    where UID = #{uid,jdbcType=DECIMAL}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
     delete from SYS_USERS
-    where UID = #{uid,jdbcType=DECIMAL}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
   </delete>
   <delete id="deleteByExample" parameterType="com.sc.entity.SysUsersExample" >
     delete from SYS_USERS
@@ -129,18 +150,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sc.entity.SysUsers" >
-    insert into SYS_USERS (UID, UNAME, UPASSWORD, 
+    insert into SYS_USERS (USER_ID, UNAME, UPASSWORD, 
       SID, GONGSIID, USTATE, 
       LASTTIME)
-    values (#{uid,jdbcType=DECIMAL}, #{uname,jdbcType=VARCHAR}, #{upassword,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=DECIMAL}, #{uname,jdbcType=VARCHAR}, #{upassword,jdbcType=VARCHAR}, 
       #{sid,jdbcType=DECIMAL}, #{gongsiid,jdbcType=DECIMAL}, #{ustate,jdbcType=VARCHAR}, 
       #{lasttime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.sc.entity.SysUsers" >
     insert into SYS_USERS
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="uid != null" >
-        UID,
+      <if test="userId != null" >
+        USER_ID,
       </if>
       <if test="uname != null" >
         UNAME,
@@ -162,8 +183,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="uid != null" >
-        #{uid,jdbcType=DECIMAL},
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
       </if>
       <if test="uname != null" >
         #{uname,jdbcType=VARCHAR},
@@ -194,8 +215,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update SYS_USERS
     <set >
-      <if test="record.uid != null" >
-        UID = #{record.uid,jdbcType=DECIMAL},
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=DECIMAL},
       </if>
       <if test="record.uname != null" >
         UNAME = #{record.uname,jdbcType=VARCHAR},
@@ -222,7 +243,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update SYS_USERS
-    set UID = #{record.uid,jdbcType=DECIMAL},
+    set USER_ID = #{record.userId,jdbcType=DECIMAL},
       UNAME = #{record.uname,jdbcType=VARCHAR},
       UPASSWORD = #{record.upassword,jdbcType=VARCHAR},
       SID = #{record.sid,jdbcType=DECIMAL},
@@ -255,7 +276,7 @@
         LASTTIME = #{lasttime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where UID = #{uid,jdbcType=DECIMAL}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sc.entity.SysUsers" >
     update SYS_USERS
@@ -265,6 +286,6 @@
       GONGSIID = #{gongsiid,jdbcType=DECIMAL},
       USTATE = #{ustate,jdbcType=VARCHAR},
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
-    where UID = #{uid,jdbcType=DECIMAL}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
   </update>
 </mapper>

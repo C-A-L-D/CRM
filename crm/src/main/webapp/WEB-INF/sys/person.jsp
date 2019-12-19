@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -27,17 +28,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <th>用户名</th>
                             <td>${nowuser.uname }</td></tr>
                         <tr>
-                            <th>密码</th>
-                            <td id="pass" style="padding-left: 15%">
-                            	<input type="password" value="${nowuser.upassword }" style="width: 50%;border: none;"readonly="readonly">
-                            </td>
-                        <tr>
-                            <th>角色</th>
+                            <th>所在公司</th>
                             <td></td></tr>
                         <tr>
-                            <th>状态</th>
-                            <td>${nowuser.ustate }</td></tr>
-                        
+                            <th>所在部门</th>
+                            <td></td></tr>
+                        <tr>
+                            <th>角色</th>
+                            <td></td></tr>   
+                        <tr>
+                            <th>权限</th>
+                            <td></td></tr>
+                        <tr>
+                            <th>账户状态</th>
+                            <td>${nowuser.ustate=="on" ? "正常":"异常" }</td></tr>
+                        <tr>
+                            <th>最后修改时间</th>
+                            <td>
+                            	<fmt:formatDate value="${nowuser.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
+                            </td></tr>
                     </tbody>
                 </table>
             </div>
