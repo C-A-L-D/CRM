@@ -27,8 +27,7 @@ public class JhCgdxqServiceImpl implements JhCgdxqService {
 		//查询当前页的集合数据	
 		if(jc!=null){
         if(jc.getCgdId()!=null&&!jc.getCgdId().equals("")){
-			criteria.andCgdIdEqualTo(jc.getCgdId());
-				
+			criteria.andCgdIdEqualTo(jc.getCgdId());						
 		}
 		}
 			List<JhCgdxq> list = this.jhCgdxqMapper.selectByExample(ex);
