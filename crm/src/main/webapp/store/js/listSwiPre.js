@@ -1,18 +1,17 @@
-layui.use('laypage', function(){
-  var laypage = layui.laypage;
-  laypage.render({
-	    elem: 'swipage'
-	    ,count: $('#total').val()
-	    ,url:'storeWhinfo/listpageSwi.do'
-	    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-	    ,jump: function(obj,first){
-	      if(!first){
-	    	  var url=obj.pages+":"+obj.limit;
-	    	  console.log(url);
-	      }
-	    }
-	  });
-});
+function postinfo(data){
+	$.ajax({
+		type:'post',
+		url:'storeWhinfo/selectInfo.do?whid='+data,
+		success:function(data){
+			console.log(data);
+		},
+		errer:function(){
+			console.log(data);
+		}
+	})
+}	
+	
+
 
 
 function delCheck(whid){
@@ -27,3 +26,4 @@ function delCheck(whid){
 		}
 	})
 }
+  

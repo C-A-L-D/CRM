@@ -1,18 +1,3 @@
-layui.use('laypage', function(){
-  var laypage = layui.laypage;
-  laypage.render({
-	    elem: 'demo7'
-	    ,count: $('#total').val()
-	    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-	    ,jump: function(obj,first){
-	      if(!first){
-	    	  var url="storefinfo/listpage.do?pageNum="+obj.pages+"&pageSize="+obj.limit;
-	    	  obj.curr=obj.pages;
-              window.location.href = url;
-	      }
-	    }
-	  });
-});
 
 function ajaxPost(data){
   $.ajax({

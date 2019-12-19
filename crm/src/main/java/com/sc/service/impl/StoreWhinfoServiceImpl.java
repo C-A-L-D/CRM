@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.StoreWhinfo;
+import com.sc.entity.StoreWhinfoExample;
 import com.sc.mapper.StoreWhinfoMapper;
 import com.sc.service.StoreWhinfoService;
 
@@ -34,10 +35,8 @@ public class StoreWhinfoServiceImpl implements StoreWhinfoService{
 			System.err.println("发生插入错误！");
 			System.err.println(storeWhinfo);
 		}
-		
-		
 	}
-
+	
 	@Override
 	public void update(StoreWhinfo storeWhinfo) {
 		if(storeWhinfo!=null) {
