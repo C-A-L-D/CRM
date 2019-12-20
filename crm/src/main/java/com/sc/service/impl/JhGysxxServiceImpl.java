@@ -82,4 +82,14 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 
 	}
 
+
+	
+	@Override
+	public List<JhGysxx> select() {
+		return this.jhGysxxMapper.selectByExample(null);
+	}
+
+
+
+
 }

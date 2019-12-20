@@ -10,12 +10,16 @@ import com.github.pagehelper.PageInfo;
 import com.sc.entity.JhCgd;
 import com.sc.entity.JhCgdExample;
 import com.sc.mapper.JhCgdMapper;
+import com.sc.mapper.JhCgdxqMapper;
 import com.sc.service.JhCgdService;
 @Service
 public class JhCgdServiceImpl implements JhCgdService {
 
 	@Autowired
 	JhCgdMapper jhCgdMapper;
+	
+	@Autowired 
+	JhCgdxqMapper jhCgdxqMapper;
 	
 	@Override
 	public PageInfo<JhCgd> selectpage(Integer pageNum, Integer pageSize, JhCgd jc) {
@@ -63,5 +67,7 @@ public class JhCgdServiceImpl implements JhCgdService {
 		}
 		
 	}
+
+
 
 }

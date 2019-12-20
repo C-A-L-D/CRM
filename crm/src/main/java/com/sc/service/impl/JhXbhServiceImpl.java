@@ -14,6 +14,7 @@ import com.sc.entity.StoreGinfoExample;
 import com.sc.entity.StoreGinfoExample.Criteria;
 import com.sc.mapper.JhCgdMapper;
 import com.sc.mapper.JhXbhMapper;
+import com.sc.mapper.StoreGinfoMapper;
 import com.sc.service.JhXbhService;
 @Service
 public class JhXbhServiceImpl implements JhXbhService {
@@ -22,6 +23,8 @@ public class JhXbhServiceImpl implements JhXbhService {
 	JhXbhMapper jhXbhMapper;
 	@Autowired
 	JhCgdMapper jhCgdMapper;
+	@Autowired
+	StoreGinfoMapper storeGinfoMapper;
 	@Override
 	public PageInfo<JhXbh> selectpage(Integer pageNum, Integer pageSize, JhXbh jx) {
 		//设置分页数据，开始分页

@@ -108,6 +108,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   name="cgdId" autocomplete="off" class="layui-input">
                   <input type="hidden"  value="${xx}" 
                   name="isrk" autocomplete="off" class="layui-input">
+                  <input type="hidden"  value="${cgd.gsId}" 
+                  name="gsId" autocomplete="off" class="layui-input">
+                  
               </div>
           </div>       
               
@@ -121,15 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>          
                                 
-             <div class="layui-form-item">
-              <label  class="layui-form-label">
-                                        公司编号：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text"  name="gsId" required id="gsid" disabled="disabled"
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>    
+       
        
        
             
@@ -160,7 +155,7 @@ layui.use(['form','layer'], function(){
           ,layer = layui.layer;
           
           form.on('submit(add)', function(data){
-            console.log(data);
+            console.log(data.field);
             $.ajax({
 		        type: 'post',
 		        url: "cgdxqadd.do",
@@ -184,7 +179,6 @@ layui.use(['form','layer'], function(){
 		                    //关闭当前frame
 		                    parent.layer.close(index);
 		                    //刷新页面
-		                    parent.location.reload();
 		                });
 		            }
 		        }
@@ -203,7 +197,7 @@ layui.use(['form','layer'], function(){
 		            console.log(info);
 		            $("#cpname").val(info.gname);
 		            $("#cpPrice").val(info.pricesold);
-		            $("#gsid").val(info.cid);
+		            
 		        }
 		    });
          });

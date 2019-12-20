@@ -3,6 +3,7 @@ package com.sc.controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +18,7 @@ import com.sc.entity.JhCgd;
 import com.sc.entity.JhCgdxq;
 import com.sc.entity.Result;
 import com.sc.entity.StoreGinfo;
+import com.sc.service.JhCgdService;
 import com.sc.service.JhCgdxqService;
 import com.sc.service.StoreGinfoService;
 @RequestMapping("/cgdxqctrl")
@@ -27,14 +29,32 @@ public class JhCgdxqController {
 	JhCgdxqService jhCgdxqService;
 	@Autowired
 	StoreGinfoService storeGinfoService;
+	@Autowired
+	JhCgdService jhCgdService;
 	
 	
 	@RequestMapping("/cgdxq.do")
 	public ModelAndView cgdxqlistpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
-			@RequestParam(defaultValue="10")Integer pageSize,JhCgd jc){
+			@RequestParam(defaultValue="10")Integer pageSize,JhCgd jc,JhCgdxq u){
 		System.out.println("查询用户列表-分页！");	
 		//查询list集合-分页     ${page.list}
+		List<JhCgdxq> list = jhCgdxqService.getall(u.getCgdId());
+		if(list!=null){
+			Long money=0L;
+			for (JhCgdxq jhCgdxq : list) {
+				Long cpnumber=jhCgdxq.getCpNumber();
+				Long cpprice=jhCgdxq.getCpPrice();
+				System.out.println(cpnumber+"--------"+cpprice);
+				if(cpnumber!=null&&cpprice!=null){
+					money+=cpnumber*cpprice;
+				}
+			jc = jhCgdService.get(u.getCgdId());
+			jc.setHkMoney(new BigDecimal(money) );
+			jhCgdService.update(jc);
+			}	
+		}
+		
 		mav.addObject("p", jhCgdxqService.selectpage(pageNum, pageSize,jc));
 		mav.setViewName("jh/cgdxq");// 路径是：/WEB-INF/jh/gysxxlistpage.jsp
 		return mav;
@@ -43,7 +63,7 @@ public class JhCgdxqController {
 	@RequestMapping("/cgdxqgoupdate.do")
 	public ModelAndView goupdate(ModelAndView mav,JhCgdxq u){
 		System.out.println("跳转到修改页面！"+u);
-		JhCgdxq users = this.jhCgdxqService.get(u.getCgXqId());
+		JhCgdxq users = this.jhCgdxqService.get(u.getCgXqId());	 
 		mav.addObject("u", users);
 		mav.addObject("st",storeGinfoService.selectAll()); 
 		mav.setViewName("jh/cgdxqupdate");// 路径是：/WEB-INF/jh/cgdxqupdate.jsp
@@ -70,6 +90,7 @@ public class JhCgdxqController {
 		mav.addObject("ck",storeGinfoService.selectAll()); 
 		mav.addObject("x", id);
 		mav.addObject("xx", rk);
+		mav.addObject("cgd", jhCgdService.get(id));
 		mav.setViewName("jh/cgdxqadd");
 		return mav;
 	}
@@ -83,11 +104,9 @@ public class JhCgdxqController {
 				JhCgdxq u)throws IllegalStateException, IOException {
 			System.out.println("开始添加采购单详情"+u);
 			//设置添加时间
-			u.setLtime(new Date());
-			
-			jhCgdxqService.add(u);
-			Long cp = u.getCpNumber() * u.getCpPrice();
-			
+		
+			u.setLtime(new Date());			
+			jhCgdxqService.add(u);					
 			return new Result(200,"添加成功！");
 		}
 		
@@ -108,5 +127,7 @@ public class JhCgdxqController {
 			return storeGinfoService.getsgi(gid);
 		}
 	
+		
+		
 	
 }

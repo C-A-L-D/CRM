@@ -70,6 +70,22 @@ public class JhCgdxqServiceImpl implements JhCgdxqService {
 			}
 		
 	}
+
+	@Override
+	public List<JhCgdxq> getall(Long cgdId) {
+		if(cgdId!=null){
+			JhCgdxqExample ex=new JhCgdxqExample();
+			Criteria criteria = ex.createCriteria();
+			criteria.andCgdIdEqualTo(cgdId);
+			return this.jhCgdxqMapper.selectByExample(ex);
+			
+		}
+		return null;
+	}
+
+	
+
+
 	
 	
 }

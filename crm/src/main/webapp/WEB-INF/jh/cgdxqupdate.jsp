@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="hidden"  name="cgXqId" required lay-verify="required"
                   autocomplete="off" value="${u.cgXqId }" class="layui-input">
                   <input type="text"  name="cgdId" required lay-verify="required"
-                  autocomplete="off" value="${u.cgdId }" class="layui-input" disabled="disabled">
+                  autocomplete="off" value="${u.cgdId }" class="layui-input" readonly="readonly">
               </div>     
           </div>
           
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                        产品编号：
               </label>
               <div class="layui-input-inline">
-              <select id="cpId" name="cpId" class="layui-input" > 
+              <select id="cpId" name="cpId" lay-filter="cpId" lay-select="" class="layui-input" > 
               <option value=""></option>
               <c:forEach items="${st }" var="s">
                <option ${u.cpId==s.gid ? "selected":"" }>${s.gid }</option>
@@ -74,8 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         产品价格：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.cpPrice }" name="cpPrice" required 
-                  autocomplete="off" class="layui-input">
+                  <input type="text" value="${u.cpPrice }" name="cpPrice" id="cpPrice" required 
+                  readonly="readonly" autocomplete="off" class="layui-input">
               </div>
           </div>
           
@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text" value="${u.isrk }" name="isrk" required 
-                  autocomplete="off" class="layui-input" disabled="disabled">
+                  autocomplete="off" class="layui-input" readonly="readonly">
               </div>
           </div>
           
@@ -115,9 +115,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         公司编号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.gsId }" name="gsId" required 
+                  <input type="text" value="${u.gsId }" name="gsId" required readonly="readonly"
                   autocomplete="off" class="layui-input">
-              </div>
+              </div> 
           </div>
                  
          <div class="layui-form-item">
@@ -167,8 +167,23 @@ layui.use(['form','layer'], function(){
 		    });
 		    return false;
           });
-          
+          form.on('select(cpId)', function(data){
+            console.log(data.value);
+            var id=data.value;
+            $.ajax({
+		        type: 'post',
+		        url: "getStoreInfo.do",
+		        data: "gid="+id,
+		        success: function (info) {
+		            console.log(info);
+		            $("#cpname").val(info.gname);
+		            $("#cpPrice").val(info.pricesold);
+		           
+		        }
+		    });
+         });
     });
+   
 
 </script>
   

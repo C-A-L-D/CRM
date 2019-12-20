@@ -122,14 +122,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                已付款
                  </c:if>
                  
-                 <c:if test="${u.cgJz=='已入库' }">                           
-                 </c:if>
                  
-                 <c:if test="${u.cgJz=='待采购' }">
-                 <a href="../cgdctrl/rk.do?id=${u.cgdId}" >
-                 <span class="layui-btn layui-btn-normal layui-btn-mini">入库</span>
-                 </a>                    
-                 </c:if>                 
+                 
+                                
                </td>
                 
                 <td class="td-status">

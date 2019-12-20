@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.JhXbh;
 import com.sc.service.JhXbhService;
+import com.sc.service.StoreGinfoService;
 
 @RequestMapping("/xbhctrl")
 @Controller
@@ -15,14 +16,14 @@ public class JhXbhController {
 
 	@Autowired
 	JhXbhService jhXbhService;
-	
+	@Autowired
+	StoreGinfoService storeGinfoService;
 
 	@RequestMapping("/xbhlistpage.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
 			@RequestParam(defaultValue="10")Integer pageSize,JhXbh jx){
-		System.out.println("查询用户列表-分页！");
-		
+		System.out.println("查询用户列表-分页！");		
 		//查询list集合-分页     ${page.list}
 		mav.addObject("p", jhXbhService.selectpage(pageNum, pageSize,jx));
 		

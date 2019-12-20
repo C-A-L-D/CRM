@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.JhGysxx;
-import com.sc.entity.JhGysxxExample;
 import com.sc.entity.Result;
 import com.sc.service.JhGysxxService;
 
