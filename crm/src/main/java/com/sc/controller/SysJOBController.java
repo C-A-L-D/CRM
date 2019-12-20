@@ -1,11 +1,18 @@
 package com.sc.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.Result;
-
+import com.sc.entity.SysDepartment;
 import com.sc.entity.SysJobinfo;
-
+import com.sc.service.SysDepartmentService;
 import com.sc.service.SysJobinfoService;
 
 @Service
@@ -24,7 +31,8 @@ import com.sc.service.SysJobinfoService;
 public class SysJOBController {
 @Autowired
 SysJobinfoService sysJobinfoService;
-	
+@Autowired
+SysDepartmentService sysDepartmentService;
 	
 	//公司分页list
 	@RequestMapping("/jobpage.do")
@@ -49,7 +57,7 @@ SysJobinfoService sysJobinfoService;
 	public ModelAndView gsgotj(ModelAndView mav){
 		System.out.println("公司去添加！");
 		mav.addObject("p1", sysJobinfoService.select1());
-		mav.addObject("p2", sysJobinfoService.select2());
+		//mav.addObject("p2", sysJobinfoService.select2());
 		mav.setViewName("gs/jobtj");
 		return mav;
 	}
@@ -74,7 +82,7 @@ SysJobinfoService sysJobinfoService;
 		SysJobinfo info = this.sysJobinfoService.get(info1.getJid());
 		mav.addObject("u", info);
 		mav.addObject("p1", sysJobinfoService.select1());
-		mav.addObject("p2", sysJobinfoService.select2());
+		mav.addObject("p2", sysJobinfoService.select2(info));
 		mav.setViewName("gs/jobupdate");
 		return mav;
 	}
@@ -116,6 +124,42 @@ SysJobinfoService sysJobinfoService;
 		}
 		
 		
+	}
+	//导出excel
+	@RequestMapping("/jobexcel.do")
+	@ResponseBody
+	public void ygexcel1(HttpServletResponse response){
+		System.out.println("111");	
+		XSSFWorkbook wb =sysJobinfoService.show();
+	    String fileName = "职务信息报表.xlsx";
+	    
+	    OutputStream outputStream =null;
+	    try {
+	        fileName = URLEncoder.encode(fileName,"UTF-8");
+	        //设置ContentType请求信息格式
+	        response.setContentType("application/vnd.ms-excel");
+	        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+	        outputStream = response.getOutputStream();
+	        wb.write(outputStream);
+	        outputStream.flush();
+	        outputStream.close();
+	    } catch (UnsupportedEncodingException e) {
+	    	
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	    	
+	        e.printStackTrace();
+	    }
+		
+	}
+	//关联其他表
+	@RequestMapping("/jobgl.do")
+	@ResponseBody
+	public List<SysDepartment> jobgl(SysJobinfo info1){
+		System.out.println("关联其他表");	
+		List<SysDepartment> list = this.sysJobinfoService.gsbm(info1);
+		System.out.println(list);
+		return  list;
 	}
 	
 }
