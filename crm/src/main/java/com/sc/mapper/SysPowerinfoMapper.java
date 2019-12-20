@@ -28,4 +28,6 @@ public interface SysPowerinfoMapper {
     int updateByPrimaryKeySelective(SysPowerinfo record);
 
     int updateByPrimaryKey(SysPowerinfo record);
+    
+    List<SysPowerinfo> selectAllPowerAndCol();
 }

@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <td>
                  ${u.gysId}
                </td>
-               <td>
+               <td id="mk">
                  ${u.hkMoney }
                </td>
                 <td>
@@ -110,21 +110,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <fmt:formatDate value="${u.ltime}" pattern="yyyy-MM-dd"/>   
                  
                </td>
-                  <td >
-                 ${u.fkqk=="已付款" ? "已付款":"<a 
-                 class='layui-btn layui-btn-sm' onclick=
-                 'x_admin_show('添加','cgdgoadd.do',700,700)'>
-                 <i class='layui-icon'>&#xe654;</i></a>
-                  <a class='layui-btn layui-btn-sm'onclick=
-                 'x_admin_show('删除','cgddelete.do',700,700)' >
-                  <i class='layui-icon'>&#xe640;</i></a>
-                 " }
+                  <td  class="td-status">
+               
+                 <c:if test="${u.fkqk=='未付款' }"> 
+                 <a href="../cgdctrl/fk.do?cgdId=${u.cgdId  }" >
+                 <span class="layui-btn layui-btn-normal layui-btn-mini">付款</span>
+                 </a>   
+                 </c:if>
+                 
+                 <c:if test="${u.fkqk=='已付款' }">
+                                               已付款
+                 </c:if>
+                 
+                 <c:if test="${u.cgJz=='已入库' }">                           
+                 </c:if>
+                 
+                 <c:if test="${u.cgJz=='待采购' }">
+                 <a href="../cgdctrl/rk.do?id=${u.cgdId}" >
+                 <span class="layui-btn layui-btn-normal layui-btn-mini">入库</span>
+                 </a>                    
+                 </c:if>                 
                </td>
                 
                 <td class="td-status">
-                <a  onclick="x_admin_show('','../cgdxxctrl/cgdxq.do?cgdId =${u.cgdId  }')" >
-                
-                 <span class="layui-btn layui-btn-normal layui-btn-mini">查看详单</span></a>
+                <a href="../cgdxqctrl/cgdxq.do?cgdId=${u.cgdId  }" >
+                <span class="layui-btn layui-btn-normal layui-btn-mini">查看详单</span>
+                </a>
                </td>
                      
             </tr>
@@ -132,9 +143,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr>
              <td style="text-align: center;" colspan="17">
                 <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.firstPage }">首页</a>
-                <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.prePage }">上一页</a>
-                <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../cgdxxctrl/cgdlistpage.do?pageNum=${p.lastPage }">尾页</a>
+                <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.prePage }">上一页</a>
+                <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.nextPage }">下一页</a>
+                <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.lastPage }">尾页</a>
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr> 
@@ -147,7 +158,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </body>
      
    </html>  
-    
-
+    	 
     
     

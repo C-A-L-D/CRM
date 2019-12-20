@@ -4,25 +4,22 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class SysPowerRole implements Serializable {
     private BigDecimal id;
 
-    private BigDecimal pcolumnId;
+    private BigDecimal pid;
 
     private BigDecimal roleId;
 
     private BigDecimal caozuopersonId;
 
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lasttime;
 
     private static final long serialVersionUID = 1L;
 
-    public SysPowerRole(BigDecimal id, BigDecimal pcolumnId, BigDecimal roleId, BigDecimal caozuopersonId, Date lasttime) {
+    public SysPowerRole(BigDecimal id, BigDecimal pid, BigDecimal roleId, BigDecimal caozuopersonId, Date lasttime) {
         this.id = id;
-        this.pcolumnId = pcolumnId;
+        this.pid = pid;
         this.roleId = roleId;
         this.caozuopersonId = caozuopersonId;
         this.lasttime = lasttime;
@@ -40,12 +37,12 @@ public class SysPowerRole implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getPcolumnId() {
-        return pcolumnId;
+    public BigDecimal getPid() {
+        return pid;
     }
 
-    public void setPcolumnId(BigDecimal pcolumnId) {
-        this.pcolumnId = pcolumnId;
+    public void setPid(BigDecimal pid) {
+        this.pid = pid;
     }
 
     public BigDecimal getRoleId() {
@@ -74,8 +71,8 @@ public class SysPowerRole implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SysPowerRole [id=" + id + ", pcolumnId=" + pcolumnId + ", roleId=" + roleId + ", caozuopersonId="
-				+ caozuopersonId + ", lasttime=" + lasttime + "]";
+		return "SysPowerRole [id=" + id + ", pid=" + pid + ", roleId=" + roleId + ", caozuopersonId=" + caozuopersonId
+				+ ", lasttime=" + lasttime + "]";
 	}
     
 }

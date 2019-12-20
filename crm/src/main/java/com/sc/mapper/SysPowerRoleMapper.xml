@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.sc.entity.SysPowerRole" >
     <constructor >
       <idArg column="ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="PCOLUMN_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="PID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="ROLE_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="CAOZUOPERSON_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, PCOLUMN_ID, ROLE_ID, CAOZUOPERSON_ID, LASTTIME
+    ID, PID, ROLE_ID, CAOZUOPERSON_ID, LASTTIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SysPowerRoleExample" >
     select
@@ -103,9 +103,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sc.entity.SysPowerRole" >
-    insert into SYS_POWER_ROLE (ID, PCOLUMN_ID, ROLE_ID, 
+    insert into SYS_POWER_ROLE (ID, PID, ROLE_ID, 
       CAOZUOPERSON_ID, LASTTIME)
-    values (#{id,jdbcType=DECIMAL}, #{pcolumnId,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=DECIMAL}, #{pid,jdbcType=DECIMAL}, #{roleId,jdbcType=DECIMAL}, 
       #{caozuopersonId,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.sc.entity.SysPowerRole" >
@@ -114,8 +114,8 @@
       <if test="id != null" >
         ID,
       </if>
-      <if test="pcolumnId != null" >
-        PCOLUMN_ID,
+      <if test="pid != null" >
+        PID,
       </if>
       <if test="roleId != null" >
         ROLE_ID,
@@ -131,8 +131,8 @@
       <if test="id != null" >
         #{id,jdbcType=DECIMAL},
       </if>
-      <if test="pcolumnId != null" >
-        #{pcolumnId,jdbcType=DECIMAL},
+      <if test="pid != null" >
+        #{pid,jdbcType=DECIMAL},
       </if>
       <if test="roleId != null" >
         #{roleId,jdbcType=DECIMAL},
@@ -157,8 +157,8 @@
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=DECIMAL},
       </if>
-      <if test="record.pcolumnId != null" >
-        PCOLUMN_ID = #{record.pcolumnId,jdbcType=DECIMAL},
+      <if test="record.pid != null" >
+        PID = #{record.pid,jdbcType=DECIMAL},
       </if>
       <if test="record.roleId != null" >
         ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
@@ -177,7 +177,7 @@
   <update id="updateByExample" parameterType="map" >
     update SYS_POWER_ROLE
     set ID = #{record.id,jdbcType=DECIMAL},
-      PCOLUMN_ID = #{record.pcolumnId,jdbcType=DECIMAL},
+      PID = #{record.pid,jdbcType=DECIMAL},
       ROLE_ID = #{record.roleId,jdbcType=DECIMAL},
       CAOZUOPERSON_ID = #{record.caozuopersonId,jdbcType=DECIMAL},
       LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
@@ -188,8 +188,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.SysPowerRole" >
     update SYS_POWER_ROLE
     <set >
-      <if test="pcolumnId != null" >
-        PCOLUMN_ID = #{pcolumnId,jdbcType=DECIMAL},
+      <if test="pid != null" >
+        PID = #{pid,jdbcType=DECIMAL},
       </if>
       <if test="roleId != null" >
         ROLE_ID = #{roleId,jdbcType=DECIMAL},
@@ -205,7 +205,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sc.entity.SysPowerRole" >
     update SYS_POWER_ROLE
-    set PCOLUMN_ID = #{pcolumnId,jdbcType=DECIMAL},
+    set PID = #{pid,jdbcType=DECIMAL},
       ROLE_ID = #{roleId,jdbcType=DECIMAL},
       CAOZUOPERSON_ID = #{caozuopersonId,jdbcType=DECIMAL},
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}

@@ -39,35 +39,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>客户状态</option>
-              <option>合作客户</option>
-              <option>潜在客户</option>
-            </select>
-          </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付方式</option>
-              <option>现付全额</option>
-              <option>分批支付</option>
-              <option>货到付款</option>
-            </select>
-          </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
-              <option>订单状态</option>
-              <option value="0">有效</option>
-              <option value="1">无效</option>
-            </select>
-          </div>
-          <input type="text" name="username"  placeholder="请输入客户名称" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        <form class="layui-form layui-col-md12 x-so" action="MohuchaxunKehuxinxi.do">
+          <input type="text" name="kname"  placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+          <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" value=""><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加客户</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','KehuxinxiGoAdd.do')" href="javascript:;"><i class="layui-icon"></i>添加客户</button>
         <span class="x-right" style="line-height:40px;font-size:20px;">共有数据：${klp.total } 条</span>
       </xblock>
       <table class="layui-table">
@@ -108,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="联系人" onclick="x_admin_show('客户联系人','order-view.html')" href="javascript:;">
+		              <a title="联系人" href="../Kehulianxirenctrl/KehulianxirenListPage.do?kid=${k.kid}&kname=${k.kname}">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;

@@ -234,6 +234,10 @@
   <id column="MESSID" property="messid"></id>
   </resultMap>
   <insert id="huifu" parameterType="com.sc.entity.OffMess" >
+  <!-- 在插入语句之后获取当前id -->
+        <selectKey keyProperty="messid" resultType="java.lang.Long" order="AFTER">
+     SELECT SEQ_MESS_MESSID.CURRVAL FROM DUAL
+     </selectKey>
   insert into OFF_MESS (MESSID, TITLE, CONTENT, 
       SENDER, COMPANYID, LASTTIME
       )

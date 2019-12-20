@@ -24,13 +24,15 @@ public class JhCgdServiceImpl implements JhCgdService {
 		JhCgdExample ex=new JhCgdExample();
 		com.sc.entity.JhCgdExample.Criteria criteria = ex.createCriteria();
 		//查询当前页的集合数据	
-        if(jc.getCgTheme()!=null){
+		if(jc!=null){
+        if(jc.getCgTheme()!=null&&!jc.getCgTheme().equals("")){
 			criteria.andCgThemeLike("%"+jc.getCgTheme()+"%");
 				
 		}
+		}
 			List<JhCgd> list = this.jhCgdMapper.selectByExample(ex);
 			PageInfo<JhCgd>page=new PageInfo<JhCgd>(list);
-		return page;
+		    return page;
 
 	}
 
@@ -52,6 +54,14 @@ public class JhCgdServiceImpl implements JhCgdService {
 			this.jhCgdMapper.insert(jc);
 		}
 
+	}
+
+	@Override
+	public void update(JhCgd jc) {
+		if(jc!=null&&jc.getCgdId()!=null){
+			this.jhCgdMapper.updateByPrimaryKey(jc);
+		}
+		
 	}
 
 }

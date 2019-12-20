@@ -38,15 +38,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <body>
     <div class="x-body">
         <form action="" method="post" class="layui-form layui-form-pane">
-           <c:forEach items="${shoedetail }" var="u">
+          
                 <div class="layui-form-item">
                     <label for="name" class="layui-form-label">
-                                              发送人
+                                              接收人
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text"  id="sender1" name="name" required lay-verify="required"
-                        autocomplete="off" class="layui-input" value="${u.offMess.sender }">
-                        
+                        <input type="text"  name="name" required lay-verify="required"
+                        autocomplete="off" class="layui-input" value="${shoedetail.offMess.sender }">
+                        <input type="hidden" id="receiver" value="${shoedetail.receiverid }">
+                         
                     </div>
                 </div>
                 
@@ -56,78 +57,78 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="name" name="name" required lay-verify="required"
-                        autocomplete="off" class="layui-input" value="${u.lasttime }">
-                         <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
+                        autocomplete="off" class="layui-input" readonly="readonly" value="<fmt:formatDate value="${shoedetail.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>">
+                        
                     </div>
                 </div>
                 
                  <div class="layui-form-item">
-                    <label for="name" class="layui-form-label">
+                    <label for="name" class="layui-form-label" >
                                           短信标题
                     </label>
                     <div class="layui-input-inline">
                         <input type="text"  id="name" name="name" required lay-verify="required"
-                        autocomplete="off" class="layui-input" value="${u.offMess.title }" style="width:1100px">
+                        autocomplete="off" class="layui-input" value="${shoedetail.offMess.title }" style="width:450px">
                     </div>
                 </div>
                 
-                <div class="layui-form-item layui-form-text" style="width:1209px">
+                <div class="layui-form-item layui-form-text" >
                     <label for="desc" class="layui-form-label">
                     短信内容
                     </label>
                     <div class="layui-input-block">
-                        <textarea placeholder="暂无" id="desc" name="desc" class="layui-textarea" >${u.offMess.content }</textarea>
+                        <textarea placeholder="暂无" id="desc"   name="desc" class="layui-textarea" >${shoedetail.offMess.content }</textarea>
                     </div>
                 </div>
            
-                <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" lay-filter="" onclick="huifu(${u.detailid})">回复</button>
-                 <button class="layui-btn" lay-submit="" lay-filter="">
-                 <a style="color:white" title="删除" onclick="return confirm('是否确定删除？')" href="offmessctrl/delete.do?detailid=${u.detailid }">删除</a>
+               
+                
+                 <button class="layui-btn" >
+                 <a title="删除" style="color:white" onclick="mess_del(this,'${u.detailid}')" href="javascript:;">删除</a>
                    </button>
-                   
-                    <button class="layui-btn" >
-                 <a style="color:white" title="返回" href="offmessctrl/offmesslist.do">返回</a>
-                   </button>
-                   </c:forEach>
+                
                 </form>
-              </div>
-               
               
-               <hr style="height:5px">
+              </div>
+              <div style="margin-left: 100px;margin-top: -58px;">
+                    <button  class="layui-btn"  onclick="huifu()">回复</button>
+                    </div>
                
-        <div style="display:block">
-                <form action="offmessctrl/huifu.do"  οnsubmit="return check(this)"  method="post">
+        <div style="display:none" id="huifu">
+        <hr style="height:5px">
+                <form    class="layui-form layui-form-pane">
+		              <!-- 发送者：--> 
+		              <input type="hidden" id="senderid" name="senderid" value="${shoedetail.receiverid }">
+		               <!-- 接收人：--> 
+		              <input type="hidden" id="receiver" name="receiver" value="${shoedetail.offMess.sender }" >
+                  
                 
-               接收人： <input type="text" id="sender" >
-                
-                <div class="layui-form-item">
-                    <label for="title" class="layui-form-label">
-                                                    邮件标题
+                 <div class="layui-form-item">
+                    <label for="title" class="layui-form-label" >
+                                          短信标题
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="title" name="title" style="width:1100px"
-                        autocomplete="off" class="layui-input" value="">   
+                        <input type="text"  id="title" name="title" required lay-verify="required"
+                        autocomplete="off" class="layui-input"  style="width:450px">
                     </div>
                 </div>
-               
-                 <div class="layui-form-item layui-form-text" style="width:1209px">
+                
+                <div class="layui-form-item layui-form-text" >
                     <label for="content" class="layui-form-label">
-                                         短信内容
+                       短信内容
                     </label>
                     <div class="layui-input-block">
-                        <textarea  placeholder="暂无" id="content" name="content" class="layui-textarea" ></textarea>
+                        <textarea  id="content"   name="content" class="layui-textarea" ></textarea>
                     </div>
                 </div>
+                
                 <center>
                 
                   <div class="layui-form-item">
-                  <input  class="layui-btn" type=submit name="submit1" value="发送"> 
-	                <button class="layui-btn" type="reset">清空 </button>     
-	                    <button class="layui-btn">
-	                 <a style="color:white" title="返回" href="offmessctrl/offmesslist.do">返回</a>
-	                   </button>
+                  <button  class="layui-btn"  lay-filter="add" lay-submit="">发送</button>
                   
+	                <button class="layui-btn" type="reset">清空 </button>     
+	                   
 		              </div>
 		               </center>
                
@@ -138,28 +139,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
   
     <script>
-      var s=document.getElementById('sender1').value;
-      document.getElementById('sender').value=s;
+     /*用户-删除*/
+      function mess_del(obj,id){
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              location.href="offmessctrl/delete.do?detailid="+id;
+              $(obj).parents("tr").remove();
+              layer.msg('已删除!',{icon:1,time:1000});
+             
+          });
+      }
       
-      
-    function huifu(detailid){
+    function huifu(){
      document.getElementById("huifu").style.display="block"; 
     }
     
-     function check(form) {
-     alert("111");
-              if(form.title.value=='') {
+     function check() {
+              if($("#title").val()=='') {
                     alert("短信标题不能为空!");
-                    form.title.focus();
+                   $("#title").focus();
                     return false;
                }
-               if(form.content.value==''){
+                if($("#content").val()=='') {
                     alert("短信内容不能为空!");
-                    form.content.focus();
+                   $("#content").focus();
                     return false;
-                }
-                  document.myform.submit();
+               }
+                return true;
+                  
             }
+            
+            layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+          var form = layui.form
+          ,layer = layui.layer;
+        
+             //监听提交
+          form.on('submit(add)', function(data){
+            console.log(data);
+            $.ajax({
+		        type: 'post',
+		        url: "offmessctrl/huifu.do?detailid"+${shoedetail.detailid},
+		        data: data.field,
+		        
+		        success: function (res) {
+		            if (res.status == 200) {
+		                layer.alert(res.msg, {icon: 6}, function () {
+		                    // 获得frame索引
+		                    var index = parent.layer.getFrameIndex(window.name);
+		                    //关闭当前frame
+		                    parent.layer.close(index);
+		                   //刷新页面
+		                    parent.location.reload();
+		                });
+		                 //parent.layer.reload();
+		               
+		            } else {
+		                layer.alert(res.msg, {icon: 5}, function () {
+		                    // 获得frame索引
+		                    var index = parent.layer.getFrameIndex(window.name);
+		                    //关闭当前frame
+		                    parent.layer.close(index);
+		                    //刷新页面
+		                    parent.location.reload();
+		                });
+		            }
+		        }
+		    });
+		    return false;
+          });
+          
+        });
     
     </script>
   </body>

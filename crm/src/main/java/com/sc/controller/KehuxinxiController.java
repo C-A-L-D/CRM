@@ -3,6 +3,9 @@ package com.sc.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,5 +63,32 @@ public class KehuxinxiController {
 		xsk.setLasttime(new Date());
 		kehuxinxiService.updateKehuxinxi(xsk);
 		return new Result(200,"修改成功！");
+	}
+	
+	@RequestMapping("/KehuxinxiGoAdd.do")
+	public ModelAndView goAddKehuxinxi(ModelAndView mav){
+		System.out.println("添加新客户");
+		mav.setViewName("KehuJsp/AddKehuxinxi");
+		return mav;
+	}
+	
+	@RequestMapping("/addKehuxinxi.do")
+	@ResponseBody
+	public Result addKehuxinxi(ModelAndView mav,HttpServletRequest req,XiaoshouKehuxinxi xk){
+		System.out.println("添加客户："+xk);
+		xk.setLasttime(new Date());
+		kehuxinxiService.addKehuxinxi(xk);
+		return new Result(200,"添加成功！");
+	}
+	
+	@RequestMapping("/MohuchaxunKehuxinxi.do")
+	public ModelAndView mohuchaxunKehuxinxi(ModelAndView mav,
+			@RequestParam(defaultValue="1")Integer pageNum,
+			@RequestParam(defaultValue="10")Integer pageSize,
+			String kname){
+		System.out.println("模糊查询客户信息列表");
+		mav.addObject("klp", kehuxinxiService.mohuchaxunKehuxinxi(pageNum, pageSize, kname));
+		mav.setViewName("KehuJsp/Kehuxinxi");
+		return mav;
 	}
 }

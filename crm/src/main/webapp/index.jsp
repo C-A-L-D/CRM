@@ -74,22 +74,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <li >
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6e4;</i>
-                    <cite>进货-周官帝</cite>
+                    <cite>进货管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="gysxxctrl/gyslistpage.do"><i class="iconfont">&#xe6a7;</i><cite>图标字体</cite></a></li>
-                    <li><a _href="cgdctrl/cgdlistpage.do"><i class="iconfont">&#xe6a7;</i><cite>表单元素</cite></a></li>
-                    <li> <a _href="html/form2.html"><i class="iconfont">&#xe6a7;</i><cite>表单组合</cite></a></li>
-                    <li><a _href="html/buttons.html"><i class="iconfont">&#xe6a7;</i><cite>按钮</cite></a></li>
-                    <li><a _href="html/nav.html"><i class="iconfont">&#xe6a7;</i><cite>导航/面包屑</cite></a></li>
-                    <li><a _href="html/tab.html"><i class="iconfont">&#xe6a7;</i><cite>选项卡</cite></a></li>
-                    <li><a _href="html/progress-bar.html"><i class="iconfont">&#xe6a7;</i><cite>进度条</cite></a></li>
-                    <li><a _href="html/panel.html"><i class="iconfont">&#xe6a7;</i><cite>面板</cite></a></li>
-                    <li><a _href="html/badge.html"><i class="iconfont">&#xe6a7;</i><cite>微章</cite></a></li>
-                    <li><a _href="html/timeline.html"><i class="iconfont">&#xe6a7;</i><cite>时间线</cite></a></li>
-                    <li><a _href="html/table-element.html"><i class="iconfont">&#xe6a7;</i><cite>静态表格</cite></a></li>
-                    <li><a _href="html/anim.html"><i class="iconfont">&#xe6a7;</i><cite>动画</cite></a></li>
+                    <li><a _href="gysxxctrl/gyslistpage.do"><i class="iconfont">&#xe6a7;</i><cite>供应商管理</cite></a></li>
+                    <li><a _href="cgdctrl/cgdlistpage.do"><i class="iconfont">&#xe6a7;</i><cite>采购单管理</cite></a></li>
+                    <li> <a _href="xbhctrl/xbhlistpage.do"><i class="iconfont">&#xe6a7;</i><cite>需补货管理</cite></a></li>
                 </ul>
             </li>
             
@@ -258,7 +249,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                     </li>
                     <li>
-                        <a _href="html/echarts4.html">
+                        <a _href="power/selectAllPower.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>权限管理</cite>
                         </a>

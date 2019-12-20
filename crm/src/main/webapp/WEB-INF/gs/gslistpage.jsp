@@ -248,11 +248,7 @@ var url="../sysgsctrl/gspage.do?pageNum="+pageNum+"&gname="+$("#gname").val();
 		        url: "gsdeletesy.do",
 		        data: "aa="+data,
 		        success: function (res) {
-		           //$(obj).parents("tr").remove();
-		           layer.msg('已删除!',{icon:1,time:1000},function () {
-		              //刷新页面
-		              location.reload();
-		           });
+		           location.reload();
 		        }
 		    });
              $(".layui-form-checked").not('.header').parents('tr').remove(); 

@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'offmesslist.jsp' starting page</title>
+    <title>My JSP starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
     <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="lib/layui/css/modules/layer/default/layer.css">
     <link rel="stylesheet" type="text/css" href="lib/layui/css/layui.css">
     <script src="js/jquery.min.js"></script>
 	<script src="lib/layui/layui.js"></script>
@@ -31,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <div class="layui-card">
 
+<!-- 导航 -->
 <div class="x-nav">
       <span class="layui-breadcrumb" style="visibility: visible;">
         <a href="">库存</a><span lay-separator="">/</span>
@@ -38,29 +40,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a>
           <cite>导航元素</cite></a>
       </span>
-      <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
 </div>
 
 
-
+<!-- 查询 -->
 <form class="layui-form">
-<input type="text" name="gid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="display:inline; width:400px;">
-<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="display:inline; width:400px;">
-<button type="submit" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查找</button>  
-<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
+<input type="text" name="gid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="display:inline; width:500px;">
+<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="display:inline; width:500px;">
+<button type="submit" class="layui-btn layui-btn-normal sm"><i class="layui-icon">&#xe615;</i>查找</button>  
+<button type="reset" class="layui-btn sm"><i class="layui-icon">&#xe669;</i>清空</button>  
+<a type="reset" class="layui-btn layui-btn-danger sm" href="../CRM/storegoodsinfo/jsp/addsginfo.jsp"><i class="layui-icon">&#xe654;</i></a>
 </form>
 
+
+<!-- 表格 -->
   <table class="layui-table">
     <colgroup>
-      <col width="100">
-      <col width="100">
-      <col width="100">
-      <col width="100">
-      <col width="100">
-      <col width="100">
-	  <col width="100">
-      <col width="100">
+      <col width="200">
+      <col width="200">
+      <col width="200">
+      <col width="200">
+      <col width="150">
+      <col width="150">
+	  <col width="150">
+      <col width="300">
       <col>
     </colgroup>
     <thead>
@@ -70,34 +73,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <th><center>商品类别</center></th>
         <th><center>规格说明</center></th>
         <th><center>单位</center></th>
-      <!--   <th><center>仓库编号</center></th>   
-        <th><center>库存数量</center></th>  -->
         <th><center>成本价</center></th>
        <th><center>零售价</center></th>
-      <!--   <th><center>经销价</center></th>
-        <th><center>备注信息</center></th>
-        <th><center>公司编号</center></th>
-        <th><center>最后修改时间</center></th>   --> 
         <th><center>操作</center></th>
       </tr> 
     </thead>
     <tbody>
-		 <c:forEach items="${sgilist.list }" var="storeginfo">
+		 <c:forEach items="${listpage.list}" var="sgi">
 	  		<tr>
-		  		<td><center>${storeginfo.gid}</center></td>
-		  		<td><center>${storeginfo.gname}</center></td>
-		  		<td><center>${storeginfo.gcategopy}</center></td>
-		  		<td><center>${storeginfo.gdesp}</center></td>
-		  		<td><center>${storeginfo.gunit}</center></td>
-		  	<!-- 	<td><center>${storeginfo.whid}</center></td>   
-		  		<td><center>${storeginfo.storenum}</center></td>  -->
-		  		<td><center>${storeginfo.pricebuy}</center></td>
-		  		<td><center>${storeginfo.pricesold}</center></td>
-		  	 <!--	<td><center>${storeginfo.priceact}</center></td>
-		  		<td><center>${storeginfo.remark}</center></td>
-		  		<td><center>${storeginfo.cid}</center></td>
-		  		<td><center><fmt:formatDate value="${storeginfo.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></center></td>
-		  	-->	
+		  		<td><center>${sgi.gid}</center></td>
+		  		<td><center>${sgi.gname}</center></td>
+		  		<td><center>${sgi.gcategopy}</center></td>
+		  		<td><center>${sgi.gdesp}</center></td>
+		  		<td><center>${sgi.gunit}</center></td>
+		  		<td><center>${sgi.pricebuy}</center></td>
+		  		<td><center>${sgi.pricesold}</center></td>
 	      		<td>
 	      		<center>
 	      			<div class="layui-btn-group">
@@ -105,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          				<i class="layui-icon">&#xe65f;</i>
 	          			</button>
 	          			<button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe642;</i></button>
-	          			<button type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck()">
+	          			<button type="button" class="btn layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck(${storeginfo.gid})">
 	          				<i class="layui-icon">&#xe640;</i>
 	          			</button>
 	          		</div>
@@ -115,8 +105,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		</c:forEach>
 	</tbody>
   </table>
-<input type="hidden" id="tatol" readonly="readonly" value="${sgilist.total}">
-<center><div id="demo7"></div></center>
+  
+<!-- 分页 -->
+	  <center>
+      <div class="layui-elem-field layui-field-title" id="page">
+          <a class="layui-btn layui-btn-primary" href="storefinfo/listpage.do?pageNum=${listpage.firstPage}">首页</a>
+          <a class="layui-btn layui-btn-primary" href="storefinfo/listpage.do?pageNum=${listpage.prePage}">&lt;&lt;上一页</a>
+          <span class="layui-btn"> 当前${listpage.pageNum }/${listpage.pages }页</span>
+          <span class="layui-btn layui-btn-primary">共${listpage.total}条数据</span>
+          <a class="layui-btn layui-btn-primary" href="storefinfo/listpage.do?pageNum=${listpage.nextPage}">下一页&gt;&gt;</a>
+          <a class="layui-btn layui-btn-primary" href="storefinfo/listpage.do?pageNum=${listpage.lastPage }">尾页</a>       
+      </div>
+      </center>
+
 </div>
 </body>
+
+
 </html>

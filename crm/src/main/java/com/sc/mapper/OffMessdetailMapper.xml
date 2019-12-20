@@ -239,17 +239,44 @@
   </association>
    <!--  一对一的配置end -->
   </resultMap>
-<!--   <select id="select" resultMap="offmessMap1">
-  select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID
-  </select> -->
+
   <select id="select" resultMap="offmessMap1" >
-    select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
-    where OFF_MESSDETAIL.RECEIVERID=1 and OFF_MESSDETAIL.MESSSTATE!=0
+   select * from OFF_MESSDETAIL 
+LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
+LEFT JOIN SYS_USERS on SYS_USERS."USER_ID"=OFF_MESSDETAIL.RECEIVERID
+where SYS_USERS."USER_ID"=1 
+and
+    OFF_MESSDETAIL.RECEIVERID=SYS_USERS."USER_ID" 
+and 
+   OFF_MESSDETAIL.MESSSTATE!=0
 </select>
 <select id="showdetail" resultMap="offmessMap1" parameterType="java.lang.Long">
     select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
-    where OFF_MESSDETAIL.RECEIVERID=1 and OFF_MESSDETAIL.MESSSTATE!=0 
+    where  OFF_MESSDETAIL.MESSSTATE!=0 
     and OFF_MESSDETAIL.DETAILID=#{detailid,jdbcType=DECIMAL}
 </select>
  
+  <insert id="huifuone" parameterType="com.sc.entity.OffMessdetail" >
+    insert into OFF_MESSDETAIL (DETAILID, MESSID, RECEIVERID, 
+      MESSSTATE, COMPANYID, LASTTIME
+      )
+    values (#{detailid,jdbcType=DECIMAL}, #{messid,jdbcType=DECIMAL}, #{receiverid,jdbcType=DECIMAL}, 
+      #{messstate,jdbcType=VARCHAR}, #{companyid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <select id="selectsend" resultMap="offmessMap1" >
+   select * from OFF_MESSDETAIL 
+LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
+LEFT JOIN SYS_USERS on SYS_USERS."USER_ID"=OFF_MESSDETAIL.RECEIVERID
+where SYS_USERS."USER_ID"=1 
+and
+    OFF_MESSDETAIL.RECEIVERID=SYS_USERS."USER_ID" 
+and 
+   OFF_MESSDETAIL.MESSSTATE!=0
+</select>
+ <delete id="updatestate" parameterType="java.lang.Long" >
+ UPDATE OFF_MESSDETAIL SET OFF_MESSDETAIL.MESSSTATE=2 WHERE OFF_MESSDETAIL.DETAILID=#{detailid,jdbcType=DECIMAL}
+  </delete>
+  
+
 </mapper>
