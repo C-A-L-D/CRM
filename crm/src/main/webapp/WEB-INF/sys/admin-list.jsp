@@ -63,6 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>用户姓名</th>
             <th>联系电话</th>
             <th>身份</th>
+            <th>任职公司</th>
             <th>用户状态</th>
             <th>简介</th>
             <th>上次操作时间</th>
@@ -78,13 +79,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td>${all.sysUsersInfo.sname }</td>
             <td>${all.sysUsersInfo.sphone }</td>
             <td>${all.sysRole.rname }</td>
+            <td>${all.sysGongsiinfo.gname }</td>
             <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+              <span class="layui-btn layui-btn-normal layui-btn-mini ${all.ustate=='on' ? '1' : 'layui-btn-disabled' }">${all.ustate=="on" ? "已启用":"已停用" }</span></td>
             <td>${all.sysUsersInfo.sdescribe }</td>
             <td><fmt:formatDate value="${all.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'${all.userId }')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
+              <a onclick="member_stop(this,'${all.userId }')" href="javascript:;"  title="${all.ustate=='on' ? '停用':'启用' }">
+                <i class="layui-icon">${all.ustate=='on' ? '&#xe601;' : '&#xe62f;' }</i>
               </a>
               <a title="编辑"  onclick="x_admin_show('编辑','goUpdateUser.do?userId='+${all.userId })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
@@ -127,27 +129,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       function member_stop(obj,id){
           layer.confirm('确认修改用户状态吗？',function(data){
 
+				if($(obj).attr('title')=='启用'){
+					//发异步把用户状态进行更改
+	                $(obj).attr('title','停用')
+	                $(obj).find('i').html('&#xe601;');
+	
+	                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
+	                layer.msg('已启用!',{icon: 5,time:1000});
+	              }
+	              else {
+	                $(obj).attr('title','启用')
+	                $(obj).find('i').html('&#xe62f;');
+	
+	                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
+	                layer.msg('已停用!',{icon: 5,time:1000});
+	               
+              	  }
+
 			$.ajax({
 		        type: 'get',
 		        url: "updateUserStatus.do?userId="+id,
 		        data: data.field,
 		        success: function (res) {
-		           if($(obj).attr('title')=='启用'){
 
-	                //发异步把用户状态进行更改
-	                $(obj).attr('title','停用')
-	                $(obj).find('i').html('&#xe62f;');
-	
-	                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-	                layer.msg('已停用!',{icon: 5,time:1000});
-	
-	              }else{
-	                $(obj).attr('title','启用')
-	                $(obj).find('i').html('&#xe601;');
-	
-	                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-	                layer.msg('已启用!',{icon: 5,time:1000});
-              		}
 		           
 		        }
 		    });    

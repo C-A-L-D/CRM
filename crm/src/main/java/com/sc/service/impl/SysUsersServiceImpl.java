@@ -19,6 +19,12 @@ public class SysUsersServiceImpl implements SysUsersService{
 
 	@Autowired
 	SysUsersMapper sysUsersMapper;
+	
+	//办公
+	@Override
+	public List<SysUsers> selectuser(BigDecimal uid) {
+		return this.sysUsersMapper.selectuser(uid);
+	}
 
 	@Override
 	public SysUsers login(String u) {
@@ -69,6 +75,13 @@ public class SysUsersServiceImpl implements SysUsersService{
 	public SysUsers goUpdateUserOne(BigDecimal userId) {
 		// TODO Auto-generated method stub
 		return sysUsersMapper.selectByPrimaryKey(userId);
+	}
+
+
+	@Override
+	public SysUsers selectUsersAndRoleAndUsersInfoOne(BigDecimal userId) {
+		// TODO Auto-generated method stub
+		return sysUsersMapper.selectUsersAndRoleAndUsersInfoOne(userId);
 	}
 	
 		

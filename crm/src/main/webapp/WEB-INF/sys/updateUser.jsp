@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
-      <div class="layui-card-header">您所使用的角色编号：${user.uid }</div>
+      <div class="layui-card-header">您所使用的角色编号：${user.userId }</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">        
           <div class="layui-form-item">
@@ -44,36 +44,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="layui-inline">
               <label class="layui-form-label">操作员编号</label>
               <div class="layui-input-inline">
-                <input type="text" name="opertorid" value="${nowuser.uid }" autocomplete="on" class="layui-input" disabled="disabled">
+                <input type="text" name="opertorid" value="${nowuser.userId }" autocomplete="on" class="layui-input" disabled="disabled">
               </div>
             </div>
           </div>
           
           <div class="layui-form-item">
           	<div class="layui-inline">
-              <label class="layui-form-label">角色名称</label>
+              <label class="layui-form-label">用户账号</label>
               <div class="layui-input-inline">
-                <input type="text" name="rname" value="${RPOne.rname }" autocomplete="on" class="layui-input">
+                <input type="text" name="rname" value="${user.uname }" autocomplete="on" class="layui-input">
               </div>
             </div>
-          </div>
-          
-          
-           <div class="layui-form-item">
-            <label class="layui-form-label">角色描述</label>
-            <div class="layui-input-block">
-              <input type="text" name="rdescribe" value="${RPOne.rdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
+            <div class="layui-inline">
+              <label class="layui-form-label">员工编号</label>
+              <div class="layui-input-inline">
+                <input type="text" name="rname" value="${user.sid }" autocomplete="on" class="layui-input">
+              </div>
             </div>
-          </div>
-         
+          </div>      
           
           <div class="layui-form-item">
-            <label class="layui-form-label">上级角色</label>
+            <label class="layui-form-label">用户角色</label>
             <div class="layui-input-block">
-              <select name="headrid" lay-filter="aihao">
+              <select name="sysRole.rid" lay-filter="aihao">
                 <option value=""></option>
-                <c:forEach items="${allR }" var="all">
-                    <option value="${all.rid }" ${all.rid==RPOne.headrid ? "selected":""}>${all.rname }</option>
+                <c:forEach items="${allRole }" var="all">
+                    <option value="${all.rid }" ${all.rid==user.sysRole.rid ? "selected":""}>${all.rname }</option>
                 </c:forEach>
                </select>
             </div>
@@ -82,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
               <div class="layui-footer" style="left: 0;">
-                <button class="layui-btn" lay-submit="" lay-filter="add">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="add">确认修改</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
               </div>
             </div>
@@ -105,7 +102,7 @@ layui.use(['form','layer'], function(){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "updateRle.do?rid="+${RPOne.rid },
+		        url: "updateUser.do?userId="+${user.userId },
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {

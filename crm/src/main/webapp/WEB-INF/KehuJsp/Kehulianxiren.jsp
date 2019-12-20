@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a>
-          <cite style="color: red;"><h2>客户信息管理</h2></cite></a>
+          <cite style="color: red;"><h2>客户联系人</h2></cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -40,61 +40,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" action="MohuchaxunKehuxinxi.do">
-          <input type="text" name="kname"  placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+          <input type="text" name="kname"  placeholder="请输入联系人名称" autocomplete="off" class="layui-input">
           <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" value=""><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
+      	<button class="layui-btn" style="background-color: purple;" onsubmit="false">客户：${kname }</button>
         <button class="layui-btn" onclick="x_admin_show('添加用户','KehuxinxiGoAdd.do')" href="javascript:;"><i class="layui-icon"></i>添加客户</button>
-        <span class="x-right" style="line-height:40px;font-size:20px;">共有数据：${klp.total } 条</span>
+        <button class="layui-btn" style="background-color: black;">返回上一级</button>
+        <button class="layui-btn" style="background-color: red;">批量删除</button>
+        <span class="x-right" style="line-height:40px;font-size:20px;">共有数据：${lxr.total } 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
           <tr>
-            <th>客户编号</th>
-            <th>客户名称</th>
-            <th>客户属性</th>
-            <th>客户状态</th>
-            <th>支付方式</th>
-            <th>订单状态</th>
-            <th>固定电话</th>
-            <th>移动电话</th>
-            <th>公司编号</th>
-            <th>下次联系时间</th>
+          	<th>
+         		<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+      		</th>
+            <th>联系人编号</th>
+            <th>联系人姓名</th>
+            <th>英文名</th>
+            <th>职务</th>
+            <th>部门</th>
+            <th>手机</th>
+            <th>办公电话</th>
+            <th>电子邮件</th>
+            <th>地址</th>
+            <th>备注信息</th>
             <th>操作</th>
             </tr>
         </thead>
         <tbody>
-        	<c:forEach items="${klp.list}" var="k">
+        	<c:forEach items="${lxr.list}" var="r">
 		          <tr>
-		            <td>${k.kid }</td>
-		            <td>${k.kname }</td>
-		            <td>${k.kshuxin }</td>
-		            <td>${k.kehuzhuangtai }</td>
-		            <td>${k.zhifufangshi }</td>
-		            <td>${k.shifouyouxiao }</td>
-		            <td>${k.gudingdianhua }</td>
-		            <td>${k.yidongdianhua }</td>
-		            <td>${k.gid }</td>
-		            <td>${k.xiacilianxishijian }</td>
-		            <td class="td-manage">
-		              <a title="详细信息"  onclick="x_admin_show('详细信息','KehuxiangxiPage.do?kid=${k.kid}')" href="javascript:;">
-		                <i class="layui-icon">&#xe63c;</i>
-		              </a>
-		              &nbsp;
-		              <a title="编辑信息"  onclick="x_admin_show('编辑信息','KehuxiangxiGoUpdatePage.do?kid=${k.kid}')" href="javascript:;">
-		                <i class="layui-icon">&#xe63c;</i>
-		              </a>
-		              &nbsp;
-		              <a title="联系人" href="../Kehulianxirenctrl/KehulianxirenListPage.do?kid=${k.kid}&kname=${k.kname}">
+		          	<td>
+              			<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+           		 	</td>
+		            <td>${r.lid }</td>
+		            <td>${r.lianxirenxingming }</td>
+		            <td>${r.yingwenming }</td>
+		            <td>${r.zhiwu }</td>
+		            <td>${r.bumen }</td>
+		            <td>${r.shouji }</td>
+		            <td>${r.bangongdianhua }</td>
+		            <td>${r.dianziyoujian }</td>
+		            <td>${r.dizhi }</td>
+		            <td>${r.beizhuxinxi }</td>
+		            <td>
+		              <a title="联系人编辑"  onclick="x_admin_show('联系人编辑','KehuxiangxiGoUpdatePage.do?kid=${k.kid}')" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
 		              <a title="联系记录"  onclick="x_admin_show('客户联系记录','order-view.html')" href="javascript:;">
-		                <i class="layui-icon">&#xe63c;</i>
-		              </a>
-		              &nbsp;
-		              <a title="反馈记录"  onclick="x_admin_show('客户反馈记录','order-view.html')" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		            </td>
@@ -104,11 +101,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </table>
       <div class="page">
         <div>
-          <a class="num" href="KehuxinxiListPage.do?pageNum=${klp.firstPage }">首页</a>
-          <a class="prev" href="KehuxinxiListPage.do?pageNum=${klp.prePage }" title="上一页">&lt;&lt;</a>
-          <span class="current"> 当前${klp.pageNum }/${klp.pages }页</span>
-          <a class="next" href="KehuxinxiListPage.do?pageNum=${klp.nextPage }" title="下一页">&gt;&gt;</a>
-          <a class="num" href="KehuxinxiListPage.do?pageNum=${klp.lastPage }">尾页</a>
+          <a class="num" href="KehulianxirenListPage.do?pageNum=${lxr.firstPage }&kid=${kid}&kname=${kname}">首页</a>
+          <a class="prev" href="KehulianxirenListPage.do?pageNum=${lxr.prePage }&kid=${kid}&kname=${kname}" title="上一页">&lt;&lt;</a>
+          <span class="current"> 当前${lxr.pageNum }/${lxr.pages }页</span>
+          <a class="next" href="KehulianxirenListPage.do?pageNum=${lxr.nextPage }&kid=${kid}&kname=${kname}" title="下一页">&gt;&gt;</a>
+          <a class="num" href="KehulianxirenListPage.do?pageNum=${lxr.lastPage }&kid=${kid}&kname=${kname}">尾页</a>
         </div>
       </div>
 

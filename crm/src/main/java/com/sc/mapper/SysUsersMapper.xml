@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysUsersMapper" >
+	<select id="selectuser" resultMap="BaseResultMap" parameterType="java.math.BigDecimal">
+	  select * from SYS_USERS where SYS_USERS."USER_ID" != #{userId,jdbcType=DECIMAL}
+	  </select>
+	  
+	 <select id="selectu" resultMap="BaseResultMap" parameterType="java.lang.String">
+	  select * from SYS_USERS where SYS_USERS.UNAME=#{uname,jdbcType=VARCHAR}
+	 </select>
+	
+
+
 	<resultMap type="SysUsers" id="sysUsersMapper" autoMapping="true">
       <id column="USER_ID" property="userId"/>
       <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
@@ -34,7 +44,7 @@
       </association>
    </resultMap>
 	<select id="selectAllUsersAndRoleAndUsersInfo" resultMap="sysAllUsersMapper">
-		SELECT u.*,r.rname,UI.SNAME,UI.SPHONE,UI.SDESCRIBE FROM SYS_USERS u
+		SELECT u.*,r.rname,UI.SNAME,UI.SPHONE,UI.SDESCRIBE,g.GNAME FROM SYS_USERS u
 		LEFT JOIN SYS_USERS_ROLE ur
 		ON u."USER_ID"=ur."UID"
 		LEFT JOIN SYS_ROLE r
@@ -42,6 +52,26 @@
 		WHERE u.SID=ui.SID AND u.GONGSIID=g.ID
    </select>
 
+	<resultMap type="SysUsers" id="sysUsersOneMapper" autoMapping="true">
+      <id column="USER_ID" property="userId"/>
+      <association property="sysRole" javaType="SysRole" autoMapping="true">
+          <id column="RID" property="rid"/>
+      </association>
+      <association property="sysUsersInfo" javaType="SysUsersInfo" autoMapping="true">
+          <id column="SID" property="sid"/>
+      </association>
+      <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
+          <id column="ID" property="id"/>
+      </association>
+   </resultMap>
+	<select id="selectUsersAndRoleAndUsersInfoOne" resultMap="sysUsersOneMapper">
+		SELECT u.*,r.RID,r.RNAME,UI.SNAME,UI.SPHONE,UI.SDESCRIBE,g.GNAME FROM SYS_USERS u
+		LEFT JOIN SYS_USERS_ROLE ur
+		ON u."USER_ID"=ur."UID"
+		LEFT JOIN SYS_ROLE r
+		ON ur."RID"=r."RID",SYS_USERSINFO ui,SYS_GONGSIINFO g
+		WHERE u.SID=ui.SID AND u.GONGSIID=g.ID AND u."USER_ID"=#{userId}
+   </select>
 
 
 
