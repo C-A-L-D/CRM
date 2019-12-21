@@ -30,7 +30,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     
-      
+    
+       
    
   
    
@@ -87,9 +88,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                </td>
                   <td >
               
-                 <c:if test="${u.isrk=='已入库' }">已入库
+                 <c:if test="${jc.fkqk=='已付款' }">已付款
                  </c:if>
-				 <c:if test="${u.isrk=='未入库' }">
+				 <c:if test="${jc.fkqk=='未付款' }">
 			  <div class="layui-btn-container">
               <div class="layui-btn-group">
                 <a title="添加" onclick="x_admin_show('添加','cgdxqgoadd.do?id=${u.cgdId }&rk=${u.isrk }',650,650)" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe654;</i></a>

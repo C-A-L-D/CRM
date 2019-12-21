@@ -3,6 +3,7 @@ package com.sc.controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.JhCgd;
+import com.sc.entity.JhCgdxq;
 import com.sc.entity.JhGysxx;
 import com.sc.service.JhCgdService;
 import com.sc.service.JhCgdxqService;
@@ -36,6 +38,7 @@ public class JhCgdController {
 		System.out.println("查询用户列表-分页！");
 		
 		
+			
 		//查询list集合-分页     ${page.list}
 		mav.addObject("p", jhCgdService.selectpage(pageNum, pageSize,jc));
 		

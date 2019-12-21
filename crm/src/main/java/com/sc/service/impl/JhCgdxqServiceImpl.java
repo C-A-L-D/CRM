@@ -23,6 +23,7 @@ public class JhCgdxqServiceImpl implements JhCgdxqService {
 	public PageInfo<JhCgdxq> selectpage(Integer pageNum, Integer pageSize, JhCgd jc) {
 		PageHelper.startPage(pageNum, pageSize);
 		JhCgdxqExample ex=new JhCgdxqExample();
+		ex.setOrderByClause("CG_XQ_ID asc");
 		Criteria criteria = ex.createCriteria();
 		//查询当前页的集合数据	
 		if(jc!=null){

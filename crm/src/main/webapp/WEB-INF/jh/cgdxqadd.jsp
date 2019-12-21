@@ -106,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   autocomplete="off" class="layui-input">
                    <input type="hidden"  value="${x}" 
                   name="cgdId" autocomplete="off" class="layui-input">
-                  <input type="hidden"  value="${xx}" 
+                  <input type="hidden"  value="未入库" 
                   name="isrk" autocomplete="off" class="layui-input">
                   <input type="hidden"  value="${cgd.gsId}" 
                   name="gsId" autocomplete="off" class="layui-input">

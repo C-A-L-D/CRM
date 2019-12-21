@@ -26,6 +26,7 @@ public class JhCgdServiceImpl implements JhCgdService {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		JhCgdExample ex=new JhCgdExample();
+		ex.setOrderByClause(" CGD_ID asc ");
 		com.sc.entity.JhCgdExample.Criteria criteria = ex.createCriteria();
 		//查询当前页的集合数据	
 		if(jc!=null){

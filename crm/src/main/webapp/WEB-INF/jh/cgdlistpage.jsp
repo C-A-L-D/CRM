@@ -112,14 +112,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                </td>
                   <td  class="td-status">
                
-                 <c:if test="${u.fkqk=='未付款' }"> 
+                 <c:if test="${u.cgJz=='已入库'&&u.fkqk=='未付款' }"> 
                  <a href="../cgdctrl/fk.do?cgdId=${u.cgdId  }" >
                  <span class="layui-btn layui-btn-normal layui-btn-mini">付款</span>
                  </a>   
                  </c:if>
                  
-                 <c:if test="${u.fkqk=='已付款' }">
-                                               已付款
+                 <c:if test="${u.fkqk=='已付款'&&u.cgJz=='已入库' }">
+                                         
                  </c:if>
                  
                  
