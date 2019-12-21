@@ -1,11 +1,16 @@
 package com.sc.controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,6 +117,34 @@ public class SysBMController {
 			this.sysDepartmentService.delete(info);
 		}
 		
+		
+	}
+	
+	//导出excel
+	@RequestMapping("/bmexcel.do")
+	@ResponseBody
+	public void bmexcel1(HttpServletResponse response){
+		System.out.println("111");	
+		XSSFWorkbook wb =sysDepartmentService.show();
+	    String fileName = "部门详情报表.xlsx";
+	    
+	    OutputStream outputStream =null;
+	    try {
+	        fileName = URLEncoder.encode(fileName,"UTF-8");
+	        //设置ContentType请求信息格式
+	        response.setContentType("application/vnd.ms-excel");
+	        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+	        outputStream = response.getOutputStream();
+	        wb.write(outputStream);
+	        outputStream.flush();
+	        outputStream.close();
+	    } catch (UnsupportedEncodingException e) {
+	    	
+	        e.printStackTrace();
+	    } catch (IOException e) {
+	    	
+	        e.printStackTrace();
+	    }
 		
 	}
 	

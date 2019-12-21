@@ -44,19 +44,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           
-            <div class="layui-form-item">
-              <label for="phone" class="layui-form-label">
-                  <span class="x-red">*</span>部门名称
+            <%--  --%>
+          
+          <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>公司名称
               </label>
               <div class="layui-input-inline">
-              <!--     <input type="text" id="did" name="did" required lay-verify="required"
+                <!--   <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
                   autocomplete="off" class="layui-input"> -->
-                  
-                 <select id="did" name="did" class="layui-input"> 
-                   <c:forEach items="${p2 }" var="v2">
-                    <option value="${v2.did }"> ${v2.dname }</option>
-                   </c:forEach>
-                   </select>      
+                 <select id="gongsiid" name="gongsiid" class="layui-input" lay-filter="gs" lay-select="">
+                   <option value="">请选择</option>
+                   <c:forEach items="${p1 }" var="v1">
+                    <option value="${v1.id }" >${v1.gname }</option>
+                   </c:forEach>              
+                   </select>                  
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
@@ -77,20 +79,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           
           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>公司名称
+              <label for="phone" class="layui-form-label">
+                  <span class="x-red">*</span>部门名称
               </label>
               <div class="layui-input-inline">
-                <!--   <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
+              <!--     <input type="text" id="did" name="did" required lay-verify="required"
                   autocomplete="off" class="layui-input"> -->
-                    <select id="gongsiid" name="gongsiid" class="layui-input">
                   
-                   <c:forEach items="${p1 }" var="v1">
-                    <option value="${v1.id }">${v1.gname }</option>
-                   </c:forEach>
-                   
-                   </select>
-                  
+                 <select id="did" name="did" class="layui-input"> 
+                 <option value="">请选择</option>
+                   <%-- <c:forEach items="${p2 }" var="v2">
+                    <option value="${v2.did }"> ${v2.dname }</option>
+                   </c:forEach> --%>
+                   </select>      
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
@@ -108,6 +109,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     
 <script type="text/javascript">
+
+
+
   layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
@@ -161,8 +165,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    });
 		    return false;
           });
+           //
+        
+          form.on('select(gs)', function(data){
+         console.log(data);
+       
+          layer.msg($("#gongsiid").val()); 
+        var   id=$("#gongsiid").val(); 
+       /*  alert($("#gongsiid").val()) */
+          $.ajax({
+	            type: 'post',
+			    url: "jobgl.do",
+			    data: "gongsiid="+id,
+	            success: function (list) {
+	              console.log(list);
+	              
+            	  $("#did").empty();
+            	   
+            	  $("#did").append("<option value=''>-- 请选择 --</option>");
+            	  for(var i=0;i<list.length;i++){
+            	     $("#did").append("<option value='"+list[i].did+"'>"+list[i].dname+"</option>")
+            	  }
+            	  console.log($("#did").html());
+                  form.render('select');
+                }
+           }); 
+              
+         }); 
           
         });
+       
+      
+        
+  /*       $("#gongsiid").change(function () {
+        alert("123");
+        $.ajax({
+		        type: 'post',
+		        url: "department.do?gongsiid="+ ${gongsiid },
+		        data: data.field,
+		        success: function (res) {
+		            if (res.status == 200) {
+		                layer.alert(res.msg, {icon: 6}, function () {
+		                    
+		                });
+		                 
+		               
+		            } else {
+		                layer.alert(res.msg, {icon: 5}, function () {
+		                   
+		                });
+		            }
+		        }
+		    }); */
+        
+    
+
 </script>
   </body>
 </html>
