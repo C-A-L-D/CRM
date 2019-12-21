@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.JhGysxx;
-import com.sc.entity.JhGysxxExample;
 import com.sc.entity.Result;
 import com.sc.service.JhGysxxService;
 
@@ -91,12 +90,12 @@ public class JhGysxxController {
 	
 	//删除供应商
 	@RequestMapping("/gysdelete.do")
-	public ModelAndView gysdelete(ModelAndView mav,JhGysxx u){
+	@ResponseBody
+	public void gysdelete(ModelAndView mav,JhGysxx u){
 		System.out.println("供应商删除！"+u);
 		JhGysxx u1 = this.jhGysxxService.get(u.getGysId());
 		this.jhGysxxService.delete(u1);
-		mav.setViewName("redirect:gyslistpage.do");
-		return mav;
+	
 	}
 	
 
