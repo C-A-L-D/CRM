@@ -1,15 +1,12 @@
 package com.sc.realm;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -45,11 +42,18 @@ public class CustomRealmMD5 extends AuthorizingRealm{
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
-		String username=(String)arg0.getPrincipal();
+		String username= (String) arg0.getPrincipal();
+		
+		String gsIdStr=username.split("=")[1];
+		username=username.split("=")[0];
+		
+		BigDecimal  gsId= new BigDecimal(gsIdStr);
+		
+		System.out.println("需要认证的公司编号："+gsId);
 		System.out.println("需要认证的用户名："+username);
 		
-		SysUsers sysUser = sysUsersService.login(username);
-		
+		SysUsers sysUser = sysUsersService.login(username, gsId);
+		System.out.println("---------------------"+sysUser);
 		if(sysUser==null){
 			System.out.println("没有此用户...");
 			return null;

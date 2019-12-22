@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>修改角色信息</title>
+    <title>修改密码</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -31,12 +31,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
-      <div class="layui-card-header">您所修改的角色编号：${RPOne.rid }</div>
+      <div class="layui-card-header"><span style="color: red;">温馨提示：</span>及时修改密码，降低账号被盗风险！</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">        
           <div class="layui-form-item">
             <div class="layui-inline">
-              <label class="layui-form-label">操作员</label>
+              <label class="layui-form-label">用户名</label>
               <div class="layui-input-inline">
                 <input type="text" name="phone" value="${nowuser.uname }" lay-verify="" class="layui-input" readonly="readonly" disabled="disabled">
               </div>
@@ -48,37 +48,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
             </div>
           </div>
-          
-          <div class="layui-form-item">
-          	<div class="layui-inline">
-              <label class="layui-form-label">角色名称</label>
-              <div class="layui-input-inline">
-                <input type="text" name="rname" value="${RPOne.rname }" autocomplete="on" class="layui-input">
-              </div>
+
+           <div class="layui-form-item">
+            <label class="layui-form-label">旧密码</label>
+            <div class="layui-input-block">
+              <input type="password" name="upassword" value="" autocomplete="off" placeholder="请输入旧密码" class="layui-input">
             </div>
           </div>
-          
-          
-           <div class="layui-form-item">
-            <label class="layui-form-label">角色描述</label>
-            <div class="layui-input-block">
-              <input type="text" name="rdescribe" value="${RPOne.rdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
-            </div>
+
+         <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>新密码
+              </label>
+              <div class="layui-input-block">
+                  <input type="password" id="L_pass" name="pass" required placeholder="请输入新密码" lay-verify="pass"
+                  autocomplete="off" class="layui-input">
+              </div>
+          </div>
+          <div class="layui-form-item">
+              <label for="L_repass" class="layui-form-label">
+                  <span class="x-red">*</span>确认密码
+              </label>
+              <div class="layui-input-block">
+                  <input type="password" id="L_repass" name="repass" required placeholder="请再次确认密码" lay-verify="repass"
+                  autocomplete="off" class="layui-input">
+              </div>
           </div>
          
-          
-          <div class="layui-form-item">
-            <label class="layui-form-label">上级角色</label>
-            <div class="layui-input-block">
-              <select name="headrid" lay-filter="aihao">
-                <option value=""></option>
-                <c:forEach items="${allR }" var="all">
-                    <option value="${all.rid }" ${all.rid==RPOne.headrid ? "selected":""}>${all.rname }</option>
-                </c:forEach>
-               </select>
-            </div>
-          </div>
-          
+
             <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
               <div class="layui-footer" style="left: 0;">
@@ -100,12 +97,23 @@ layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
+        
+          //自定义验证规则
+          form.verify({
+            pass: [/(.+){6,12}$/, '密码必须6到12位']
+            ,repass: function(value){
+                if($('#L_pass').val()!=$('#L_repass').val()){
+                    return '两次密码不一致';
+                }
+            }
+          });
+
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);
             $.ajax({
-		        type: 'post',
-		        url: "updateRle.do?rid="+${RPOne.rid },
+		        type: 'get',
+		        url: "updatePassword.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
@@ -114,25 +122,22 @@ layui.use(['form','layer'], function(){
 		                    var index = parent.layer.getFrameIndex(window.name);
 		                    //关闭当前frame
 		                    parent.layer.close(index);
-		                   //刷新页面
-		                    parent.location.reload();
+		                    //退出登录,重新登录
+		                    $(location).prop('href', '<%=basePath %>logout.do');
+		                    top.location.reload();
 		                });
 		               
 		            } else {
 		                layer.alert(res.msg, {icon: 5}, function () {
 		                    // 获得frame索引
 		                    var index = parent.layer.getFrameIndex(window.name);
-		                    //关闭当前frame
-		                    parent.layer.close(index);
-		                    //刷新页面
-		                    parent.location.reload();
+		                    location.reload(index);
 		                });
 		            }
 		        }
 		    });
 		    return false;
           });
-          
         });
   </script>
 

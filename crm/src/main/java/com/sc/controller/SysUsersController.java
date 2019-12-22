@@ -1,6 +1,9 @@
 package com.sc.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
@@ -24,6 +28,9 @@ import com.sc.entity.Result;
 import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysRole;
 import com.sc.entity.SysUsers;
+import com.sc.entity.SysUsersInfo;
+import com.sc.service.SysUsersInfoService;
+import com.sc.service.impl.SysGongsiinfoServiceImpl;
 import com.sc.service.impl.SysRoleServiceImpl;
 import com.sc.service.impl.SysUsersServiceImpl;
 
@@ -35,6 +42,8 @@ public class SysUsersController {
 	SysUsersServiceImpl sysUsersServiceImpl;
 	@Autowired
 	SysRoleServiceImpl sysRoleServiceImpl;
+	@Autowired
+	SysUsersInfoService sysUsersInfoService;
 	
 	/**
 	 * 登录失败
@@ -57,6 +66,8 @@ public class SysUsersController {
 				fail="error";//密码不正确
 			}else if(msg.equals("randomCodeError")){
 				fail="code";//验证码错误
+			}else if(msg.equals("GSError")){
+				fail="gs";//公司错误
 			}else{
 				fail="other";//未知错误
 			}
@@ -77,10 +88,11 @@ public class SysUsersController {
 		System.out.println("登录认证成功，将跳到主页...");
 		
 		Subject subject = SecurityUtils.getSubject();
-		
 		SysUsers sysUser=(SysUsers)subject.getPrincipal();
+		
+		
+		System.out.println("-----认证后的对象值："+sysUser);
 		session.setAttribute("nowuser", sysUser);
-		System.out.println("..............."+sysUser);
 		
 		mav.setViewName("redirect:../index.jsp");
 		return mav;
@@ -95,9 +107,109 @@ public class SysUsersController {
 	 */
 	@RequestMapping("/person.do")
 	public ModelAndView person(HttpServletRequest req,ModelAndView mav){
+		HttpSession session = req.getSession();
+		SysUsers user = (SysUsers) session.getAttribute("nowuser");
+		System.out.println("---------------"+user);
+		if (user != null) {
+			if (user.getGongsiid() != null) {
+				SysGongsiinfo selectGSOne = sysUsersServiceImpl.selectGSOne(user.getGongsiid());
+				mav.addObject("selectGSOne", selectGSOne);
+				System.out.println("---------------"+selectGSOne);
+			}
+			if (user.getUserId() != null) {
+				SysUsers role = sysUsersServiceImpl.selectUsersAndRoleAndUsersInfoOne(user.getUserId());
+				mav.addObject("role", role);
+				System.out.println("---------------"+role);
+			}
+			if (user.getUserId() != null) {
+				SysUsers one2 = sysUsersServiceImpl.selectUsersAndRoleAndUsersInfoOne2(user.getUserId());
+				mav.addObject("one", one2);
+				System.out.println("---------------"+one2);
+			}
+		}
+		
 		mav.setViewName("sys/person");
 		return mav;
 	}
+	
+	/**
+	 * 弹出修改密码框
+	 * @param mav
+	 * @return
+	 */
+	@RequestMapping("/goUpdatePassword.do")
+	public ModelAndView goUpdatePassword(ModelAndView mav, HttpSession session) {
+		mav.setViewName("sys/updatePassword");
+		return mav;	
+	}
+	
+	/**
+	 * 修改密码
+	 * @param pass
+	 * @param session
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updatePassword.do")
+	public Result updatePassword(String pass, String upassword, HttpSession session) {
+		SysUsers user = (SysUsers) session.getAttribute("nowuser");
+		Md5Hash oldmd5Hash = new Md5Hash(upassword, "qwerty", 3);
+		Md5Hash md5Hash = new Md5Hash(pass, "qwerty", 3);
+		System.out.println(oldmd5Hash+"------"+user.getUpassword());
+		if (String.valueOf(oldmd5Hash).equals(user.getUpassword())) {
+			System.out.println("修改了-------------");
+			user.setUpassword(String.valueOf(md5Hash));
+			user.setLasttime(new Date());
+			sysUsersServiceImpl.updatePassword(user);
+			return new Result(200, "密码修改成功");
+		}
+		else {
+			return new Result(400, "初始密码错误");
+		}
+		
+	}
+	
+	/**
+	 * 文件上传
+	 * @param upload
+	 * @param req
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	@ResponseBody
+	@RequestMapping("/uploadFile.do")
+	public Result uploadFile(MultipartFile file, HttpServletRequest req) throws IllegalStateException, IOException {
+		System.out.println("选中文件对象："+file);
+		if(file!=null){
+			//获取文件名
+			String filename=file.getOriginalFilename();
+			if(filename!=null&&!filename.equals("")){
+				//获取项目upload文件夹在Tomcat容器（磁盘）的真实路径
+				String path=req.getSession().getServletContext().getRealPath("upload");
+				System.out.println("upload的路径："+path);
+				
+				filename=System.currentTimeMillis() + filename.substring(filename.lastIndexOf("."));
+				
+				File f=new File(path+"/"+filename);
+				System.out.println("文件存储路径："+path+"/"+filename);
+				//转换存储文件
+				file.transferTo(f);
+				
+				SysUsers user = (SysUsers) req.getSession().getAttribute("nowuser");
+				SysUsersInfo sysUsersInfo = sysUsersInfoService.get(user.getSid());
+				System.out.println("员工信息表："+sysUsersInfo);
+				sysUsersInfo.setSphoto(filename);
+				
+				sysUsersInfoService.update(sysUsersInfo);
+				return new Result(200, "照片上传成功");
+			}
+			
+		}
+		
+		return new Result(400, "照片上传失败");
+	}
+	
 	
 	/**
 	 * 全部用户信息

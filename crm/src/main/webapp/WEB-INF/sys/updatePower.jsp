@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>修改角色信息</title>
+    <title>修改权限信息</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -31,38 +31,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
-      <div class="layui-card-header">您所修改的角色编号：${RPOne.rid }</div>
+      <div class="layui-card-header">您所修改的角色编号：${gp.pid }</div>
       <div class="layui-card-body" style="padding: 15px;">
-        <form class="layui-form" action="" method="post" lay-filter="component-form-group">        
-          <div class="layui-form-item">
-            <div class="layui-inline">
-              <label class="layui-form-label">操作员</label>
-              <div class="layui-input-inline">
-                <input type="text" name="phone" value="${nowuser.uname }" lay-verify="" class="layui-input" readonly="readonly" disabled="disabled">
-              </div>
-            </div>
-            <div class="layui-inline">
-              <label class="layui-form-label">操作员编号</label>
-              <div class="layui-input-inline">
-                <input type="text" name="opertorid" value="${nowuser.userId }" autocomplete="on" class="layui-input" disabled="disabled">
-              </div>
-            </div>
-          </div>
-          
+        <form class="layui-form" action="" method="post" lay-filter="component-form-group">         
           <div class="layui-form-item">
           	<div class="layui-inline">
-              <label class="layui-form-label">角色名称</label>
+              <label class="layui-form-label">权限名称</label>
               <div class="layui-input-inline">
-                <input type="text" name="rname" value="${RPOne.rname }" autocomplete="on" class="layui-input">
+                <input type="text" name="pname" value="${gp.pname }" autocomplete="on" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">权限</label>
+              <div class="layui-input-inline">
+                <input type="text" name="ppower" value="${gp.ppower }" autocomplete="on" class="layui-input">
               </div>
             </div>
           </div>
           
           
            <div class="layui-form-item">
-            <label class="layui-form-label">角色描述</label>
+            <label class="layui-form-label">备注信息</label>
             <div class="layui-input-block">
-              <input type="text" name="rdescribe" value="${RPOne.rdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
+              <input type="text" name="rdescribe" value="${gp.pdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
             </div>
           </div>
          

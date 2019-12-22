@@ -10,27 +10,6 @@
 	 </select>
 	
 
-
-	<resultMap type="SysUsers" id="sysUsersMapper" autoMapping="true">
-      <id column="USER_ID" property="userId"/>
-      <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
-          <id column="id" property="id"/>
-      </association>
-   </resultMap>
-	<select id="login" resultMap="sysUsersMapper">
-		SELECT * FROM SYS_USERS u
-		LEFT JOIN SYS_GONGSIINFO g
-		ON u.GONGSIID=g.ID
-	  <where>
-	  	<if test="UNAME != null">
-	  		and u.UNAME = #{uname }
-	  	</if>
-	  	<if test="ID != null">
-	  		and u.GONGSIID = #{id }
-	  	</if>
-	  </where>
-   </select>
-
 	<resultMap type="SysUsers" id="sysAllUsersMapper" autoMapping="true">
       <id column="USER_ID" property="userId"/>
       <association property="sysRole" javaType="SysRole" autoMapping="true">
@@ -57,21 +36,39 @@
       <association property="sysRole" javaType="SysRole" autoMapping="true">
           <id column="RID" property="rid"/>
       </association>
-      <association property="sysUsersInfo" javaType="SysUsersInfo" autoMapping="true">
-          <id column="SID" property="sid"/>
-      </association>
-      <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
-          <id column="ID" property="id"/>
-      </association>
    </resultMap>
 	<select id="selectUsersAndRoleAndUsersInfoOne" resultMap="sysUsersOneMapper">
-		SELECT u.*,r.RID,r.RNAME,UI.SNAME,UI.SPHONE,UI.SDESCRIBE,g.GNAME FROM SYS_USERS u
+		SELECT * FROM SYS_USERS u
 		LEFT JOIN SYS_USERS_ROLE ur
 		ON u."USER_ID"=ur."UID"
 		LEFT JOIN SYS_ROLE r
-		ON ur."RID"=r."RID",SYS_USERSINFO ui,SYS_GONGSIINFO g
-		WHERE u.SID=ui.SID AND u.GONGSIID=g.ID AND u."USER_ID"=#{userId}
+		ON ur."RID"=r."RID"
+		WHERE u.USER_ID=#{userId}
    </select>
+
+	<resultMap type="SysUsers" id="sysUsersOne2Mapper" autoMapping="true">
+      <id column="USER_ID" property="userId"/>
+      <association property="sysUsersInfo" javaType="SysUsersInfo" autoMapping="true">
+          <id column="SID" property="sid"/>
+      </association>
+      <association property="sysJobinfo" javaType="SysJobinfo" autoMapping="true">
+          <id column="JID" property="jid"/>
+      </association>
+      <association property="sysDepartment" javaType="SysDepartment" autoMapping="true">
+          <id column="DID" property="did"/>
+      </association>
+   </resultMap>
+	<select id="selectUsersAndRoleAndUsersInfoOne2" resultMap="sysUsersOne2Mapper">
+		SELECT * FROM SYS_USERS u
+		LEFT JOIN SYS_USERSINFO ui
+		ON u.SID=ui.SID
+		LEFT JOIN SYS_JOBINFO j
+		ON ui.SJOBID=j.JID
+		LEFT JOIN SYS_DEPARTMENT d
+		ON j.DID=d.DID
+		WHERE u.USER_ID=#{userId}
+   </select>
+
 
 
 

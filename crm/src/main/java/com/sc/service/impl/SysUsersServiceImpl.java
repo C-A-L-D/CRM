@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersExample;
 import com.sc.entity.SysUsersExample.Criteria;
+import com.sc.mapper.SysGongsiinfoMapper;
 import com.sc.mapper.SysUsersMapper;
 import com.sc.service.SysUsersService;
 
@@ -19,6 +21,8 @@ public class SysUsersServiceImpl implements SysUsersService{
 
 	@Autowired
 	SysUsersMapper sysUsersMapper;
+	@Autowired
+	SysGongsiinfoMapper sysGongsiinfoMapper;
 	
 	//办公
 	@Override
@@ -27,21 +31,32 @@ public class SysUsersServiceImpl implements SysUsersService{
 	}
 
 	@Override
-	public SysUsers login(String u) {
+	public SysUsers login(String uname) {
 		// TODO Auto-generated method stub
 		SysUsersExample example = new SysUsersExample();
 		Criteria criteria = example.createCriteria();
-		criteria.andUnameEqualTo(u);
-		List<SysUsers> selectByExample = this.sysUsersMapper.selectByExample(example);
-		return selectByExample.get(0) ;
+		criteria.andUnameEqualTo(uname);
+		List<SysUsers> list = this.sysUsersMapper.selectByExample(example);
+		if(list!=null&&list.size()>0){
+			return list.get(0) ;
+		}
+		return null ;
 	}
 	
 	
 	@Override
 	public SysUsers login(String uname, BigDecimal id) {
 		// TODO Auto-generated method stub
-		SysUsers sysUsers = this.sysUsersMapper.login(uname, id);
-		return sysUsers;
+		SysUsersExample example = new SysUsersExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUnameEqualTo(uname);
+		criteria.andGongsiidEqualTo(id);
+		List<SysUsers> selectByExample = this.sysUsersMapper.selectByExample(example);
+		System.out.println(selectByExample);
+		if (selectByExample!=null&&selectByExample.size()>0) {
+			return selectByExample.get(0);
+		}
+		return null;
 	}
 
 	@Override
@@ -82,6 +97,30 @@ public class SysUsersServiceImpl implements SysUsersService{
 	public SysUsers selectUsersAndRoleAndUsersInfoOne(BigDecimal userId) {
 		// TODO Auto-generated method stub
 		return sysUsersMapper.selectUsersAndRoleAndUsersInfoOne(userId);
+	}
+
+	@Override
+	public SysGongsiinfo selectGSOne(BigDecimal gongsiId) {
+		// TODO Auto-generated method stub
+		return sysGongsiinfoMapper.selectByPrimaryKey(gongsiId);
+	}
+
+	@Override
+	public SysUsers selectUsersinfoJobDepartment(BigDecimal userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SysUsers selectUsersAndRoleAndUsersInfoOne2(BigDecimal userId) {
+		// TODO Auto-generated method stub
+		return sysUsersMapper.selectUsersAndRoleAndUsersInfoOne2(userId);
+	}
+
+	@Override
+	public void updatePassword(SysUsers sysUsers) {
+		// TODO Auto-generated method stub
+		sysUsersMapper.updateByPrimaryKey(sysUsers);
 	}
 	
 		
