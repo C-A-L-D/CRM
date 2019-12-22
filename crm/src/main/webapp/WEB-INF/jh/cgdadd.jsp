@@ -48,8 +48,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="x-red">*</span>  供应商编号：
               </label>
               <div class="layui-input-inline">
-              <input type="text"  name="gysId" id="gysId" 
-                  autocomplete="off" class="layui-input" lay-verify="required">
+                 
+              <select name="gysId" id="gysId" lay-filter="gysId" lay-select="">
+              <option value=""></option>          
+              <c:forEach items="${gs }" var="u">
+               <option value="${u.gysId }">${u.gysId }</option>
+              </c:forEach>             
+              </select>
+             
               
                </div>
           </div>
@@ -109,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <span class="x-red">*</span> 公司编号：
               </label>
               <div class="layui-input-inline">
-                  <input type="text"  name="gsId" required 
+                  <input type="text"  name="gsId" id="gsId" required disabled="disabled"
                   autocomplete="off" class="layui-input" lay-verify="required">
               </div>
           </div>    
@@ -165,10 +171,26 @@ layui.use(['form','layer'], function(){
 		    return false;
           });
           
-    });
+   
 
-  
-
+   form.on('select(gysId)', function(data){
+            
+            var id=$("#gysId").val();
+            console.log(id);
+             console.log("123");
+            $.ajax({
+		        type: 'post',
+		        url: "getGysxx.do",
+		        data: "gysId="+id,
+		        success: function (info) {
+		            console.log(info);
+		            $("#gsId").val(info.gsId);
+		        
+		        }
+		    });
+         });
+          });
+ 
 </script>
   
   

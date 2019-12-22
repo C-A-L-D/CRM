@@ -48,11 +48,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <input class="layui-input" placeholder="截止日" name="end" id="end"> -->
           <input type="text" name="sname" id="sname" value="${info1.sname }" placeholder="请输入员工名称" autocomplete="off" class="layui-input">
           <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" ><i class="layui-icon">&#xe615;</i></button>
+          
         </form>
+        
+     
+     
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加员工','yggotj.do',900,670)"><i class="layui-icon"></i>添加</button>
+    <a href="ygexcel.do">   
+    <button class="layui-btn layui-btn-warm"   >导出excel</button>
+    </a>
         <span class="x-right" style="line-height:40px">共有数据：${p.total } 条</span>
       </xblock>
       <table class="layui-table">
@@ -81,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>公司编号</th>
             <th>最后修改时间</th>
             <th>操作</th>
-          
+          <!-- 20 -->
     </tr>
         </thead>
         <c:forEach items="${p.list }" var="u">

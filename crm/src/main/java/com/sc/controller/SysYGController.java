@@ -2,11 +2,17 @@ package com.sc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.net.URLEncoder;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.Result;
-
+import com.sc.entity.SysDepartment;
+import com.sc.entity.SysJobinfo;
 import com.sc.entity.SysUsersInfo;
+import com.sc.entity.Ygexcel;
 import com.sc.service.SysUsersInfoService;
 
 @Service
@@ -25,6 +33,7 @@ import com.sc.service.SysUsersInfoService;
 public class SysYGController {
 @Autowired
 SysUsersInfoService sysUsersInfoService;
+
 
 //公司分页list
 @RequestMapping("/ygpage.do")
@@ -60,7 +69,7 @@ public ModelAndView gsxx(ModelAndView mav,SysUsersInfo info1){
 public ModelAndView gsgotj(ModelAndView mav){
 	System.out.println("公司去添加！");
 	mav.addObject("p1", sysUsersInfoService.select1());
-	mav.addObject("p3", sysUsersInfoService.select3());
+	/*mav.addObject("p3", sysUsersInfoService.select3());*/
 	mav.setViewName("gs/ygtj");
 	return mav;
 }
@@ -109,7 +118,7 @@ public ModelAndView goupdate(ModelAndView mav,SysUsersInfo info1,MultipartFile u
 	System.out.println("原有的数据"+info);
 	
 	mav.addObject("p1", sysUsersInfoService.select1());
-	mav.addObject("p3", sysUsersInfoService.select3());
+	mav.addObject("p3", sysUsersInfoService.select3(info));
 	mav.addObject("u", info);
 	mav.setViewName("gs/ygupdate");
 	return mav;
@@ -172,10 +181,45 @@ public void gsdelete(ModelAndView mav,String aa){
 	for (String xx : ss) {
 		SysUsersInfo info = this.sysUsersInfoService.get(new BigDecimal(xx));
 		this.sysUsersInfoService.delete(info);
-	}
-	
+	}	
+}
+
+//导出excel
+@RequestMapping("/ygexcel.do")
+@ResponseBody
+public void ygexcel1(HttpServletResponse response){
+	System.out.println("111");	
+	XSSFWorkbook wb =sysUsersInfoService.show();
+    String fileName = "员工报表.xlsx";
+    
+    OutputStream outputStream =null;
+    try {
+        fileName = URLEncoder.encode(fileName,"UTF-8");
+        //设置ContentType请求信息格式
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        outputStream = response.getOutputStream();
+        wb.write(outputStream);
+        outputStream.flush();
+        outputStream.close();
+    } catch (UnsupportedEncodingException e) {
+    	
+        e.printStackTrace();
+    } catch (IOException e) {
+    	
+        e.printStackTrace();
+    }
 	
 }
 
+//关联其他表
+@RequestMapping("/yggl.do")
+@ResponseBody
+public List<SysJobinfo> yggl(SysUsersInfo info1){
+	System.out.println("关联其他表");	
+	List<SysJobinfo> list = this.sysUsersInfoService.gszw(info1);
+	System.out.println(list);
+	return  list;
+}
 
 }

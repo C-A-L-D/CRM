@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysDepartmentMapper" >
+    <!-- column是数据库  property是表-->
+  <!-- <resultMap type="SysGongsiinfo" id="sysGongsiinfoMapper">
+  <id column="ID" property="id"/>
+  <collection property="sysDepartments" ofType="SysDepartment" autoMapping="true">
+  <id column="DID" property="did"/>
+  </collection>
+  </resultMap>
+  
+ <select id="bmlistpage" resultMap="sysGongsiinfoMapper">
+SELECT * FROM SYS_GONGSIINFO gs
+LEFT JOIN SYS_DEPARTMENT bm
+ON gs.ID=bm.GONGSIID
+ </select> -->
+   
+  
   <resultMap id="BaseResultMap" type="com.sc.entity.SysDepartment" >
     <constructor >
       <idArg column="DID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -211,4 +226,8 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where DID = #{did,jdbcType=DECIMAL}
   </update>
+  
+  
+ 
+  
 </mapper>
