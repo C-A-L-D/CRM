@@ -26,10 +26,12 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		JhGysxxExample ex=new JhGysxxExample();
-		Criteria criteria = ex.createCriteria();
+	    ex.setOrderByClause("GYS_ID asc");
+		
 		
 		if(u!=null){
 		if(u.getGysName()!=null&&!u.getGysName().equals("")){
+			Criteria criteria = ex.createCriteria();
 			criteria.andGysNameLike("%"+u.getGysName()+"%");
 		}
 		}
@@ -81,5 +83,15 @@ public class JhGysxxServiceImpl implements JhGysxxService {
 			}
 
 	}
+
+
+	
+	@Override
+	public List<JhGysxx> select() {
+		return this.jhGysxxMapper.selectByExample(null);
+	}
+
+
+
 
 }

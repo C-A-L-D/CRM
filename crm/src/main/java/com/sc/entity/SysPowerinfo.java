@@ -2,6 +2,7 @@ package com.sc.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class SysPowerinfo implements Serializable {
@@ -40,8 +41,7 @@ public class SysPowerinfo implements Serializable {
 		this.pdescribe = pdescribe;
 		this.lasttime = lasttime;
 		this.sysPowercolumn = sysPowercolumn;
-	}
-
+	}  
 
 	public SysPowercolumn getSysPowercolumn() {
 		return sysPowercolumn;

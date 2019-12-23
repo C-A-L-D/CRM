@@ -8,8 +8,8 @@
       </association>
    </resultMap>
 	<select id="selectAllPowerAndCol" resultMap="sysPowerColMapper">
-SELECT * FROM SYS_POWERINFO p
-		RIGHT JOIN SYS_POWERCOLUMN pc
+		SELECT * FROM SYS_POWERINFO p
+		INNER JOIN SYS_POWERCOLUMN pc
 		ON p.PCOLUMN_ID=PC.CID
    </select>
 

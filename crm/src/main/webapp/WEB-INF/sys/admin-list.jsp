@@ -32,9 +32,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">用户管理</a>
+        <a href="">账户管理</a>
         <a>
-          <cite>用户列表</cite></a>
+          <cite>账户列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加账户','addUser.do')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">总共 ${allUsersInfo.total } 条数据</span>
       </xblock>
       <table class="layui-table">
@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a onclick="member_stop(this,'${all.userId }')" href="javascript:;"  title="${all.ustate=='on' ? '停用':'启用' }">
                 <i class="layui-icon">${all.ustate=='on' ? '&#xe601;' : '&#xe62f;' }</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','goUpdateUser.do?userId='+${all.userId })" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('修改账户','goUpdateUser.do?userId='+${all.userId })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">

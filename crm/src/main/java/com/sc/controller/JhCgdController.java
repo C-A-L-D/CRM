@@ -1,7 +1,9 @@
 package com.sc.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,16 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.JhCgd;
 import com.sc.entity.JhCgdxq;
-import com.sc.entity.Result;
+import com.sc.entity.JhGysxx;
 import com.sc.service.JhCgdService;
+import com.sc.service.JhCgdxqService;
+import com.sc.service.JhGysxxService;
 @RequestMapping("/cgdctrl")
 @Controller
 public class JhCgdController {
 
 	@Autowired
 	JhCgdService jhCgdService;
-	
-	
+	@Autowired
+	JhCgdxqService jhCgdxqService;
+	@Autowired
+	JhGysxxService jhGysxxService;
 	
 	@RequestMapping("/cgdlistpage.do")
 	public ModelAndView listpage(ModelAndView mav,
@@ -31,6 +37,8 @@ public class JhCgdController {
 			@RequestParam(defaultValue="10")Integer pageSize,JhCgd jc){
 		System.out.println("查询用户列表-分页！");
 		
+		
+			
 		//查询list集合-分页     ${page.list}
 		mav.addObject("p", jhCgdService.selectpage(pageNum, pageSize,jc));
 		
@@ -41,7 +49,8 @@ public class JhCgdController {
 	    //添加采购单
 		@RequestMapping("/cgdgoadd.do")
 		public ModelAndView cgdgoadd(ModelAndView mav){
-			System.out.println("采购单去添加！");					
+			System.out.println("采购单去添加！");	
+			mav.addObject("gs",jhGysxxService.select()); 
 			mav.setViewName("jh/cgdadd");
 			return mav;
 		}
@@ -49,35 +58,16 @@ public class JhCgdController {
 		//添加采购单详情后
 		@RequestMapping("/cgdadd.do")
 		@ResponseBody
-		public Result cgdxqadd(ModelAndView mav,
+		public ModelAndView cgdxqadd(ModelAndView mav,
 				HttpServletRequest req,
 				JhCgd jc)throws IllegalStateException, IOException {
 			System.out.println("开始添加采购单"+jc);
 			//设置添加时间
 			jc.setLtime(new Date());
 			jhCgdService.add(jc);
-			return new Result(200,"添加成功！");
+			mav.setViewName("/cgdlistpage.do");
+			return mav;
 		}
-	
-	
-	
-	
-	//入库
-	@RequestMapping("/rk.do")
-	public ModelAndView cgdrk(ModelAndView mav,Long id){
-		System.out.println("采购单付款！"+id);
-		JhCgd u1 = this.jhCgdService.get(id);
-		if(u1.getCgJz()!=null&&!u1.getCgJz().equals("")){
-			if(u1.getCgJz().equals("待采购")){
-				u1.setCgJz("已入库");
-			}
-		}
-		u1.setLtime(new Date());
-		this.jhCgdService.update(u1);
-		mav.setViewName("redirect:cgdlistpage.do");//重定向到list方法
-		return mav;
-   
-	}
 	
 	//付款
 	@RequestMapping("/fk.do")
@@ -96,5 +86,13 @@ public class JhCgdController {
    
 	}
 	
+	
+	//通过产品id获取产品对象
+	@RequestMapping("/getGysxx.do")
+	@ResponseBody
+	public JhGysxx getGysxx(BigDecimal gysId){
+		return jhGysxxService.get(gysId);
+	}
+
 	
 }

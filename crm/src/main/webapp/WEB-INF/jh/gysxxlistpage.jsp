@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a title="修改" onclick="x_admin_show('编辑','../gysxxctrl/gysgoupdate.do?gysId=${u.gysId }',650,650)" >
                <i class="layui-icon">&#xe642;</i>
 				</a>
-              <a title="删除" href="../gysxxctrl/gysdelete.do?gysId=${u.gysId }" onclick="return confirm('是否确定删除？') " >
+              <a title="删除" onclick="member_del(this,${u.gysId })" >
               <i class="layui-icon">&#xe640;</i>
                </a>
               </td>  
@@ -113,7 +113,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </body>
 
    </html>  
+    <script>
+      function member_del(obj,gysId){
+      
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $.ajax({
+		        type: 'post',
+		        url: "gysdelete.do",
+		        data: "gysId="+gysId,
+		        success: function (res) {
+		           //$(obj).parents("tr").remove();
+		           layer.msg('已删除!',{icon:1,time:1000},function () {
+		              //刷新页面
+		              location.reload();
+		           });
+		        }
+		    });
+          });
+      }
     
+    </script>
      
      
      
