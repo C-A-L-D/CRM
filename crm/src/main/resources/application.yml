@@ -16,9 +16,9 @@ spring:
       suffix: .jsp
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@127.0.0.1:1521:orcl
-    username: CRM
-    password: CRM
+    url: jdbc:oracle:thin:@192.168.99.211:1521:orcl
+    username: CRM02
+    password: CRM02
     
 mybatis:
   config-location: classpath:conf.xml        
