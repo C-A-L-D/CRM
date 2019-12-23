@@ -345,4 +345,5 @@ public class SysUsersController {
 		sysUsersServiceImpl.createUser(sysUsers);
 		return new Result(200, "账户创建完成");
 	}
+	
 }
