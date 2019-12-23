@@ -25,7 +25,7 @@
 	<select id="selectAllUsersAndRoleAndUsersInfo" resultMap="sysAllUsersMapper">
 		SELECT u.*,r.rname,UI.SNAME,UI.SPHONE,UI.SDESCRIBE,g.GNAME FROM SYS_USERS u
 		LEFT JOIN SYS_USERS_ROLE ur
-		ON u."USER_ID"=ur."UID"
+		ON u."USER_ID"=ur."USER_ID"
 		LEFT JOIN SYS_ROLE r
 		ON ur."RID"=r."RID",SYS_USERSINFO ui,SYS_GONGSIINFO g
 		WHERE u.SID=ui.SID AND u.GONGSIID=g.ID
@@ -33,16 +33,24 @@
 
 	<resultMap type="SysUsers" id="sysUsersOneMapper" autoMapping="true">
       <id column="USER_ID" property="userId"/>
+      <association property="sysUsersRole" javaType="SysUsersRole" autoMapping="true">
+          <id column="ID" property="id"/>
+      </association>
       <association property="sysRole" javaType="SysRole" autoMapping="true">
           <id column="RID" property="rid"/>
+      </association>
+      <association property="sysUsersInfo" javaType="SysUsersInfo" autoMapping="true">
+          <id column="SID" property="sid"/>
       </association>
    </resultMap>
 	<select id="selectUsersAndRoleAndUsersInfoOne" resultMap="sysUsersOneMapper">
 		SELECT * FROM SYS_USERS u
 		LEFT JOIN SYS_USERS_ROLE ur
-		ON u."USER_ID"=ur."UID"
+		ON u."USER_ID"=ur."USER_ID"
 		LEFT JOIN SYS_ROLE r
 		ON ur."RID"=r."RID"
+		LEFT JOIN SYS_USERSINFO ui
+		ON u.SID=ui.SID
 		WHERE u.USER_ID=#{userId}
    </select>
 

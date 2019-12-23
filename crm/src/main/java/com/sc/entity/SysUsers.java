@@ -26,6 +26,8 @@ public class SysUsers implements Serializable {
 
     private SysGongsiinfo sysGongsiinfo;
     
+    private SysUsersRole sysUsersRole;
+    
     private SysRole sysRole;
     
     private SysUsersInfo sysUsersInfo;
@@ -123,6 +125,35 @@ public class SysUsers implements Serializable {
 		this.sysDepartment = sysDepartment;
 		this.sysJobinfo = sysJobinfo;
 	}
+
+	public SysUsers(BigDecimal userId, String uname, String upassword, BigDecimal sid, BigDecimal gongsiid,
+			String ustate, Date lasttime, SysGongsiinfo sysGongsiinfo, SysUsersRole sysUsersRole, SysRole sysRole,
+			SysUsersInfo sysUsersInfo, SysDepartment sysDepartment, SysJobinfo sysJobinfo) {
+		super();
+		this.userId = userId;
+		this.uname = uname;
+		this.upassword = upassword;
+		this.sid = sid;
+		this.gongsiid = gongsiid;
+		this.ustate = ustate;
+		this.lasttime = lasttime;
+		this.sysGongsiinfo = sysGongsiinfo;
+		this.sysUsersRole = sysUsersRole;
+		this.sysRole = sysRole;
+		this.sysUsersInfo = sysUsersInfo;
+		this.sysDepartment = sysDepartment;
+		this.sysJobinfo = sysJobinfo;
+	}
+
+	public SysUsersRole getSysUsersRole() {
+		return sysUsersRole;
+	}
+
+
+	public void setSysUsersRole(SysUsersRole sysUsersRole) {
+		this.sysUsersRole = sysUsersRole;
+	}
+
 
 	public SysJobinfo getSysJobinfo() {
 		return sysJobinfo;
@@ -239,8 +270,8 @@ public class SysUsers implements Serializable {
 	public String toString() {
 		return "SysUsers [userId=" + userId + ", uname=" + uname + ", upassword=" + upassword + ", sid=" + sid
 				+ ", gongsiid=" + gongsiid + ", ustate=" + ustate + ", lasttime=" + lasttime + ", sysGongsiinfo="
-				+ sysGongsiinfo + ", sysRole=" + sysRole + ", sysUsersInfo=" + sysUsersInfo + ", sysDepartment="
-				+ sysDepartment + ", sysJobinfo=" + sysJobinfo + "]";
+				+ sysGongsiinfo + ", sysUsersRole=" + sysUsersRole + ", sysRole=" + sysRole + ", sysUsersInfo="
+				+ sysUsersInfo + ", sysDepartment=" + sysDepartment + ", sysJobinfo=" + sysJobinfo + "]";
 	}
     
     

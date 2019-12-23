@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.sc.entity.SysUsersRole" >
     <constructor >
       <idArg column="ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
-      <arg column="UID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="USER_ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="RID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="OPERATORID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="LASTTIME" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -69,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, UID, RID, OPERATORID, LASTTIME
+    ID, USER_ID, RID, OPERATORID, LASTTIME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sc.entity.SysUsersRoleExample" >
     select
@@ -103,9 +103,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sc.entity.SysUsersRole" >
-    insert into SYS_USERS_ROLE (ID, UID, RID, 
+    insert into SYS_USERS_ROLE (ID, USER_ID, RID, 
       OPERATORID, LASTTIME)
-    values (#{id,jdbcType=DECIMAL}, #{uid,jdbcType=DECIMAL}, #{rid,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=DECIMAL}, #{userId,jdbcType=DECIMAL}, #{rid,jdbcType=DECIMAL}, 
       #{operatorid,jdbcType=DECIMAL}, #{lasttime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.sc.entity.SysUsersRole" >
@@ -114,8 +114,8 @@
       <if test="id != null" >
         ID,
       </if>
-      <if test="uid != null" >
-        UID,
+      <if test="userId != null" >
+        USER_ID,
       </if>
       <if test="rid != null" >
         RID,
@@ -131,8 +131,8 @@
       <if test="id != null" >
         #{id,jdbcType=DECIMAL},
       </if>
-      <if test="uid != null" >
-        #{uid,jdbcType=DECIMAL},
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
       </if>
       <if test="rid != null" >
         #{rid,jdbcType=DECIMAL},
@@ -157,8 +157,8 @@
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=DECIMAL},
       </if>
-      <if test="record.uid != null" >
-        UID = #{record.uid,jdbcType=DECIMAL},
+      <if test="record.userId != null" >
+        USER_ID = #{record.userId,jdbcType=DECIMAL},
       </if>
       <if test="record.rid != null" >
         RID = #{record.rid,jdbcType=DECIMAL},
@@ -177,7 +177,7 @@
   <update id="updateByExample" parameterType="map" >
     update SYS_USERS_ROLE
     set ID = #{record.id,jdbcType=DECIMAL},
-      UID = #{record.uid,jdbcType=DECIMAL},
+      USER_ID = #{record.userId,jdbcType=DECIMAL},
       RID = #{record.rid,jdbcType=DECIMAL},
       OPERATORID = #{record.operatorid,jdbcType=DECIMAL},
       LASTTIME = #{record.lasttime,jdbcType=TIMESTAMP}
@@ -188,8 +188,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sc.entity.SysUsersRole" >
     update SYS_USERS_ROLE
     <set >
-      <if test="uid != null" >
-        UID = #{uid,jdbcType=DECIMAL},
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=DECIMAL},
       </if>
       <if test="rid != null" >
         RID = #{rid,jdbcType=DECIMAL},
@@ -205,7 +205,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sc.entity.SysUsersRole" >
     update SYS_USERS_ROLE
-    set UID = #{uid,jdbcType=DECIMAL},
+    set USER_ID = #{userId,jdbcType=DECIMAL},
       RID = #{rid,jdbcType=DECIMAL},
       OPERATORID = #{operatorid,jdbcType=DECIMAL},
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}

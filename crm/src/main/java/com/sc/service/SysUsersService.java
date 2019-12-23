@@ -6,6 +6,8 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysUsers;
+import com.sc.entity.SysUsersInfo;
+import com.sc.entity.SysUsersRole;
 
 public interface SysUsersService {
 	
@@ -33,7 +35,7 @@ public interface SysUsersService {
 	//修改用户状态
 	public void updateUserStatus(BigDecimal userId);
 	
-	//修改制定ID的用户
+	//修改指定ID的用户
 	public SysUsers goUpdateUserOne(BigDecimal userId);
 	
 	//根据公司ID查公司表
@@ -45,4 +47,21 @@ public interface SysUsersService {
 	//修改该账户ID对应的密码
 	public void updatePassword(SysUsers sysUsers);
 	
+	//修改账户信息
+	public void updateUsers(SysUsers sysUsers);
+	
+	//查询员工ID对应的员工信息
+	public SysUsersInfo selectUsersInfoOne(BigDecimal sid);
+	
+	//修改用户角色中间表
+	public void updateUsersRole(SysUsersRole sysUsersRole);
+	
+	//插入单条用户角色中间表数据
+	public void insertUsersRole(SysUsersRole sysUsersRole);
+	
+	//根据ID查询公司表
+	public SysGongsiinfo selectSysGongsiinfoOne(BigDecimal id);
+	
+	//创建新账户
+	public void createUser(SysUsers sysUsers);
 }

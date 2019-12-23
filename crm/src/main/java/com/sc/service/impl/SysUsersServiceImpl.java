@@ -12,8 +12,12 @@ import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersExample;
 import com.sc.entity.SysUsersExample.Criteria;
+import com.sc.entity.SysUsersInfo;
+import com.sc.entity.SysUsersRole;
 import com.sc.mapper.SysGongsiinfoMapper;
+import com.sc.mapper.SysUsersInfoMapper;
 import com.sc.mapper.SysUsersMapper;
+import com.sc.mapper.SysUsersRoleMapper;
 import com.sc.service.SysUsersService;
 
 @Service
@@ -23,6 +27,10 @@ public class SysUsersServiceImpl implements SysUsersService{
 	SysUsersMapper sysUsersMapper;
 	@Autowired
 	SysGongsiinfoMapper sysGongsiinfoMapper;
+	@Autowired
+	SysUsersInfoMapper sysUsersInfoMapper;
+	@Autowired
+	SysUsersRoleMapper sysUsersRoleMapper;
 	
 	//办公
 	@Override
@@ -121,6 +129,42 @@ public class SysUsersServiceImpl implements SysUsersService{
 	public void updatePassword(SysUsers sysUsers) {
 		// TODO Auto-generated method stub
 		sysUsersMapper.updateByPrimaryKey(sysUsers);
+	}
+
+	@Override
+	public SysUsersInfo selectUsersInfoOne(BigDecimal sid) {
+		// TODO Auto-generated method stub
+		return sysUsersInfoMapper.selectByPrimaryKey(sid);
+	}
+
+	@Override
+	public void updateUsers(SysUsers sysUsers) {
+		// TODO Auto-generated method stub
+		sysUsersMapper.updateByPrimaryKeySelective(sysUsers);
+	}
+
+	@Override
+	public void updateUsersRole(SysUsersRole sysUsersRole) {
+		// TODO Auto-generated method stub
+		sysUsersRoleMapper.updateByPrimaryKeySelective(sysUsersRole);
+	}
+
+	@Override
+	public void insertUsersRole(SysUsersRole sysUsersRole) {
+		// TODO Auto-generated method stub
+		sysUsersRoleMapper.insertSelective(sysUsersRole);
+	}
+
+	@Override
+	public SysGongsiinfo selectSysGongsiinfoOne(BigDecimal id) {
+		// TODO Auto-generated method stub
+		return sysGongsiinfoMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void createUser(SysUsers sysUsers) {
+		// TODO Auto-generated method stub
+		sysUsersMapper.insertSelective(sysUsers);
 	}
 	
 		

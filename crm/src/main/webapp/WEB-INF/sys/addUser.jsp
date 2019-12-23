@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>修改用户信息</title>
+    <title>添加账户</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -31,55 +31,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
-      <div class="layui-card-header">您正在修改的账户编号：${user.userId }</div>
+    <div class="layui-card-header"><span style="color: red;">小提示：</span>默认初始密码为 123456，登录后请及时更换密码！</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">        
-          <div class="layui-form-item">
-            <div class="layui-inline">
-              <label class="layui-form-label">操作员</label>
-              <div class="layui-input-inline">
-                <input type="text" name="uname" value="${nowuser.uname }" lay-verify="" class="layui-input" readonly="readonly" disabled="disabled">
-              </div>
-            </div>
-            <div class="layui-inline">
-              <label class="layui-form-label">操作员编号</label>
-              <div class="layui-input-inline">
-                <input type="text" name="userId" value="${nowuser.userId }" autocomplete="on" class="layui-input" disabled="disabled">
-              </div>
-            </div>
-          </div>
-          
-          <div class="layui-form-item">
-          	<div class="layui-inline">
-              <label class="layui-form-label">
-              	<span class="x-red">*</span>用户账号
-              </label>
-              <div class="layui-input-inline">
-                <input type="text" name="uname" id="uname" value="${user.uname }" autocomplete="on" class="layui-input" required="required">
-              </div>
-            </div>
-          </div>      
-          
-          <div class="layui-form-item">
-            <label class="layui-form-label">用户角色</label>
-            <div class="layui-input-block">
-              <select name="rid" lay-filter="aihao">
-                <option value=""></option>
-                <c:forEach items="${allRole }" var="all">
-                    <option value="${all.rid }" ${all.rid==user.sysRole.rid ? "selected":""}>${all.rname }</option>
-                </c:forEach>
-               </select>
-            </div>
-          </div>
-          
-          
           <div class="layui-form-item">
           	<div class="layui-inline">
               <label class="layui-form-label">
               	<span class="x-red">*</span>持有者编号
               </label>
               <div class="layui-input-inline">
-                <input type="text" name="sid" id="sssid" value="${user.sid }" autocomplete="on" class="layui-input" required="required">
+                <input type="text" name="sid" id="sssid" value="" autocomplete="on" class="layui-input">
               </div>
             </div>
             <div class="layui-inline">
@@ -87,15 +48,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               	<span class="x-red">*</span>持有者姓名
               </label>
               <div class="layui-input-inline">
-                <input type="text" name="sname" id="sname" value="${user.sysUsersInfo.sname }" lay-verify="ssname" autocomplete="on" class="layui-input" readonly="readonly" required="required">
+                <input type="text" name="sname" id="sname" value="" lay-verify="ssname" autocomplete="on" class="layui-input" readonly="readonly">
               </div>
             </div>
           </div>
+    
+          <div class="layui-form-item">
+          	<div class="layui-inline">
+              <label class="layui-form-label">
+              	<span class="x-red">*</span>公司编号
+              </label>
+              <div class="layui-input-inline">
+                <input type="text" name="gongsiid" id="gongsiid" value="" autocomplete="on" class="layui-input" readonly="readonly">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">
+              	<span class="x-red">*</span>所属公司
+              </label>
+              <div class="layui-input-inline">
+                <input type="text" name="gname" id="gname" value="" autocomplete="on" class="layui-input" readonly="readonly">
+              </div>
+            </div>
+          </div>      
+          
+          <div class="layui-form-item">
+          	<div class="layui-inline">
+              <label class="layui-form-label">
+              	<span class="x-red">*</span>账户名称
+              </label>
+              <div class="layui-input-inline">
+                <input type="text" name="uname" id="uname" value="" autocomplete="on" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">
+              	<span class="x-red">*</span>账户状态
+              </label>
+              <div class="layui-input-inline">
+	            	<div class="layui-col-md12">
+	              		<input type="checkbox" name="ustate" lay-skin="switch" lay-text="启用|禁用" checked>
+	            	</div>
+            	</div>
+          	</div>
+          </div>    
+          
+          
           
             <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
               <div class="layui-footer" style="left: 0;">
-                <button class="layui-btn" lay-submit="" lay-filter="add">确认修改</button>
+                <button class="layui-btn" lay-submit="" lay-filter="add">确认添加</button>
               </div>
             </div>
           </div>
@@ -116,13 +119,13 @@ layui.use(['form','layer'], function(){
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);
-            if($("#uname").val()==""||$("#sssid").val()==""||$("#sname").val()=="") {
+            if($("#sssid").val()==""||$("#sname").val()==""||$("#gongsiid").val()==""||$("#gname").val()==""||$("#uname").val()=="") {
             	layer.alert("必填项不能为空！", {icon: 5});
             	return false;
             }
             $.ajax({
 		        type: 'post',
-		        url: "updateUser.do?userId="+${user.userId }${user.sysUsersRole.id==null ? "" : "+'&id='+" }${user.sysUsersRole.id==null ? "" : user.sysUsersRole.id },
+		        url: "addNewUser.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
@@ -156,15 +159,19 @@ layui.use(['form','layer'], function(){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "getNewValue.do?sid="+$("#sssid").val(),
+		        url: "getUsersInfoGSValue.do?sid="+$("#sssid").val(),
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
-		                $("#sname").val(res.msg)
-		               
+		            	var msg = res.msg.split(",");
+		                $("#sname").val(msg[0])
+		            	$("#gongsiid").val(msg[1])
+		            	$("#gname").val(msg[2])
 		            }
 		            else {
 		            	$("#sname").val(res.msg)
+		            	$("#gongsiid").val(res.msg)
+		            	$("#gname").val(res.msg)
 		            }
 		        }
 		    });

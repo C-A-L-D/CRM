@@ -2,7 +2,6 @@ package com.sc.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -29,8 +28,8 @@ import com.sc.entity.SysGongsiinfo;
 import com.sc.entity.SysRole;
 import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersInfo;
+import com.sc.entity.SysUsersRole;
 import com.sc.service.SysUsersInfoService;
-import com.sc.service.impl.SysGongsiinfoServiceImpl;
 import com.sc.service.impl.SysRoleServiceImpl;
 import com.sc.service.impl.SysUsersServiceImpl;
 
@@ -98,6 +97,7 @@ public class SysUsersController {
 		return mav;
 	}
 
+	//========================个人信息页==================================
 	
 	/**
 	 * 个人信息
@@ -157,7 +157,6 @@ public class SysUsersController {
 		Md5Hash md5Hash = new Md5Hash(pass, "qwerty", 3);
 		System.out.println(oldmd5Hash+"------"+user.getUpassword());
 		if (String.valueOf(oldmd5Hash).equals(user.getUpassword())) {
-			System.out.println("修改了-------------");
 			user.setUpassword(String.valueOf(md5Hash));
 			user.setLasttime(new Date());
 			sysUsersServiceImpl.updatePassword(user);
@@ -210,6 +209,7 @@ public class SysUsersController {
 		return new Result(400, "照片上传失败");
 	}
 	
+	//========================账户管理页==================================
 	
 	/**
 	 * 全部用户信息
@@ -255,4 +255,94 @@ public class SysUsersController {
 		return mav;
 	}
 	
+	/**
+	 * 输入框值改变
+	 * @param sysUsersInfo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getNewValue.do")
+	public Result getNewValue(SysUsersInfo sysUsersInfo) {
+		SysUsersInfo selectUsersInfoOne = sysUsersServiceImpl.selectUsersInfoOne(sysUsersInfo.getSid());
+		if (selectUsersInfoOne != null) {
+			return new Result(200, selectUsersInfoOne.getSname());
+		}
+		return new Result(400, "");
+	}
+	
+	/**
+	 * 修改账户信息
+	 * @param sysUsers
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/updateUser.do")
+	public Result updateUser(SysUsers sysUsers, SysUsersRole sysUsersRole,HttpSession session) {
+		System.out.println("---------"+sysUsers);
+		System.out.println(sysUsersRole);
+		sysUsers.setLasttime(new Date());
+		sysUsersServiceImpl.updateUsers(sysUsers);
+		
+		sysUsersRole.setUserId(sysUsers.getUserId());
+		SysUsers su = (SysUsers) session.getAttribute("nowuser");
+		sysUsersRole.setOperatorid(su.getUserId());
+		sysUsersRole.setLasttime(new Date());
+		if (sysUsersRole.getId() != null) {
+			sysUsersServiceImpl.updateUsersRole(sysUsersRole);
+		}
+		else {
+			if (sysUsersRole.getRid() != null) {
+				sysUsersServiceImpl.insertUsersRole(sysUsersRole);
+			}
+		}
+		System.out.println(sysUsersServiceImpl.selectUsersAndRoleAndUsersInfoOne(sysUsers.getUserId()));
+		return new Result(200, "账户修改成功");
+	}
+	
+	/**
+	 * 弹出添加账户窗口
+	 * @param mav
+	 * @return
+	 */
+	@RequestMapping("/addUser.do")
+	public ModelAndView addUser(ModelAndView mav){
+		mav.setViewName("sys/addUser");
+		return mav;
+	}
+	
+	
+	/**
+	 * 输入框值改变
+	 * @param sysUsersInfo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/getUsersInfoGSValue.do")
+	public Result getUsersInfoGSValue(SysUsersInfo sysUsersInfo) {
+		SysUsersInfo ui = sysUsersServiceImpl.selectUsersInfoOne(sysUsersInfo.getSid());
+		if (ui != null) {
+			SysGongsiinfo gs = sysUsersServiceImpl.selectSysGongsiinfoOne(ui.getGongsiid());
+			return new Result(200, ui.getSname()+","+ui.getGongsiid()+","+gs.getGname());
+		}
+		return new Result(400, "");
+	}
+
+	/**
+	 * 添加一个新账户
+	 * @param sysUsersInfo
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/addNewUser.do")
+	public Result addNewUser(SysUsers sysUsers) {
+		System.out.println(sysUsers);
+		Md5Hash md5Hash = new Md5Hash("123456", "qwerty", 3);
+		sysUsers.setUpassword(String.valueOf(md5Hash));
+		if (sysUsers.getUstate() == null) {
+			sysUsers.setUstate("off");
+		}
+		sysUsers.setLasttime(new Date());
+		sysUsersServiceImpl.createUser(sysUsers);
+		return new Result(200, "账户创建完成");
+	}
 }
