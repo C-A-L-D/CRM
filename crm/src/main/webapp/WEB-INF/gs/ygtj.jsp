@@ -136,7 +136,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-input-inline">
                  <!--  <input type="text" id="gongsiid" name="gongsiid"
                   autocomplete="off" class="layui-input"  lay-verify="required"> -->
-                <select id="gongsiid" name="gongsiid" class="layui-input"> 
+                <select id="gongsiid" name="gongsiid" class="layui-input" lay-filter="gs" lay-select=""> 
+                     <option value="">请选择</option>
                    <c:forEach items="${p1 }" var="v1">
                     <option value="${v1.id }">${v1.gname }</option>
                    </c:forEach>
@@ -241,12 +242,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-input-inline">
                 <!--   <input type="text" id="sjobid" name="sjobid"
                   autocomplete="off" class="layui-input" lay-verify="required"> -->
-               <select id="sjobid" name="sjobid" class="layui-input"> 
-                   <c:forEach items="${p3 }" var="v3">
+                <select id="sjobid" name="sjobid" class="layui-input"> 
+                   <option value="">请选择</option>
+                  <%--  <c:forEach items="${p3 }" var="v3">
                     <option value="${v3.jid }"> ${v3.jname }</option>
-                   </c:forEach>
+                   </c:forEach> --%>
                    
-                   </select>
+                   </select> 
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
@@ -378,6 +380,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    
 		    return false;
           });
+          
+          //
+         form.on('select(gs)', function(data){
+         console.log(data);
+       
+          layer.msg($("#gongsiid").val()); 
+        var   id=$("#gongsiid").val(); 
+       /*  alert($("#gongsiid").val()) */
+          $.ajax({
+	            type: 'post',
+			    url: "yggl.do",
+			    data: "gongsiid="+id,
+	            success: function (list) {
+	            console.log(list);
+	              
+            	  $("#sjobid").empty();
+            	   
+            	  $("#sjobid").append("<option value=''>-- 请选择 --</option>");
+            	  for(var i=0;i<list.length;i++){
+            	     $("#sjobid").append("<option value='"+list[i].jid+"'>"+list[i].jname+"</option>")
+            	  }
+            	  console.log($("#sjobid").html());
+                  form.render('select');
+                }
+           }); 
+              
+         }); 
           
         });
 </script>

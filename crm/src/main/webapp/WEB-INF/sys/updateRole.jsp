@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="layui-inline">
               <label class="layui-form-label">操作员编号</label>
               <div class="layui-input-inline">
-                <input type="text" name="opertorid" value="${nowuser.uid }" autocomplete="on" class="layui-input" disabled="disabled">
+                <input type="text" name="opertorid" value="${nowuser.userId }" autocomplete="on" class="layui-input" disabled="disabled">
               </div>
             </div>
           </div>

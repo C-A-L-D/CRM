@@ -5,12 +5,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.Filter;
+
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.DelegatingFilterProxy;
 
 import com.sc.form.CustomFormAuthenticationFilter;
 import com.sc.realm.CustomRealmMD5;
@@ -35,6 +40,7 @@ public class ShiroConfig {
 		return manager;
 	}
 	
+	
 	@Bean("shiroFilter")
 	public ShiroFilterFactoryBean shiroFilter(){
 		CustomFormAuthenticationFilter form=new CustomFormAuthenticationFilter();
@@ -47,6 +53,7 @@ public class ShiroConfig {
 		shiroFilter.setLoginUrl("/login.jsp");
 		shiroFilter.setSuccessUrl("/loginController/index.do");//登陆成功成功跳转页面
 		
+		
 		Map<String, Filter> filters=new HashMap<String, Filter>();
 		filters.put("authc", form);//
 		
@@ -58,6 +65,8 @@ public class ShiroConfig {
 		
 		
 		LinkedHashMap<String, String> filterMap = new LinkedHashMap<String, String>();
+		//退出登录写到前面
+		filterMap.put("/logout.do", "logout");
 		//匿名用户可以访问资源页面
 		filterMap.put("/css/**", "anon");
 		filterMap.put("/fonts/**", "anon");
@@ -71,7 +80,7 @@ public class ShiroConfig {
 		filterMap.put("/validatecode.jsp", "anon");
 		filterMap.put("/login.jsp", "anon");
 		
-		filterMap.put("/logout.do", "logout");
+		
 /*		//放开的权限
 		filterMap.put("/index.jsp", "anon");
 		filterMap.put("/gs/**", "anon");
@@ -82,7 +91,7 @@ public class ShiroConfig {
 		
 		filterMap.put("/**", "authc");
 		//将匿名用户可访问页面的map集合放入过滤器链
-//		shiroFilter.setFilterChainDefinitionMap(filterMap);
+		shiroFilter.setFilterChainDefinitionMap(filterMap);
 		
 		return shiroFilter;
 	}

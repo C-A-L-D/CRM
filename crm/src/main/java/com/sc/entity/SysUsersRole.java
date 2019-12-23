@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class SysUsersRole implements Serializable {
     private BigDecimal id;
 
-    private BigDecimal uid;
+    private BigDecimal userId;
 
     private BigDecimal rid;
 
@@ -20,9 +20,9 @@ public class SysUsersRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public SysUsersRole(BigDecimal id, BigDecimal uid, BigDecimal rid, BigDecimal operatorid, Date lasttime) {
+    public SysUsersRole(BigDecimal id, BigDecimal userId, BigDecimal rid, BigDecimal operatorid, Date lasttime) {
         this.id = id;
-        this.uid = uid;
+        this.userId = userId;
         this.rid = rid;
         this.operatorid = operatorid;
         this.lasttime = lasttime;
@@ -40,12 +40,12 @@ public class SysUsersRole implements Serializable {
         this.id = id;
     }
 
-    public BigDecimal getUid() {
-        return uid;
+    public BigDecimal getUserId() {
+        return userId;
     }
 
-    public void setUid(BigDecimal uid) {
-        this.uid = uid;
+    public void setUserId(BigDecimal userId) {
+        this.userId = userId;
     }
 
     public BigDecimal getRid() {
@@ -74,8 +74,8 @@ public class SysUsersRole implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SysUsersRole [id=" + id + ", uid=" + uid + ", rid=" + rid + ", operatorid=" + operatorid + ", lasttime="
-				+ lasttime + "]";
+		return "SysUsersRole [id=" + id + ", userId=" + userId + ", rid=" + rid + ", operatorid=" + operatorid
+				+ ", lasttime=" + lasttime + "]";
 	}
     
 }

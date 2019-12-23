@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>角色管理</title>
+    <title>权限管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -32,9 +33,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
 		      <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">角色管理</a>
+        <a href="">权限管理</a>
         <a>
-          <cite>角色信息列表</cite></a>
+          <cite>权限信息列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -74,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px">总共 ${RP.total } 条数据</span>
+        <span class="x-right" style="line-height:40px">总共 ${PC.total } 条数据</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -82,31 +83,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>角色</th>
-            <th>角色描述</th>
-            <th>角色权限</th>
-            <th>上级角色</th>
+            <th>权限名称</th>
+            <th>权限所在分栏</th>
+            <th>权限</th>
+            <th>备注信息</th>
+            <th>最后修改时间</th>
             <th>操作</th>
         </thead>
         <tbody>
-<c:forEach items="${RP.list }" var="r">
+<c:forEach items="${PC.list }" var="pc">
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${r.rid }'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${pc.pid }'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>${r.rname }</td>
-            <td>${r.rdescribe }</td>
-            <td>
-            <c:forEach items="${r.sysPowerinfo }" var="rr">
-            	${rr.ppower }
-            </c:forEach>
-            </td>
-            <td>${r.headrid }</td>
+            <td>${pc.pname }</td>
+            <td>${pc.sysPowercolumn.cname }</td>
+            <td>${pc.ppower }</td>
+            <td>${pc.pdescribe }</td>
+            <td><fmt:formatDate value="${pc.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             <td class="td-manage">
-              <a title="编辑"  onclick="x_admin_show('编辑','goUpdateRle.do?rid='+${r.rid })" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('编辑','goUpdatePower.do?pid='+${pc.pid })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'${r.rid }')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'${pc.pid }')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>

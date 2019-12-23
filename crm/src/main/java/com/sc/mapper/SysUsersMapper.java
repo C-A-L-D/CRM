@@ -36,9 +36,9 @@ public interface SysUsersMapper {
 
     int updateByPrimaryKey(SysUsers record);
     
-    SysUsers login(String uname, BigDecimal id);
-    
     List<SysUsers> selectAllUsersAndRoleAndUsersInfo();
     
     SysUsers selectUsersAndRoleAndUsersInfoOne(BigDecimal userId);
+    
+    SysUsers selectUsersAndRoleAndUsersInfoOne2(BigDecimal userId);
 }

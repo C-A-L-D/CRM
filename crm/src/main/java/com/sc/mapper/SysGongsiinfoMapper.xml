@@ -353,4 +353,5 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+ 
 </mapper>

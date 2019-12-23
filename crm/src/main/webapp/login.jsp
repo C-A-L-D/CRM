@@ -38,6 +38,9 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
 		else if("${param.isfail }" == "code") {
 			layui.layer.msg("验证码错误", {icon: 5});
 		}
+		else if("${param.isfail }" == "gs") {
+			layui.layer.msg("公司错误", {icon: 5});
+		}
 		else if("${param.isfail }" == "other") {
 			layui.layer.msg("未知错误", {icon: 5});
 		}
@@ -55,7 +58,7 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
 <div id="wrapper" class="login-page">
 <div id="login_form" class="form">
 
-<form  action="loginController/login.do"  method="post">
+<form  action="loginController/login.do"  method="post" id="myform">
  <h2>管理登录</h2>
 <select lay-verify="" name="sysGongsiinfo.gname" lay-filter="sel" id="sel" style="background-color: RGB(232,240,254);border:none;margin-bottom: 15px;font-weight: bold;">
 	<option value="">请选择</option>	
@@ -63,19 +66,25 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
 		<option style="font-size: 18px;" name="${l.id }" value="${l.gcode }">${l.gname }</option> 
 	</c:forEach>
 </select>
-<textarea id="gsDIV" name="sysGongsiinfo.id" style="display: none;"></textarea>
+<textarea id="gsDIV" name="test"  style="display: none;"></textarea>
 <input type="text" placeholder="公司代码" name="sysGongsiinfo.gcode" value="" id="gsCode" style="background-color: RGB(232,240,254);" readonly>
-<input type="text" placeholder="用户名" name="uname" value="" id="user_name">
+<input type="text" placeholder="用户名" name="aaa" value="" id="aaa">
+<input type="hidden" name="uname" value="" id="user_name">
 <input type="password" placeholder="密码" name="upassword" value="" id="password" />
 <input type="text" placeholder="验证码" name="randomcode" id="randomcode" size="8" style="width: 50%;float: left;">
 <img src="validatecode.jsp" id="imgcode" width="40%" height="50px"
      onclick="refreshcode(this)" title="点击刷新">
-<button type="submit" id="login">登　录</button>
+<button type="button" id="login" onclick="submitmyform()">登　录</button>
 </form>
 </div>
 </div>
 
 <script type="text/javascript">
+    function submitmyform(){
+       $("#user_name").val($("#aaa").val()+"="+$("#gsDIV").html());
+       $("#myform").submit();
+    }
+   
  	/* function check_login()
   	{
   	 var name=$("#user_name").val();

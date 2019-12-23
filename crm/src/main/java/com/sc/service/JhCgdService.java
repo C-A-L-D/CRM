@@ -14,6 +14,10 @@ public interface JhCgdService {
 	  
 	  public void update(JhCgd jc);
 	  
+
+		
+	
+	  
 	  
 	
 }

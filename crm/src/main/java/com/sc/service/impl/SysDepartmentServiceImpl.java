@@ -1,8 +1,12 @@
 package com.sc.service.impl;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +16,7 @@ import com.sc.entity.SysDepartment;
 import com.sc.entity.SysDepartmentExample;
 import com.sc.entity.SysDepartmentExample.Criteria;
 import com.sc.entity.SysGongsiinfo;
+import com.sc.entity.SysUsersInfo;
 import com.sc.mapper.SysDepartmentMapper;
 import com.sc.mapper.SysGongsiinfoMapper;
 import com.sc.service.SysDepartmentService;
@@ -90,5 +95,40 @@ SysGongsiinfoMapper sysGongsiinfoMapper;
 		
 		return page;
 	}
+	//导出excel
+	@Override
+    public XSSFWorkbook show() {
+        List<SysDepartment> list = sysDepartmentMapper.selectByExample(null);//查出数据库数据
+        XSSFWorkbook wb = new XSSFWorkbook();
+        XSSFSheet sheet =  wb.createSheet("bm");//创建一张表
+        Row titleRow =  sheet.createRow(0);//创建第一行，起始为0
+        titleRow.createCell(0).setCellValue("部门编号");//第一列
+        titleRow.createCell(1).setCellValue("部门名");
+        titleRow.createCell(2).setCellValue("备注说明");
+        titleRow.createCell(3).setCellValue("公司编号");
+        titleRow.createCell(4).setCellValue("最后修改时间");
+       
+        int cell = 1;
+        for (SysDepartment sysDepartment : list) {
+			
+		
+            Row row =  sheet.createRow(cell);//从第二行开始保存数据
+            
+            //转时间格式
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");         
+            String date= formatter.format(sysDepartment.getLasttime());
+            System.out.println(date);
+            
+            row.createCell(0).setCellValue(String.valueOf(sysDepartment.getDid()));//将数据库的数据遍历出来
+            row.createCell(1).setCellValue(sysDepartment.getDname());
+            row.createCell(2).setCellValue(sysDepartment.getDdescribe());
+            row.createCell(3).setCellValue(String.valueOf(sysDepartment.getGongsiid()));
+            row.createCell(4).setCellValue(date);
+           
+            cell++;
+        }
+        
+        return wb;
+    }
 	
 }

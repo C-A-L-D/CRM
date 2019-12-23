@@ -140,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-input-inline">
                 <%--   <input type="text" id="gongsiid" name="gongsiid"
                   autocomplete="off" class="layui-input" value="${u.gongsiid }" lay-verify="required"> --%>
-            <select id="gongsiid" name="gongsiid" class="layui-input">                 
+            <select id="gongsiid" name="gongsiid" class="layui-input" lay-filter="gs" lay-select="">                 
            <c:forEach items="${p1 }" var="v1">
              <option value="${v1.id }" ${v1.id==u.gongsiid ? "selected":"" }>${v1.gname }</option>
            </c:forEach>
@@ -375,6 +375,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    });
 		    return false;
           });
+          
+          //
+         form.on('select(gs)', function(data){
+         console.log(data);
+       
+          layer.msg($("#gongsiid").val()); 
+        var   id=$("#gongsiid").val(); 
+       /*  alert($("#gongsiid").val()) */
+          $.ajax({
+	            type: 'post',
+			    url: "yggl.do",
+			    data: "gongsiid="+id,
+	            success: function (list) {
+	            console.log(list);
+	              
+            	  $("#sjobid").empty();
+            	   
+            	  $("#sjobid").append("<option value=''>-- 请选择 --</option>");
+            	  for(var i=0;i<list.length;i++){
+            	     $("#sjobid").append("<option value='"+list[i].jid+"'>"+list[i].jname+"</option>")
+            	  }
+            	  console.log($("#sjobid").html());
+                  form.render('select');
+                }
+           }); 
+              
+         }); 
           
         });
 </script>
