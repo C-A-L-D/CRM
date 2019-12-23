@@ -2,6 +2,7 @@ package com.sc.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -346,4 +347,36 @@ public class SysUsersController {
 		return new Result(200, "账户创建完成");
 	}
 	
+	/**
+	 * 删除ID对应的记录
+	 * @param s
+	 * @return
+	 */
+	@RequestMapping("/delUser.do")
+	@ResponseBody
+	public Result delUser(SysUsers sysUsers){
+		System.out.println("开始删除！"+sysUsers.getUserId());
+		sysUsersServiceImpl.delUser(sysUsers.getUserId());
+		sysUsersServiceImpl.delUserRole(sysUsers);
+		return new Result(200, "删除成功！");
+	}
+	
+	/**
+	 * 删除选中的账户
+	 * @param mav
+	 * @param aa
+	 */
+	@RequestMapping("/delAllUser.do")
+	@ResponseBody
+	public void delAllUser(String aa){//aa	字符串格式：1,3,2,4...
+		System.out.println("账户删除！"+aa);
+		
+		String[] USERSArr = aa.split(",");
+
+		for (String userId : USERSArr) {
+			SysUsers user =  sysUsersServiceImpl.goUpdateUserOne(new BigDecimal(userId));
+			sysUsersServiceImpl.delUser(user.getUserId());
+			sysUsersServiceImpl.delUserRole(user);
+		}
+	}
 }

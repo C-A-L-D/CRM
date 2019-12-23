@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px">总共 ${RP.total } 条数据</span>
+        <span class="x-right" style="line-height:40px">总共<span id="total">${RP.total }</span> 条数据</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -178,6 +178,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		               //发异步删除数据
 		              $(obj).parents("tr").remove();
 		              layer.msg(res.msg,{icon:1,time:1000});
+		             //刷新页面
+		              location.reload();
 		               
 		            } else {
 		                layer.alert(res.msg, {icon: 5}, function () {

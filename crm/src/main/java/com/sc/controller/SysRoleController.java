@@ -25,10 +25,17 @@ public class SysRoleController {
 	@Autowired
 	SysRoleServiceImpl sysRoleServiceImpl;
 	
+	//====================角色信息列表========================
+	/**
+	 * 角色和权限列表
+	 * @param mav
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
 	@RequestMapping("/selectAllRoleAndPower.do") 
 	public ModelAndView selectAllRoleAndPower(ModelAndView mav, @RequestParam(defaultValue="1")Integer pageNum, @RequestParam(defaultValue="5")Integer pageSize) {
 		PageInfo<SysRole> list = sysRoleServiceImpl.selectAllRoleAndPower(pageNum, pageSize);
-		System.out.println("角色和权限信息" + list.toString());
 		mav.addObject("RP", list);
 		mav.setViewName("sys/RoleAndPower");
 		return mav;

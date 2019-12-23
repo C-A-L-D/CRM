@@ -106,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
                 <ul class="sub-menu">
                     <li><a _href="Kehuxinxictrl/KehuxinxiListPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
-                    <li><a _href="KehuJsp/Kehuliushi.do"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
+                    <li><a _href="Kehuliushictrl/KehuliushiPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
                 </ul>
             </li>
                    
