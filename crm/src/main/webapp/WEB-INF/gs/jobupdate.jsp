@@ -45,19 +45,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red">*</span>部门名称
+
+          
+            <div class="layui-form-item">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>公司名称
               </label>
               <div class="layui-input-inline">
-             <%--      <input type="text" id="did" name="did" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.did }"> --%>
-                <select id="did" name="did" class="layui-input"> 
-                   <c:forEach items="${p2 }" var="v2">
-                    <option value="${v2.did }" ${v2.did==u.did ? "selected":""}>${v2.dname }</option>
-                   </c:forEach>
-                   </select>  
+                <%--   <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.gongsiid }"> --%>
               
+               <select id="gongsiid" name="gongsiid" class="layui-input" lay-filter="gs" lay-select="">                 
+                   <c:forEach items="${p1 }" var="v1">
+                     <option value="${v1.id }" ${v1.id==u.gongsiid ? "selected":"" }>${v1.gname }</option>
+                   </c:forEach>
+                   </select>
+             
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
@@ -76,25 +79,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <span class="x-red">*</span>
               </div>
           </div>
-          <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>公司名称
+          
+            <div class="layui-form-item">
+              <label for="L_email" class="layui-form-label">
+                  <span class="x-red">*</span>部门名称
               </label>
               <div class="layui-input-inline">
-                 <%--  <input type="text" id="gongsiid" name="gongsiid" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.gongsiid }"> --%>
-              
-               <select id="gongsiid" name="gongsiid" class="layui-input">                 
-                   <c:forEach items="${p1 }" var="v1">
-                     <option value="${v1.id }" ${v1.id==u.gongsiid ? "selected":"" }>${v1.gname }</option>
+                <%--   <input type="text" id="did" name="did" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.did }"> --%>
+                <select id="did" name="did" class="layui-input"> 
+                   <c:forEach items="${p2 }" var="v2">
+                    <option value="${v2.did }" ${v2.did==u.did ? "selected":""}>${v2.dname }</option>
                    </c:forEach>
-                   </select>
-             
+                   </select>  
+              
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
               </div>
-          </div>
+          </div> 
           
           
        
@@ -148,6 +151,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    });
 		    return false;
           });
+          //
+         form.on('select(gs)', function(data){
+         console.log(data);
+       
+          layer.msg($("#gongsiid").val()); 
+        var   id=$("#gongsiid").val(); 
+       /*  alert($("#gongsiid").val()) */
+          $.ajax({
+	            type: 'post',
+			    url: "jobgl.do",
+			    data: "gongsiid="+id,
+	            success: function (list) {
+	              console.log(list);
+	              
+            	  $("#did").empty();
+            	   
+            	  $("#did").append("<option value=''>-- 请选择 --</option>");
+            	  for(var i=0;i<list.length;i++){
+            	     $("#did").append("<option value='"+list[i].did+"'>"+list[i].dname+"</option>")
+            	  }
+            	  console.log($("#did").html());
+                  form.render('select');
+                }
+           }); 
+              
+         }); 
+          
+          
           
         });
 </script>

@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-input-inline">
                   <%-- <input type="text" id="sphoto" name="sphoto" required lay-verify="required"
                   autocomplete="off" class="layui-input" value="${u.sphoto }" disabled="disabled"> --%>
-              <img alt="暂无图片" src="upload/${u.sphoto }" 
+              <img alt="暂无图片" src="<%=basePath %>upload/${u.sphoto }" 
                     width="40px" height="40px" disabled="disabled">
               </div>
               <div class="layui-form-mid layui-word-aux">

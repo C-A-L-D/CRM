@@ -3,6 +3,8 @@ package com.sc.service;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysDepartment;
 import com.sc.entity.SysGongsiinfo;
@@ -25,6 +27,9 @@ public interface SysDepartmentService {
     public List<SysDepartment > select();
 
     public List<SysGongsiinfo > select1();
+    
+  //导出excel
+    public XSSFWorkbook show();
     
     public PageInfo<SysDepartment> selectpage(Integer pageNum,Integer pageSize,SysDepartment info1);
 }

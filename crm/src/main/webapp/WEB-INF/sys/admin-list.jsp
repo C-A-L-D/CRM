@@ -32,9 +32,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">用户管理</a>
+        <a href="">账户管理</a>
         <a>
-          <cite>用户列表</cite></a>
+          <cite>账户列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -50,8 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./admin-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">总共 ${allUsersInfo.total } 条数据</span>
+        <button class="layui-btn" onclick="x_admin_show('添加账户','addUser.do')"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">总共 <span id="total">${allUsersInfo.total }</span> 条数据</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <c:forEach items="${allUsersInfo.list }" var="all">
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${all.userId }'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${all.uname }</td>
             <td>${all.sysUsersInfo.sname }</td>
@@ -88,10 +88,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <a onclick="member_stop(this,'${all.userId }')" href="javascript:;"  title="${all.ustate=='on' ? '停用':'启用' }">
                 <i class="layui-icon">${all.ustate=='on' ? '&#xe601;' : '&#xe62f;' }</i>
               </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','goUpdateUser.do?userId='+${all.userId })" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('修改账户','goUpdateUser.do?userId='+${all.userId })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'${all.userId }')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -161,10 +161,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       /*用户-删除*/
       function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+          layer.confirm('确认要删除吗？',function(data){
+          console.log("id:"+id)
+          	$.ajax({
+		        type: 'get',
+		        url: "delUser.do?userId="+id,
+		        data: data.field,
+		        success: function (res) {
+		            if (res.status == 200) {
+		               //发异步删除数据
+		              $(obj).parents("tr").remove();
+		              layer.msg(res.msg,{icon:1,time:1000});
+		              //刷新页面
+		              location.reload();
+		            } else {
+		                layer.alert(res.msg, {icon: 5}, function () {
+		                    
+		                });
+		            }
+		        }
+		    });
           });
       }
 
@@ -172,11 +188,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
       function delAll (argument) {
 
-        var data = tableCheck.getData();
+        var dataID = tableCheck.getData();
   
-        layer.confirm('确认要删除吗？'+data,function(index){
+        layer.confirm('确认要删除吗？',function(index){
+        	layer.msg('删除成功', {icon: 1});
+        	console.log("222")
+        	$.ajax({
+		        type: 'get',
+		        url: "delAllUser.do",
+		        data: "aa="+dataID,
+		        success: function (res) {
+		           //$(obj).parents("tr").remove();
+		           layer.msg('已删除!',{icon:1,time:1000},function () {
+		              //刷新页面
+		              location.reload();
+		           });
+		        }
+		    });
+        
+        console.log("111111")
             //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }

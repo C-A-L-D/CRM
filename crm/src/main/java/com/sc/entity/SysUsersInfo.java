@@ -223,6 +223,7 @@ public class SysUsersInfo implements Serializable {
     }
 
     public void setLasttime(Date lasttime) {
+    	
         this.lasttime = lasttime;
     }
 

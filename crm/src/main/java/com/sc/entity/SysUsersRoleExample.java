@@ -166,63 +166,63 @@ public class SysUsersRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andUidIsNull() {
-            addCriterion("UID is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("USER_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andUidIsNotNull() {
-            addCriterion("UID is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("USER_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUidEqualTo(BigDecimal value) {
-            addCriterion("UID =", value, "uid");
+        public Criteria andUserIdEqualTo(BigDecimal value) {
+            addCriterion("USER_ID =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotEqualTo(BigDecimal value) {
-            addCriterion("UID <>", value, "uid");
+        public Criteria andUserIdNotEqualTo(BigDecimal value) {
+            addCriterion("USER_ID <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThan(BigDecimal value) {
-            addCriterion("UID >", value, "uid");
+        public Criteria andUserIdGreaterThan(BigDecimal value) {
+            addCriterion("USER_ID >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidGreaterThanOrEqualTo(BigDecimal value) {
-            addCriterion("UID >=", value, "uid");
+        public Criteria andUserIdGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("USER_ID >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThan(BigDecimal value) {
-            addCriterion("UID <", value, "uid");
+        public Criteria andUserIdLessThan(BigDecimal value) {
+            addCriterion("USER_ID <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidLessThanOrEqualTo(BigDecimal value) {
-            addCriterion("UID <=", value, "uid");
+        public Criteria andUserIdLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("USER_ID <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidIn(List<BigDecimal> values) {
-            addCriterion("UID in", values, "uid");
+        public Criteria andUserIdIn(List<BigDecimal> values) {
+            addCriterion("USER_ID in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotIn(List<BigDecimal> values) {
-            addCriterion("UID not in", values, "uid");
+        public Criteria andUserIdNotIn(List<BigDecimal> values) {
+            addCriterion("USER_ID not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("UID between", value1, value2, "uid");
+        public Criteria andUserIdBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("USER_ID between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andUidNotBetween(BigDecimal value1, BigDecimal value2) {
-            addCriterion("UID not between", value1, value2, "uid");
+        public Criteria andUserIdNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("USER_ID not between", value1, value2, "userId");
             return (Criteria) this;
         }
 

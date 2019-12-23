@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>后台登录-L-admin2.0</title>
+	<title>主页</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -83,18 +83,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li> <a _href="xbhctrl/xbhlistpage.do"><i class="iconfont">&#xe6a7;</i><cite>需补货管理</cite></a></li>
                 </ul>
             </li>
-            
-            
-            <li>
+
+              <li>
                 <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>库存-陈卓越</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
-                    <li><a _href="html/upload.html"><i class="iconfont">&#xe6a7;</i><cite>文件上传</cite></a></li>
-                    <li><a _href="html/page.html"><i class="iconfont">&#xe6a7;</i><cite>分页</cite></a></li>
-                    <li><a _href="html/cate.html"><i class="iconfont">&#xe6a7;</i><cite>多级分类</cite></a></li>
-                    <li><a _href="html/carousel.html"><i class="iconfont">&#xe6a7;</i><cite>轮播图</cite></a></li>
-                    <li><a _href="html/city.html"><i class="iconfont">&#xe6a7;</i><cite>城市三级联动</cite></a></li>
+                    <li><a _href="storeWhinfo/listpageSwi.do"><i class="iconfont">&#xe6a7;</i><cite>仓库信息</cite></a></li>
+                    <li><a _href="storeGinfo/listpage.do"><i class="iconfont">&#xe6a7;</i><cite>仓库商品信息</cite></a></li>
+                    <li><a _href="storeSinfo/listpageSinfo.do"><i class="iconfont">&#xe6a7;</i><cite>采购详情</cite></a></li>
+                    <li><a _href="storeSout/listpageSout.do"><i class="iconfont">&#xe6a7;</i><cite>销售详情</cite></a></li>
                 </ul>
             </li>
+            
+            
+            
+            
+            
              <li >
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
@@ -102,16 +105,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="KehuJsp/Kehuxinxi.html"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
                     <li><a _href="Kehuxinxictrl/KehuxinxiListPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
-                    <li><a _href="KehuJsp/Kehuliushi.html"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
+                    <li><a _href="Kehuliushictrl/KehuliushiPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
                 </ul>
             </li>
                    
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6f5;</i>
-                    <i class="iconfont">&#xe69e;</i>
                     <cite>办公管理-黄静怡</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
@@ -131,29 +132,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                     </li >
                 </ul>
+                
                  <ul class="sub-menu">
                     <li>
-                        <a _href="html/order-list.html">
-                            <i class="iconfont">&#xe6b3;</i>
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>办公短消息</cite>
+                        <a _href="javascript:;">
+                            <i class="iconfont">&#xe6ce;</i>
+                            <cite>任务管理</cite>
                         </a>
+                         <ul class="sub-menu">
+                          <li>
+	                        <a _href="offassessctrl/targetlist.do">                 
+	                             <i class="iconfont">&#xe6a7;</i>
+	                            <cite>考核指标管理</cite>
+	                        </a>
+	                          </li >
+	                            </ul>
+	                            <ul class="sub-menu">
+	                             <li>
+	                          <a _href="offtaskctrl/tasklist.do">                 
+	                             <i class="iconfont">&#xe6a7;</i>
+	                            <cite>任务发布管理</cite>
+	                          </a>
+	                           </li >
+	                            </ul>
+	                             <ul class="sub-menu">
+	                             <li>
+	                           <a _href="offassessctrl/targetlist.do">                 
+	                             <i class="iconfont">&#xe6a7;</i>
+	                            <cite>任务接收管理</cite>
+	                          </a>
+	                          
                     </li >
                 </ul>
-                 <ul class="sub-menu">
-                    <li>
-                        <a _href="html/order-list.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>个人日程表</cite>
-                        </a>
-                    </li >
-                </ul>
-                 <ul class="sub-menu">
-                    <li>
-                        <a _href="html/order-list.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>考核任务</cite>
-                        </a>
                     </li >
                 </ul>
             </li>
