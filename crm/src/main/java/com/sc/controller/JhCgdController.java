@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sc.entity.JhCgd;
 import com.sc.entity.JhCgdxq;
 import com.sc.entity.JhGysxx;
+import com.sc.entity.JhXbh;
+import com.sc.entity.Result;
 import com.sc.service.JhCgdService;
 import com.sc.service.JhCgdxqService;
 import com.sc.service.JhGysxxService;
+import com.sc.service.JhXbhService;
 @RequestMapping("/cgdctrl")
 @Controller
 public class JhCgdController {
@@ -30,7 +31,8 @@ public class JhCgdController {
 	JhCgdxqService jhCgdxqService;
 	@Autowired
 	JhGysxxService jhGysxxService;
-	
+	@Autowired
+	JhXbhService jhXbhService;
 	@RequestMapping("/cgdlistpage.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
@@ -48,25 +50,49 @@ public class JhCgdController {
 	
 	    //添加采购单
 		@RequestMapping("/cgdgoadd.do")
-		public ModelAndView cgdgoadd(ModelAndView mav){
-			System.out.println("采购单去添加！");	
+		public ModelAndView cgdgoadd(ModelAndView mav,Long id){
+			System.out.println("采购单去添加！");				
 			mav.addObject("gs",jhGysxxService.select()); 
+			JhXbh jhXbh = jhXbhService.get(id);
+			mav.addObject("bh", jhXbh);		
 			mav.setViewName("jh/cgdadd");
 			return mav;
 		}
 		
-		//添加采购单详情后
+		//添加采购单后
 		@RequestMapping("/cgdadd.do")
 		@ResponseBody
-		public ModelAndView cgdxqadd(ModelAndView mav,
-				HttpServletRequest req,
-				JhCgd jc)throws IllegalStateException, IOException {
-			System.out.println("开始添加采购单"+jc);
+		public Result cgdxqadd(ModelAndView mav,				
+				JhCgd jc,Long id)throws IllegalStateException, IOException {
+			
 			//设置添加时间
+			System.out.println(id);
+			JhXbh jhXbh = jhXbhService.get(id);	
+			System.out.println(jhXbh);
 			jc.setLtime(new Date());
-			jhCgdService.add(jc);
-			mav.setViewName("/cgdlistpage.do");
-			return mav;
+			jc.setJhtime(jhXbh.getJhTime());
+			jc.setCgTime(new Date());
+			jhCgdService.add(jc);	
+			System.out.println("开始添加采购单"+jc);			
+			List<JhCgdxq> list = jhCgdxqService.getall(jc.getCgdId());
+			System.out.println(list);
+			if(list!=null){
+				if(list.size()==0){
+					JhCgdxq jhCgdxq=new JhCgdxq();
+					jhCgdxq.setCpId(jhXbh.getCpId());
+					System.out.println(jhXbh.getCpId());
+					System.out.println(jhCgdxq.getCpId());
+					jhCgdxq.setCgdId(jc.getCgdId());
+					jhCgdxq.setGsId(jhXbh.getGsId());
+					jhCgdxq.setOperator(jhXbh.getOperator());
+					jhCgdxq.setRemark(jhXbh.getRemark());
+					jhCgdxq.setLtime(new Date());
+					jhCgdxqService.add(jhCgdxq);
+				}
+				   				
+			}						
+			return new Result(200,"生成采购单成功！");
+			
 		}
 	
 	//付款

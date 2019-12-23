@@ -29,7 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  
    
+  
+  
+  
 <div class="layui-btn-container">
 
       <table class="layui-table">    
@@ -72,9 +76,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <fmt:formatDate value="${u.ltime}" pattern="yyyy-MM-dd"/>
                </td>                         
                <td  class="td-status">                            
-                 <a onclick="x_admin_show('','../cgdctrl/cgdgoadd.do',650,650)" >
+                 <a onclick="x_admin_show('','../cgdctrl/cgdgoadd.do?id=${u.id }',650,650)" >
                  <span class="layui-btn layui-btn-normal layui-btn-mini">生成采购单</span>
-                 </a>                 
+                 </a>     
+                           
                </td>
                 
              

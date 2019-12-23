@@ -1,5 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+ <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -37,11 +38,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="x-red">*</span>  采购主题：
               </label>
               <div class="layui-input-inline">
-              <input type="text"  id="cgTheme" name="cgTheme" 
+              <input type="text"   name="cgTheme" 
                   autocomplete="off" class="layui-input" lay-verify="required">
-             
+              <input type="hidden"   name="cgdId" 
+                  autocomplete="off" class="layui-input" lay-verify="">
                </div>
           </div> 
+           
                   
           <div class="layui-form-item">
               <label  class="layui-form-label">
@@ -54,17 +57,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <c:forEach items="${gs }" var="u">
                <option value="${u.gysId }">${u.gysId }</option>
               </c:forEach>             
-              </select>
-             
-              
-               </div>
+              </select>                         
+               </div>              
           </div>
+          
+                  
            <div class="layui-form-item">
               <label  class="layui-form-label">
-          <span class="x-red">*</span> 交货时间：
+          <span class="x-red">*</span> 发票号码：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="jhtime" name="jhtime" required 
+                  <input type="text" name="fphm" required 
                   autocomplete="off" class="layui-input" lay-verify="required">
               </div>
           </div>
@@ -74,10 +77,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <span class="x-red">*</span>交货地点：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="jhplace"  name="jhplace" required 
+                  <input type="text" name="jhplace" required 
                   autocomplete="off" class="layui-input" lay-verify="required">
               </div>
           </div>
+          
+          
+          
           
             <div class="layui-form-item">
               <label  class="layui-form-label">
@@ -85,41 +91,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </label>
               <div class="layui-input-inline">
                   <input type="text"  required name="jhway"
-                  autocomplete="off" class="layui-input" lay-verify="required">
+                  autocomplete="off" class="layui-input">                                                                
+                  <input type="hidden"  name="operator" required value="${bh.operator }"
+                  autocomplete="off" class="layui-input">
+                                                                          
+                  <input type="hidden"  name="remark"  required value="${bh.remark }"
+                  autocomplete="off" class="layui-input" >
+                  
+                  <input type="hidden"  name="gsId"  required value="${bh.gsId }"
+                  autocomplete="off" class="layui-input" >
+                  
+                  <input type="hidden"  name="fkqk"  required value="未付款"
+                  autocomplete="off" class="layui-input" >
+       
+                  <input type="hidden"  name="cgJz"  required value="待采购"
+                  autocomplete="off" class="layui-input" >
+                 
                  
               </div>
           </div>
-              
-               <div class="layui-form-item">
-              <label  class="layui-form-label">
-                                        操作员：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text"  name="operator" required 
-                  autocomplete="off" class="layui-input">               
-              </div>
-          </div>       
-              
-          <div class="layui-form-item">
-              <label  class="layui-form-label">
-                                        备注信息：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text"  name="remark" required 
-                  autocomplete="off" class="layui-input">
-              </div>
-          </div>          
-                                
-             <div class="layui-form-item">
-              <label  class="layui-form-label">
-          <span class="x-red">*</span> 公司编号：
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text"  name="gsId" id="gsId" required disabled="disabled"
-                  autocomplete="off" class="layui-input" lay-verify="required">
-              </div>
-          </div>    
-       
+                      
+               
+                 
+                 
        
             
          <div class="layui-form-item">
@@ -142,7 +136,7 @@ layui.use(['form','layer'], function(){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "cgdadd.do",
+		        url: "cgdadd.do?id="+${bh.id},
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
