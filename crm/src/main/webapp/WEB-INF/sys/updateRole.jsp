@@ -146,22 +146,41 @@ layui.use(['form','layer'], function(){
             console.log("1234"+data);
             $.ajax({
 		        type: 'post',
-		        url: "getColumnPower.do?cid="+$("#sssid").val()+"&rid"+${RPOne.rid },
+		        url: "getColumnPower.do?cid="+$("#sssid").val()+"&rid="+${RPOne.rid },
 		        data: data.field,
 		        success: function (list) {
 		          console.log(list);
 	              
             	  $("#Plist").empty();
-            	   
-            	  for(var i=0;i<list.list1.length;i++){
-            	     $("#Plist").append("<input type='checkbox' value='"+list[i].pid+"'"+" name='pname' title='"+list[i].pname+"'>")
-/*             	  for(var i=0;i<list.list2.length;i++){
-            	  	checked="checked"
-            	  }    */
-            	     
+            	  var list11=list.list1;
+            	  var list22=list.list2;
+            	  var str = "";
+            	  for(var i=0;i<list11.length;i++){
+            	      str=str+"<input type='checkbox' value='"+list11[i].pid+"'"+" name='pname' title='"+list11[i].pname+"' ";
+            	     for(var j=0;j<list22.length;j++){
+	            	  	if(list22[j].pid==list11[i].pid){
+							 str=str+" checked='checked' ";
+							 break;
+	            	  	}
+	            	  }  
+            	      str=str+">";
             	  }
+            	   console.log(str);
             	  
-            	  console.log($("#Plist").html());	
+            	  
+            	  /* for(var i=0;i<list11.length;i++){
+            	     $("#Plist").append("<input type='checkbox' value='"+list11[i].pid+"'"+" name='pname' title="+list11[i].pname);
+            	     for(var j=0;j<list22.length;j++){
+	            	  	if(list22[j].pid==list11[i].pid){
+	            	  		$('#Plist').append("checked='checked'");
+	            	  	}
+	            	  }  
+            	     $('#Plist').append(">");
+            	  } */
+            	  
+ 
+            	  
+            	  console.log($("#Plist").html(str));	
                   form.render('checkbox');
 		        }
 		    });

@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                          <ul class="sub-menu">
                           <li>
-	                        <a _href="offassessctrl/targetlist.do">                 
+	                        <a _href="offtargetctrl/targetlist.do">                 
 	                             <i class="iconfont">&#xe6a7;</i>
 	                            <cite>考核指标管理</cite>
 	                        </a>
@@ -157,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            </ul>
 	                             <ul class="sub-menu">
 	                             <li>
-	                           <a _href="offassessctrl/targetlist.do">                 
+	                           <a _href="offtaskctrl/taskacceptlist.do">                 
 	                             <i class="iconfont">&#xe6a7;</i>
 	                            <cite>任务接收管理</cite>
 	                          </a>

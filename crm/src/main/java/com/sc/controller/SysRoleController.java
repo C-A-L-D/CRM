@@ -74,6 +74,7 @@ public class SysRoleController {
 			ArrayList<SysPowerinfo> list1 = sysRoleServiceImpl.selectAllPower(sysPowercolumn.getCid());
 			System.out.println("遍历结果"+list1);
 			ArrayList<SysPowerinfo> list2 = sysRoleServiceImpl.selectPowerChecked(sysRole.getRid());
+			System.out.println("遍历结果"+list2);
 			return new ListArr(list1, list2);
 		}
 		return null;
