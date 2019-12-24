@@ -2,6 +2,7 @@ package com.sc.mapper;
 
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.OffMessdetailExample;
+import com.sc.entity.SysUsersInfo;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,11 +21,14 @@ public interface OffMessdetailMapper {
     //查看短消息详情
     public OffMessdetail showdetail(Long detailid);
     
-   //回复短消息
+    //回复短消息
     int  huifuone(OffMessdetail detail);
     
-    //查询短消息-已发送
-    public List<OffMessdetail> selectsend();
+    //模糊查询-标题
+    public List<OffMessdetail> selectbytitle(String title);
+    
+    //模糊查询-内容
+    public List<OffMessdetail> selectbycontent(String content);
     
     int countByExample(OffMessdetailExample example);
 
@@ -34,7 +38,8 @@ public interface OffMessdetailMapper {
     int insert(OffMessdetail record);
 
     int insertSelective(OffMessdetail record);
-
+    
+    //
     List<OffMessdetail> selectByExample(OffMessdetailExample example);
 
     OffMessdetail selectByPrimaryKey(Long detailid);

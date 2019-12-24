@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'messadd.jsp' starting page</title>
+    <title>My JSP 'targetadd.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -30,66 +30,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	  <link rel="stylesheet" type="text/css" href="https://raw.githack.com/hnzzmsf/layui-formSelects/master/dist/formSelects-v4.css" />
-       
+	
 
   </head>
-  
-  <body class="form-wrap" >
-
-  <div class="layui-fluid">
-      <div class="layui-card-body" style="padding: 15px;">
-      
-        <form class="layui-form">
-        
-          <div class="layui-form-item" style="width:500px">
-           <label for="title" class="layui-form-label">
-            <span class="x-red">*</span> 消息标题
-            </label>
-            <div class="layui-input-inline">
-              <input type="text" name="title" id="title"   required lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:300px" >
-            </div>
-            
-          </div>
-            <div class="layui-form-item" style="width:500px">
-           <label for="title" class="layui-form-label">
-            <span class="x-red">*</span>接收人
-            </label>
-           <div  class="layui-input-inline" style="width:300px">
-            <select name="uids" xm-select="select1"  required lay-verify="required" >
-            <c:forEach items="${sysusers }" var="u">
-                <option value="${u.sid}">${u.sname }</option>
-                </c:forEach>
-            </select>
-        </div>
-         </div>
-
-
-          <div class="layui-form-item layui-form-text">
-           <label for="content" class="layui-form-label">
-            <span class="x-red">*</span>消息内容
-            </label>
-            <div class="layui-input-inline">
-              <textarea id="content"  name="content"  required lay-verify="required" placeholder="请输入内容" class="layui-textarea" style="width:300px"></textarea>
-            </div>
-          </div>
-         
-            <div class="layui-input-block">
-               <div class="layui-footer" style="left: 0;">
+ <body>
+    <div class="x-body">
+        <form  class="layui-form layui-form-pane">
+          
+                <div class="layui-form-item layui-form-text" >
+                    <label for="desc" class="layui-form-label">
+                     <span class="x-red">*</span>    考核指标集名称
+                    </label>
+                    <div class="layui-input-block">
+                      <input type="text"  id="assesstarget" name="assesstarget" required lay-verify="required"
+                        autocomplete="off" class="layui-input" >
+                        </div>
+                </div>
               
-                <button class="layui-btn" lay-filter="add" lay-submit="">发送</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-              </div>
-            </div>
-     
-        </form>
+                <div class="layui-form-item layui-form-text" >
+                    <label for="desc" class="layui-form-label">
+                                        <span class="x-red">*</span>    考核指标集描述
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea  id="remarks"  required lay-verify="required" name="remarks" class="layui-textarea" ></textarea>
+                    </div>
+                </div>
+           
+               <center>        
+                  <div class="layui-form-item">
+                  <button  class="layui-btn"  lay-filter="add" lay-submit="">新建</button>
+	                
+		           </div>
+		       </center>
+               
+      </form>
       </div>
-  
 
-    
-  <script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js" type="text/javascript" charset="utf-8"></script>
-        <script src="https://raw.githack.com/hnzzmsf/layui-formSelects/master/dist/formSelects-v4.min.js" type="text/javascript"
-         charset="utf-8"></script>
          <script>
   /*
    layui.config({
@@ -123,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "offmessctrl/add.do",
+		        url: "offtargetctrl/add.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {

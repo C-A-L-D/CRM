@@ -243,4 +243,53 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  
+     <!-- 结果映射 -->
+  <resultMap type="OffTaskdetail" id="offtaskMap1" autoMapping="true">
+  <id column="ID" property="id"></id>
+  <!-- 一对一的配置start -->
+  <association property="offAssesstask" javaType="OffAssesstask" autoMapping="true">
+  <id column="TASKID" property="taskid"></id>
+  </association>
+   <!--  一对一的配置end -->
+  </resultMap>
+ 
+   <select id="selectaccept" resultMap="offtaskMap1"  >
+  select *
+    from OFF_TASKDETAIL
+    LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
+    where OFF_TASKDETAIL.ACCEPTUSERID=37
+  </select>
+  
+   <select id="selectbytitle" resultMap="offtaskMap1"  >
+  select *
+    from OFF_TASKDETAIL
+    LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
+    where OFF_TASKDETAIL.ACCEPTUSERID=37
+    AND OFF_ASSESSTASK.TASKTITLE LIKE concat(concat('%',#{tasktitle,jdbcType=VARCHAR}),'%')
+  </select>
+  
+     <select id="selectbycontent" resultMap="offtaskMap1"  >
+  select *
+    from OFF_TASKDETAIL
+    LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
+    where OFF_TASKDETAIL.ACCEPTUSERID=37
+    AND OFF_ASSESSTASK.TASKDETAIL LIKE concat(concat('%',#{taskdetail,jdbcType=VARCHAR}),'%')
+  </select>
+  
+   <select id="selectbyuser" resultMap="offtaskMap1"  >
+  select *
+    from OFF_TASKDETAIL
+    LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
+    where OFF_TASKDETAIL.ACCEPTUSERID=37
+    AND OFF_ASSESSTASK.TASKPUBLISHER LIKE concat(concat('%',#{taskpublisher,jdbcType=VARCHAR}),'%')
+  </select>
+  
+  <select id="selectbytarget" resultMap="offtaskMap1"  >
+  select *
+    from OFF_TASKDETAIL
+    LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
+    where OFF_TASKDETAIL.ACCEPTUSERID=37
+    AND OFF_ASSESSTASK.ASSESSTARGET LIKE concat(concat('%',#{assesstarget,jdbcType=VARCHAR}),'%')
+  </select>
 </mapper>
