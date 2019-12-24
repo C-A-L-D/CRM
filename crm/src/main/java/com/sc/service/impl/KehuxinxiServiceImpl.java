@@ -63,5 +63,34 @@ public class KehuxinxiServiceImpl implements KehuxinxiService {
 		List<XiaoshouKehuxinxi> selectByExample = this.xiaoshouKehuxinxiMapper.selectByExample(example);
 		return new PageInfo<XiaoshouKehuxinxi>(selectByExample);
 	}
+	
+	//流失客户处理
+	@Override
+	public PageInfo<XiaoshouKehuxinxi> selectKehuliushiPage(Integer pageNum, Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		XiaoshouKehuxinxiExample example=new XiaoshouKehuxinxiExample();
+		example.setOrderByClause(" kid desc ");
+		Criteria criteria=example.createCriteria();
+		criteria.andKehuzhuangtaiEqualTo("暂缓流失");
+		List<XiaoshouKehuxinxi> list=this.xiaoshouKehuxinxiMapper.selectByExample(example);
+		PageInfo<XiaoshouKehuxinxi> page=new PageInfo<XiaoshouKehuxinxi>(list);
+		return page;
+	}
 
+	//流失客户恢复
+	@Override
+	public void kehuxinxiHuifu(XiaoshouKehuxinxi xk) {
+		if(xk!=null){
+			this.xiaoshouKehuxinxiMapper.updateByPrimaryKey(xk);
+		}
+	}
+	
+	//流失客户删除
+	@Override
+	public void deleteKehuxinxi(XiaoshouKehuxinxi xk){
+		if(xk!=null){
+			this.xiaoshouKehuxinxiMapper.deleteByPrimaryKey(xk.getKid());
+		}
+	}
+	
 }

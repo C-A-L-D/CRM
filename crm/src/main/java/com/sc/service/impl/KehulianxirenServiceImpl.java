@@ -55,13 +55,14 @@ public class KehulianxirenServiceImpl implements KehulianxirenService {
 	}
 
 	@Override
-	public PageInfo<XiaoshouKehulianxiren> selectKehulianxiren(Integer pageNum, Integer pageSize, Long kid,
+	public PageInfo<XiaoshouKehulianxiren> mohuKehulianxiren(Integer pageNum, Integer pageSize, Long kid,
 			String lianxirenxingming) {
 		PageHelper.startPage(pageNum, pageSize);
 		XiaoshouKehulianxirenExample example = new XiaoshouKehulianxirenExample();
 		example.setOrderByClause(" lid desc ");
 		Criteria criteria = example.createCriteria();
 		criteria.andKidEqualTo(kid);
+		criteria.andLianxirenxingmingLike("%"+lianxirenxingming+"%");
 		List<XiaoshouKehulianxiren> list=this.xiaoshouKehulianxirenMapper.selectByExample(example);
 		PageInfo<XiaoshouKehulianxiren> page=new PageInfo<XiaoshouKehulianxiren>(list);
 		return page;
@@ -69,8 +70,9 @@ public class KehulianxirenServiceImpl implements KehulianxirenService {
 
 	@Override
 	public void deleteKehulianxiren(XiaoshouKehulianxiren lxr) {
-		// TODO Auto-generated method stub
-		
+		if(lxr!=null){
+			this.xiaoshouKehulianxirenMapper.deleteByPrimaryKey(lxr.getLid());
+		}
 	}
 
 }
