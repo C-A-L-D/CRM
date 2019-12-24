@@ -26,34 +26,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../../CRM/js/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../CRM/lib/layui/css/layui.css">
 	<script src="../../CRM/lib/layui/layui.js"></script>
+	<script type="text/javascript" src="store/js/listSwiPre.js"></script>
   </head>
   
 <body>
-    <div class="layui-card-header"><h2>修改仓库信息</h2></div>
+    <div class="layui-card-header">
+    <div class="layui-form-item">
+    <label class="layui-form-label" style="width:220px"><h2>仓库号为${selected.whid }的仓库信息</h2> </label>
+    <button type="button" style="float:right" class="layui-btn layui-btn-sm" onclick="postUpdate(${selected.whid })" ><i class="layui-icon">&#xe642;</i></button>
+    </div>
+    </div>
+   
     <div class="layui-card">
-        <form class="layui-form" action="http://localhost:8080/CRM/storeWhinfo/updateSwi.do" method="post">
+    	<div class="layui-form">
                 <div class="layui-form-item">
                     <label class="layui-form-label" >仓库编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="whid" readonly="readonly" value="${selected.whid }"  autocomplete="off" class="layui-input">
+                        <input type="text" name="whid" readonly="readonly" value="${selected.whid }" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">仓库名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="whname" placeholder="${selected.whname}" autocomplete="off" class="layui-input">
+                        <input type="text" name="whname" readonly="readonly" value="${selected.whname}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">备注信息</label>
                     <div class="layui-input-block">
-                        <textarea name="remark" placeholder="请输入备注信息......." class="layui-textarea"></textarea>
+                        <textarea name="remark" readonly="readonly" class="layui-textarea">${selected.remark}</textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">公司编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="cid" required readonly="readonly"  value="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="cid" readonly="readonly"  value="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -63,13 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		
                     </div>
                 </div>
-                <div class="layui-form-item">
-                     <div class="layui-input-block">
-                         <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                     </div>
-                </div>
-        </form>
+           </div>
     </div>
 
 </body>

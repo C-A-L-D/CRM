@@ -33,33 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
 <body>
 <div class="layui-card">
-
-<!-- 导航 -->
-<div class="x-nav">
-      <span class="layui-breadcrumb" style="visibility: visible;">
-        <a href="javascript:location.replace(location.href);">主页</a><span lay-separator="">/</span>
-        <a href="javascript:location.replace(location.href);">库存</a><span lay-separator="">/</span>
-        <a href="javascript:location.replace(location.href);"><cite>仓库商品信息</cite></a>
-       </span>
-       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-      		<i class="layui-icon" style="line-height:38px">ဂ</i>
-      	</a>
-</div>
-
-
 <div class="x-body">
-	<!-- 查询 -->
-<div class="layui-row">
-<form class="layui-form layui-col-md12 x-so">
-<input type="text" id="searchid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="width:380px">
-<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="width:380px">
-<button type="button" onclick='postinfo($("#searchid").val(),"")' class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查找</button>  
-<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button>  
-<a type="reset" style="float: right" class="layui-btn layui-btn-danger" href="../CRM/store/jsp/addSgi.jsp"><i class="layui-icon">&#xe654;</i></a>
-</form>
-</div>
-
-
 <!-- 表格 -->
   <table class="layui-table">
     <colgroup>
@@ -86,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr> 
     </thead>
     <tbody>
-		 <c:forEach items="${listpage.list}" var="sgi">
+		 <c:forEach items="${page.list}" var="sgi">
 	  		<tr>
 		  		<td><center>${sgi.gid}</center></td>
 		  		<td><center>${sgi.gname}</center></td>
@@ -116,15 +90,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 分页 -->
 	  <center>
       <div class="layui-elem-field layui-field-title" id="page">
-          <a class="layui-btn layui-btn-primary" href="storeGinfo/listpage.do?pageNum=${listpage.firstPage}">首页</a>
-          <a class="layui-btn layui-btn-primary" href="storeGinfo/listpage.do?pageNum=${listpage.prePage}">&lt;&lt;上一页</a>
-          <span class="layui-btn"> 当前${listpage.pageNum }/${listpage.pages }页</span>
-          <span class="layui-btn layui-btn-primary">共${listpage.total}条数据</span>
-          <a class="layui-btn layui-btn-primary" href="storeGinfo/listpage.do?pageNum=${listpage.nextPage}">下一页&gt;&gt;</a>
-          <a class="layui-btn layui-btn-primary" href="storeGinfo/listpage.do?pageNum=${listpage.lastPage }">尾页</a>       
+          <a class="layui-btn layui-btn-primary" href="storeWhinfo/listpageSgi.do?pageNum=${page.firstPage}&whid=${id}">首页</a>
+          <a class="layui-btn layui-btn-primary" href="storeWhinfo/listpageSgi.do?pageNum=${page.prePage}&whid=${id}">&lt;&lt;上一页</a>
+          <span class="layui-btn"> 当前${page.pageNum }/${page.pages }页</span>
+          <span class="layui-btn layui-btn-primary">共${page.total}条数据</span>
+          <a class="layui-btn layui-btn-primary" href="storeWhinfo/listpageSgi.do?pageNum=${page.nextPage}&whid=${id}">下一页&gt;&gt;</a>
+          <a class="layui-btn layui-btn-primary" href="storeWhinfo/listpageSgi.do?pageNum=${page.lastPage }&whid=${id}">尾页</a>       
       </div>
       </center>
-
+</div>
 </div>
 </body>
 
