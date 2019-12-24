@@ -2,7 +2,6 @@ package com.sc.service;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.JhCgd;
-import com.sc.entity.JhCgdxq;
 
 public interface JhCgdService {
 
@@ -13,6 +12,8 @@ public interface JhCgdService {
 	  public void add(JhCgd jc);
 	  
 	  public void update(JhCgd jc);
+	  
+
 	  
 
 		

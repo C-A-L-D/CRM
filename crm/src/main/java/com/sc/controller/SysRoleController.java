@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.ListArr;
 import com.sc.entity.Result;
-import com.sc.entity.SysGongsiinfo;
+import com.sc.entity.SysPowercolumn;
+import com.sc.entity.SysPowerinfo;
 import com.sc.entity.SysRole;
+import com.sc.mapper.SysPowerinfoMapper;
 import com.sc.service.impl.SysRoleServiceImpl;
 
 @Controller
@@ -41,18 +43,48 @@ public class SysRoleController {
 		return mav;
 	}
 	
-	
+	/**
+	 * 修改角色信息弹框
+	 * @param mav
+	 * @param sysRole
+	 * @return
+	 */
 	@RequestMapping("/goUpdateRle.do")
 	public ModelAndView updateRoleList(ModelAndView mav, SysRole sysRole) {
 		List<SysRole> selectAllRole = sysRoleServiceImpl.selectAllRole();
 		SysRole selectOne = sysRoleServiceImpl.selectOne(sysRole.getRid());
+		ArrayList<SysPowercolumn> column = sysRoleServiceImpl.selectAllColumn();
+		mav.addObject("column", column);
 		mav.addObject("allR", selectAllRole);
 		mav.addObject("RPOne", selectOne);
 		mav.setViewName("sys/updateRole");
 		return mav;
 	}
 	
+	/**
+	 * 选中权限分栏，得到对应的权限，并把该角色已有的权限显示为选中状态
+	 * @param sysPowercolumn
+	 * @return
+	 */
+	@RequestMapping("/getColumnPower.do")
+	@ResponseBody
+	public ListArr getColumnPower(SysPowercolumn sysPowercolumn, SysRole sysRole){
+		System.out.println("遍历显示全部权限方法....."+sysPowercolumn+"\n-----"+sysRole);
+		if (sysPowercolumn != null && sysPowercolumn.getCid() != null) {
+			ArrayList<SysPowerinfo> list1 = sysRoleServiceImpl.selectAllPower(sysPowercolumn.getCid());
+			System.out.println("遍历结果"+list1);
+			ArrayList<SysPowerinfo> list2 = sysRoleServiceImpl.selectPowerChecked(sysRole.getRid());
+			System.out.println("遍历结果"+list2);
+			return new ListArr(list1, list2);
+		}
+		return null;
+	}
 	
+	/**
+	 * 修改角色信息
+	 * @param s
+	 * @return
+	 */
 	@RequestMapping("/updateRle.do")
 	@ResponseBody
 	public Result updateRoleOne(SysRole s){

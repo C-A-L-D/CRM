@@ -13,6 +13,18 @@
 		ON p.PCOLUMN_ID=PC.CID
    </select>
 
+	<resultMap type="SysPowerinfo" id="powerChecked" autoMapping="true">
+      <id column="PID" property="pid"/>
+      <collection property="sysPowerRole" ofType="SysPowerRole" autoMapping="true">
+          <id column="ID" property="id"/>
+      </collection>
+   </resultMap>
+	<select id="selectPowerChecked" resultMap="powerChecked">
+		SELECT * FROM SYS_POWERINFO p
+		INNER JOIN SYS_POWER_ROLE pr
+		ON p.PID=pr.PID
+		WHERE ROLE_ID=#{roleId }
+   </select>
 
 
 

@@ -114,6 +114,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sc.entity.JhCgd" >
+  <selectKey keyProperty="cgdId" resultType="Long" order="AFTER">
+      SELECT SEQ_JH_CGD_CGD_ID.CURRVAL FROM DUAL
+      </selectKey>
+      
+  
+  
     insert into JH_CGD (CGD_ID, CG_THEME, CG_TIME, 
       GYS_ID, HK_MONEY, FKQK, 
       CG_JZ, JHTIME, JHPLACE, 
@@ -126,6 +132,7 @@
       #{jhway,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{gsId,jdbcType=DECIMAL}, #{ltime,jdbcType=TIMESTAMP}, #{fphm,jdbcType=VARCHAR}
       )
+      
   </insert>
   <insert id="insertSelective" parameterType="com.sc.entity.JhCgd" >
     insert into JH_CGD

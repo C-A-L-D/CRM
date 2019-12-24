@@ -23,8 +23,11 @@ public class SysRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    
     private List<SysPowerinfo> sysPowerinfo;
+    
+    private String headname;
+    
+    private SysUsers sysUsers;
     
     public SysRole(BigDecimal rid, String rname, String rdescribe, BigDecimal headrid, BigDecimal opertorid, Date lasttime) {
         this.rid = rid;
@@ -47,6 +50,57 @@ public class SysRole implements Serializable {
 		this.opertorid = opertorid;
 		this.lasttime = lasttime;
 		this.sysPowerinfo = sysPowerinfo;
+	}
+
+	public SysRole(BigDecimal rid, String rname, String rdescribe, BigDecimal headrid, BigDecimal opertorid,
+			Date lasttime, List<SysPowerinfo> sysPowerinfo, String headname) {
+		super();
+		this.rid = rid;
+		this.rname = rname;
+		this.rdescribe = rdescribe;
+		this.headrid = headrid;
+		this.opertorid = opertorid;
+		this.lasttime = lasttime;
+		this.sysPowerinfo = sysPowerinfo;
+		this.headname = headname;
+	}
+
+	public SysRole(BigDecimal rid, String rname, String rdescribe, BigDecimal headrid, BigDecimal opertorid,
+			Date lasttime, List<SysPowerinfo> sysPowerinfo, String headname, SysUsers sysUsers) {
+		super();
+		this.rid = rid;
+		this.rname = rname;
+		this.rdescribe = rdescribe;
+		this.headrid = headrid;
+		this.opertorid = opertorid;
+		this.lasttime = lasttime;
+		this.sysPowerinfo = sysPowerinfo;
+		this.headname = headname;
+		this.sysUsers = sysUsers;
+	}
+
+
+
+	public SysUsers getSysUsers() {
+		return sysUsers;
+	}
+
+
+
+	public void setSysUsers(SysUsers sysUsers) {
+		this.sysUsers = sysUsers;
+	}
+
+
+
+	public String getHeadname() {
+		return headname;
+	}
+
+
+
+	public void setHeadname(String headname) {
+		this.headname = headname;
 	}
 
 
@@ -126,9 +180,8 @@ public class SysRole implements Serializable {
 	@Override
 	public String toString() {
 		return "SysRole [rid=" + rid + ", rname=" + rname + ", rdescribe=" + rdescribe + ", headrid=" + headrid
-				+ ", opertorid=" + opertorid + ", lasttime=" + lasttime + ", sysPowerinfo=" + sysPowerinfo + "]";
+				+ ", opertorid=" + opertorid + ", lasttime=" + lasttime + ", sysPowerinfo=" + sysPowerinfo
+				+ ", headname=" + headname + ", sysUsers=" + sysUsers + "]";
 	}
-
-
     
 }
