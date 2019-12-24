@@ -81,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           
 			<div class="layui-col-md12" id="Plist" lay-filter="" lay-checkbox="">
+				
             </div>
 		
           
@@ -155,6 +156,9 @@ layui.use(['form','layer'], function(){
             	  var list11=list.list1;
             	  var list22=list.list2;
             	  var str = "";
+            	  if(list11.length!=0){
+            	  	str = str +"<input type='radio' name='' value='' title='全选'>"
+            	  }
             	  for(var i=0;i<list11.length;i++){
             	      str=str+"<input type='checkbox' value='"+list11[i].pid+"'"+" name='pname' title='"+list11[i].pname+"' ";
             	     for(var j=0;j<list22.length;j++){
