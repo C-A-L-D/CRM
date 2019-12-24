@@ -50,16 +50,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           
           <div class="layui-form-item">
-          	<div class="layui-inline">
-              <label class="layui-form-label">角色名称</label>
-              <div class="layui-input-inline">
-                <input type="text" name="rname" value="${RPOne.rname }" autocomplete="on" class="layui-input">
-              </div>
+            <label class="layui-form-label">权限分栏</label>
+            <div class="layui-input-block">
+              <select name="cid" id="sssid" class="layui-input" lay-filter="pp" lay-select="">
+              	<option value="">请选择</option>
+                <c:forEach items="${column }" var="col">
+                    <option value="${col.cid }"}>${col.cname }</option>
+                </c:forEach>
+               </select>
             </div>
           </div>
           
-          
-           <div class="layui-form-item">
+           <div class="layui-form-item"${RPOne.rname }>
             <label class="layui-form-label">角色描述</label>
             <div class="layui-input-block">
               <input type="text" name="rdescribe" value="${RPOne.rdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
@@ -71,13 +73,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <label class="layui-form-label">上级角色</label>
             <div class="layui-input-block">
               <select name="headrid" lay-filter="aihao">
-                <option value=""></option>
                 <c:forEach items="${allR }" var="all">
                     <option value="${all.rid }" ${all.rid==RPOne.headrid ? "selected":""}>${all.rname }</option>
                 </c:forEach>
                </select>
             </div>
           </div>
+          
+			<div class="layui-col-md12" id="Plist" lay-filter="" lay-checkbox="">
+            </div>
+		
+          
+          
           
             <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
@@ -132,6 +139,35 @@ layui.use(['form','layer'], function(){
 		    });
 		    return false;
           });
+          
+          
+          //监听值的改变
+          form.on('select(pp)', function(data){
+            console.log("1234"+data);
+            $.ajax({
+		        type: 'post',
+		        url: "getColumnPower.do?cid="+$("#sssid").val()+"&rid"+${RPOne.rid },
+		        data: data.field,
+		        success: function (list) {
+		          console.log(list);
+	              
+            	  $("#Plist").empty();
+            	   
+            	  for(var i=0;i<list.list1.length;i++){
+            	     $("#Plist").append("<input type='checkbox' value='"+list[i].pid+"'"+" name='pname' title='"+list[i].pname+"'>")
+/*             	  for(var i=0;i<list.list2.length;i++){
+            	  	checked="checked"
+            	  }    */
+            	     
+            	  }
+            	  
+            	  console.log($("#Plist").html());	
+                  form.render('checkbox');
+		        }
+		    });
+		    return false;
+          });
+          
           
         });
   </script>

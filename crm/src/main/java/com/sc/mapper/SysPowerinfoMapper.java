@@ -30,4 +30,6 @@ public interface SysPowerinfoMapper {
     int updateByPrimaryKey(SysPowerinfo record);
     
     List<SysPowerinfo> selectAllPowerAndCol();
+    
+    List<SysPowerinfo> selectPowerChecked(BigDecimal rid);
 }
