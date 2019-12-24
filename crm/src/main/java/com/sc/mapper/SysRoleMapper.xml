@@ -236,7 +236,7 @@
           <id column="USER_ID" property="userId"/>
       </association>
       <collection property="sysPowerinfo" ofType="SysPowerinfo" autoMapping="true">
-          <id column="PCOLUMN_ID" property="pcolumnId"/>
+          <id column="PID" property="pid"/>
       </collection>
    </resultMap>  
     <select id="selectAllRoleAndPower" resultMap="roleAndPower" >
