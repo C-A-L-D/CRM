@@ -20,6 +20,8 @@ public class SysPowerinfo implements Serializable {
 
     private SysPowercolumn sysPowercolumn;
     
+    private ArrayList<SysPowerRole> sysPowerRole;
+    
     private static final long serialVersionUID = 1L;
 
     public SysPowerinfo(BigDecimal pid, String pname, String ppower, BigDecimal pcolumnId, String pdescribe, Date lasttime) {
@@ -41,7 +43,28 @@ public class SysPowerinfo implements Serializable {
 		this.pdescribe = pdescribe;
 		this.lasttime = lasttime;
 		this.sysPowercolumn = sysPowercolumn;
-	}  
+	} 
+
+	public SysPowerinfo(BigDecimal pid, String pname, String ppower, BigDecimal pcolumnId, String pdescribe,
+			Date lasttime, SysPowercolumn sysPowercolumn, ArrayList<SysPowerRole> sysPowerRole) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.ppower = ppower;
+		this.pcolumnId = pcolumnId;
+		this.pdescribe = pdescribe;
+		this.lasttime = lasttime;
+		this.sysPowercolumn = sysPowercolumn;
+		this.sysPowerRole = sysPowerRole;
+	}
+
+	public ArrayList<SysPowerRole> getSysPowerRole() {
+		return sysPowerRole;
+	}
+
+	public void setSysPowerRole(ArrayList<SysPowerRole> sysPowerRole) {
+		this.sysPowerRole = sysPowerRole;
+	}
 
 	public SysPowercolumn getSysPowercolumn() {
 		return sysPowercolumn;
@@ -106,7 +129,8 @@ public class SysPowerinfo implements Serializable {
 	@Override
 	public String toString() {
 		return "SysPowerinfo [pid=" + pid + ", pname=" + pname + ", ppower=" + ppower + ", pcolumnId=" + pcolumnId
-				+ ", pdescribe=" + pdescribe + ", lasttime=" + lasttime + ", sysPowercolumn=" + sysPowercolumn + "]";
+				+ ", pdescribe=" + pdescribe + ", lasttime=" + lasttime + ", sysPowercolumn=" + sysPowercolumn
+				+ ", sysPowerRole=" + sysPowerRole + "]";
 	}
     
 }

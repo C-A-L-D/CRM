@@ -108,6 +108,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sc.entity.OffAssesstask" >
+   <!-- 在插入语句之后获取当前id -->
+        <selectKey keyProperty="taskid" resultType="java.lang.Long" order="AFTER">
+     SELECT SEQ_ASSESSTASK_TASKID.CURRVAL FROM DUAL
+     </selectKey>
     insert into OFF_ASSESSTASK (TASKID, TASKTITLE, TASKDETAIL, 
       TASKPUBLISHER, ASSESSTARGET, TASKSTARTTIME, 
       TASKENDTIME, COMPANYID, LASTTIME
@@ -276,4 +280,19 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where TASKID = #{taskid,jdbcType=DECIMAL}
   </update>
+ 
+  <select id="select" resultMap="BaseResultMap" >
+   select * from  OFF_ASSESSTASK 
+</select>
+ <update id="updatestate" parameterType="com.sc.entity.OffAssesstask" >
+UPDATE 
+(SELECT * FROM OFF_TASKDETAIL LEFT JOIN OFF_ASSESSTASK
+ON OFF_ASSESSTASK.TASKID=OFF_TASKDETAIL.TASKID
+WHERE 
+TO_CHAR(sysdate,'yyyy-MM-dd HH:mm:ss') >=
+TO_CHAR(OFF_ASSESSTASK.TASKENDTIME,'yyyy-MM-dd HH:mm:ss')
+) X
+SET X.STATE='2'
+
+ </update>
 </mapper>

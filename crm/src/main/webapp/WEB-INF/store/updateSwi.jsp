@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="layui-form-item">
                     <label class="layui-form-label" >仓库编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="whid" placeholder="${selected.whid }" autocomplete="off" class="layui-input">
+                        <input type="text" name="whid" readonly="readonly" value="${selected.whid }"  autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">

@@ -22,8 +22,29 @@ public class OffTaskdetail implements Serializable {
     private Date lasttime;
 
     private static final long serialVersionUID = 1L;
+    
+    //一对一配置
+    private String uname;
+    
+    public String getUname() {
+		return uname;
+	}
 
-    public OffTaskdetail(Long id, Long taskid, Long acceptuserid, String isfinish, String state, Long companyid, Date lasttime) {
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+   
+	private OffAssesstask offAssesstask;
+	
+	public OffAssesstask getOffAssesstask() {
+		return offAssesstask;
+	}
+
+	public void setOffAssesstask(OffAssesstask offAssesstask) {
+		this.offAssesstask = offAssesstask;
+	}
+
+	public OffTaskdetail(Long id, Long taskid, Long acceptuserid, String isfinish, String state, Long companyid, Date lasttime) {
         this.id = id;
         this.taskid = taskid;
         this.acceptuserid = acceptuserid;
@@ -96,7 +117,10 @@ public class OffTaskdetail implements Serializable {
 	@Override
 	public String toString() {
 		return "OffTaskdetail [id=" + id + ", taskid=" + taskid + ", acceptuserid=" + acceptuserid + ", isfinish="
-				+ isfinish + ", state=" + state + ", companyid=" + companyid + ", lasttime=" + lasttime + "]";
+				+ isfinish + ", state=" + state + ", companyid=" + companyid + ", lasttime=" + lasttime + ", uname="
+				+ uname + ", offAssesstask=" + offAssesstask + "]";
 	}
+
+	
     
 }

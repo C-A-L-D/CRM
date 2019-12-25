@@ -38,31 +38,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body class="form-wrap" >
 
   <div class="layui-fluid">
-    
-     
       <div class="layui-card-body" style="padding: 15px;">
       
         <form class="layui-form">
         
-          <div class="layui-form-item" >
+          <div class="layui-form-item" style="width:500px">
            <label for="title" class="layui-form-label">
             <span class="x-red">*</span> 消息标题
             </label>
             <div class="layui-input-inline">
-              <input type="text" name="title" id="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input" >
+              <input type="text" name="title" id="title"   required lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:300px" >
             </div>
             
           </div>
+            <div class="layui-form-item" style="width:500px">
            <label for="title" class="layui-form-label">
             <span class="x-red">*</span>接收人
             </label>
-           <div  class="layui-input-inline" >
-            <select name="uids" xm-select="select1" >
+           <div  class="layui-input-inline" style="width:300px">
+            <select name="uids" xm-select="select1"  required lay-verify="required" >
             <c:forEach items="${sysusers }" var="u">
-                <option value="${u.userId}" >${u.uname }</option>
+                <option value="${u.sid}">${u.sname }</option>
                 </c:forEach>
             </select>
         </div>
+         </div>
 
 
           <div class="layui-form-item layui-form-text">
@@ -70,18 +70,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span class="x-red">*</span>消息内容
             </label>
             <div class="layui-input-inline">
-              <textarea id="content"  name="content" placeholder="请输入内容" class="layui-textarea"></textarea>
+              <textarea id="content"  name="content"  required lay-verify="required" placeholder="请输入内容" class="layui-textarea" style="width:300px"></textarea>
             </div>
-          </div>        
-          <div class="layui-form-item layui-layout-admin">
+          </div>
+         
             <div class="layui-input-block">
-              <div class="layui-footer" style="left: 0;">
+               <div class="layui-footer" style="left: 0;">
               
                 <button class="layui-btn" lay-filter="add" lay-submit="">发送</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
               </div>
             </div>
-          </div>
+     
         </form>
       </div>
   

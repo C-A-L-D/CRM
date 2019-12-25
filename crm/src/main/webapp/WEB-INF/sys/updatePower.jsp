@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
-      <div class="layui-card-header">您所修改的角色编号：${gp.pid }</div>
+      <div class="layui-card-header">您所修改的权限编号：${gp.pid }</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">         
           <div class="layui-form-item">
@@ -53,18 +53,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <div class="layui-form-item">
             <label class="layui-form-label">备注信息</label>
             <div class="layui-input-block">
-              <input type="text" name="rdescribe" value="${gp.pdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
+              <input type="text" name="pdescribe" value="${gp.pdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
             </div>
           </div>
          
           
           <div class="layui-form-item">
-            <label class="layui-form-label">上级角色</label>
+            <label class="layui-form-label">权限分栏</label>
             <div class="layui-input-block">
-              <select name="headrid" lay-filter="aihao">
+              <select name="pcolumnId" lay-filter="aihao">
                 <option value=""></option>
-                <c:forEach items="${allR }" var="all">
-                    <option value="${all.rid }" ${all.rid==RPOne.headrid ? "selected":""}>${all.rname }</option>
+                <c:forEach items="${column }" var="all">
+                    <option value="${all.cid }" ${all.cid==gp.pcolumnId ? "selected":""}>${all.cname }</option>
                 </c:forEach>
                </select>
             </div>
@@ -96,7 +96,7 @@ layui.use(['form','layer'], function(){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "updateRle.do?rid="+${RPOne.rid },
+		        url: "updatePow.do?pid="+${gp.pid },
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {

@@ -9,7 +9,16 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.SysPowerRole;
+import com.sc.entity.SysPowerRoleExample;
+import com.sc.entity.SysPowercolumn;
+import com.sc.entity.SysPowerinfo;
+import com.sc.entity.SysPowerinfoExample;
+import com.sc.entity.SysPowerinfoExample.Criteria;
 import com.sc.entity.SysRole;
+import com.sc.mapper.SysPowerRoleMapper;
+import com.sc.mapper.SysPowercolumnMapper;
+import com.sc.mapper.SysPowerinfoMapper;
 import com.sc.mapper.SysRoleMapper;
 import com.sc.service.SysRoleService;
 
@@ -18,12 +27,22 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 	@Autowired
 	SysRoleMapper sysRoleMapper;
+	@Autowired
+	SysPowercolumnMapper sysPowercolumnMapper;
+	@Autowired
+	SysPowerinfoMapper sysPowerinfoMapper;
+	@Autowired
+	SysPowerRoleMapper sysPowerRoleMapper;
 	
 	@Override
 	public PageInfo<SysRole> selectAllRoleAndPower(int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
 		PageHelper.startPage(pageNum, pageSize);
 		ArrayList<SysRole> list = this.sysRoleMapper.selectAllRoleAndPower();
+		for (SysRole r : list) {
+			SysRole headName = this.sysRoleMapper.selectByPrimaryKey(r.getHeadrid());
+			r.setHeadname(headName.getRname());
+		}
 		return 	new PageInfo<SysRole>(list);
 	}
 
@@ -56,5 +75,54 @@ public class SysRoleServiceImpl implements SysRoleService {
 		// TODO Auto-generated method stub
 		this.sysRoleMapper.deleteByPrimaryKey(rid);
 	}
+
+	@Override
+	public ArrayList<SysPowercolumn> selectAllColumn() {
+		// TODO Auto-generated method stub
+		return (ArrayList<SysPowercolumn>) sysPowercolumnMapper.selectByExample(null);
+	}
+
+	@Override
+	public ArrayList<SysPowerinfo> selectAllPower(BigDecimal pcolumnId) {
+		// TODO Auto-generated method stub
+		SysPowerinfoExample example = new SysPowerinfoExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andPcolumnIdEqualTo(pcolumnId);
+		return (ArrayList<SysPowerinfo>) sysPowerinfoMapper.selectByExample(example);
+	}
+
+	@Override
+	public ArrayList<SysPowerinfo> selectPowerChecked(BigDecimal rid) {
+		// TODO Auto-generated method stub
+		return (ArrayList<SysPowerinfo>) sysPowerinfoMapper.selectPowerChecked(rid);
+	}
+
+	@Override
+	public ArrayList<SysPowerRole> selectPower(BigDecimal roleId) {
+		// TODO Auto-generated method stub
+		SysPowerRoleExample example = new SysPowerRoleExample();
+		com.sc.entity.SysPowerRoleExample.Criteria criteria = example.createCriteria();
+		criteria.andRoleIdEqualTo(roleId);
+		return (ArrayList<SysPowerRole>) sysPowerRoleMapper.selectByExample(example);
+	}
+
+	@Override
+	public void insertPowerColumn(SysPowerRole sysPowerRole) {
+		// TODO Auto-generated method stub
+		sysPowerRoleMapper.insertSelective(sysPowerRole);
+	}
+
+	@Override
+	public void delPowerColumn(BigDecimal id) {
+		// TODO Auto-generated method stub
+		sysPowerRoleMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public ArrayList<SysPowerRole> selectRP(BigDecimal roleId, BigDecimal pcolumnId) {
+		// TODO Auto-generated method stub
+		return (ArrayList<SysPowerRole>) sysPowerRoleMapper.selectRP(roleId, pcolumnId);
+	}
+
 
 }

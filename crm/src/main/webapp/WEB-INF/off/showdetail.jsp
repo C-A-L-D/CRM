@@ -41,10 +41,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
                 <div class="layui-form-item">
                     <label for="name" class="layui-form-label">
-                                              接收人
+                                          发送人
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text"  name="name" required lay-verify="required"
+                        <input type="text"  name="name" required lay-verify="required" readonly="readonly"
                         autocomplete="off" class="layui-input" value="${shoedetail.offMess.sender }">
                         <input type="hidden" id="receiver" value="${shoedetail.receiverid }">
                          
@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                              接收时间
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="name" name="name" required lay-verify="required"
+                        <input type="text" id="name" name="name" required lay-verify="required" readonly="readonly"
                         autocomplete="off" class="layui-input" readonly="readonly" value="<fmt:formatDate value="${shoedetail.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>">
                         
                     </div>
@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                           短信标题
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text"  id="name" name="name" required lay-verify="required"
+                        <input type="text"  id="name" name="name" required lay-verify="required" readonly="readonly"
                         autocomplete="off" class="layui-input" value="${shoedetail.offMess.title }" style="width:450px">
                     </div>
                 </div>
@@ -77,24 +77,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     短信内容
                     </label>
                     <div class="layui-input-block">
-                        <textarea placeholder="暂无" id="desc"   name="desc" class="layui-textarea" >${shoedetail.offMess.content }</textarea>
+                        <textarea placeholder="暂无" id="desc"   name="desc" readonly="readonly" class="layui-textarea" >${shoedetail.offMess.content }</textarea>
                     </div>
                 </div>
            
-               
-                
                  <button class="layui-btn" >
                  <a title="删除" style="color:white" onclick="mess_del(this,'${u.detailid}')" href="javascript:;">删除</a>
                    </button>
-                
-                </form>
               
-              </div>
-              <div style="margin-left: 100px;margin-top: -58px;">
+                </form>
+                 <div style="margin-left: 80px;margin-top: -38px;">
                     <button  class="layui-btn"  onclick="huifu()">回复</button>
                     </div>
+                   <div style="margin-left: 160px;margin-top: -38px;">
+                    <button  class="layui-btn"  onclick="guanbi()">关闭</button>
+                    </div> 
+              </div>
+           
                
-        <div style="display:none" id="huifu">
+        <div style="display:none;margin-left:20px" id="huifu">
         <hr style="height:5px">
                 <form    class="layui-form layui-form-pane">
 		              <!-- 发送者：--> 
@@ -105,20 +106,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                  <div class="layui-form-item">
                     <label for="title" class="layui-form-label" >
+                   
                                           短信标题
                     </label>
                     <div class="layui-input-inline">
                         <input type="text"  id="title" name="title" required lay-verify="required"
-                        autocomplete="off" class="layui-input"  style="width:450px">
+                        autocomplete="off" class="layui-input"  style="width:430px">
                     </div>
                 </div>
                 
-                <div class="layui-form-item layui-form-text" >
+                <div class="layui-form-item layui-form-text" style="width:540px">
                     <label for="content" class="layui-form-label">
                        短信内容
                     </label>
                     <div class="layui-input-block">
-                        <textarea  id="content"   name="content" class="layui-textarea" ></textarea>
+                        <textarea  id="content"   name="content" class="layui-textarea"  required lay-verify="required" ></textarea>
                     </div>
                 </div>
                 
@@ -139,6 +141,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           
   
     <script>
+      function guanbi(){
+             // 获得frame索引
+             var index = parent.layer.getFrameIndex(window.name);
+             //关闭当前frame
+             parent.layer.close(index);
+             //刷新页面
+             parent.location.reload();
+      }
+      
      /*用户-删除*/
       function mess_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
@@ -153,22 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     function huifu(){
      document.getElementById("huifu").style.display="block"; 
     }
-    
-     function check() {
-              if($("#title").val()=='') {
-                    alert("短信标题不能为空!");
-                   $("#title").focus();
-                    return false;
-               }
-                if($("#content").val()=='') {
-                    alert("短信内容不能为空!");
-                   $("#content").focus();
-                    return false;
-               }
-                return true;
-                  
-            }
-            
+      
             layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
@@ -176,7 +172,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
              //监听提交
           form.on('submit(add)', function(data){
-            console.log(data);
             $.ajax({
 		        type: 'post',
 		        url: "offmessctrl/huifu.do?detailid"+${shoedetail.detailid},
@@ -191,6 +186,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    parent.layer.close(index);
 		                   //刷新页面
 		                    parent.location.reload();
+		                    window.parent.location.href='offmessctrl/offmesslist.do';
 		                });
 		                 //parent.layer.reload();
 		               
@@ -202,6 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    parent.layer.close(index);
 		                    //刷新页面
 		                    parent.location.reload();
+		                    
 		                });
 		            }
 		        }

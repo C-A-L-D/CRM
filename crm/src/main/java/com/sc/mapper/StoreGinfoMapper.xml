@@ -101,6 +101,14 @@
     from STORE_GINFO
     where GID = #{gid,jdbcType=DECIMAL}
   </select>
+  
+   <select id="selectByWhid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from STORE_GINFO
+    where WHID = #{whid,jdbcType=DECIMAL}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
     delete from STORE_GINFO
     where GID = #{gid,jdbcType=DECIMAL}

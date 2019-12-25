@@ -7,6 +7,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface SysUsersInfoMapper {
+	//查询员工信息-	办公
+	List<SysUsersInfo> selectuser(BigDecimal sid);
+
+	//查询接受者姓名-办公
+	SysUsersInfo selectu(String sname);
+	
     int countByExample(SysUsersInfoExample example);
 
     int deleteByExample(SysUsersInfoExample example);
