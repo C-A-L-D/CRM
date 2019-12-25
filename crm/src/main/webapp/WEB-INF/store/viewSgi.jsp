@@ -26,97 +26,95 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../../CRM/js/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../CRM/lib/layui/css/layui.css">
 	<script src="../../CRM/lib/layui/layui.js"></script>
-	<script src="storegoodsinfo/js/addsgi.js"></script>
+	<script src="store/js/storeginfopre.js"></script>
   </head>
   
 <body>
-    <div class="layui-card">
-        <div class="layui-card-header"><h2>添加库存商品信息</h2></div>
-        <form class="layui-form" action="storefinfo/addStore.do">
+    <br/>
+        <form class="layui-form">
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gid" required lay-verify="required" placeholder="请输入商品编号" autocomplete="off" class="layui-input">
+                        <input type="text" name="gid" readonly="readonly" value="${selected.gid }" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gname" required lay-verify="required" placeholder="请输入商品名称" autocomplete="off" class="layui-input">
+                        <input type="text" name="gname" readonly="readonly" value="${selected.gname}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品类别</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gcategopy" required lay-verify="required" placeholder="请输入商品类别" autocomplete="off" class="layui-input">
+                        <input type="text" name="gcategopy" readonly="readonly" value="${selected.gcategopy}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">规格说明</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gdesp" required lay-verify="required" placeholder="请输入规格说明" autocomplete="off" class="layui-input">
+                        <input type="text" name="gdesp" readonly="readonly" value="${selected.gdesp}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">单位</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gunit" required lay-verify="required" placeholder="请输入单位" autocomplete="off" class="layui-input">
+                        <input type="text" name="gunit" readonly="readonly" value="${selected.gunit}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">仓库编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="whid" required lay-verify="required" placeholder="请输入仓库编号" autocomplete="off" class="layui-input">
+                        <input type="text" name="whid" readonly="readonly" value="${selected.whid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">库存数量</label>
                     <div class="layui-input-block">
-                        <input type="number" name="storenum" required lay-verify="required" placeholder="请输入库存数量" autocomplete="off" class="layui-input">
+                        <input type="text" name="storenum" readonly="readonly" value="${selected.storenum}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">成本价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pricebuy" required lay-verify="required" placeholder="请输入成本价" autocomplete="off" class="layui-input">
+                        <input type="text" name="pricebuy" placeholder="${selected.pricebuy}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">零售价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pricesold" required lay-verify="required" placeholder="请输入零售价" autocomplete="off" class="layui-input">
+                        <input type="text" name="pricesold" readonly="readonly" value="${selected.pricesold}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">经销价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="priceact" required lay-verify="required" placeholder="请输入经销价" autocomplete="off" class="layui-input">
+                        <input type="text" name="priceact" readonly="readonly" value="${selected.priceact}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">备注信息</label>
                     <div class="layui-input-block">
-                        <textarea name="remark" placeholder="请输入备注信息......." class="layui-textarea"></textarea>
+                        <textarea name="remark" readonly="readonly" value="${selected.remark}" class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">公司编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="cid" required lay-verify="required" placeholder="请输入公司编号" autocomplete="off" class="layui-input">
+                        <input type="text" name="cid" readonly="readonly" value="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">最后修改时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="lattime" placeholder="请输入最后修改时间" autocomplete="off" class="layui-input">
+                        <input type="text" name="lattime" readonly="readonly" value="${selected.lasttime}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                     <div class="layui-input-block">
-                         <button  class="layui-btn" lay-filter="add" lay-submit="">立即提交</button>
-                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                     </div>
-                </div>
+                	 <div class="layui-input-block">
+                	<button type="button" class="layui-btn" onclick="postUpdate(${selected.gid })" ><i class="layui-icon">&#xe642;</i>修改</button>
+           			</div>
+           		</div>
             </form>
     </div>
 

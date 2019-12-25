@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.StoreGinfo;
 import com.sc.entity.StoreWhinfo;
-import com.sc.entity.StoreWhinfoExample;
+import com.sc.mapper.StoreGinfoMapper;
 import com.sc.mapper.StoreWhinfoMapper;
 import com.sc.service.StoreWhinfoService;
 
@@ -16,6 +17,9 @@ import com.sc.service.StoreWhinfoService;
 public class StoreWhinfoServiceImpl implements StoreWhinfoService{
 	@Autowired
 	StoreWhinfoMapper storeWhinfoMapper;
+	
+	@Autowired
+	StoreGinfoMapper storeGinfoMapper;
 	
 	@Override
 	public PageInfo<StoreWhinfo> selectPage(Integer pageNum,Integer pageSize) {
@@ -70,4 +74,18 @@ public class StoreWhinfoServiceImpl implements StoreWhinfoService{
 		}
 		this.storeWhinfoMapper.deleteByPrimaryKey(whid);
 	}
+
+	@Override
+	public PageInfo<StoreGinfo> selectSgi(BigDecimal whid,Integer pageNum,Integer pageSize) {
+		if(whid==null) {
+			System.err.println("发生查询错误！");
+			System.err.println(whid);
+			return null;
+		}
+		PageHelper.startPage(pageNum,pageSize);
+		PageInfo<StoreGinfo> page=new PageInfo<StoreGinfo>(this.storeGinfoMapper.selectByWhid(whid));
+		System.err.println("impl"+this.storeGinfoMapper);
+		return page;
+	}
+	
 }

@@ -3,6 +3,7 @@ package com.sc.mapper;
 import com.sc.entity.StoreGinfo;
 import com.sc.entity.StoreGinfoExample;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -20,6 +21,8 @@ public interface StoreGinfoMapper {
     List<StoreGinfo> selectByExample(StoreGinfoExample example);
 
     StoreGinfo selectByPrimaryKey(BigDecimal gid);
+    
+    List<StoreGinfo> selectByWhid(BigDecimal whid);
 
     int updateByExampleSelective(@Param("record") StoreGinfo record, @Param("example") StoreGinfoExample example);
 
@@ -28,4 +31,5 @@ public interface StoreGinfoMapper {
     int updateByPrimaryKeySelective(StoreGinfo record);
 
     int updateByPrimaryKey(StoreGinfo record);
+    
 }

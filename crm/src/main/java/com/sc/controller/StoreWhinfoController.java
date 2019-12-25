@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.Result;
+import com.sc.entity.StoreGinfo;
 import com.sc.entity.StoreWhinfo;
 import com.sc.service.StoreWhinfoService;
 
@@ -32,7 +33,24 @@ public class StoreWhinfoController {
 		mav.addObject("total",sgilistPage.getTotal());
 		mav.setViewName("store/listSwi");
 		return mav;
-	}	
+	}
+	
+	
+	@RequestMapping("/listpageSgi.do")
+	@ResponseBody
+	public ModelAndView listpageSgi(ModelAndView mav,Integer whid,
+			@RequestParam(defaultValue="1")Integer pageNum,
+			@RequestParam(defaultValue="7")Integer pageSize){
+		BigDecimal id=BigDecimal.valueOf(whid);
+		PageInfo<StoreGinfo> sgilistPage = this.storeWhinfoService.selectSgi(id, pageNum, pageSize);
+		System.err.println(sgilistPage.getList());
+		mav.addObject("page",sgilistPage);
+		mav.addObject("total",sgilistPage.getTotal());
+		mav.addObject("id",whid);
+		mav.setViewName("store/viewGoods");
+		return mav;
+	}
+	
 	
 	
 	@RequestMapping("/selectSwi.do")
@@ -52,21 +70,23 @@ public class StoreWhinfoController {
 		return mav;
 	}
 	
+	
 	@RequestMapping("/selectInfo.do")
 	@ResponseBody
-	public StoreWhinfo selectInfo(Integer whid) {
-		System.err.println("要修改的对象(int)id："+whid);
+	public ModelAndView selectInfo(ModelAndView mav,Integer whid) {
 		BigDecimal id=BigDecimal.valueOf(whid);
-		System.err.println("要修改的对象(bigDecimal)id："+whid);
 		StoreWhinfo info=storeWhinfoService.selectObj(id);
 		if(info==null) {
 			System.err.println("未查询到该对象！");
 		}
 		else {
+		mav.addObject("selected",info);
 		}
-		System.err.println(info);
-		return info;
+		mav.setViewName("store/viewSwi");
+		System.err.println(mav.getViewName());
+		return mav;
 	}
+
 	
 	@RequestMapping("/updateSwi.do")
 	public ModelAndView updateSwi(ModelAndView mav,StoreWhinfo storeWhinfo) {
@@ -117,4 +137,5 @@ public class StoreWhinfoController {
 		System.err.println(whid);
 		return new Result(200,"status");
 	}
+	
 }

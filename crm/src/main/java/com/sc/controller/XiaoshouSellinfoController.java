@@ -1,6 +1,7 @@
 package com.sc.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.XiaoshouSellinfo;
+import com.sc.service.StoreGinfoService;
 import com.sc.service.XiaoshouSellinfoService;
 
 @Controller
@@ -19,11 +21,16 @@ public class XiaoshouSellinfoController {
 	@Autowired
 	XiaoshouSellinfoService xiaoshouSellinfoService;
 	
+	@Autowired
+	StoreGinfoService storeGinfoService;
+	
 	@RequestMapping("/listpageSinfo.do")
 	public ModelAndView listpageSwi(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
 			@RequestParam(defaultValue="10")Integer pageSize){
+		ArrayList<BigDecimal> list=storeGinfoService.selectGid();
 		PageInfo<XiaoshouSellinfo> sgilistPage = xiaoshouSellinfoService.selectPage(pageNum, pageSize);
+		mav.addObject("idlist",list);
 		mav.addObject("listpage",sgilistPage);
 		mav.addObject("total",sgilistPage.getTotal());
 		mav.setViewName("store/listSinfo");
@@ -48,8 +55,8 @@ public class XiaoshouSellinfoController {
 		return mav;
 	}
 	
-	@RequestMapping("/updateSwi.do")
-	public ModelAndView updateSwi(ModelAndView mav,XiaoshouSellinfo xiaoshouSellinfo) {
+	@RequestMapping("/updateSinfo.do")
+	public ModelAndView updateSinfo(ModelAndView mav,XiaoshouSellinfo xiaoshouSellinfo) {
 		if(xiaoshouSellinfo.getSsid()==null||xiaoshouSellinfo==null) {
 			System.err.println("该对象为空！");
 		}
@@ -82,7 +89,7 @@ public class XiaoshouSellinfoController {
 		System.err.println(xiaoshouSellinfo);
 		xiaoshouSellinfoService.update(xiaoshouSellinfo);
 		
-		mav.setViewName("redirect:/xiaoshouSellinfo/listpageSinfo.do");
+		mav.setViewName("redirect:/storeSinfo/listpageSinfo.do");
 		return mav;
 	}	
 
