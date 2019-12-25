@@ -13,9 +13,10 @@ import com.sc.entity.SysUsersInfo;
 
 
 public interface SysUsersInfoService {
+	
+	//查询除了当前用户的其他所有用户信息-办公
+	public List<SysUsersInfo> selectuser(BigDecimal sid);
 
-	
-	
 	//添加
 	public void add(SysUsersInfo u);
 	

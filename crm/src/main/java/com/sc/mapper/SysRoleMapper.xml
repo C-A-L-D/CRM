@@ -232,15 +232,20 @@
   
   <resultMap type="SysRole" id="roleAndPower" autoMapping="true">
       <id column="RID" property="rid"/>
+      <association property="sysUsers" javaType="SysUsers" autoMapping="true">
+          <id column="USER_ID" property="userId"/>
+      </association>
       <collection property="sysPowerinfo" ofType="SysPowerinfo" autoMapping="true">
-          <id column="PCOLUMN_ID" property="pcolumnId"/>
+          <id column="PID" property="pid"/>
       </collection>
    </resultMap>  
     <select id="selectAllRoleAndPower" resultMap="roleAndPower" >
-    	SELECT * FROM SYS_ROLE r
+		SELECT * FROM SYS_ROLE r
 		LEFT JOIN SYS_POWER_ROLE rp
 		ON r.RID=rp.ROLE_ID
 		LEFT JOIN SYS_POWERINFO p
 		ON rp.PID=p.PID
+		LEFT JOIN SYS_USERS u
+		ON r.OPERTORID=u.USER_ID
   </select>
 </mapper>

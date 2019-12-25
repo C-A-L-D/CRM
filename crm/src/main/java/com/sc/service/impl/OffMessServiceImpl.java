@@ -9,11 +9,16 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.OffMess;
+import com.sc.entity.OffMessExample;
+import com.sc.entity.OffMessExample.Criteria;
 import com.sc.entity.OffMessdetail;
+import com.sc.entity.OffMessdetailExample;
 import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersExample;
+import com.sc.entity.SysUsersInfo;
 import com.sc.mapper.OffMessMapper;
 import com.sc.mapper.OffMessdetailMapper;
+import com.sc.mapper.SysUsersInfoMapper;
 import com.sc.mapper.SysUsersMapper;
 //import com.sc.mapper.SysUsersMapper;
 import com.sc.service.OffMessService;
@@ -21,20 +26,19 @@ import com.sc.service.OffMessService;
 @Service
 public class OffMessServiceImpl implements OffMessService {
 	@Autowired
-       OffMessdetailMapper offMessdetailMapper;
+    OffMessdetailMapper offMessdetailMapper;
 	
 	@Autowired
     OffMessMapper offMessMapper;
 	
 	@Autowired
-	SysUsersMapper sysUsersMapper;
+	SysUsersInfoMapper sysUsersInfoMapper;
 	
 	//短消息-已接收
 	@Override
 	public List<OffMessdetail> select() {
 		return this.offMessdetailMapper.select();
 	}
-	
 	
 	//分页查询
 	@Override
@@ -43,6 +47,7 @@ public class OffMessServiceImpl implements OffMessService {
 		PageHelper.startPage(pageNum, pageSize);
 	    //查询当前页的集合数据	
 		List<OffMessdetail> list = this.offMessdetailMapper.select();
+		System.out.println("查询到的list"+list);
 		//封装成pageinfo对象
 		PageInfo<OffMessdetail> page=new PageInfo<OffMessdetail>(list);
 				
@@ -81,29 +86,107 @@ public class OffMessServiceImpl implements OffMessService {
 
     //更改短消息状态
 	@Override
-	public void  updatestate(Long detailid) {
-		if(detailid!=null){
-			  this.offMessdetailMapper.updatestate(detailid);
+	public void  updatestate(OffMessdetail detail) {
+		if(detail!=null){
+			  this.offMessdetailMapper.updateByPrimaryKey(detail);
 		}
 	}
 
     //查看发送人信息
 	@Override
-	public SysUsers selectByuid(BigDecimal uid) {
+	public SysUsersInfo selectByuid(BigDecimal sid) {
 		
-		return this.sysUsersMapper.selectByPrimaryKey(uid);
+		return this.sysUsersInfoMapper.selectByPrimaryKey(sid);
 	}
 
 	
     //查看接收人信息
 	@Override
-	public SysUsers selectu(String uname){
-		SysUsers user = this.sysUsersMapper.selectu(uname);
+	public SysUsersInfo selectu(String uname){
+		SysUsersInfo user = this.sysUsersInfoMapper.selectu(uname);
 		
 				
 		return user;
 	}
+
+	//分页查询-发送的短信
+		@Override
+		public PageInfo<OffMess> selectpagesend(Integer pageNum, Integer pageSize,String name) {
+			//设置分页数据，开始分页
+			PageHelper.startPage(pageNum, pageSize);
+		    //查询当前页的集合数据	
+			OffMessExample e=new OffMessExample();
+	        Criteria c=e.createCriteria();
+	        if(name!=null){
+	        	c.andSenderEqualTo(name);
+	        }
+	        List<OffMess> list =  this.offMessMapper.selectByExample(e);
+			//封装成pageinfo对象
+			PageInfo<OffMess> page=new PageInfo<OffMess>(list);
+			System.out.println("11"+page);
+			return page;
+		}
 		
+		public List<OffMessdetail>  selectpagesend1(Long messid){
+			OffMessdetailExample e=new OffMessdetailExample();
+             com.sc.entity.OffMessdetailExample.Criteria c=e.createCriteria();
+             c.andMessidEqualTo(messid);
+             List<OffMessdetail> list=this.offMessdetailMapper.selectByExample(e);
+             for (OffMessdetail d : list) {
+            	 BigDecimal b=new BigDecimal(d.getReceiverid());
+				SysUsersInfo s=this.sysUsersInfoMapper.selectByPrimaryKey(b);
+				d.setUname(s.getSname());
+			}
+			return list;
+		}
+		
+		@Override
+		public OffMess select(Long messid) {
+			return offMessMapper.selectByPrimaryKey(messid);
+		}
+
+	@Override
+	public SysUsersInfo receuser(BigDecimal receiverid) {
+		return sysUsersInfoMapper.selectByPrimaryKey(receiverid);		
+	}
 	
+	//模糊查询-标题
+	@Override
+	public List<OffMessdetail> selectbytitle(String title) {	
+		return this.offMessdetailMapper.selectbytitle(title);
+	}
 	
+	//分页-模糊查询-标题
+	@Override
+	public PageInfo<OffMessdetail> selectpagetitle(Integer pageNum, Integer pageSize,String title) {
+		//设置分页数据，开始分页
+		PageHelper.startPage(pageNum, pageSize);
+		//查询当前页的集合数据	
+		List<OffMessdetail> list = this.offMessdetailMapper.selectbytitle(title);
+				//封装成pageinfo对象
+				PageInfo<OffMessdetail> page=new PageInfo<OffMessdetail>(list);
+				System.out.println("11"+page);
+				return page;
+	}
+	
+	   //模糊查询-内容
+		@Override
+		public List<OffMessdetail> selectbycontent(String content) {
+			return this.offMessdetailMapper.selectbycontent(content);
+		}
+		
+		//分页-模糊查询-内容
+		@Override
+		public PageInfo<OffMessdetail> selectpagecontent(Integer pageNum, Integer pageSize,String content) {
+			//设置分页数据，开始分页
+			PageHelper.startPage(pageNum, pageSize);
+			//查询当前页的集合数据	
+			List<OffMessdetail> list = this.offMessdetailMapper.selectbycontent(content);
+					//封装成pageinfo对象
+					PageInfo<OffMessdetail> page=new PageInfo<OffMessdetail>(list);
+					System.out.println("11"+page);
+					return page;
+		}
+		
+		
 }

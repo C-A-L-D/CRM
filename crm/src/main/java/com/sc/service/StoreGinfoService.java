@@ -13,4 +13,6 @@ public interface StoreGinfoService {
 	public void update(StoreGinfo sinfo);
 	public PageInfo<StoreGinfo> selectPage(Integer pageNum,Integer pageSize);
 	public StoreGinfo getsgi(BigDecimal gid);
+	public StoreGinfo selectObj(BigDecimal id);
+	public ArrayList<BigDecimal> selectGid();
 }

@@ -38,6 +38,13 @@ SysGongsiinfoMapper sysGongsiinfoMapper;
 @Autowired
 SysJobinfoMapper sysJobinfoMapper;
 	
+	//办公
+	@Override
+	public List<SysUsersInfo> selectuser(BigDecimal sid) {
+		return this.sysUsersInfoMapper.selectuser(sid);
+	}
+
+
 	@Override
 	public void add(SysUsersInfo u) {
 		if(u!=null){

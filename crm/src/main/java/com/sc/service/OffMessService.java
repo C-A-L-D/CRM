@@ -9,19 +9,20 @@ import com.sc.entity.OffMess;
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersExample;
+import com.sc.entity.SysUsersInfo;
 
 public interface OffMessService {
 	//查询办公短消息表-已接收
   public List<OffMessdetail> select();
    
   //修改短信状态
-  public void updatestate(Long detailid);
+  public void updatestate(OffMessdetail detail);
   
   //查询发送人信息
-  public SysUsers selectByuid(BigDecimal uid);
+  public SysUsersInfo selectByuid(BigDecimal sid);
   
   //查询接收人信息
-  public SysUsers selectu(String uname);
+  public SysUsersInfo selectu(String uname);
   
    //分页查询
 	public PageInfo<OffMessdetail> selectpage(Integer pageNum,Integer pageSize); 
@@ -37,4 +38,29 @@ public interface OffMessService {
 		
    //回复短信-详情表
 	public void huifuone(OffMessdetail detail);
+	
+	
+	  //分页查询-发送
+    public PageInfo<OffMess> selectpagesend(Integer pageNum,Integer pageSize,String name); 
+		
+    public List<OffMessdetail>  selectpagesend1(Long messid); 
+    
+    public OffMess select(Long messid);
+    
+	//查询接收人信息
+    public SysUsersInfo receuser(BigDecimal receiverid);
+    
+    //模糊查询-标题
+    public List<OffMessdetail> selectbytitle(String title);
+    
+    //分页查询-模糊查询-标题
+   	public PageInfo<OffMessdetail> selectpagetitle(Integer pageNum,Integer pageSize,String title);
+   	
+    //模糊查询-内容
+    public List<OffMessdetail> selectbycontent(String content);
+    
+    //分页查询-模糊查询-内容
+   	public PageInfo<OffMessdetail> selectpagecontent(Integer pageNum,Integer pageSize,String content);
+   	
+   	
 }
