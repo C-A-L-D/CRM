@@ -22,6 +22,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" type="text/css" href="lib/layui/css/modules/layer/default/layer.css">
     <link rel="stylesheet" type="text/css" href="lib/layui/css/layui.css">
+    <link rel="stylesheet" type="text/css" href="css/xadmin.css">
+    <link rel="stylesheet" type="text/css" href="css/font.css">
     <script src="js/jquery.min.js"></script>
 	<script src="lib/layui/layui.js"></script>
 	<script src="lib/layui/lay/modules/layer.js"></script>
@@ -32,9 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 导航 -->
 <div class="x-nav" >
       <span class="layui-breadcrumb" style="visibility: visible;">
-        <a href="">首页</a><span lay-separator="">/</span>
-        <a href="">演示</a><span lay-separator="">/</span>
-        <a><cite>导航元素</cite></a>
+        <a href="javascript:location.replace(location.href);">主页</a><span lay-separator="">/</span>
+        <a href="javascript:location.replace(location.href);">库存</a><span lay-separator="">/</span>
+        <a href="javascript:location.replace(location.href);"><cite>仓库信息</cite></a>
   	  </span>
       	<a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
       		<i class="layui-icon" style="line-height:38px">ဂ</i>
@@ -44,11 +46,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="x-body">
 	<!-- 查询 -->
 	<div class="layui-row">
-		<form>
-			<input type="text" id="whinfo" placeholder="请输入要查询的仓库信息......" autocomplete="off" class="layui-input" style="display:inline; width:700px;">
+		<form class="layui-form layui-col-md12 x-so">
+			<input type="text" id="whinfo" placeholder="请输入要查询的仓库信息......" autocomplete="off" class="layui-input" style="width:750px;">
 			<button type="button" class="btn layui-btn layui-btn-normal" onclick="postinfo($('#whinfo').val())"><i class="layui-icon">&#xe615;</i>查找</button>  
-			<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
-			<a display="inline-block"  class="layui-btn layui-btn-danger" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
+			<button type="reset" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe669;</i>清空</button> 
+			<a  class="layui-btn" href="../CRM/store/jsp/addSwi.jsp" style="float:right"><i class="layui-icon">&#xe654;</i></a> 
 		</form>
 	</div>
 
@@ -83,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  			<td>
 	      				<center>
 	      					<div class="layui-btn-group">
-	      						<button type="button" class="layui-btn layui-btn-sm layui-btn-normal"><i class="layui-icon">&#xe65f;</i></button>
+	      						<a type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick="getGoods(${swi.whid })"><i class="layui-icon">&#xe65f;</i></a>
 	          					<a type="button" class="layui-btn layui-btn-sm" href="storeWhinfo/selectSwi.do?whid=${swi.whid }"><i class="layui-icon">&#xe642;</i></a>
 	          					<button type="button" class="btn layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck(${swi.whid})"><i class="layui-icon">&#xe640;</i></button>
 	          				</div>
