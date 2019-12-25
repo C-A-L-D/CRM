@@ -103,14 +103,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           
           <!-- 3 -->
-           <div class="layui-row ">
+            <div class="layui-row ">
           <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>家庭地址
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="saddressHome" name="saddressHome" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.saddressHome }">
+                <!--   <input type="text" id="saddressHome" name="saddressHome" required lay-verify="required"
+                  autocomplete="off" class="layui-input" > -->
+                 <div class="layui-input-inline">
+                 <c:forEach items="${ssq}" var="s">
+          
+                
+              <select name="province" id="province" lay-filter="sf" lay-select="">
+                <option value="">${s}</option>
+              </select>
+              </c:forEach>
+            </div>
+            <div class="layui-input-inline">
+              <select name="city" id="city" lay-filter="cs" lay-select="">
+                <option value="">请选择城市</option>
+              </select>
+            </div>
+            <div class="layui-input-inline">
+              <select name="area" id="area" lay-filter="qu" lay-select="">
+                <option value="">请选择区</option>
+              </select>
+            </div>
+                  
               </div>
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
@@ -125,12 +145,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <input type="text" id="saddressNow" name="saddressNow" required lay-verify="required"
                   autocomplete="off" class="layui-input" value="${u.saddressNow }">
               </div>
+              
               <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
               </div>
           </div>
           </div>
           
+       <%--     <div class="layui-row ">
+          <div class="layui-form-item layui-col-sm6" style="clear: none;">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>家庭地址
+              </label>
+              <div class="layui-input-inline">
+                   <input type="text" id="saddressHome" name="saddressHome" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.saddressHome }">
+                            <div class="layui-input-inline"> 
+              
+              <select name="province" id="province" lay-filter="sf" lay-select="">
+              <c:forEach items="${ssq}" var="s">
+                <option value="${s}">${s}</option>
+                </c:forEach>
+              </select>
+            </div>
+            <div class="layui-input-inline">
+              <select name="city" id="city" lay-filter="cs" lay-select="">
+                <option value="">请选择城市</option>
+              </select>
+            </div>
+            <div class="layui-input-inline">
+              <select name="area" id="area" lay-filter="qu" lay-select="">
+                <option value="">请选择区</option>
+              </select>
+            </div>   
+
+             </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+     
+           <div class="layui-form-item layui-col-sm6" style="clear: none;">
+              <label for="L_pass" class="layui-form-label">
+                  <span class="x-red">*</span>现在地址
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="saddressNow" name="saddressNow" required lay-verify="required"
+                  autocomplete="off" class="layui-input" value="${u.saddressNow }">
+              </div>
+              <div class="layui-form-mid layui-word-aux">
+                  <span class="x-red">*</span>
+              </div>
+          </div>
+          </div>
+           --%>
           <!-- 4 -->
           <div class="layui-row ">
                       <div class="layui-form-item layui-col-sm6" style="clear: none;">

@@ -33,7 +33,8 @@ public interface SysJobinfoService {
     public XSSFWorkbook show();
     //在职务表根据公司id查询部门对象集合
     public List<SysDepartment> gsbm(SysJobinfo info1);
+    //通过部门编号查询职务表
+    public List<SysJobinfo> bmzw(SysDepartment info1);
     
-
     public PageInfo<SysJobinfo> selectpage(Integer pageNum,Integer pageSize,SysJobinfo info1);
 }

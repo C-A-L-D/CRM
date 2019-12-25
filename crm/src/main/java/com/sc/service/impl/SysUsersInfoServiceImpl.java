@@ -37,6 +37,8 @@ SysUsersInfoMapper sysUsersInfoMapper;
 SysGongsiinfoMapper sysGongsiinfoMapper;
 @Autowired
 SysJobinfoMapper sysJobinfoMapper;
+@Autowired
+SysUsersInfoService sysUsersInfoService;
 	
 	@Override
 	public void add(SysUsersInfo u) {
@@ -111,7 +113,8 @@ SysJobinfoMapper sysJobinfoMapper;
 		 System.out.println(list);
 		 return list;
    }
-
+	
+	  
 	
 	@Override
 	public PageInfo<SysUsersInfo> selectpage(Integer pageNum, Integer pageSize,SysUsersInfo info1) {

@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <form class="layui-form layui-col-md12 x-so" action="gspage.do">
         <!--   <input class="layui-input" placeholder="开始日" name="start" id="start">
           <input class="layui-input" placeholder="截止日" name="end" id="end"> -->
-          <input type="text" name="gname" id="gname" value="${info1.gname }" placeholder="请输入公司名称" autocomplete="off" class="layui-input">
+          <input type="text" name="gname" id="gname" value="${info1.gname }" placeholder="请输入公司名称或公司代码" autocomplete="off" class="layui-input" style="width: 250px;" >
           <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" ><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>

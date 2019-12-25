@@ -114,6 +114,19 @@ public class SysJobinfoServiceImpl implements SysJobinfoService {
 			return page;
 		}
 		
+		@Override
+		//根据部门查询职务
+		 public List<SysJobinfo> bmzw(SysDepartment info1){
+			 SysJobinfoExample example=new SysJobinfoExample();
+			 Criteria c = example.createCriteria();
+			 c.andDidEqualTo(info1.getDid());
+			//查询当前页的集合数据
+			 List<SysJobinfo> list = this.sysJobinfoMapper.selectByExample(example);
+			return list;
+			
+		 }
+		 
+		
 		 //在职务表根据公司id查询部门对象集合
 		@Override
 	    public List<SysDepartment> gsbm(SysJobinfo info1){

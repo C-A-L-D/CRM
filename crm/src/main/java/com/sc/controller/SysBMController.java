@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.Result;
 import com.sc.entity.SysDepartment;
-
+import com.sc.entity.SysJobinfo;
+import com.sc.mapper.SysDepartmentMapper;
 import com.sc.service.SysDepartmentService;
+import com.sc.service.SysJobinfoService;
+import com.sc.service.SysUsersInfoService;
 
 
 @Controller
@@ -29,6 +33,10 @@ import com.sc.service.SysDepartmentService;
 public class SysBMController {
 	@Autowired
 	SysDepartmentService sysDepartmentService;
+	@Autowired
+	SysJobinfoService  sysJobinfoService;
+	@Autowired
+	SysUsersInfoService sysUsersInfoService;
 	
 	//公司分页list
 	@RequestMapping("/bmpage.do")
@@ -40,6 +48,20 @@ public class SysBMController {
 		mav.addObject("p", sysDepartmentService.selectpage(pageNum, pageSize, info1));
 		mav.addObject("info1", info1);
 		mav.setViewName("gs/bmlistpage");// 路径是：/WEB-INF/gs/gslistpage.jsp
+		return mav;
+	}
+	
+	//查询员工信息
+	@RequestMapping("/bmyg.do")
+	public ModelAndView bmyg(ModelAndView mav,SysDepartment info1,
+			@RequestParam(defaultValue="1")Integer pageNum,
+			@RequestParam(defaultValue="5")Integer pageSize) throws IOException{
+		System.out.println("查询员工信息");
+		//查询list集合-分页     ${p.list}		
+		System.out.println(sysDepartmentService.selectbmzwyg(pageNum, pageSize,info1.getDid()));
+		mav.addObject("p", sysDepartmentService.selectbmzwyg(pageNum, pageSize,info1.getDid()));
+		
+		mav.setViewName("gs/bmyg");// 路径是：/WEB-INF/gs/gslistpage.jsp
 		return mav;
 	}
 	
@@ -63,9 +85,20 @@ public class SysBMController {
 			HttpServletRequest req,
 			SysDepartment info)throws IllegalStateException, IOException {
 		System.out.println("开始添加公司"+info);
+		
+		SysJobinfo job = new SysJobinfo();
+		
+		job.setGongsiid(info.getGongsiid());
+		System.out.println(info);
 		//设置添加时间
 		info.setLasttime(new Date());
 		sysDepartmentService.add(info);
+		
+		job.setDid(info.getDid());
+		sysJobinfoService.add(job);
+		
+		
+		
 		return new Result(200,"添加成功！");
 	}
 	

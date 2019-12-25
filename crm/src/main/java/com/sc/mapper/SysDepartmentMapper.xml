@@ -2,18 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysDepartmentMapper" >
     <!-- column是数据库  property是表-->
-  <!-- <resultMap type="SysGongsiinfo" id="sysGongsiinfoMapper">
-  <id column="ID" property="id"/>
-  <collection property="sysDepartments" ofType="SysDepartment" autoMapping="true">
+   <resultMap type="SysDepartment" id="SysDepartmentMapper">
   <id column="DID" property="did"/>
+  <collection property="sysJobinfos" ofType="SysJobinfo" autoMapping="true">
+  <id column="JID" property="jid"/>
+  </collection>
+   <collection property="sysUsersInfos" ofType="SysUsersInfo" autoMapping="true">
+  <id column="SID" property="sid"/>
   </collection>
   </resultMap>
   
- <select id="bmlistpage" resultMap="sysGongsiinfoMapper">
-SELECT * FROM SYS_GONGSIINFO gs
-LEFT JOIN SYS_DEPARTMENT bm
-ON gs.ID=bm.GONGSIID
- </select> -->
+ <select id="selectbmzwyg" resultMap="SysDepartmentMapper">
+SELECT * FROM SYS_DEPARTMENT bm
+LEFT JOIN SYS_JOBINFO job
+ON bm.DID=job.DID
+LEFT JOIN SYS_USERSINFO yg
+ON job.JID=yg.SJOBID
+where bm.DID=#{did,jdbcType=DECIMAL}
+
+ </select> 
    
   
   <resultMap id="BaseResultMap" type="com.sc.entity.SysDepartment" >
@@ -118,6 +125,9 @@ ON gs.ID=bm.GONGSIID
     </if>
   </delete>
   <insert id="insert" parameterType="com.sc.entity.SysDepartment" >
+    <selectKey keyProperty="did" resultType="java.math.BigDecimal" order="AFTER">
+      select SEQ_SYS_DEPARTMENT_DID.CURRVAL from dual
+     </selectKey>
     insert into SYS_DEPARTMENT (DID, DNAME, DDESCRIBE, 
       GONGSIID, LASTTIME)
     values (#{did,jdbcType=DECIMAL}, #{dname,jdbcType=VARCHAR}, #{ddescribe,jdbcType=VARCHAR}, 
