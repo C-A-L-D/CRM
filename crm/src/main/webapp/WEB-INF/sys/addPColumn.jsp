@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>修改权限信息</title>
+    <title>添加分栏</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -36,15 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">         
           <div class="layui-form-item">
           	<div class="layui-inline">
-              <label class="layui-form-label">权限名称</label>
+              <label class="layui-form-label">分栏名</label>
               <div class="layui-input-inline">
                 <input type="text" name="pname" value="${gp.pname }" autocomplete="on" class="layui-input">
-              </div>
-            </div>
-            <div class="layui-inline">
-              <label class="layui-form-label">权限</label>
-              <div class="layui-input-inline">
-                <input type="text" name="ppower" value="${gp.ppower }" autocomplete="on" class="layui-input">
               </div>
             </div>
           </div>
@@ -56,20 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <input type="text" name="pdescribe" value="${gp.pdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
             </div>
           </div>
-         
-          
-          <div class="layui-form-item">
-            <label class="layui-form-label">权限分栏</label>
-            <div class="layui-input-block">
-              <select name="pcolumnId" lay-filter="aihao">
-                <option value=""></option>
-                <c:forEach items="${column }" var="all">
-                    <option value="${all.cid }" ${all.cid==gp.pcolumnId ? "selected":""}>${all.cname }</option>
-                </c:forEach>
-               </select>
-            </div>
-          </div>
-          
+  
             <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
               <div class="layui-footer" style="left: 0;">

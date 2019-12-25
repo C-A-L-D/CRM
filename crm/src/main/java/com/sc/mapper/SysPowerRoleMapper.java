@@ -28,4 +28,8 @@ public interface SysPowerRoleMapper {
     int updateByPrimaryKeySelective(SysPowerRole record);
 
     int updateByPrimaryKey(SysPowerRole record);
+    
+    List<SysPowerRole> selectRP(@Param("roleId") BigDecimal roleId, @Param ("pcolumnId")BigDecimal pcolumnId);
+    
+    void delPow(BigDecimal pid);
 }

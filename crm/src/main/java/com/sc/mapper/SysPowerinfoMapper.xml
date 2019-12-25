@@ -27,7 +27,6 @@
    </select>
 
 
-
   <resultMap id="BaseResultMap" type="com.sc.entity.SysPowerinfo" >
     <constructor >
       <idArg column="PID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
