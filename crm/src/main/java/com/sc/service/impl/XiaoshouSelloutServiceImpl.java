@@ -1,5 +1,7 @@
 package com.sc.service.impl;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,30 @@ public class XiaoshouSelloutServiceImpl implements XiaoshouSelloutService {
 	public StoreWhinfo in(XiaoshouSellout xiaoshouSellout) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public XiaoshouSellout selectObj(BigDecimal id) {
+		if(id==null) {
+			System.err.println("发生查询错误！");
+			System.err.println(id);
+		}
+		XiaoshouSellout info=this.xiaoshouSelloutMapper.selectByPrimaryKey(id);
+		System.err.println("Service已查询到："+info);
+		return info;
+	}
+
+	@Override
+	public void update(XiaoshouSellout xiaoshouSellout) {
+		if(xiaoshouSellout!=null) {
+			this.xiaoshouSelloutMapper.updateByPrimaryKey(xiaoshouSellout);
+			return;
+		}
+		else {
+			System.err.println("发生更新错误！");
+			System.err.println(xiaoshouSellout);
+		}
+		
 	}
 
 }

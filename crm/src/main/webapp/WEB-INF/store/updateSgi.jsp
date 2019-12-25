@@ -26,71 +26,71 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="../../CRM/js/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../CRM/lib/layui/css/layui.css">
 	<script src="../../CRM/lib/layui/layui.js"></script>
-	<script src="storegoodsinfo/js/addsgi.js"></script>
+	<script src="store/js/storeginfopre.js"></script>
   </head>
   
 <body>
     <div class="layui-card">
         <div class="layui-card-header"><h2>修改库存商品信息</h2></div>
-        <form class="layui-form" action="storefinfo/updatestore.do">
+        <form class="layui-form" action="storeGinfo/updateSgi.do">
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gid" required lay-verify="required" placeholder="${sgi.gid }" autocomplete="off" class="layui-input">
+                        <input type="text" name="gid" readonly="readonly" value="${selected.gid }" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品名称</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gname" required lay-verify="required" placeholder="${sgi.gname}" autocomplete="off" class="layui-input">
+                        <input type="text" name="gname"placeholder="${selected.gname}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品类别</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gcategopy" required lay-verify="required" placeholder="${sgi.gcategopy}" autocomplete="off" class="layui-input">
+                        <input type="text" name="gcategopy" placeholder="${selected.gcategopy}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">规格说明</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gdesp" required lay-verify="required" placeholder="${sgi.gdesp}" autocomplete="off" class="layui-input">
+                        <input type="text" name="gdesp" placeholder="${selected.gdesp}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">单位</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gunit" required lay-verify="required" placeholder="${sgi.gunit}" autocomplete="off" class="layui-input">
+                        <input type="text" name="gunit" placeholder="${selected.gunit}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">仓库编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="whid" required lay-verify="required" placeholder="${sgi.whid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="whid" placeholder="${selected.whid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">库存数量</label>
                     <div class="layui-input-block">
-                        <input type="number" name="storenum" required lay-verify="required" placeholder="${sgi.storenum}" autocomplete="off" class="layui-input">
+                        <input type="number" name="storenum" placeholder="${selected.storenum}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">成本价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pricebuy" required lay-verify="required" placeholder="${sgi.pricebuy}" autocomplete="off" class="layui-input">
+                        <input type="text" name="pricebuy" placeholder="${selected.pricebuy}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">零售价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pricesold" required lay-verify="required" placeholder="${sgi.pricesold}" autocomplete="off" class="layui-input">
+                        <input type="text" name="pricesold" placeholder="${selected.pricesold}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">经销价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="priceact" required lay-verify="required" placeholder="${sgi.priceact}" autocomplete="off" class="layui-input">
+                        <input type="text" name="priceact" placeholder="${selected.priceact}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
@@ -102,18 +102,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="layui-form-item">
                     <label class="layui-form-label">公司编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="cid" required lay-verify="required" placeholder="${sgi.cid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="cid" readonly="readonly" value="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">最后修改时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="lattime" placeholder="${sgi.lattime}" autocomplete="off" class="layui-input">
+                        <input type="text" name="lattime" placeholder="${selected.lasttime}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                      <div class="layui-input-block">
-                         <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                         <button type="submit" class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                      </div>
                 </div>

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
 import com.sc.entity.OffMess;
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.Result;
-import com.sc.entity.SysUsers;
+import com.sc.entity.SysUsersInfo;
 import com.sc.service.OffMessService;
-import com.sc.service.SysUsersService;
+import com.sc.service.SysUsersInfoService;
+
 
 @Controller
 @RequestMapping("/offmessctrl")
@@ -27,16 +29,17 @@ public class OffMessController {
 	OffMessService offMessService;
 	
 	@Autowired
-	SysUsersService sysUsersService;
+	SysUsersInfoService sysUsersInfoService;
 	
-	//分页显示短信息
+	//分页显示短信息-已接收
 	@RequestMapping("/offmesslist.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
 			@RequestParam(defaultValue="5")Integer pageSize){
 		System.out.println("查看短信列表-分页！");
 		
-		//查询list集合-分页    ${page.list}
+		//查询list集合-分页    ${p.list}
+		mav.addObject("stat", "2");
 		mav.addObject("p", offMessService.selectpage(pageNum,pageSize));
 		mav.setViewName("off/offmesslist");//路径是：/WEB-INF/off/offmesslist.jsp
 		return mav;
@@ -57,9 +60,11 @@ public class OffMessController {
 		System.out.println("查看短消息详情！"+mess);
 		//更改短消息状态
 		 Long l = new Long(mess.getDetailid());
-		this.offMessService.updatestate(l);
+		
 		//查询短消息详情
 		OffMessdetail detail=this.offMessService.showdetail(mess);
+		detail.setMessstate("2");
+		this.offMessService.updatestate(detail);
 	System.out.println(detail+"111");
 		
 		mav.addObject("shoedetail",detail);
@@ -77,9 +82,9 @@ public class OffMessController {
 		System.out.println("接收人用户名"+receiver);
 		BigDecimal c = new BigDecimal(senderid);
 		System.out.println("11"+c);
-		SysUsers u=this.offMessService.selectByuid(c);
+		SysUsersInfo u=this.offMessService.selectByuid(c);
 		System.out.println(u+"用户");
-		mess.setSender(u.getUname());
+		mess.setSender(u.getSname());
 		
 		mess.setLasttime(new Date());
 		
@@ -90,13 +95,12 @@ public class OffMessController {
 		System.out.println("222");
 		detail.setMessid(mess.getMessid());
 		System.out.println("333");
-		SysUsers user=this.offMessService.selectu(receiver);
+		SysUsersInfo user=this.offMessService.selectu(receiver);
 		System.out.println("接收人信息"+user);
 	
-	    Long rece = user.getUserId().longValue();
+	    Long rece = user.getSid().longValue();
 		detail.setReceiverid(rece);
-		detail.setMessstate("1");
-		
+		//detail.setMessstate("2");
         detail.setLasttime(new Date());
         System.out.println("详情"+detail);
 		this.offMessService.huifuone(detail);
@@ -110,10 +114,8 @@ public class OffMessController {
 			
 			 System.out.println("4444");
 			//查询员工信息-用于发送短信 
-			BigDecimal c = new BigDecimal(1);
-			
-			
-			List<SysUsers> listuser=this.sysUsersService.selectuser(c);
+			BigDecimal c = new BigDecimal(37);
+			List<SysUsersInfo> listuser=this.sysUsersInfoService.selectuser(c);
 			System.out.println("666"+listuser);
 			mav.addObject("sysusers", listuser);
 			mav.setViewName("off/messadd");
@@ -147,5 +149,64 @@ public class OffMessController {
 			    }
 			}
 			return new Result(200,"发送成功！");
+		}
+		
+		//分页显示发送的短消息
+		@RequestMapping("/offsendlist.do")
+		public ModelAndView listsend(ModelAndView mav,
+				@RequestParam(defaultValue="1")Integer pageNum,
+				@RequestParam(defaultValue="5")Integer pageSize){
+			PageInfo<OffMess> dd=offMessService.selectpagesend(pageNum, pageSize, "彭俊");
+			System.out.println("111");
+			for (OffMess offmess : dd.getList()) {
+				offmess.setOffMessdetail(this.offMessService.selectpagesend1(offmess.getMessid()));
+			}
+			//查询list集合-分页    ${page.list}
+			mav.addObject("send", dd);
+			
+			mav.addObject("isshowsend", "yes");
+			mav.addObject("stat", "1");
+			mav.setViewName("off/offmesslist");//路径是：/WEB-INF/off/offmesslist.jsp
+			return mav;
+		}
+		
+			//显示短消息详情-发送
+			@RequestMapping("/showdetailsend.do")
+			public ModelAndView showdetailsend(ModelAndView mav,Long messid){
+				System.out.println("查看已发送的短消息详情！"+messid);
+				 OffMess offmess=offMessService.select(messid);
+				 List<OffMessdetail> list=this.offMessService.selectpagesend1(messid);
+				offmess.setOffMessdetail(list);
+				mav.addObject("offmess",offmess);
+				mav.setViewName("off/showdetailsend");//路径是：/WEB-INF/off/showdetailsend.jsp
+				return mav;
+		     }
+			
+		//模糊查询
+		@RequestMapping("/search.do")
+		public ModelAndView search(ModelAndView mav,HttpServletRequest req,
+				@RequestParam(defaultValue="1")Integer pageNum,
+				@RequestParam(defaultValue="5")Integer pageSize){
+			System.out.println("模糊查询-分页！");
+			String i=req.getParameter("select");
+			System.out.println("查询条件"+i);
+			//关键字
+			String search=req.getParameter("search");
+			System.out.println("关键字"+search);
+			PageInfo<OffMessdetail> list=null;
+			//标题
+			if(i.equals("1")){
+				list=this.offMessService.selectpagetitle(pageNum, pageSize, search);
+				System.out.println("模糊查询"+list);
+			}
+			//发送人
+			if(i.equals("2")){
+				list=this.offMessService.selectpagecontent(pageNum, pageSize, search);
+				System.out.println("模糊查询"+list);
+			}
+			
+			mav.addObject("p",list);
+			mav.setViewName("off/offmesslist");//路径是：/WEB-INF/off/offmesslist.jsp
+			return mav;
 		}
 }

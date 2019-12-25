@@ -36,31 +36,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="layui-form-item">
                     <label class="layui-form-label">采购详情编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="ssid" required lay-verify="required" placeholder="${selected.ssid }" autocomplete="off" class="layui-input">
+                        <input type="text" name="ssid" readonly="readonly" value="${selected.ssid }" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">采购编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="sid" required lay-verify="required" placeholder="${selected.sid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="sid"  placeholder="${selected.sid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">产品编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gid" required lay-verify="required" placeholder="${selected.gid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="gid"  placeholder="${selected.gid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">产品数量</label>
                     <div class="layui-input-block">
-                        <input type="text" name="gnum" required lay-verify="required" placeholder="${selected.gnum}" autocomplete="off" class="layui-input">
+                        <input type="text" name="gnum"  placeholder="${selected.gnum}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">产品价格</label>
                     <div class="layui-input-block">
-                        <input type="text" name="price" required lay-verify="required" placeholder="${selected.price}" autocomplete="off" class="layui-input">
+                        <input type="text" name="gprice"  placeholder="${selected.gprice}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 				  <div class="layui-form-item layui-form-text">
@@ -72,31 +72,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="layui-form-item">
                     <label class="layui-form-label">公司编号</label>
                     <div class="layui-input-block">
-                        <input type="number" name="cid" required lay-verify="required" placeholder="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="number" name="cid"  placeholder="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item">
                     <label class="layui-form-label">是否入库</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pricesold" required lay-verify="required" placeholder="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="pricesold"  placeholder="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">操作人员</label>
                     <div class="layui-input-block">
-                        <input type="text" name="priceact" required lay-verify="required" placeholder="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="priceact"  placeholder="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">最后修改时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="lasttime" required lay-verify="required" placeholder="${selected.lasttime}" autocomplete="off" class="layui-input">
+                        <input type="text" name="lasttime" placeholder="${selected.lasttime}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                      <div class="layui-input-block">
-                         <button class="layui-btn" lay-submit lay-filter="formDemo">入库</button>
+                         <button class="layui-btn" lay-submit lay-filter="formDemo">确定入库</button>
                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                      </div>
                 </div>

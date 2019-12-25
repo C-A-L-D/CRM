@@ -40,6 +40,13 @@ SysJobinfoMapper sysJobinfoMapper;
 @Autowired
 SysUsersInfoService sysUsersInfoService;
 	
+	//办公
+	@Override
+	public List<SysUsersInfo> selectuser(BigDecimal sid) {
+		return this.sysUsersInfoMapper.selectuser(sid);
+	}
+
+
 	@Override
 	public void add(SysUsersInfo u) {
 		if(u!=null){

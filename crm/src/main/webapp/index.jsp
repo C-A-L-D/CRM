@@ -106,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </a>
                 <ul class="sub-menu">
                     <li><a _href="Kehuxinxictrl/KehuxinxiListPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户信息</cite></a></li>
-                    <li><a _href="KehuJsp/Kehuliushi.do"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
+                    <li><a _href="Kehuxinxictrl/KehuliushiPage.do"><i class="iconfont">&#xe6a7;</i><cite>客户流失</cite></a></li>
                 </ul>
             </li>
                    
@@ -126,7 +126,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </ul>
                  <ul class="sub-menu">
                     <li>
-                        <a _href="html/admin-list.html">
+                        <a _href="<%=basePath %>schedule.jsp">
                             <i class="iconfont">&#xe6bf;</i>
                             <cite>个人日程表</cite>
                         </a>
@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                          <ul class="sub-menu">
                           <li>
-	                        <a _href="offassessctrl/targetlist.do">                 
+	                        <a _href="offtargetctrl/targetlist.do">                 
 	                             <i class="iconfont">&#xe6a7;</i>
 	                            <cite>考核指标管理</cite>
 	                        </a>
@@ -157,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            </ul>
 	                             <ul class="sub-menu">
 	                             <li>
-	                           <a _href="offassessctrl/targetlist.do">                 
+	                           <a _href="offtaskctrl/taskacceptlist.do">                 
 	                             <i class="iconfont">&#xe6a7;</i>
 	                            <cite>任务接收管理</cite>
 	                          </a>

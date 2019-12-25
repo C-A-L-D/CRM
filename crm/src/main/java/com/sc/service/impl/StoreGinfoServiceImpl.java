@@ -2,6 +2,7 @@ package com.sc.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.StoreGinfo;
 import com.sc.entity.StoreGinfoExample;
+import com.sc.entity.StoreWhinfo;
 import com.sc.mapper.StoreGinfoMapper;
 import com.sc.service.StoreGinfoService;
 
@@ -78,6 +80,27 @@ public class StoreGinfoServiceImpl implements StoreGinfoService{
 			System.err.println("对象为空！");
 		}
 		return null;
+	}
+
+	@Override
+	public StoreGinfo selectObj(BigDecimal id) {
+		if(id==null) {
+			System.err.println("发生查询错误！");
+			System.err.println(id);
+		}
+		StoreGinfo info=this.storeGinfoMapper.selectByPrimaryKey(id);
+		System.err.println("Service已查询到："+info);
+		return info;
+	}
+
+	@Override
+	public ArrayList<BigDecimal> selectGid() {
+		ArrayList<StoreGinfo> list = this.selectAll();
+		ArrayList<BigDecimal> idlist=new ArrayList<BigDecimal>();
+		for(StoreGinfo sgi:list) {
+			idlist.add(sgi.getGid());
+		}
+		return idlist;
 	}
 	
 	

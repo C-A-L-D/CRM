@@ -9,7 +9,10 @@ import org.apache.ibatis.annotations.Param;
 public interface OffMessMapper {
 	 //回复短消息
     int huifu(OffMess mess);
-    
+
+     //查看已发送短信
+    List<OffMess> selectByExample(OffMessExample example);
+
     int countByExample(OffMessExample example);
 
     int deleteByExample(OffMessExample example);
@@ -19,8 +22,6 @@ public interface OffMessMapper {
     int insert(OffMess record);
 
     int insertSelective(OffMess record);
-
-    List<OffMess> selectByExample(OffMessExample example);
 
     OffMess selectByPrimaryKey(Long messid);
 

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -74,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px">总共 ${RP.total } 条数据</span>
+        <span class="x-right" style="line-height:40px">总共<span id="total">${RP.total }</span> 条数据</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -86,6 +87,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>角色描述</th>
             <th>角色权限</th>
             <th>上级角色</th>
+            <th>操作人</th>
+            <th>最后修改时间</th>
             <th>操作</th>
         </thead>
         <tbody>
@@ -95,13 +98,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${r.rid }'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${r.rname }</td>
-            <td>${r.rdescribe }</td>
-            <td>
+            <td style="width: 18%;">${r.rdescribe }</td>
+            <td style="width: 13%;">
             <c:forEach items="${r.sysPowerinfo }" var="rr">
-            	${rr.ppower }
+            	${rr.ppower }<br>
             </c:forEach>
             </td>
-            <td>${r.headrid }</td>
+            <td>${r.headname }</td>
+            <td>${r.sysUsers.uname }</td>
+            <td><fmt:formatDate value="${r.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             <td class="td-manage">
               <a title="编辑"  onclick="x_admin_show('编辑','goUpdateRle.do?rid='+${r.rid })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
@@ -178,6 +183,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		               //发异步删除数据
 		              $(obj).parents("tr").remove();
 		              layer.msg(res.msg,{icon:1,time:1000});
+		             //刷新页面
+		              location.reload();
 		               
 		            } else {
 		                layer.alert(res.msg, {icon: 5}, function () {

@@ -64,4 +64,12 @@ public interface SysUsersService {
 	
 	//创建新账户
 	public void createUser(SysUsers sysUsers);
+	
+	//删除ID对应的账户
+	public void delUser(BigDecimal userId);
+	
+	//删除ID对应的用户角色表记录
+	public void delUserRole(SysUsers sysUsers);
+	
+	
 }

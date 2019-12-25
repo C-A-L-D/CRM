@@ -39,24 +39,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="MohuchaxunKehuxinxi.do">
-          <input type="text" name="kname"  placeholder="请输入联系人名称" autocomplete="off" class="layui-input">
+        <form class="layui-form layui-col-md12 x-so" action="mohuKehulianxiren.do">
+          <input type="text" name="lianxirenxingming"  placeholder="请输入联系人名称" autocomplete="off" class="layui-input">
           <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" value=""><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
       	<button class="layui-btn" style="background-color: purple;" onsubmit="false">客户：${kname }</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','KehuxinxiGoAdd.do')" href="javascript:;"><i class="layui-icon"></i>添加客户</button>
-        <button class="layui-btn" style="background-color: black;">返回上一级</button>
-        <button class="layui-btn" style="background-color: red;">批量删除</button>
+        <button class="layui-btn" onclick="x_admin_show('添加联系人','goAddKehulianxiren.do',500,670)" href="javascript:;"><i class="layui-icon"></i>添加联系人</button>
+        <button class="layui-btn" style="background-color: black;" onclick="fh()">返回客户信息页面</button>
+        <!-- <button class="layui-btn" style="background-color: red;" onclick="tj()">批量删除</button> -->
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <span class="x-right" style="line-height:40px;font-size:20px;">共有数据：${lxr.total } 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
           <tr>
-          	<th>
-         		<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-      		</th>
+          	<!-- <th>
+         		<input type="checkbox" id="checkall" onclick="cf()" 
+              	style="width: 18px;height: 18px;background-color: white;">
+      		</th> -->
+      		<th>
+              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
             <th>联系人编号</th>
             <th>联系人姓名</th>
             <th>英文名</th>
@@ -73,9 +78,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tbody>
         	<c:forEach items="${lxr.list}" var="r">
 		          <tr>
-		          	<td>
-              			<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-           		 	</td>
+		          	<%-- <td>
+              			<input type="checkbox" value="${r.lid }"  name="checkone" 
+              			style="width: 18px;height: 18px;background-color: white;">
+           		 	</td> --%>
+           		 	<td>
+              			<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${r.lid }'><i class="layui-icon">&#xe605;</i></div>
+            		</td>
 		            <td>${r.lid }</td>
 		            <td>${r.lianxirenxingming }</td>
 		            <td>${r.yingwenming }</td>
@@ -87,18 +96,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <td>${r.dizhi }</td>
 		            <td>${r.beizhuxinxi }</td>
 		            <td>
-		              <a title="联系人编辑"  onclick="x_admin_show('联系人编辑','KehuxiangxiGoUpdatePage.do?kid=${k.kid}')" href="javascript:;">
+		              <a title="联系人编辑"  onclick="x_admin_show('联系人编辑','goUpdateKehulianxiren.do?lid=${r.lid}',500,670)" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="联系记录"  onclick="x_admin_show('客户联系记录','order-view.html')" href="javascript:;">
+		              <a title="删除联系人"  onclick="member_del(this,${r.lid })" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		            </td>
 		          </tr>
         	</c:forEach>
+        	
+        	
         </tbody>
       </table>
+      <script type="text/javascript">
+	      function cf(){
+		      var checkall =document.getElementById("checkall");
+		      var checkone =document.getElementsByName("checkone");
+		      var flag=checkall.checked;
+		      for(var i =0;i<checkone.length;i++){     
+		         checkone[i].checked=flag;
+		      }
+	      }
+	      
+	      function tj(){
+		      var lid="";
+		      var checkone =document.getElementsByName("checkone");
+		      for(var i =0;i<checkone.length;i++){     
+		         if(checkone[i].checked==true){
+		         lid+="lid="+checkone[i].value+"&";
+		         alert(checkone[i].value);
+		         }
+		      }
+		      location.href="deleteAllKehulianxiren.do?"+lid;
+		      alert(location.href="deleteAllKehulianxiren.do?"+lid);
+	      }
+	      
+	      function fh(){
+	      	location.href="<%=basePath %>/Kehuxinxictrl/KehuxinxiListPage.do";
+	      }
+      </script>
       <div class="page">
         <div>
           <a class="num" href="KehulianxirenListPage.do?pageNum=${lxr.firstPage }&kid=${kid}&kname=${kname}">首页</a>
@@ -106,6 +144,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <span class="current"> 当前${lxr.pageNum }/${lxr.pages }页</span>
           <a class="next" href="KehulianxirenListPage.do?pageNum=${lxr.nextPage }&kid=${kid}&kname=${kname}" title="下一页">&gt;&gt;</a>
           <a class="num" href="KehulianxirenListPage.do?pageNum=${lxr.lastPage }&kid=${kid}&kname=${kname}">尾页</a>
+          
+          <%-- <a class="num" onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+          <a class="prev" onclick="aa('${p.prePage }')" href="javascript:;">&lt;&lt;</a>
+          <span class="current"> 当前${lxr.pageNum }/${lxr.pages }页</span>
+          <a class="next" onclick="aa('${p.nextPage }')" href="javascript:;">&gt;&gt;</a>
+          <a class="num" onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a> --%>
+          
+          <%-- <a onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+          <a onclick="aa('${p.prePage }')" href="javascript:;">上一页</a>
+          <a onclick="aa('${p.nextPage }')" href="javascript:;">下一页</a>
+          <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a> --%>
         </div>
       </div>
 
@@ -124,7 +173,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           elem: '#end' //指定元素
         });
       });
-
+	
+		/* function aa(pageNum){
+		var url="../Kehulianxirenctrl/KehulianxirenListPage.do?pageNum="+pageNum+"&lianxirenxingming="+$("#lianxirenxingming").val();
+	   		console.log(url);
+	     	window.location.href=url;
+	 	} */
+	
        /*用户-停用*/
       function member_stop(obj,id){
           layer.confirm('确认要停用吗？',function(index){
@@ -150,26 +205,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }
 
       /*用户-删除*/
-      function member_del(obj,id){
+      function member_del(obj,lid){
+      
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
+              $.ajax({
+		        type: 'post',
+		        url: "deleteKehulianxiren.do",
+		        data: "lid="+lid,
+		        success: function (res) {
+		           //$(obj).parents("tr").remove();
+		           layer.msg('已删除!',{icon:1,time:1000},function () {
+		              //刷新页面
+		              location.reload();
+		           });
+		        }
+		    });
           });
       }
-
-
-
-      function delAll (argument) {
-
+      
+      function delAll(argument){
         var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
+      	console.log(data);
+      	//捉到所有被选中的，发异步进行删除
+        layer.confirm('确认要删除已选择的吗？'+data,function(index){
             layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
+            $.ajax({
+		        type: 'post',
+		        url: "deleteAllKehulianxiren.do",
+		        data: "msg="+data,
+		        success: function (res) {
+		           location.reload();
+		        }
+		    });
+            $(".layui-form-checked").not('.header').parents('tr').remove(); 
+        }); 
+       } 
     </script>
   </body>
 

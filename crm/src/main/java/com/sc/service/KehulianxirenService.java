@@ -13,7 +13,7 @@ public interface KehulianxirenService {
 	//联系人信息添加——弹层
 	public void addKehulianxiren(XiaoshouKehulianxiren lxr);
 	//联系人信息模糊查询
-	public PageInfo<XiaoshouKehulianxiren> selectKehulianxiren(Integer pageNum,Integer pageSize,Long kid,String lianxirenxingming);
+	public PageInfo<XiaoshouKehulianxiren> mohuKehulianxiren(Integer pageNum,Integer pageSize,Long kid,String lianxirenxingming);
 	//删除联系人
 	public void deleteKehulianxiren(XiaoshouKehulianxiren lxr);
 }

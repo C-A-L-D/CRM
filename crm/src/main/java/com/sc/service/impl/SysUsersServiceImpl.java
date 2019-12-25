@@ -166,6 +166,20 @@ public class SysUsersServiceImpl implements SysUsersService{
 		// TODO Auto-generated method stub
 		sysUsersMapper.insertSelective(sysUsers);
 	}
-	
-		
+
+	@Override
+	public void delUser(BigDecimal userId) {
+		// TODO Auto-generated method stub
+		sysUsersMapper.deleteByPrimaryKey(userId);
+	}
+
+	@Override
+	public void delUserRole(SysUsers sysUsers) {
+		// TODO Auto-generated method stub
+		SysUsersExample example = new SysUsersExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andUserIdEqualTo(sysUsers.getUserId());
+		sysUsersMapper.deleteByExample(example);
+	}
+
 }
