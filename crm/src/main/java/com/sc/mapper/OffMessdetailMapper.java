@@ -2,15 +2,12 @@ package com.sc.mapper;
 
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.OffMessdetailExample;
-import com.sc.entity.SysUsersInfo;
-
-import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OffMessdetailMapper {
 	//查询短消息-已接收
-	public List<OffMessdetail> select();
+	public List<OffMessdetail> select(OffMessdetail detail);
 	
 	//更改短消息状态
 	int updatestate(Long detailid);

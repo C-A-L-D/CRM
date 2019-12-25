@@ -7,13 +7,9 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.OffMess;
 import com.sc.entity.OffMessdetail;
-import com.sc.entity.SysUsers;
-import com.sc.entity.SysUsersExample;
 import com.sc.entity.SysUsersInfo;
 
 public interface OffMessService {
-	//查询办公短消息表-已接收
-  public List<OffMessdetail> select();
    
   //修改短信状态
   public void updatestate(OffMessdetail detail);
@@ -24,8 +20,8 @@ public interface OffMessService {
   //查询接收人信息
   public SysUsersInfo selectu(String uname);
   
-   //分页查询
-	public PageInfo<OffMessdetail> selectpage(Integer pageNum,Integer pageSize); 
+   //分页查询办公短消息表-已接收
+	public PageInfo<OffMessdetail> selectpage(Integer pageNum,Integer pageSize,OffMessdetail detail); 
 
 	//删除短信
 	public void deleteMess(OffMessdetail mess);

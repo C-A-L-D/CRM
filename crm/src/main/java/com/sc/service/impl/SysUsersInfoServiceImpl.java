@@ -71,11 +71,7 @@ SysJobinfoMapper sysJobinfoMapper;
 
 	@Override
 	public SysUsersInfo get(BigDecimal sid) {
-		
-		if(sid!=null){
-			return	this.sysUsersInfoMapper.selectByPrimaryKey(sid);
-		}
-		return null;
+		return	this.sysUsersInfoMapper.selectByPrimaryKey(sid);		
 	}
 
 	@Override
