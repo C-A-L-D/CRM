@@ -1,10 +1,8 @@
 package com.sc.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.Result;
+import com.sc.entity.XiaoshouKehulianxiren;
 import com.sc.entity.XiaoshouKehuxinxi;
 import com.sc.service.KehuxinxiService;
 
@@ -30,7 +29,6 @@ public class KehuxinxiController {
 			@RequestParam(defaultValue="10")Integer pageSize
 			){
 		System.out.println("查询客户信息列表！");
-		
 		mav.addObject("klp", kehuxinxiService.selectKehuxinxiPage(pageNum, pageSize));
 		mav.setViewName("KehuJsp/Kehuxinxi");
 		return mav;
@@ -48,7 +46,7 @@ public class KehuxinxiController {
 	
 	@RequestMapping("/KehuxiangxiGoUpdatePage.do")
 	public ModelAndView goUpdateKehuxinxi(ModelAndView mav,XiaoshouKehuxinxi xk){
-		System.out.println("跳往修改"+xk.getKname()+"详细信息");
+		System.out.println("跳往修改"+xk.getKid()+"详细信息");
 		XiaoshouKehuxinxi xk1=this.kehuxinxiService.getKehuxiangxi(xk.getKid());
 		mav.addObject("khuk", xk1);
 		mav.setViewName("KehuJsp/UpdateKehuxinxi");
@@ -90,5 +88,35 @@ public class KehuxinxiController {
 		mav.addObject("klp", kehuxinxiService.mohuchaxunKehuxinxi(pageNum, pageSize, kname));
 		mav.setViewName("KehuJsp/Kehuxinxi");
 		return mav;
+	}
+	
+	@RequestMapping("/KehuliushiPage.do")
+	public ModelAndView KehuliushiPage(ModelAndView mav,
+			@RequestParam(defaultValue="1")Integer pageNum,
+			@RequestParam(defaultValue="10")Integer pageSize
+			){
+		System.out.println("查询客户流失列表！");
+		mav.addObject("klp", kehuxinxiService.selectKehuliushiPage(pageNum, pageSize));
+		mav.setViewName("KehuJsp/Kehuliushi");
+		return mav;
+	};
+	
+	@RequestMapping("/KehuxinxiHuifu.do")
+	@ResponseBody
+	public Result KehuxinxiHuifu(ModelAndView mav,XiaoshouKehuxinxi xsk){
+		System.out.println("恢复"+xsk.getKname()+"信息");
+		XiaoshouKehuxinxi xsk1=this.kehuxinxiService.getKehuxiangxi(xsk.getKid());
+		xsk1.setKehuzhuangtai("正在合作");
+		xsk1.setLasttime(new Date());
+		kehuxinxiService.updateKehuxinxi(xsk1);
+		return new Result(200,"修改成功！");
+	}
+	
+	@RequestMapping("/deleteKehuxinxi.do")
+	@ResponseBody
+	public void deleteKehuxinxi(ModelAndView mav,XiaoshouKehuxinxi xsk){
+		System.out.println("删除联系人:"+xsk.getKname());
+		XiaoshouKehuxinxi xsk1=this.kehuxinxiService.getKehuxiangxi(xsk.getKid());
+		this.kehuxinxiService.deleteKehuxinxi(xsk1);
 	}
 }

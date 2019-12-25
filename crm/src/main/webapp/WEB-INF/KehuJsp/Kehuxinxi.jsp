@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>客户属性</th>
             <th>客户状态</th>
             <th>支付方式</th>
-            <th>订单状态</th>
+            <th>是否有效</th>
             <th>固定电话</th>
             <th>移动电话</th>
             <th>公司编号</th>
@@ -86,15 +86,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="联系人" href="../Kehulianxirenctrl/KehulianxirenListPage.do?kid=${k.kid}&kname=${k.kname}">
+		              <a title="联系人" href="../Kehulianxirenctrl/KehulianxirenListPage.do?kid=${k.kid}&kname=${k.kname}&gid=${k.gid}">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="联系记录"  onclick="x_admin_show('客户联系记录','order-view.html')" href="javascript:;">
+		              <a title="联系记录" href="../Kehulianxijiluctrl/KehulianxijiluListPage.do?kid=${k.kid}&kname=${k.kname}&gid=${k.gid}">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="反馈记录"  onclick="x_admin_show('客户反馈记录','order-view.html')" href="javascript:;">
+		              <a title="反馈记录" href="../Kehufankuictrl/KehufankuiListPage.do?kid=${k.kid}&kname=${k.kname}&gid=${k.gid}">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		            </td>

@@ -32,25 +32,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a>
-          <cite style="color: red;"><h2>客户联系人</h2></cite></a>
+          <cite style="color: red;"><h2>客户反馈记录</h2></cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="mohuKehulianxiren.do">
-          <input type="text" name="lianxirenxingming"  placeholder="请输入联系人名称" autocomplete="off" class="layui-input">
+        <form class="layui-form layui-col-md12 x-so" action="mohuKehufankui.do">
+          <input type="text" name="jiluyouxianji"  placeholder="请输入记录优先级" autocomplete="off" class="layui-input">
           <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" value=""><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
       	<button class="layui-btn" style="background-color: purple;" onsubmit="false">客户：${kname }</button>
-        <button class="layui-btn" onclick="x_admin_show('添加联系人','goAddKehulianxiren.do',500,670)" href="javascript:;"><i class="layui-icon"></i>添加联系人</button>
+        <button class="layui-btn" onclick="x_admin_show('添加反馈','goAddKehufankui.do',500,700)" href="javascript:;"><i class="layui-icon"></i>添加反馈记录</button>
         <button class="layui-btn" style="background-color: black;" onclick="fh()">返回客户信息页面</button>
         <!-- <button class="layui-btn" style="background-color: red;" onclick="tj()">批量删除</button> -->
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px;font-size:20px;">共有数据：${lxr.total } 条</span>
+        <span class="x-right" style="line-height:40px;font-size:20px;">共有数据：${fkjl.total } 条</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -62,45 +62,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       		<th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>联系人编号</th>
-            <th>联系人姓名</th>
-            <th>英文名</th>
-            <th>职务</th>
-            <th>部门</th>
-            <th>手机</th>
-            <th>办公电话</th>
-            <th>电子邮件</th>
-            <th>地址</th>
-            <th>备注信息</th>
+            <th>反馈记录编号</th>
+            <th>记录优先级</th>
+            <th>客户编号</th>
+            <th>状态</th>
+            <th>反馈类型</th>
+            <th>反馈时间</th>
+            <th>反馈原因</th>
+            <th>负责人</th>
+            <th>反馈来源</th>
+            <th>反馈主题</th>
+            <th>反馈描述</th>
+            <th>分析</th>
+            <th>公司编号</th>
             <th>操作</th>
             </tr>
         </thead>
         <tbody>
-        	<c:forEach items="${lxr.list}" var="r">
+        	<c:forEach items="${fkjl.list}" var="f">
 		          <tr>
 		          	<%-- <td>
               			<input type="checkbox" value="${r.lid }"  name="checkone" 
               			style="width: 18px;height: 18px;background-color: white;">
            		 	</td> --%>
            		 	<td>
-              			<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${r.lid }'><i class="layui-icon">&#xe605;</i></div>
+              			<div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${f.fid }'><i class="layui-icon">&#xe605;</i></div>
             		</td>
-		            <td>${r.lid }</td>
-		            <td>${r.lianxirenxingming }</td>
-		            <td>${r.yingwenming }</td>
-		            <td>${r.zhiwu }</td>
-		            <td>${r.bumen }</td>
-		            <td>${r.shouji }</td>
-		            <td>${r.bangongdianhua }</td>
-		            <td>${r.dianziyoujian }</td>
-		            <td>${r.dizhi }</td>
-		            <td>${r.beizhuxinxi }</td>
+		            <td>${f.fid }</td>
+		            <td>${f.jiluyouxianji }</td>
+		            <td>${f.kid }</td>
+		            <td>${f.zhuangtai }</td>
+		            <td>${f.fankuileixing }</td>
+		            <td>${f.fankuishijian }</td>
+		            <td>${f.fankuiyuanyin }</td>
+		            <td>${f.fuzeren }</td>
+		            <td>${f.fankuilaiyuan }</td>
+		            <td>${f.fankuizhuti }</td>
+		            <td>${f.fankuimiaoshu }</td>
+		            <td>${f.fenxi }</td>
+		            <td>${f.gid }</td>
 		            <td>
-		              <a title="联系人编辑"  onclick="x_admin_show('联系人编辑','goUpdateKehulianxiren.do?lid=${r.lid}',500,670)" href="javascript:;">
+		              <a title="反馈编辑"  onclick="x_admin_show('反馈编辑','goUpdateKehufankui.do?fid=${f.fid}',500,700)" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="删除联系人"  onclick="member_del(this,${r.lid })" href="javascript:;">
+		              <a title="删除联系人"  onclick="member_del(this,${f.fid })" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		            </td>
@@ -139,11 +145,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </script>
       <div class="page">
         <div>
-          <a class="num" href="KehulianxirenListPage.do?pageNum=${lxr.firstPage }&kid=${kid}&kname=${kname}">首页</a>
-          <a class="prev" href="KehulianxirenListPage.do?pageNum=${lxr.prePage }&kid=${kid}&kname=${kname}" title="上一页">&lt;&lt;</a>
-          <span class="current"> 当前${lxr.pageNum }/${lxr.pages }页</span>
-          <a class="next" href="KehulianxirenListPage.do?pageNum=${lxr.nextPage }&kid=${kid}&kname=${kname}" title="下一页">&gt;&gt;</a>
-          <a class="num" href="KehulianxirenListPage.do?pageNum=${lxr.lastPage }&kid=${kid}&kname=${kname}">尾页</a>
+          <a class="num" href="KehufankuiListPage.do?pageNum=${fkjl.firstPage }&kid=${kid}&kname=${kname}">首页</a>
+          <a class="prev" href="KehufankuiListPage.do?pageNum=${fkjl.prePage }&kid=${kid}&kname=${kname}" title="上一页">&lt;&lt;</a>
+          <span class="current"> 当前${fkjl.pageNum }/${fkjl.pages }页</span>
+          <a class="next" href="KehufankuiListPage.do?pageNum=${fkjl.nextPage }&kid=${kid}&kname=${kname}" title="下一页">&gt;&gt;</a>
+          <a class="num" href="KehufankuiListPage.do?pageNum=${fkjl.lastPage }&kid=${kid}&kname=${kname}">尾页</a>
           
           <%-- <a class="num" onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
           <a class="prev" onclick="aa('${p.prePage }')" href="javascript:;">&lt;&lt;</a>
@@ -205,14 +211,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       }
 
       /*用户-删除*/
-      function member_del(obj,lid){
+      function member_del(obj,fid){
       
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
               $.ajax({
 		        type: 'post',
-		        url: "deleteKehulianxiren.do",
-		        data: "lid="+lid,
+		        url: "deleteKehufankui.do",
+		        data: "fid="+fid,
 		        success: function (res) {
 		           //$(obj).parents("tr").remove();
 		           layer.msg('已删除!',{icon:1,time:1000},function () {
@@ -232,7 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             layer.msg('删除成功', {icon: 1});
             $.ajax({
 		        type: 'post',
-		        url: "deleteAllKehulianxiren.do",
+		        url: "deleteAllKehufankui.do",
 		        data: "msg="+data,
 		        success: function (res) {
 		           location.reload();
