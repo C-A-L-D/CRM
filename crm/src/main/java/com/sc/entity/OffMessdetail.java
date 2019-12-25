@@ -22,6 +22,12 @@ public class OffMessdetail implements Serializable {
     private static final long serialVersionUID = 1L;
     
     //一对一配置start
+ 
+    private String uname;
+   
+	//一对一配置end
+	
+	//一对一配置start
     private OffMess offMess;//在一的一方定义另外一方的对象
     
     public OffMess getOffMess() {
@@ -58,7 +64,16 @@ public class OffMessdetail implements Serializable {
         return messid;
     }
 
-    public void setMessid(Long messid) {
+   
+	public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public void setMessid(Long messid) {
         this.messid = messid;
     }
 
@@ -97,7 +112,11 @@ public class OffMessdetail implements Serializable {
 	@Override
 	public String toString() {
 		return "OffMessdetail [detailid=" + detailid + ", messid=" + messid + ", receiverid=" + receiverid
-				+ ", messstate=" + messstate + ", companyid=" + companyid + ", lasttime=" + lasttime + "]";
+				+ ", messstate=" + messstate + ", companyid=" + companyid + ", lasttime=" + lasttime + ", uname="
+				+ uname + ", offMess=" + offMess + "]";
 	}
+
+
+	
     
 }

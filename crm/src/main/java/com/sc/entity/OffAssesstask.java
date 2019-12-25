@@ -2,7 +2,9 @@ package com.sc.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import  com.sc.entity.OffAssesstarget;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class OffAssesstask implements Serializable {
@@ -28,8 +30,18 @@ public class OffAssesstask implements Serializable {
     private Date lasttime;
 
     private static final long serialVersionUID = 1L;
+    //配置状态
+    private String state;
+    
+	public String getState() {
+		return state;
+	}
 
-    public OffAssesstask(Long taskid, String tasktitle, String taskdetail, String taskpublisher, String assesstarget, Date taskstarttime, Date taskendtime, Long companyid, Date lasttime) {
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public OffAssesstask(Long taskid, String tasktitle, String taskdetail, String taskpublisher, String assesstarget, Date taskstarttime, Date taskendtime, Long companyid, Date lasttime) {
         this.taskid = taskid;
         this.tasktitle = tasktitle;
         this.taskdetail = taskdetail;
@@ -122,7 +134,10 @@ public class OffAssesstask implements Serializable {
 		return "OffAssesstask [taskid=" + taskid + ", tasktitle=" + tasktitle + ", taskdetail=" + taskdetail
 				+ ", taskpublisher=" + taskpublisher + ", assesstarget=" + assesstarget + ", taskstarttime="
 				+ taskstarttime + ", taskendtime=" + taskendtime + ", companyid=" + companyid + ", lasttime=" + lasttime
-				+ "]";
+				+ ", state=" + state + "]";
 	}
+
+	
+	
     
 }

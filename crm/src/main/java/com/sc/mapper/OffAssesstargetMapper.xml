@@ -211,4 +211,12 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where TARGETID = #{targetid,jdbcType=DECIMAL}
   </update>
+  <select id="select" resultMap="BaseResultMap">
+  SELECT * FROM OFF_ASSESSTARGET
+  </select>
+  
+  <select id="selectbyassesstarget" resultMap="BaseResultMap" parameterType="java.lang.String">
+     select * from OFF_ASSESSTARGET 
+where ASSESSTARGET LIKE concat(concat('%',#{assesstarget,jdbcType=VARCHAR}),'%')
+</select>
 </mapper>

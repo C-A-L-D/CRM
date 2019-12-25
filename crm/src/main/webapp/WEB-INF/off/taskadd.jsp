@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'messadd.jsp' starting page</title>
+    <title>My JSP 'taskadd.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	  <link rel="stylesheet" type="text/css" href="https://raw.githack.com/hnzzmsf/layui-formSelects/master/dist/formSelects-v4.css" />
        
-
+<script src="<%=basePath %>/js/My97DatePicker/WdatePicker.js" type="text/javascript" defer="defer"  charset="UTF-8"></script>
   </head>
   
   <body class="form-wrap" >
@@ -40,44 +40,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div class="layui-fluid">
       <div class="layui-card-body" style="padding: 15px;">
       
-        <form class="layui-form">
-        
-          <div class="layui-form-item" style="width:500px">
+        <form class="layui-form layui-form-pane">
+          <div class="layui-form-item" >
            <label for="title" class="layui-form-label">
-            <span class="x-red">*</span> 消息标题
+            <span class="x-red">*</span>任务标题
             </label>
             <div class="layui-input-inline">
-              <input type="text" name="title" id="title"   required lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:300px" >
+              <input type="text" name="tasktitle" id="tasktitle"   required lay-verify="required" autocomplete="off" placeholder="请输入标题" class="layui-input" style="width:400px" >
             </div>
-            
           </div>
-            <div class="layui-form-item" style="width:500px">
+          <input type="hidden" name="taskpublisher" >
+            <div class="layui-form-item" style="width:600px" >
            <label for="title" class="layui-form-label">
-            <span class="x-red">*</span>接收人
+            <span class="x-red">*</span>被考核人
             </label>
-           <div  class="layui-input-inline" style="width:300px">
+           <div  class="layui-input-inline" style="width:400px">
             <select name="uids" xm-select="select1"  required lay-verify="required" >
             <c:forEach items="${sysusers }" var="u">
-                <option value="${u.sid}">${u.sname }</option>
+                <option value="${u.sid}" >${u.sname }</option>
                 </c:forEach>
             </select>
         </div>
          </div>
-
-
-          <div class="layui-form-item layui-form-text">
+         
+         <div class="layui-form-item">
            <label for="content" class="layui-form-label">
-            <span class="x-red">*</span>消息内容
+            <span class="x-red">*</span>考核指标集
+            </label>
+              <div  class="layui-input-inline" style="width:400px">
+            <select  name="assesstarget" required lay-verify="required">           
+                <option value="" disabled="disabled" selected="selected">请选择</option>
+                <c:forEach items="${targetlist }" var="t">
+                <option value="${t.assesstarget}">${t.assesstarget}</option>
+                </c:forEach>
+            </select>            
+          </div>
+           </div>
+          
+            <div class="layui-form-item">
+           <label for="content" class="layui-form-label" style="height: 50px">
+            <span class="x-red">*</span>有效期
+            </label>
+              <div  class="layui-input-inline" style="width:400px;border:1px solid rgb(230,230,230);background-color: white" >
+		             开始时间:<input name="taskstarttime"  required lay-verify="required" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" /><br>
+		             结束时间:<input name="taskendtime"  required lay-verify="required" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+          </div>
+          </div>
+
+
+          <div class="layui-form-item layui-form-text" style="width:510px">
+           <label for="content" class="layui-form-label">
+            <span class="x-red">*</span>任务内容
             </label>
             <div class="layui-input-inline">
-              <textarea id="content"  name="content"  required lay-verify="required" placeholder="请输入内容" class="layui-textarea" style="width:300px"></textarea>
+              <textarea id="taskdetail"  name="taskdetail"  required lay-verify="required" placeholder="请输入内容" class="layui-textarea" style="width:510px"></textarea>
             </div>
           </div>
-         
-            <div class="layui-input-block">
+           
+            <div class="layui-input-block" style="margin-left:200px">
                <div class="layui-footer" style="left: 0;">
               
-                <button class="layui-btn" lay-filter="add" lay-submit="">发送</button>
+                <button class="layui-btn" lay-filter="add" lay-submit="">发布</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
               </div>
             </div>
@@ -85,8 +108,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
       </div>
   
-
-    
   <script src="https://unpkg.com/jquery@3.4.1/dist/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="https://raw.githack.com/hnzzmsf/layui-formSelects/master/dist/formSelects-v4.min.js" type="text/javascript"
          charset="utf-8"></script>
@@ -123,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "offmessctrl/add.do",
+		        url: "offtaskctrl/add.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
