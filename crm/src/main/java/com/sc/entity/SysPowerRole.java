@@ -3,6 +3,7 @@ package com.sc.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class SysPowerRole implements Serializable {
     private BigDecimal id;
@@ -17,7 +18,7 @@ public class SysPowerRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private SysPowerinfo sysPowerinfo;
+    private List<SysPowerinfo> sysPowerinfo;
 
     public SysPowerRole(BigDecimal id, BigDecimal pid, BigDecimal roleId, BigDecimal caozuopersonId, Date lasttime) {
         this.id = id;
@@ -27,8 +28,8 @@ public class SysPowerRole implements Serializable {
         this.lasttime = lasttime;
     }
 
-    public SysPowerRole(BigDecimal id, BigDecimal pid, BigDecimal roleId, BigDecimal caozuopersonId, Date lasttime,
-			SysPowerinfo sysPowerinfo) {
+	public SysPowerRole(BigDecimal id, BigDecimal pid, BigDecimal roleId, BigDecimal caozuopersonId, Date lasttime,
+			List<SysPowerinfo> sysPowerinfo) {
 		super();
 		this.id = id;
 		this.pid = pid;
@@ -38,11 +39,11 @@ public class SysPowerRole implements Serializable {
 		this.sysPowerinfo = sysPowerinfo;
 	}
 
-	public SysPowerinfo getSysPowerinfo() {
+	public List<SysPowerinfo> getSysPowerinfo() {
 		return sysPowerinfo;
 	}
 
-	public void setSysPowerinfo(SysPowerinfo sysPowerinfo) {
+	public void setSysPowerinfo(List<SysPowerinfo> sysPowerinfo) {
 		this.sysPowerinfo = sysPowerinfo;
 	}
 

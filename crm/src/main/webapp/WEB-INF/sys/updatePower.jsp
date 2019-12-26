@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <div class="layui-form-item">
             <label class="layui-form-label">备注信息</label>
             <div class="layui-input-block">
-              <input type="text" name="pdescribe" value="${gp.pdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
+              <input type="text" name="pdescribe" value="${gp.pdescribe }" autocomplete="on" placeholder="请输入权限描述信息" class="layui-input">
             </div>
           </div>
          
