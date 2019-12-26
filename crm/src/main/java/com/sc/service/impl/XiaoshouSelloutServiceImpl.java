@@ -55,4 +55,12 @@ public class XiaoshouSelloutServiceImpl implements XiaoshouSelloutService {
 		
 	}
 
+	@Override
+	public void delete(BigDecimal id) {
+		if(id==null) {
+			return;
+		}
+		xiaoshouSelloutMapper.deleteByPrimaryKey(id);
+	}
+
 }

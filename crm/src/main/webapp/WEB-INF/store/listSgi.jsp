@@ -51,11 +51,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 查询 -->
 <div class="layui-row">
 <form class="layui-form layui-col-md12 x-so">
-<input type="text" id="searchid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="width:380px">
-<input type="text" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="width:380px">
-<button type="button" onclick='postinfo($("#searchid").val(),"")' class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe615;</i>查找</button>  
+<input type="text" id="searchid" placeholder="请输入要查询的商品编号......" autocomplete="off" class="layui-input" style="width:750px">
+<input type="hidden" name="gname" placeholder="请输入要查询的商品名称......" autocomplete="off" class="layui-input" style="width:380px">
+<button type="button" onclick='postinfo($("#searchid").val(),"")' class="layui-btn"><i class="layui-icon">&#xe615;</i>查找</button>  
 <button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button>  
-<a type="reset" style="float: right" class="layui-btn layui-btn-danger" href="../CRM/store/jsp/addSgi.jsp"><i class="layui-icon">&#xe654;</i></a>
+<a type="reset" style="float: right" class="layui-btn" href="../CRM/store/jsp/addSgi.jsp"><i class="layui-icon">&#xe654;</i></a>
 </form>
 </div>
 
@@ -101,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      				<button type="button" onclick="postinfo(${sgi.gid},'${sgi.gname}')" class="layui-btn layui-btn-sm layui-btn-normal">
 	          				<i class="layui-icon">&#xe65f;</i>
 	          			</button>
-	          			<a type="button" class="layui-btn layui-btn-sm" href="storeGinfo/selectSgi.do?gid=${sgi.gid}"><i class="layui-icon">&#xe642;</i></a>
+	          			<a type="button" class="layui-btn layui-btn-normal layui-btn-sm" href="storeGinfo/selectSgi.do?gid=${sgi.gid}"><i class="layui-icon">&#xe642;</i></a>
 	          			<button type="button" class="btn layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck(${sgi.gid})">
 	          				<i class="layui-icon">&#xe640;</i>
 	          			</button>
@@ -125,6 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>
       </center>
 
+</div>
 </div>
 </body>
 

@@ -89,7 +89,7 @@ public class ShiroConfig {
 		filterMap.put("/storegoodinfo/**", "anon");
 		filterMap.put("/sys/**", "anon");*/
 		
-		filterMap.put("/**", "authc");
+		//filterMap.put("/**", "authc");
 		//将匿名用户可访问页面的map集合放入过滤器链
 		shiroFilter.setFilterChainDefinitionMap(filterMap);
 		

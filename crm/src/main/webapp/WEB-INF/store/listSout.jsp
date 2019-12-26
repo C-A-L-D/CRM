@@ -50,10 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 查询 -->
 <div class="layui-row">
 <form class="layui-form layui-col-md12 x-so">
-<input type="text" id="searchinfo" placeholder="请输入要查询的订单的信息......" autocomplete="off" class="layui-input" style="width:780px;">
-<button type="button" class="layui-btn layui-btn-normal sm" onclick="postinfo($('#searchinfo').val())"><i class="layui-icon">&#xe615;</i>查找</button>  
-<button type="reset" class="layui-btn sm"><i class="layui-icon">&#xe669;</i>清空</button> 
-<a style="float:right;" class="layui-btn layui-btn-danger sm" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
+<input type="text" id="searchinfo" placeholder="请输入要查询的订单的信息......" autocomplete="off" class="layui-input" style="width:750px;">
+<button type="button" class="layui-btn" onclick="postinfo($('#searchinfo').val())"><i class="layui-icon">&#xe615;</i>查找</button>  
+<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
+<a style="float:right;" class="layui-btn" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
 </form>
 </div>
 
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <col width="200">
       <col width="200">
       <col width="200">
-      <col width="200">
+      <col width="400">
       <col>
     </colgroup>
     <thead>
@@ -110,9 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      		<td>
 	      		<center>
 	      			<div class="layui-btn-group">
-	          			<a type="button" class="layui-btn layui-btn-sm" href="storeSout/selectSout.do?sid=${sout.sid }">
-	          				<i class="layui-icon">&#xe609;</i>修改
+	      			<div class="layui-btn-container">
+	      				<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick="postSinfo(${sout.sid })">
+	          				<i class="layui-icon">&#xe65f;</i>
+	          			</button>
+	          			<a type="button" class="layui-btn layui-btn-normal  layui-btn-sm" href="storeSout/selectSout.do?sid=${sout.sid }">
+	          				<i class="layui-icon">&#xe642;</i>
 	          			</a>
+	          		</div>
 	          		</div>
 	          	</center>
 	      		</td>

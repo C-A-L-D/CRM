@@ -11,4 +11,5 @@ public interface XiaoshouSelloutService {
 	public StoreWhinfo in(XiaoshouSellout xiaoshouSellout);
 	public XiaoshouSellout selectObj(BigDecimal id);
 	public void update(XiaoshouSellout xiaoshouSellout);
+	public void delete(BigDecimal id);
 }

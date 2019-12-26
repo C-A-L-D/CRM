@@ -20,6 +20,19 @@ function postUpdate(data){
 	parent.location.href=url;
 }
 
+function postSinfo(data){
+	layer.open({
+		  type: 2,
+		  title:'订单'+data+'的详情',
+		  skin: 'layui-layer-demo', //样式类名
+		  shadeClose: true, //开启遮罩关闭
+		  offset:'10px',
+		  area: ['1000px','550px'],
+		  content: "storeSout/listpageSinfo.do?sid="+data
+		});
+	
+}
+
 
 function delCheck(whid){
 	$.ajax({
