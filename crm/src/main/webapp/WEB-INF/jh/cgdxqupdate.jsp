@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                        产品数量：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.cpNumber }" name="cpNumber" required 
+                  <input type="text" value="${u.cpNumber }" id="cpNumber" name="cpNumber" required 
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -78,6 +78,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   readonly="readonly" autocomplete="off" class="layui-input">
               </div>
           </div>
+          
+             <div class="layui-form-item">
+              <label  class="layui-form-label">
+                                        总价：
+              </label>
+              <div class="layui-input-inline">
+                  <input type="text" id="zj" required readonly="readonly"
+                  autocomplete="off" class="layui-input">
+                 
+              </div>
+          </div>
+          
           
               <div class="layui-form-item">
               <label  class="layui-form-label">
@@ -131,6 +143,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
   
  <script>
+   $(document).ready(function() {
+   	$("#cpNumber").keyup(function() {
+   		$("#zj").val($("#cpPrice").val()*$("#cpNumber").val())
+   	})
+   })
+ 
+ 
+ 
 layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
@@ -178,6 +198,7 @@ layui.use(['form','layer'], function(){
 		            console.log(info);
 		            $("#cpname").val(info.gname);
 		            $("#cpPrice").val(info.pricesold);
+		            
 		           
 		        }
 		    });
