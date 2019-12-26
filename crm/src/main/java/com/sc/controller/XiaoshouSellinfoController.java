@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
-import com.graphbuilder.struc.LinkedList;
 import com.sc.entity.JhCgd;
 import com.sc.entity.JhCgdxq;
 import com.sc.entity.Result;
@@ -236,8 +235,8 @@ public class XiaoshouSellinfoController {
 			}
 			storeGinfo.setStorenum(storeGinfo.getStorenum().subtract(BigDecimal.valueOf(gnum)));
 			storeGinfo.setLasttime(new Date());
-//			storeGinfoService.update(storeGinfo);
-//			xiaoshouSellinfoService.delete(BigDecimal.valueOf(ssid));
+			storeGinfoService.update(storeGinfo);
+		//	xiaoshouSellinfoService.delete(BigDecimal.valueOf(ssid));
 			System.err.println("出库成功！"+storeGinfo.getStorenum());
 			if(session.getAttribute("outofwh")==null||session.getAttribute("outofwh").equals("")) {
 				list=new ArrayList<Integer>();

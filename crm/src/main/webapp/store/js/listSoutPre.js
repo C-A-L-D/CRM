@@ -9,7 +9,7 @@ function postinfo(data){
 		  skin: 'layui-layer-demo', //样式类名
 		  shadeClose: true, //开启遮罩关闭
 		  offset:'10px',
-		  area: ['800px','550px'],
+		  area: ['800px','480px'],
 		  content: "storeSout/selectInfo.do?sid="+data
 		});
 }	
@@ -23,7 +23,7 @@ function postUpdate(data){
 function postSinfo(data){
 	layer.open({
 		  type: 2,
-		  title:'订单'+data+'的详情',
+		  title:'销售单'+data+'的详情',
 		  skin: 'layui-layer-demo', //样式类名
 		  shadeClose: true, //开启遮罩关闭
 		  offset:'10px',

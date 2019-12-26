@@ -47,7 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </form>
 </div>
 
-
 <!-- 表格 -->
   <table class="layui-table">
     <colgroup>
@@ -129,12 +128,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- 分页 -->
 	<center>
 		<div class="layui-elem-field layui-field-title" id="page">
-			<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.firstPage}">首页</a>
-			<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.prePage}">&lt;&lt;上一页</a>
+			<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.firstPage}&sid=${sid}">首页</a>
+			<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.prePage}&sid=${sid}">&lt;&lt;上一页</a>
           	<span class="layui-btn"> 当前${listpage.pageNum }/${listpage.pages }页</span>
           	<span class="layui-btn layui-btn-primary">共${listpage.total}条数据</span>
-          	<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.nextPage}">下一页&gt;&gt;</a>
-          	<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.lastPage }">尾页</a>       
+          	<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.nextPage}&sid=${sid}">下一页&gt;&gt;</a>
+          	<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.lastPage }&sid=${sid}">尾页</a>       
       	</div>
 	</center>
 </div>

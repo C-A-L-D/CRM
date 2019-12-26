@@ -26,8 +26,11 @@ public class XiaoshouSellinfoServiceImpl implements XiaoshouSellinfoService {
 
 	@Override
 	public void update(XiaoshouSellinfo xiaoshouSellinfo) {
-		// TODO Auto-generated method stub
-
+		if(xiaoshouSellinfo==null) {
+			System.err.println("发生查询错误！");
+			System.err.println(xiaoshouSellinfo);
+		}
+		xiaoshouSellinfoMapper.updateByPrimaryKey(xiaoshouSellinfo);
 	}
 
 	

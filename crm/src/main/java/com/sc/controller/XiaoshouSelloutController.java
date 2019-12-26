@@ -43,6 +43,7 @@ public class XiaoshouSelloutController {
 		BigDecimal id=BigDecimal.valueOf(sid);
 		PageInfo<XiaoshouSellinfo> sgilistPage =xiaoshouSellinfoService.selectSid(pageNum, pageSize, id);
 		mav.addObject("listpage",sgilistPage);
+		mav.addObject("sid",sid);
 		mav.addObject("total",sgilistPage.getTotal());
 		mav.setViewName("store/listSinfo");
 		return mav;
