@@ -44,6 +44,7 @@ public class CustomRealmMD5 extends AuthorizingRealm{
 				String ppower = s.getPpower();
 				if (ppower != null && !ppower.equals("")) {
 					allperms.add(ppower);
+					System.out.println("该角色查到的权限："+ppower);
 				}
 			}
 		}

@@ -43,7 +43,7 @@ public class LoggingInfoInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {		
 		SysUsers user = (SysUsers) arg0.getSession().getAttribute("nowuser");
 		System.out.println("session："+user);
-		System.out.println(getRealIP(arg0));
+//		System.out.println(getRealIP(arg0));
 		String uri = arg0.getRequestURI();//请求路径
 		String u = uri.substring(4);
 		System.out.println(u);//访问路径对应的所需权限
