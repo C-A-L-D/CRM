@@ -13,14 +13,11 @@ import com.sc.entity.OffMessExample;
 import com.sc.entity.OffMessExample.Criteria;
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.OffMessdetailExample;
-import com.sc.entity.SysUsers;
-import com.sc.entity.SysUsersExample;
 import com.sc.entity.SysUsersInfo;
 import com.sc.mapper.OffMessMapper;
 import com.sc.mapper.OffMessdetailMapper;
 import com.sc.mapper.SysUsersInfoMapper;
-import com.sc.mapper.SysUsersMapper;
-//import com.sc.mapper.SysUsersMapper;
+
 import com.sc.service.OffMessService;
 
 @Service
@@ -34,19 +31,13 @@ public class OffMessServiceImpl implements OffMessService {
 	@Autowired
 	SysUsersInfoMapper sysUsersInfoMapper;
 	
-	//短消息-已接收
+	//分页查询-短消息-已接收
 	@Override
-	public List<OffMessdetail> select() {
-		return this.offMessdetailMapper.select();
-	}
-	
-	//分页查询
-	@Override
-	public PageInfo<OffMessdetail> selectpage(Integer pageNum, Integer pageSize) {
+	public PageInfo<OffMessdetail> selectpage(Integer pageNum, Integer pageSize,OffMessdetail detail) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 	    //查询当前页的集合数据	
-		List<OffMessdetail> list = this.offMessdetailMapper.select();
+		List<OffMessdetail> list = this.offMessdetailMapper.select(detail);
 		System.out.println("查询到的list"+list);
 		//封装成pageinfo对象
 		PageInfo<OffMessdetail> page=new PageInfo<OffMessdetail>(list);

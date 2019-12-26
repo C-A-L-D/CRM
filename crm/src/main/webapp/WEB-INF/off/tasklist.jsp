@@ -57,8 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('新建考核任务','offtaskctrl/goadd.do',620,500)"><i class="layui-icon"></i>添加考核任务</button>
+              <button class="layui-btn" onclick="x_admin_show('新建考核任务','offtaskctrl/goadd.do',620,500)"><i class="layui-icon"></i>添加考核任务</button>
         <span class="x-right" style="line-height:40px">共有数据：${tasklist.total }条</span>
       </xblock>
       <table class="layui-table">

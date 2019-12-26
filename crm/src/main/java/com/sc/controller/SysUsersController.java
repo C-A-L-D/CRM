@@ -66,9 +66,11 @@ public class SysUsersController {
 				fail="error";//密码不正确
 			}else if(msg.equals("randomCodeError")){
 				fail="code";//验证码错误
-			}else if(msg.equals("GSError")){
+			}else if(msg.equals("GsAndUserError")){
 				fail="gs";//公司错误
-			}else{
+			}else if(msg.equals("uStateError")){
+				fail="state";//账户异常状态(被冻结)
+			}else {
 				fail="other";//未知错误
 			}
 		}

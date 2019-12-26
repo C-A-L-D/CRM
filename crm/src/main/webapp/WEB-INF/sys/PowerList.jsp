@@ -68,9 +68,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </select>
           </div>
           <input class="layui-input" placeholder="权限名" name="cate_name" >
-          <a title="添加角色" class="layui-btn"  onclick="x_admin_show('编辑','goAddRole.do')" href="javascript:;">
-                <i class="layui-icon"></i>增加角色
-              </a>
+          <a title="添加分栏" class="layui-btn"  onclick="x_admin_show('创建','goAddPColumn.do')" href="javascript:;">
+               <i class="layui-icon"></i>增加分栏
+          </a>
+          <a title="添加权限" class="layui-btn"  onclick="x_admin_show('创建','goAddPower.do')" href="javascript:;">
+               <i class="layui-icon"></i>增加权限
+          </a>
         </form>
       </div>
       <xblock>
@@ -102,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td>${pc.pdescribe }</td>
             <td><fmt:formatDate value="${pc.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             <td class="td-manage">
-              <a title="编辑"  onclick="x_admin_show('编辑','goUpdatePower.do?pid='+${pc.pid })" href="javascript:;">
+              <a title="编辑"  onclick="x_admin_show('权限修改','goUpdatePower.do?pid='+${pc.pid })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a title="删除" onclick="member_del(this,'${pc.pid }')" href="javascript:;">
@@ -115,14 +118,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </table>
       <div class="page">
         <div>
-			<a class="num" href="selectAllRoleAndPower.do?pageNum=${RP.firstPage }">首页</a>
-			<a href="selectAllRoleAndPower.do?pageNum=${RP.prePage }">上一页</a>
-			<a href="selectAllRoleAndPower.do?pageNum=${RP.pageNum }" style="background-color: RGB(21,193,66)">${RP.pageNum }</a>
-			<a class="next" href="selectAllRoleAndPower.do?pageNum=${RP.nextPage }">下一页</a>
-			<a class="num" href="selectAllRoleAndPower.do?pageNum=${RP.lastPage }">尾页</a>
+			<a class="num" href="selectAllRoleAndPower.do?pageNum=${PC.firstPage }">首页</a>
+			<a href="selectAllPower.do?pageNum=${PC.prePage }">上一页</a>
+			<a href="selectAllPower.do?pageNum=${PC.pageNum }" style="background-color: RGB(21,193,66)">${PC.pageNum }</a>
+			<a class="next" href="selectAllPower.do?pageNum=${PC.nextPage }">下一页</a>
+			<a class="num" href="selectAllPower.do?pageNum=${PC.lastPage }">尾页</a>
         </div>
       </div>
-
     </div>
     <script>
       layui.use('laydate', function(){
@@ -170,7 +172,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           layer.confirm('确认要删除吗？',function(data){
           		$.ajax({
 		        type: 'get',
-		        url: "delRole.do?rid="+id,
+		        url: "delPow.do?pid="+id,
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
@@ -198,7 +200,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	layer.msg('删除成功', {icon: 1});
       		$.ajax({
 		        type: 'get',
-		        url: "delAllRole.do",
+		        url: "delAllPow.do",
 		        data: "aa="+dataID,
 		        success: function (res) {
 		           //$(obj).parents("tr").remove();

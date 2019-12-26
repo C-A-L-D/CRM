@@ -3,6 +3,7 @@ package com.sc.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class SysPowerRole implements Serializable {
     private BigDecimal id;
@@ -16,6 +17,8 @@ public class SysPowerRole implements Serializable {
     private Date lasttime;
 
     private static final long serialVersionUID = 1L;
+    
+    private List<SysPowerinfo> sysPowerinfo;
 
     public SysPowerRole(BigDecimal id, BigDecimal pid, BigDecimal roleId, BigDecimal caozuopersonId, Date lasttime) {
         this.id = id;
@@ -25,7 +28,26 @@ public class SysPowerRole implements Serializable {
         this.lasttime = lasttime;
     }
 
-    public SysPowerRole() {
+	public SysPowerRole(BigDecimal id, BigDecimal pid, BigDecimal roleId, BigDecimal caozuopersonId, Date lasttime,
+			List<SysPowerinfo> sysPowerinfo) {
+		super();
+		this.id = id;
+		this.pid = pid;
+		this.roleId = roleId;
+		this.caozuopersonId = caozuopersonId;
+		this.lasttime = lasttime;
+		this.sysPowerinfo = sysPowerinfo;
+	}
+
+	public List<SysPowerinfo> getSysPowerinfo() {
+		return sysPowerinfo;
+	}
+
+	public void setSysPowerinfo(List<SysPowerinfo> sysPowerinfo) {
+		this.sysPowerinfo = sysPowerinfo;
+	}
+
+	public SysPowerRole() {
         super();
     }
 
@@ -72,7 +94,7 @@ public class SysPowerRole implements Serializable {
 	@Override
 	public String toString() {
 		return "SysPowerRole [id=" + id + ", pid=" + pid + ", roleId=" + roleId + ", caozuopersonId=" + caozuopersonId
-				+ ", lasttime=" + lasttime + "]";
+				+ ", lasttime=" + lasttime + ", sysPowerinfo=" + sysPowerinfo + "]";
 	}
     
 }

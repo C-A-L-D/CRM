@@ -2,6 +2,7 @@ package com.sc.config;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Filter;
@@ -17,12 +18,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
+import com.sc.entity.SysPowerinfo;
 import com.sc.form.CustomFormAuthenticationFilter;
 import com.sc.realm.CustomRealmMD5;
+import com.sc.service.SysPowerinfoService;
 
 @Configuration
 public class ShiroConfig {
     
+	@Autowired
+	SysPowerinfoService sysPowerinfoService;
+	
 	@Bean
 	public CustomRealmMD5 customRealmMD5(){
 		CustomRealmMD5 realm=new CustomRealmMD5();
@@ -52,7 +58,7 @@ public class ShiroConfig {
 		shiroFilter.setSecurityManager(this.securityManager());
 		shiroFilter.setLoginUrl("/login.jsp");
 		shiroFilter.setSuccessUrl("/loginController/index.do");//登陆成功成功跳转页面
-		
+		shiroFilter.setUnauthorizedUrl("/noPer.jsp");//没有权限默认跳转的页面
 		
 		Map<String, Filter> filters=new HashMap<String, Filter>();
 		filters.put("authc", form);//
@@ -89,7 +95,19 @@ public class ShiroConfig {
 		filterMap.put("/storegoodinfo/**", "anon");
 		filterMap.put("/sys/**", "anon");*/
 		
-		//filterMap.put("/**", "authc");
+		List<SysPowerinfo> allPower = sysPowerinfoService.selectAllPower();
+		if (allPower != null && allPower.size() > 0) {
+			for (SysPowerinfo s : allPower) {
+				String pdescribe = s.getPdescribe();
+				String ppower = s.getPpower();
+				if (pdescribe != null && !pdescribe.equals("") && ppower != null && !ppower.equals("")) {
+					filterMap.put(pdescribe, "perms["+ppower+"]");
+				}
+			}
+		}
+		
+		filterMap.put("/**", "authc");
+
 		//将匿名用户可访问页面的map集合放入过滤器链
 		shiroFilter.setFilterChainDefinitionMap(filterMap);
 		
