@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.XiaoshouSellinfo;
 import com.sc.entity.XiaoshouSellout;
+import com.sc.service.XiaoshouSellinfoService;
 import com.sc.service.XiaoshouSelloutService;
 
 @Controller
@@ -18,6 +20,9 @@ import com.sc.service.XiaoshouSelloutService;
 public class XiaoshouSelloutController {
 	@Autowired
 	XiaoshouSelloutService xiaoshouSelloutService;
+	
+	@Autowired
+	XiaoshouSellinfoService xiaoshouSellinfoService;
 	
 	@RequestMapping("/listpageSout.do")
 	public ModelAndView listpageSwi(ModelAndView mav,
@@ -27,6 +32,20 @@ public class XiaoshouSelloutController {
 		mav.addObject("listpage",sgilistPage);
 		mav.addObject("total",sgilistPage.getTotal());
 		mav.setViewName("store/listSout");
+		return mav;
+	}
+	
+	@RequestMapping("/listpageSinfo.do")
+	public ModelAndView listpageSinfo(ModelAndView mav,
+			@RequestParam(defaultValue="1")Integer pageNum,
+			@RequestParam(defaultValue="10")Integer pageSize,
+			Integer sid){
+		BigDecimal id=BigDecimal.valueOf(sid);
+		PageInfo<XiaoshouSellinfo> sgilistPage =xiaoshouSellinfoService.selectSid(pageNum, pageSize, id);
+		mav.addObject("listpage",sgilistPage);
+		mav.addObject("sid",sid);
+		mav.addObject("total",sgilistPage.getTotal());
+		mav.setViewName("store/listSinfo");
 		return mav;
 	}
 	
@@ -64,11 +83,30 @@ public class XiaoshouSelloutController {
 		return mav;
 	}
 	
+	@RequestMapping("/selectSid.do")
+	public ModelAndView selectSid(ModelAndView mav,Integer sid) {
+		System.err.println("要修改的对象(int)id："+sid);
+		BigDecimal id=BigDecimal.valueOf(sid);
+		System.err.println("要修改的对象(bigDecimal)id："+id);
+		XiaoshouSellout info=xiaoshouSelloutService.selectObj(id);
+		if(info==null) {
+			System.err.println("未查询到该对象！");
+		}
+		else {
+		mav.addObject("selected",info);
+		}
+		mav.setViewName("store/viewSout");
+		System.err.println(mav.getViewName());
+		return mav;
+	}
+	
 	@RequestMapping("/updateSout.do")
 	public ModelAndView updateSout(ModelAndView mav,XiaoshouSellout xiaoshouSellout) {
+		mav.setViewName("redirect:/xiaoshouSellout/listpageSout.do");
 		System.err.println("updatectrl");
 		if(xiaoshouSellout.getSid()==null||xiaoshouSellout==null) {
 			System.err.println("该对象为空！");
+			return mav;
 		}
 		
 		System.err.println("ctrl接收到的新对象："+xiaoshouSellout);
@@ -102,8 +140,7 @@ public class XiaoshouSelloutController {
 		System.err.println("修改"+oldXiaoshouSellout+"为");
 		System.err.println(xiaoshouSellout);
 		xiaoshouSelloutService.update(xiaoshouSellout);
-		
-		mav.setViewName("redirect:/xiaoshouSellout/listpageSout.do");
+		mav.setViewName("redirect:/storeSout/listpageSout.do");
 		return mav;
 	}	
 	

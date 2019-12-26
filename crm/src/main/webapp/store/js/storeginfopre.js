@@ -40,6 +40,10 @@ function postinfo(data,name){
 	}
 }
 
+function turninfo(data){
+	window.location.href="storeGinfo/selectInfo.do?gid="+data;
+}
+
 function postUpdate(data){
 	var data=data;
 	  if(data==""||data==null){

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sc.entity.StoreWhinfo;
 import com.sc.entity.XiaoshouSellinfo;
 import com.sc.mapper.XiaoshouSellinfoMapper;
 import com.sc.service.XiaoshouSellinfoService;
@@ -27,15 +26,13 @@ public class XiaoshouSellinfoServiceImpl implements XiaoshouSellinfoService {
 
 	@Override
 	public void update(XiaoshouSellinfo xiaoshouSellinfo) {
-		// TODO Auto-generated method stub
-
+		if(xiaoshouSellinfo==null) {
+			System.err.println("发生查询错误！");
+			System.err.println(xiaoshouSellinfo);
+		}
+		xiaoshouSellinfoMapper.updateByPrimaryKey(xiaoshouSellinfo);
 	}
 
-	@Override
-	public XiaoshouSellinfo in(XiaoshouSellinfo xiaoshouSellinfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	@Override
 	public XiaoshouSellinfo selectObj(BigDecimal ssid) {
@@ -48,4 +45,33 @@ public class XiaoshouSellinfoServiceImpl implements XiaoshouSellinfoService {
 		return info;
 	}
 
+	@Override
+	public PageInfo<XiaoshouSellinfo> selectSid(Integer pageNum, Integer pageSize, BigDecimal sid) {
+		if(sid==null) {
+			System.err.println("发生查询错误！");
+		}
+		PageHelper.startPage(pageNum, pageSize);
+		PageInfo<XiaoshouSellinfo> page=new PageInfo<XiaoshouSellinfo>(this.xiaoshouSellinfoMapper.selectBySid(sid));
+		System.err.println("Service:"+page);
+		return page;
+	}
+
+	@Override
+	public void outSinfo(XiaoshouSellinfo xiaoshouSellinfo){
+		if(xiaoshouSellinfo==null) {
+			System.err.println("发生修改错误！");
+		}
+		this.xiaoshouSellinfoMapper.updateByPrimaryKey(xiaoshouSellinfo);
+		return;
+	}
+
+	@Override
+	public void delete(BigDecimal id) {
+		if(id==null) {
+			System.err.println("发生修改错误！");
+		}
+		xiaoshouSellinfoMapper.deleteByPrimaryKey(id);
+		
+	}
+	
 }

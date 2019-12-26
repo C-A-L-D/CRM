@@ -29,36 +29,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/jquery.min.js"></script>
 	<script src="lib/layui/layui.js"></script>
 	<script src="lib/layui/lay/modules/layer.js"></script>
-	<script type="text/javascript" src="store/js/listSwiPre.js"></script>
+	<script type="text/javascript" src="store/js/listSinfoPre.js"></script>
   </head>
 <body>
 <div class="layui-card">
 
-<!-- 导航 -->
-<div class="x-nav">
-      <span class="layui-breadcrumb" style="visibility: visible;">
-        <a href="javascript:location.replace(location.href);">主页</a><span lay-separator="">/</span>
-        <a href="javascript:location.replace(location.href);">库存</a><span lay-separator="">/</span>
-        <a href="javascript:location.replace(location.href);"><cite>库存商品表</cite></a>
-      </span>
-      <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-      		<i class="layui-icon" style="line-height:38px">ဂ</i>
-      	</a>
-</div>
 
 
 <div class="x-body">
 	<!-- 查询 -->
 	<div class="layui-row">
 <form class="layui-form layui-col-md12 x-so">
-<input type="text" name="whinfo" placeholder="请输入要查询的仓库信息......" autocomplete="off" class="layui-input" style="width:780px;">
-<button type="submit" class="layui-btn layui-btn-normal sm"><i class="layui-icon">&#xe615;</i>查找</button>  
-<button type="reset" class="layui-btn sm"><i class="layui-icon">&#xe669;</i>清空</button> 
-<a display="inline-block" style="float:right;" class="layui-btn layui-btn-danger sm" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
+<input type="text" name="whinfo" placeholder="请输入要查询的仓库信息......" autocomplete="off" class="layui-input" style="width:700px;">
+<button type="submit" class="layui-btn"><i class="layui-icon">&#xe615;</i>查找</button>  
+<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
+<a display="inline-block" style="float:right;" class="layui-btn" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
 </form>
 </div>
-
-
 
 <!-- 表格 -->
   <table class="layui-table">
@@ -73,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <col width="200">
       <col width="200">
       <col width="200">
-      <col width="200">
+      <col width="300">
     </colgroup>
     <thead>
       <tr>
@@ -91,24 +78,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr> 
     </thead>
     <tbody>
-    
 		 <c:forEach items="${listpage.list}" var="sinfo">
+		 
+		 <c:set var="flag" scope="session" value="false"/>
+		 <c:forEach items="${sessionScope.outofwh}" var="id" end="${exitId}">
+		 	<c:if test="${id==sinfo.ssid}">
+	  			<c:set var="flag" scope="session" value="true"/>
+	          	<c:set var="exitId" value="0"></c:set>
+	        </c:if>
+	    </c:forEach>
+	        
 	  		<tr>
 		  		<td><center>${sinfo.ssid}</center></td>
 		  		<td><center>${sinfo.sid}</center></td>
 		  		<td><center>${sinfo.gid}</center></td>
 		  		<td><center>${sinfo.gprice}</center></td>
 		  		<td><center>${sinfo.gnum}</center></td>
-		  		<td><center>${sinfo.gnum}</center></td>
+		  		<td><center>
+		  			<c:if test="${sessionScope.flag eq 'true'}">
+	          			<c:out value="已出库"></c:out>
+	          		</c:if>
+	          		<c:if test="${sessionScope.flag eq 'false'}">
+	          			<c:out value="未出库"></c:out>
+	          		</c:if>
+				</center></td>
 		  		<td><center>${sinfo.gnum}</center></td><!-- 操作人员 -->
 		  		<td><center>${sinfo.remark}</center></td>
 		  		<td><center>${sinfo.cid}</center></td>
 		  		<td><center><fmt:formatDate value="${sinfo.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></center></td>
 	      		<td>
 	      		<center>
-	          		<a type="button" class="layui-btn layui-btn-sm" href="storeSinfo/selectSinfo.do?ssid=${sinfo.ssid }">
-	          			<i class="layui-icon">&#xe657;</i>修改
-	          		</a>
+	      		<div class="layui-btn-container">
+	      			<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick="turnto(${sinfo.ssid })"><i class="layui-icon">&#xe642;</i></button>
+	          		
+	          		<c:if test="${sessionScope.flag eq 'true'}">
+	          			<button type="button" class="layui-btn layui-btn-sm layui-btn-disabled"><i class="layui-icon">&#xe609;</i></button>
+	          		</c:if>
+	          		<c:if test="${sessionScope.flag eq 'false'}">
+	          			<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick="postinfo(${sinfo.ssid},${sinfo.sid},${sinfo.gid },${sinfo.gnum})"><i class="layui-icon">&#xe609;</i></button>
+	          		</c:if>
+	          	</div>
 	          	</center>
 	      		</td>
 			</tr>
@@ -116,16 +125,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		
 	</tbody>
   </table>
-  
 <!-- 分页 -->
 	<center>
 		<div class="layui-elem-field layui-field-title" id="page">
-			<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.firstPage}">首页</a>
-			<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.prePage}">&lt;&lt;上一页</a>
+			<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.firstPage}&sid=${sid}">首页</a>
+			<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.prePage}&sid=${sid}">&lt;&lt;上一页</a>
           	<span class="layui-btn"> 当前${listpage.pageNum }/${listpage.pages }页</span>
           	<span class="layui-btn layui-btn-primary">共${listpage.total}条数据</span>
-          	<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.nextPage}">下一页&gt;&gt;</a>
-          	<a class="layui-btn layui-btn-primary" href="storeSinfo/listpageSinfo.do?pageNum=${listpage.lastPage }">尾页</a>       
+          	<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.nextPage}&sid=${sid}">下一页&gt;&gt;</a>
+          	<a class="layui-btn layui-btn-primary" href="storeSout/listpageSinfo.do?pageNum=${listpage.lastPage }&sid=${sid}">尾页</a>       
       	</div>
 	</center>
 </div>
