@@ -41,6 +41,9 @@ String basePath = request.getScheme()+": "+request.getServerName()+":"+request.g
 		else if("${param.isfail }" == "gs") {
 			layui.layer.msg("公司错误", {icon: 5});
 		}
+		else if("${param.isfail }" == "state") {
+			layui.layer.msg("账户状态异常", {icon: 5});
+		}
 		else if("${param.isfail }" == "other") {
 			layui.layer.msg("未知错误", {icon: 5});
 		}

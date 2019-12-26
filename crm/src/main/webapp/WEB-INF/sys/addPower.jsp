@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>添加分栏</title>
+    <title>添加权限</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -31,13 +31,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
+      <div class="layui-card-header"><span style="color: red;">温馨提示：</span>请选择权限分栏，再填写创建的权限信息！</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">         
           <div class="layui-form-item">
           	<div class="layui-inline">
-              <label class="layui-form-label">分栏名</label>
+              <label class="layui-form-label">权限名称</label>
               <div class="layui-input-inline">
-                <input type="text" name="cname" value="" autocomplete="on" class="layui-input">
+                <input type="text" name="pname" value="" autocomplete="on" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">权限</label>
+              <div class="layui-input-inline">
+                <input type="text" name="ppower" value="" autocomplete="on" class="layui-input">
               </div>
             </div>
           </div>
@@ -46,10 +53,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <div class="layui-form-item">
             <label class="layui-form-label">备注信息</label>
             <div class="layui-input-block">
-              <input type="text" name="cdescribe" value="" autocomplete="on" placeholder="请输入权限分栏描述信息" class="layui-input">
+              <input type="text" name="pdescribe" value="" autocomplete="on" placeholder="请输入权限描述信息" class="layui-input">
             </div>
           </div>
-  
+         
+          
+          <div class="layui-form-item">
+            <label class="layui-form-label">权限分栏</label>
+            <div class="layui-input-block">
+              <select name="pcolumnId" lay-filter="aihao">
+                <option value=""></option>
+                <c:forEach items="${column }" var="all">
+                    <option value="${all.cid }"}>${all.cname }</option>
+                </c:forEach>
+               </select>
+            </div>
+          </div>
+          
             <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
               <div class="layui-footer" style="left: 0;">
@@ -76,7 +96,7 @@ layui.use(['form','layer'], function(){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "addPowCol.do",
+		        url: "addNewPower.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {

@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>权限管理</title>
+    <title>系统日志</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -33,9 +33,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-nav">
 		      <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">权限管理</a>
+        <a href="">系统日志</a>
         <a>
-          <cite>权限信息列表</cite></a>
+          <cite>日志信息列表</cite></a>
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -68,17 +68,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </select>
           </div>
           <input class="layui-input" placeholder="权限名" name="cate_name" >
-          <a title="添加分栏" class="layui-btn"  onclick="x_admin_show('创建','goAddPColumn.do')" href="javascript:;">
-               <i class="layui-icon"></i>增加分栏
-          </a>
-          <a title="添加权限" class="layui-btn"  onclick="x_admin_show('创建','goAddPower.do')" href="javascript:;">
-               <i class="layui-icon"></i>增加权限
-          </a>
+          <a title="添加角色" class="layui-btn"  onclick="x_admin_show('编辑','goAddRole.do')" href="javascript:;">
+                <i class="layui-icon"></i>增加角色
+              </a>
         </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <span class="x-right" style="line-height:40px">总共 ${PC.total } 条数据</span>
+        <span class="x-right" style="line-height:40px">总共<span id="total">${allLog.total }</span> 条数据</span>
       </xblock>
       <table class="layui-table">
         <thead>
@@ -86,29 +83,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>权限名称</th>
-            <th>权限所在分栏</th>
+            <th>用户编号</th>
+            <th>访问者IP</th>
             <th>权限</th>
-            <th>备注信息</th>
-            <th>最后修改时间</th>
+            <th>访问时间</th>
+            <th>公司编号</th>
             <th>操作</th>
         </thead>
         <tbody>
-<c:forEach items="${PC.list }" var="pc">
+<c:forEach items="${allLog.list }" var="r">
           <tr>
             <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${pc.pid }'><i class="layui-icon">&#xe605;</i></div>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${r.lid }'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>${pc.pname }</td>
-            <td>${pc.sysPowercolumn.cname }</td>
-            <td>${pc.ppower }</td>
-            <td>${pc.pdescribe }</td>
-            <td><fmt:formatDate value="${pc.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            <td>${r.uid }</td>
+            <td style="width: 18%;">${r.ip }</td>
+            <td style="width: 13%;">
+            	${r.power }
+            </td>
+            <td><fmt:formatDate value="${r.time }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+            <td>${r.gongsiid }</td>
             <td class="td-manage">
-              <a title="编辑"  onclick="x_admin_show('权限修改','goUpdatePower.do?pid='+${pc.pid })" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'${pc.pid }')" href="javascript:;">
+              <a title="删除" onclick="member_del(this,'${r.lid }')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
@@ -118,13 +114,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </table>
       <div class="page">
         <div>
-			<a class="num" href="selectAllRoleAndPower.do?pageNum=${PC.firstPage }">首页</a>
-			<a href="selectAllPower.do?pageNum=${PC.prePage }">上一页</a>
-			<a href="selectAllPower.do?pageNum=${PC.pageNum }" style="background-color: RGB(21,193,66)">${PC.pageNum }</a>
-			<a class="next" href="selectAllPower.do?pageNum=${PC.nextPage }">下一页</a>
-			<a class="num" href="selectAllPower.do?pageNum=${PC.lastPage }">尾页</a>
+			<a class="num" href="listAll.do?pageNum=${allLog.firstPage }">首页</a>
+			<a href="listAll.do?pageNum=${allLog.prePage }">上一页</a>
+			<a href="listAll.do?pageNum=${allLog.pageNum }" style="background-color: RGB(21,193,66)">${allLog.pageNum }</a>
+			<a class="next" href="listAll.do?pageNum=${allLog.nextPage }">下一页</a>
+			<a class="num" href="listAll.do?pageNum=${allLog.lastPage }">尾页</a>
         </div>
       </div>
+
     </div>
     <script>
       layui.use('laydate', function(){
@@ -172,13 +169,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           layer.confirm('确认要删除吗？',function(data){
           		$.ajax({
 		        type: 'get',
-		        url: "delPow.do?pid="+id,
+		        url: "delLog.do?lid="+id,
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
 		               //发异步删除数据
 		              $(obj).parents("tr").remove();
 		              layer.msg(res.msg,{icon:1,time:1000});
+		             //刷新页面
+		              location.reload();
 		               
 		            } else {
 		                layer.alert(res.msg, {icon: 5}, function () {
@@ -200,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	layer.msg('删除成功', {icon: 1});
       		$.ajax({
 		        type: 'get',
-		        url: "delAllPow.do",
+		        url: "delAllLog.do",
 		        data: "aa="+dataID,
 		        success: function (res) {
 		           //$(obj).parents("tr").remove();
