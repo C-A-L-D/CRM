@@ -265,7 +265,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                     </li>
                     <li>
-                        <a _href="html/echarts5.html">
+                        <a _href="log/listAll.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>系统日志</cite>
                         </a>

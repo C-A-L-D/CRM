@@ -31,14 +31,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <div class="layui-fluid">
     <div class="layui-card">
-      <div class="layui-card-header">您所修改的权限编号：${gp.pid }</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">         
           <div class="layui-form-item">
           	<div class="layui-inline">
               <label class="layui-form-label">分栏名</label>
               <div class="layui-input-inline">
-                <input type="text" name="pname" value="${gp.pname }" autocomplete="on" class="layui-input">
+                <input type="text" name="cname" value="" autocomplete="on" class="layui-input">
               </div>
             </div>
           </div>
@@ -47,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <div class="layui-form-item">
             <label class="layui-form-label">备注信息</label>
             <div class="layui-input-block">
-              <input type="text" name="pdescribe" value="${gp.pdescribe }" autocomplete="on" placeholder="请输入角色描述信息" class="layui-input">
+              <input type="text" name="cdescribe" value="" autocomplete="on" placeholder="请输入权限分栏描述信息" class="layui-input">
             </div>
           </div>
   
@@ -77,7 +76,7 @@ layui.use(['form','layer'], function(){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "updatePow.do?pid="+${gp.pid },
+		        url: "addPowCol.do",
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {

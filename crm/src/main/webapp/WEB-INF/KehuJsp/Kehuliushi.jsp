@@ -75,11 +75,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="流失处理"  onclick="x_admin_show('流失处理','../Kehuliushictrl/goAddKehuliushi.do?kid=${kid}&gid=${gid}',500,670)" href="javascript:;">
+		              <a title="流失处理"  onclick="x_admin_show('流失处理','../Kehuliushictrl/goAddKehuliushi.do?kid=${k.kid}&gid=${k.gid}',500,670)" href="javascript:;">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
-		              <a title="客户恢复"  href="KehuxinxiHuifu.do?kid=${k.kid}">
+		              <a title="客户恢复"  lay-filter="add" href="KehuxinxiHuifu.do?kid=${k.kid}" onclick="return window.confirm('是否将此客户恢复为合作客户？')">
 		                <i class="layui-icon">&#xe63c;</i>
 		              </a>
 		              &nbsp;
@@ -160,6 +160,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    });
           });
       }
+        
+      layui.use(['form','layer'], function(){
+            $ = layui.jquery;
+	        var form = layui.form
+	        ,layer = layui.layer;
+          
+	          //监听提交
+	          form.on('submit(add)', function(data){
+	            console.log(data);
+	            $.ajax({
+			        type: 'post',
+			        url: "KehuxinxiHuifu.do",
+			        data: data.field,
+			        success: function (res) {
+			            if (res.status == 200) {
+			                layer.alert(res.msg, {icon: 6}, function () {
+			                    // 获得frame索引
+			                    var index = parent.layer.getFrameIndex(window.name);
+			                    //关闭当前frame
+			                    parent.layer.close(index);
+			                   //刷新页面
+			                    parent.location.reload();
+			                });
+			                 //parent.layer.reload();
+			               
+			            } else {
+			                layer.alert(res.msg, {icon: 5}, function () {
+			                    // 获得frame索引
+			                    var index = parent.layer.getFrameIndex(window.name);
+			                    //关闭当前frame
+			                    parent.layer.close(index);
+			                    //刷新页面
+			                    parent.location.reload();
+			                });
+			            }
+			        }
+			    });
+			    return false;
+	          });
+	          
+	        });
     </script>
   </body>
 

@@ -114,4 +114,41 @@ public class SysPowerinfoController {
 		mav.setViewName("sys/addPColumn");
 		return mav;
 	}
+	
+	/**
+	 *添加分栏
+	 * @param mav
+	 * @param sysPowerinfo
+	 * @return
+	 */
+	@RequestMapping("/addPowCol.do")
+	@ResponseBody
+	public Result addPowCol(SysPowercolumn sysPowercolumn) {
+		sysPowercolumn.setLasttime(new Date());
+		sysPowerinfoService.addPowCol(sysPowercolumn);
+		return new Result(200, "添加成功");
+	}
+	
+	/**
+	 * 添加权限分栏下的权限弹框
+	 * @param mav
+	 * @param sysPowerinfo
+	 * @return
+	 */
+	@RequestMapping("/goAddPower.do")
+	public ModelAndView goAddPower(ModelAndView mav) {
+		ArrayList<SysPowercolumn> column = sysRoleServiceImpl.selectAllColumn();
+		mav.addObject("column", column);
+		mav.setViewName("sys/addPower");
+		return mav;
+	}
+	
+	@RequestMapping("/addNewPower.do")
+	@ResponseBody
+	public Result addNewPower(SysPowerinfo sysPowerinfo) {
+		System.out.println(sysPowerinfo);
+		sysPowerinfoService.addNewPower(sysPowerinfo);
+		return new Result(200, "成功添加权限");
+	}
+	
 }

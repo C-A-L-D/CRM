@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="x-body">
       <div class="layui-row">
-          <form   class="layui-form layui-col-md12 x-so" method="post" action="offmessctrl/search.do">
+          <form  class="layui-form layui-col-md12 x-so" method="post" action="offmessctrl/search.do">
           <div class="layui-input-inline">
               <select  name="select">           
                     <option value="">选择查询条件</option>  
@@ -54,7 +54,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-dlAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('发送短信','offmessctrl/goadd.do',530,400)" href="javascript:;"><i class="layui-icon"></i>发送信息</button>
          <c:if test="${stat=='2'}">
          <button id="change" class="layui-btn" onclick="send()"><i class="layui-icon">&#xe615;</i>查看已发送信息</button>
@@ -107,15 +106,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tbody>
          </center>
       </table>
-         
-      <div class="page">
-          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.firstPage}">首页</a>
-          <a class="num" href="offmessctrl/offmesslist.do?pageNum=${p.prePage}">&lt;&lt;</a>
-          <span class="current"> 当前${p.pageNum }/${p.pages }页</span>
-          <a class="next" href="offmessctrl/offmesslist.do?pageNum=${p.nextPage}">&gt;&gt;</a>
-          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.lastPage }">尾页</a>       
-      </div>
-     
+      <c:if test="${stat=='2'}">
+	      <div class="page">
+	          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.firstPage}">首页</a>
+	          <a class="num" href="offmessctrl/offmesslist.do?pageNum=${p.prePage}">&lt;&lt;</a>
+	          <span class="current"> 当前${p.pageNum }/${p.pages }页</span>
+	          <a class="next" href="offmessctrl/offmesslist.do?pageNum=${p.nextPage}">&gt;&gt;</a>
+	          <a class="prev" href="offmessctrl/offmesslist.do?pageNum=${p.lastPage }">尾页</a>       
+	      </div>
+      </c:if>
+       
+        <c:if test="${stat=='3'}">
+	        <div class="page">
+	          <a class="prev" href="offmessctrl/search.do?pageNum=${p.firstPage}">首页</a>
+	          <a class="num" href="offmessctrl/search.do?pageNum=${p.prePage}">&lt;&lt;</a>
+	          <span class="current"> 当前${p.pageNum }/${p.pages }页</span>
+	          <a class="next" href="offmessctrl/search.do?pageNum=${p.nextPage}">&gt;&gt;</a>
+	          <a class="prev" href="offmessctrl/search.do?pageNum=${p.lastPage }">尾页</a>       
+	      </div>
+     </c:if>
  </div>
  
  <!-- 显示已发送短信 -->

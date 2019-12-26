@@ -240,14 +240,12 @@
    <!--  一对一的配置end -->
   </resultMap>
 
-  <select id="select" resultMap="offmessMap1" >
+  <select id="select" resultMap="offmessMap1" parameterType="com.sc.entity.OffMessdetail" >
    select * from OFF_MESSDETAIL 
 LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
-LEFT JOIN SYS_USERSINFO on SYS_USERSINFO."SID"=OFF_MESSDETAIL.RECEIVERID
-where SYS_USERSINFO."SID"=37
-and OFF_MESSDETAIL.MESSSTATE!=0
-AND SYS_USERSINFO.GONGSIID=OFF_MESS.COMPANYID
-AND OFF_MESS.COMPANYID=OFF_MESSDETAIL.COMPANYID
+where OFF_MESSDETAIL.RECEIVERID=#{receiverid,jdbcType=DECIMAL}
+AND OFF_MESSDETAIL.COMPANYID=#{companyid,jdbcType=DECIMAL}
+AND OFF_MESSDETAIL.MESSSTATE!=0
 </select>
 <select id="showdetail" resultMap="offmessMap1" parameterType="java.lang.Long">
     select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
