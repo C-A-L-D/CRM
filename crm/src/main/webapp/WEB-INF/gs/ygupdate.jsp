@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   
    <div class="x-body">
-        <form class="layui-form " >
+      <form class="layui-form " >
       <div class="layui-container">  
        <!-- 1 -->
         <div class="layui-row ">
@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <span class="x-red">*</span>
               </div>
           </div>
-          </div>
+         </div>
           
           <!-- 2 -->
           <div class="layui-row ">
@@ -102,117 +102,79 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           </div>
           
-          <!-- 3 -->
-            <div class="layui-row ">
-          <div class="layui-form-item layui-col-sm6" style="clear: none;">
-              <label for="L_pass" class="layui-form-label">
+            <!-- 111111111 -->
+ <div class="layui-row">
+      <div class="layui-form-item layui-col-sm12 layui-form" style="clear: none;" lay-filter="test">
+            <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>家庭地址
               </label>
-              <div class="layui-input-inline">
-                <!--   <input type="text" id="saddressHome" name="saddressHome" required lay-verify="required"
-                  autocomplete="off" class="layui-input" > -->
-                 <div class="layui-input-inline">
-                 <c:forEach items="${ssq}" var="s">
-          
-                
+        <div class="layui-input-inline " >
               <select name="province" id="province" lay-filter="sf" lay-select="">
-                <option value="">${s}</option>
+               <%--  <option value="${ssq.province }">${ssq.province }</option> --%>
               </select>
-              </c:forEach>
-            </div>
-            <div class="layui-input-inline">
+        </div>     
+       
+       <div class="layui-input-inline">
               <select name="city" id="city" lay-filter="cs" lay-select="">
-                <option value="">请选择城市</option>
+               <%--  <option value="${ssq.city }">${ssq.city }</option> --%>
               </select>
-            </div>
-            <div class="layui-input-inline">
+       </div>
+           
+      <div class="layui-input-inline">
               <select name="area" id="area" lay-filter="qu" lay-select="">
-                <option value="">请选择区</option>
+              <%--   <option value="${ssq.area }">${ssq.area }</option> --%>
               </select>
-            </div>
-                  
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          
-           <div class="layui-form-item layui-col-sm6" style="clear: none;">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>现在地址
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="saddressNow" name="saddressNow" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.saddressNow }">
-              </div>
-              
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          </div>
-          
-       <%--     <div class="layui-row ">
-          <div class="layui-form-item layui-col-sm6" style="clear: none;">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>家庭地址
-              </label>
-              <div class="layui-input-inline">
-                   <input type="text" id="saddressHome" name="saddressHome" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.saddressHome }">
-                            <div class="layui-input-inline"> 
-              
-              <select name="province" id="province" lay-filter="sf" lay-select="">
-              <c:forEach items="${ssq}" var="s">
-                <option value="${s}">${s}</option>
-                </c:forEach>
-              </select>
-            </div>
-            <div class="layui-input-inline">
-              <select name="city" id="city" lay-filter="cs" lay-select="">
-                <option value="">请选择城市</option>
-              </select>
-            </div>
-            <div class="layui-input-inline">
-              <select name="area" id="area" lay-filter="qu" lay-select="">
-                <option value="">请选择区</option>
-              </select>
-            </div>   
+      </div>
+  </div>      
+</div>
+<!-- 2222 -->
+<div class="layui-row ">
+      <div class="layui-form-item layui-col-sm12" style="clear: none;">
+       <label for="L_email" class="layui-form-label">
+        <span class="x-red">*</span>详细地址
+       </label>
+       <div class="layui-input-inline">
+                  <input type="text" id="xxdz" name="xxdz" required lay-verify=""
+                  autocomplete="off" class="layui-input" style="width:500px" value="${ssq.xxdz }">
+        </div>
+        
+      </div>
+</div>
 
-             </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-     
-           <div class="layui-form-item layui-col-sm6" style="clear: none;">
+   <div class="layui-row ">
+          <div class="layui-form-item layui-col-sm12" style="clear: none;">
+  
+           
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>现在地址
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="saddressNow" name="saddressNow" required lay-verify="required"
-                  autocomplete="off" class="layui-input" value="${u.saddressNow }">
+                  autocomplete="off" class="layui-input" style="width:500px" value="${u.saddressNow }">
               </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
+              
+            
           </div>
-          </div>
-           --%>
+   </div>
+          <!-- 11111111 -->
+          
+          <!-- 3 -->
+        
+       
           <!-- 4 -->
           <div class="layui-row ">
-                      <div class="layui-form-item layui-col-sm6" style="clear: none;">
+          <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
                    	 <span class="x-red">*</span>	公司名称
               </label>
               <div class="layui-input-inline">
                 <%--   <input type="text" id="gongsiid" name="gongsiid"
                   autocomplete="off" class="layui-input" value="${u.gongsiid }" lay-verify="required"> --%>
-            <select id="gongsiid" name="gongsiid" class="layui-input" lay-filter="gs" lay-select="">                 
-           <c:forEach items="${p1 }" var="v1">
-             <option value="${v1.id }" ${v1.id==u.gongsiid ? "selected":"" }>${v1.gname }</option>
-           </c:forEach>
-           </select>
+			            <select id="gongsiid" name="gongsiid" class="layui-input" lay-filter="gs" lay-select="">                 
+			           <c:forEach items="${p1 }" var="v1">
+			             <option value="${v1.id }" ${v1.id==u.gongsiid ? "selected":"" }>${v1.gname }</option>
+			           </c:forEach>
+			           </select>
               </div>
                <div class="layui-form-mid layui-word-aux">
                   <span class="x-red">*</span>
@@ -226,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-input-inline">
                  <%--  <input type="text" id="szzmm" name="szzmm"
                   autocomplete="off" class="layui-input" value="${u.szzmm }"> --%>
-              <select name="szzmm" class="layui-input">    
+                  <select name="szzmm" class="layui-input">    
                   <option value="群众" ${u.szzmm  eq "群众" ? "selected":""} >群众</option>
                   <option value="团员" ${u.szzmm  eq "团员" ? "selected":""}>团员</option>
                   <option value="党员" ${u.szzmm  eq "党员" ? "selected":""}>党员</option>
@@ -235,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           </div>
-          
+          <!-- 111 -->
           <div class="layui-row ">
           <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
@@ -264,7 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           </div>
-          
+          <!-- 111 -->
          <div class="layui-row ">
         <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
@@ -286,7 +248,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
         </div>
-      
+      <!-- 111 -->
              <div class="layui-row ">
              <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
@@ -304,7 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div> 
           
-                       <div class="layui-form-item layui-col-sm6" style="clear: none;">
+               <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
                    		<span class="x-red">*</span> 职务名称
               </label>
@@ -322,7 +284,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div> 
           </div>
-          
+          <!-- 111 -->
           <div class="layui-row ">
                        <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
@@ -354,7 +316,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          
            
           
-       
+       <!-- 111 -->
        <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
                    		员工简历
@@ -373,16 +335,69 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   修改
               </button>
           </div>
-          
+  
        </div>   
       </form>
     </div>
     
 <script type="text/javascript">
+//开局就把省到的内容传进去
+/* $(document).ready(function() {	
+
+              
+ });
+ */
   layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
           ,layer = layui.layer;
+          
+          
+          //start
+             var pro="${ssq.province}"
+   		var cit="${ssq.city}"
+         var are="${ssq.area}"
+
+	  $.ajax({
+             type: 'get',
+		     url: "<%=basePath %>js/city.json",
+		     dataType: "json",
+		     contentType:"application/json;charset=utf-8",
+             success: function (data) {
+            
+                //省
+             $.each(data, function(k, v) {           
+               if(pro==v.name){
+           
+                $("#province").append("<option value='"+v.name+"' selected>"+v.name+"</option>")           
+                 //市
+                  $.each(v.cityList, function(key1, v1) {
+                    if(cit==v1.name){
+                       $("#city").append("<option value='"+v1.name+"' selected>"+v1.name+"</option>")
+			              //区    
+			             for(a in v1.areaList){
+			           	   if(are==v1.areaList[a]){
+			                  $("#area").append("<option value='"+v1.areaList[a]+"' selected>"+v1.areaList[a]+"</option>")                      	 
+			           	    }else{
+			           	    $("#area").append("<option value='"+v1.areaList[a]+"'>"+v1.areaList[a]+"</option>")
+			           	    }
+			           	 }
+			           	 //区
+                    }else{
+                      $("#city").append("<option value='"+v1.name+"'>"+v1.name+"</option>")
+                    }
+                  })  
+                  //市
+              }else{
+           	     $("#province").append("<option value='"+v.name+"'>"+v.name+"</option>")
+              }
+            }); 
+          
+          
+                form.render('select');
+             }
+          }); 
+          //end
           
           
               //自定义验证规则
@@ -466,8 +481,105 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	  }
             	  console.log($("#sjobid").html());
                   form.render('select');
+                 
                 }
            }); 
+              
+         }); 
+         
+                  //职务选择根据公司的改变而改变
+         form.on('select(gs)', function(data){
+         console.log(data);
+           
+          layer.msg($("#gongsiid").val()); 
+        var   id=$("#gongsiid").val(); 
+       /*  alert($("#gongsiid").val()) */
+          $.ajax({
+	            type: 'post',
+			    url: "yggl.do",
+			    data: "gongsiid="+id,
+	            success: function (list) {
+	            console.log(list);
+	              
+            	  $("#sjobid").empty();
+            	   
+            	  $("#sjobid").append("<option value=''>-- 请选择 --</option>");
+            	  for(var i=0;i<list.length;i++){
+            	     $("#sjobid").append("<option value='"+list[i].jid+"'>"+list[i].jname+"</option>")
+            	  }
+            	  console.log($("#sjobid").html());
+                  form.render('select');
+                }
+           }); 
+              
+         }); 
+         
+         
+         //市
+         form.on('select(sf)', function(data){
+           $("#area").html("")            
+            $("#area").append("<option value=''>请选择区域</option>")
+         
+            var sf = $("#province").find("option:selected").val();
+            /*  console.log(sf); */
+          $.ajax({
+            type: 'get',
+		    url: "<%=basePath %>js/city.json",
+		     dataType: "json",
+		     contentType:"application/json;charset=utf-8",
+            success: function (list) {
+            $("#city").html("")            
+            $("#city").append("<option value=''>请选择城市</option>")
+            $.each(list, function(k, v) {
+           	$.each(v.cityList, function(i, v1) {
+           	if(v.name==sf){
+           	console.log(v1.name)
+           	$("#city").append("<option value='"+v1.name+"'>"+v1.name+"</option>")
+           	}
+           		
+           	})
+
+           
+           }) 
+             form.render('select');
+            
+     
+               }
+          }); 
+              
+         }); 
+         
+         //区
+        form.on('select(cs)', function(data){        
+            var cs = $("#city").find("option:selected").val();
+             console.log(cs);
+           $.ajax({
+            type: 'get',
+		    url: "<%=basePath %>js/city.json",
+		     dataType: "json",
+		     contentType:"application/json;charset=utf-8",
+            success: function (list) {
+            $("#area").html("")            
+            $("#area").append("<option value=''>请选择区域</option>")
+            $.each(list, function(k, v) {
+           	$.each(v.cityList, function(i, v1) {
+           	if(v1.name==cs){
+           	console.log(v1.areaList)
+           	for(a in v1.areaList){
+           	 $("#area").append("<option value='"+v1.areaList[a]+"'>"+v1.areaList[a]+"</option>")
+           	}
+           /* 	$("#city").append("<option value='"+v1.name+"'>"+v1.name+"</option>") */
+           	}
+           		
+           	})
+
+           
+           }) 
+             form.render('select');
+            
+     
+               }
+          });  
               
          }); 
           

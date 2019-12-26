@@ -86,16 +86,16 @@ public class SysBMController {
 			SysDepartment info)throws IllegalStateException, IOException {
 		System.out.println("开始添加公司"+info);
 		
-		SysJobinfo job = new SysJobinfo();
+		/*SysJobinfo job = new SysJobinfo();
 		
-		job.setGongsiid(info.getGongsiid());
+		job.setGongsiid(info.getGongsiid());*/
 		System.out.println(info);
 		//设置添加时间
 		info.setLasttime(new Date());
 		sysDepartmentService.add(info);
 		
-		job.setDid(info.getDid());
-		sysJobinfoService.add(job);
+		/*job.setDid(info.getDid());*/
+		//sysJobinfoService.add(job);
 		
 		
 		

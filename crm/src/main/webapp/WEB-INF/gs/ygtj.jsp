@@ -99,49 +99,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           </div>
           
-          <!-- 3 -->
-           <div class="layui-row ">
-          <div class="layui-form-item layui-col-sm6" style="clear: none;">
-              <label for="L_pass" class="layui-form-label">
+          <!-- 111111111 -->
+<div class="layui-row ">
+      <div class="layui-form-item layui-col-sm12" style="clear: none;">
+            <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>家庭地址
               </label>
-              <div class="layui-input-inline">
-                <!--   <input type="text" id="saddressHome" name="saddressHome" required lay-verify="required"
-                  autocomplete="off" class="layui-input" > -->
-                 <div class="layui-input-inline">
+             <div class="layui-input-inline">
               <select name="province" id="province" lay-filter="sf" lay-select="">
                 <option value="">请选择省份</option>
               </select>
-            </div>
-            <div class="layui-input-inline">
+            </div>     
+       <div class="layui-input-inline">
               <select name="city" id="city" lay-filter="cs" lay-select="">
                 <option value="">请选择城市</option>
               </select>
-            </div>
-            <div class="layui-input-inline">
+       </div>
+           
+      <div class="layui-input-inline">
               <select name="area" id="area" lay-filter="qu" lay-select="">
                 <option value="">请选择区</option>
               </select>
             </div>
-                  
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          
-           <div class="layui-form-item layui-col-sm6" style="clear: none;">
+        
+</div>
+<!-- 2222 -->
+<div class="layui-row ">
+      <div class="layui-form-item layui-col-sm12" style="clear: none;">
+       <label for="L_email" class="layui-form-label">
+        <span class="x-red">*</span>详细地址
+       </label>
+       <div class="layui-input-inline">
+                  <input type="text" id="xxdz" name="xxdz" required lay-verify=""
+                  autocomplete="off" class="layui-input" style="width:500px" placeholder="请输入详细地址">
+        </div>
+        
+      </div>
+</div>
+
+          <!-- 11111111 -->
+          <!-- 3 -->
+           <div class="layui-row ">
+          <div class="layui-form-item layui-col-sm12" style="clear: none;">
+  
+           
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>现在地址
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="saddressNow" name="saddressNow" required lay-verify="required"
-                  autocomplete="off" class="layui-input" >
+                  autocomplete="off" class="layui-input" style="width:500px">
               </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
+              
+         
           </div>
           
           <!-- 4 -->
