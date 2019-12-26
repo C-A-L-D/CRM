@@ -71,16 +71,16 @@ public class CustomRealmMD5 extends AuthorizingRealm{
 		
 		SysUsers sysUser = sysUsersService.login(username, gsId);
 		System.out.println("---------------------"+sysUser);
-		HttpServletRequest req = null;
+//		HttpServletRequest req = null;
 		if(sysUser==null){
 			System.out.println("没有此用户...");
-			req.getSession().setAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, "GsAndUserError");
+//			req.getSession().setAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, "GsAndUserError");
 			return null;
 		}
 		
 		if (sysUser.getUstate().equals("off")) {
 			System.out.println("账户为冻结状态...");
-			req.getSession().setAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, "uStateError");
+//			req.getSession().setAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, "uStateError");
 			return null;
 		}
 		
