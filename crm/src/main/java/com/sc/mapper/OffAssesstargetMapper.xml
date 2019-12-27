@@ -211,8 +211,8 @@
       LASTTIME = #{lasttime,jdbcType=TIMESTAMP}
     where TARGETID = #{targetid,jdbcType=DECIMAL}
   </update>
-  <select id="select" resultMap="BaseResultMap">
-  SELECT * FROM OFF_ASSESSTARGET
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  SELECT * FROM OFF_ASSESSTARGET WHERE  COMPANYID = #{companyid,jdbcType=DECIMAL}
   </select>
   
   <select id="selectbyassesstarget" resultMap="BaseResultMap" parameterType="java.lang.String">

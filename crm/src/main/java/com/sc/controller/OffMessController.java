@@ -33,7 +33,7 @@ public class OffMessController {
 	@Autowired
 	SysUsersInfoService sysUsersInfoService;
 	
-	//分页显示短信息-已接收
+	//分页显示短信息-已接收   1
 	@RequestMapping("/offmesslist.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
@@ -53,7 +53,7 @@ public class OffMessController {
 		return mav;
      }
 	
-	//删除短信息
+	//删除短信息  1
 	@RequestMapping("/delete.do")
 	public ModelAndView delete(ModelAndView mav,OffMessdetail mess){
 		System.out.println("删除短信息"+mess);
@@ -62,7 +62,7 @@ public class OffMessController {
 		return mav;
      }
 	
-	//显示短消息详情
+	//显示短消息详情   1
 	@RequestMapping("/showdetail.do")
 	public ModelAndView showdetail(ModelAndView mav,OffMessdetail mess){
 		System.out.println("查看短消息详情！"+mess);
@@ -77,7 +77,7 @@ public class OffMessController {
 		return mav;
      }
 	
-	//回复短消息
+	//回复短消息   1
 	  @RequestMapping("/huifu.do")
 	  @ResponseBody                                                //发送人编号      //接收人用户名
 		public Result huifumess(ModelAndView mav,OffMess mess,Long senderid,String receiver){
@@ -110,7 +110,7 @@ public class OffMessController {
 		return new Result(200,"发送成功！");
      }
 	  
-      //发送消息
+      //发送消息  1
 		@RequestMapping("/goadd.do")
 		public ModelAndView goadd(ModelAndView mav,HttpSession session){	
 			//---需要获取用户id
@@ -124,7 +124,7 @@ public class OffMessController {
 			return mav;
 		}
 		
-		//发送消息-多
+		//发送消息-多   1
 		@RequestMapping("/add.do")
 		 @ResponseBody
 			public Result add(ModelAndView mav,String uids,OffMess mess,HttpSession session){
@@ -133,7 +133,7 @@ public class OffMessController {
 			SysUsers s=(SysUsers)session.getAttribute("nowuser");
 			SysUsersInfo userinfo=this.sysUsersInfoService.get(s.getSid());
 			
-			//查询员工信息-用于发送短信 
+			//查询员工信息-用于发送短信   
 			System.out.println(mess+"111");
 			System.out.println(uids+"222");
 			
@@ -160,12 +160,15 @@ public class OffMessController {
 			return new Result(200,"发送成功！");
 		}
 		
-		//分页显示发送的短消息
+		//分页显示发送的短消息    1
 		@RequestMapping("/offsendlist.do")
 		public ModelAndView listsend(ModelAndView mav,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
-			PageInfo<OffMess> dd=offMessService.selectpagesend(pageNum, pageSize, "彭俊");
+				@RequestParam(defaultValue="5")Integer pageSize,HttpSession session){
+			//---需要获取用户id
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
+			SysUsersInfo userinfo=this.sysUsersInfoService.get(s.getSid());
+			PageInfo<OffMess> dd=this.offMessService.selectpagesend(pageNum, pageSize, userinfo.getSname());
 			System.out.println("111");
 			for (OffMess offmess : dd.getList()) {
 				offmess.setOffMessdetail(this.offMessService.selectpagesend1(offmess.getMessid()));
@@ -178,7 +181,7 @@ public class OffMessController {
 			return mav;
 		}
 		
-			//显示短消息详情-发送
+			//显示短消息详情-发送   1
 			@RequestMapping("/showdetailsend.do")
 			public ModelAndView showdetailsend(ModelAndView mav,Long messid){
 				System.out.println("查看已发送的短消息详情！"+messid);
@@ -190,28 +193,30 @@ public class OffMessController {
 				return mav;
 		     }
 			
-		//模糊查询-接收
+		//模糊查询-接收   1
 		@RequestMapping("/search.do")
 		public ModelAndView search(ModelAndView mav,HttpServletRequest req,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
+				@RequestParam(defaultValue="5")Integer pageSize,String tiaojian,String search,HttpSession session){
 			System.out.println("模糊查询-分页！");
-			String i=req.getParameter("select");
-			System.out.println("查询条件"+i);
+			System.out.println("查询条件"+tiaojian);
 			//关键字
-			String search=req.getParameter("search");
 			System.out.println("关键字"+search);
 			PageInfo<OffMessdetail> list=null;
+			//---需要获取用户id和公司id---start
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
 			//标题
-			if(i.equals("1")){
-				list=this.offMessService.selectpagetitle(pageNum, pageSize, search);
+			if(tiaojian.equals("1")){
+				list=this.offMessService.selectpagetitle(pageNum, pageSize, search,s.getSid().longValue());
 				System.out.println("模糊查询"+list);
 			}
 			//内容
-			if(i.equals("2")){
-				list=this.offMessService.selectpagecontent(pageNum, pageSize, search);
+			if(tiaojian.equals("2")){
+				list=this.offMessService.selectpagecontent(pageNum, pageSize, search,s.getSid().longValue());
 				System.out.println("模糊查询"+list);
 			}
+			mav.addObject("tiaojian", tiaojian);
+			mav.addObject("search", search);
 			mav.addObject("p",list);
 			mav.addObject("stat", "3");
 			mav.setViewName("off/offmesslist");//路径是：/WEB-INF/off/offmesslist.jsp

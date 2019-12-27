@@ -43,6 +43,12 @@ SysJobinfoMapper sysJobinfoMapper;
 	public List<SysUsersInfo> selectuser(BigDecimal sid) {
 		return this.sysUsersInfoMapper.selectuser(sid);
 	}
+	
+	//办公
+	@Override
+	public List<SysUsersInfo> selectusergc(SysUsersInfo info) {
+		return this.sysUsersInfoMapper.selectusergc(info);
+	}
 
 
 	@Override

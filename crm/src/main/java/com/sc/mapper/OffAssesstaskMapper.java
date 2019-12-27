@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface OffAssesstaskMapper {
 	//查询任务
-	public List<OffAssesstask> select();
+	public List<OffAssesstask> select(Long cid);
 	
 	//修改任务状态
 	public void updatestate();

@@ -42,8 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so" method="post" action="offtargetctrl/search.do">
-        
-          <input type="text" id="assesstarget" name="assesstarget"  placeholder="请输入考核指标集名称" autocomplete="off" class="layui-input" style="width:200px">
+          <input type="text" id="target" name="target" value="${target}" placeholder="请输入考核指标集名称" autocomplete="off" class="layui-input" style="width:200px">
           <button class="layui-btn" type="submit"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
@@ -55,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <thead>
           <tr>
           
-            <th>ID</th>
+            <th>指标编号</th>
             <th>考核指标集名称</th>
             <th>考核指标集描述</th>
             <th>最后修改时间</th>
@@ -64,34 +63,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tbody>
         <c:forEach items="${assesstarget.list}" var="u">
           <tr>
-      
             <td>${u.targetid}</td>
             <td>${u.assesstarget}</td>
             <td>${u.remarks}</td>
             <td> <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></td> 
             <td class="td-manage">    
-              <a title="编辑"  onclick="x_admin_show('编辑考核指标','offtargetctrl/goupdate.do?targetid=${u.targetid}',500,400)" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>编辑
+              <a title="编辑" class="layui-btn layui-btn-normal" onclick="x_admin_show('编辑考核指标','offtargetctrl/goupdate.do?targetid=${u.targetid}',500,400)" href="javascript:;">
+               编辑
               </a>
-              <a title="删除" onclick="target_del(this,'${u.targetid}')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>删除
+              <a title="删除" class="layui-btn  layui-btn-danger"  onclick="target_del(this,'${u.targetid}')" href="javascript:;">
+              删除
               </a>
             </td>
           </tr>
           </c:forEach>
         </tbody>
       </table>
-        
-      <div class="page">
-          <a class="prev" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.firstPage}">首页</a>
-          <a class="num" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.prePage}">&lt;&lt;</a>
-          <span class="current"> 当前${assesstarget.pageNum }/${assesstarget.pages }页</span>
-          <a class="next" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.nextPage}">&gt;&gt;</a>
-          <a class="prev" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.lastPage }">尾页</a>       
-      </div>
-
+        <c:if test="${stat=='1'}">
+	      <div class="page">
+	          <a class="prev" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.firstPage}">首页</a>
+	          <a class="num" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.prePage}">&lt;&lt;</a>
+	          <span class="current"> 当前${assesstarget.pageNum }/${assesstarget.pages }页</span>
+	          <a class="next" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.nextPage}">&gt;&gt;</a>
+	          <a class="prev" href="offtargetctrl/targetlist.do?pageNum=${assesstarget.lastPage }">尾页</a>       
+	      </div>
+	  </c:if>
+    <c:if test="${stat=='2'}">
+	        <div class="page">
+	         <a class="prev" onclick="aa('${assesstarget.firstPage }')" href="javascript:;">首页</a>
+	         <a class="num" onclick="aa('${assesstarget.prePage }')" href="javascript:;">&lt;&lt;</a>
+	          <span class="current"> 当前${assesstarget.pageNum }/${assesstarget.pages }页</span>
+	         <a class="next" onclick="aa('${assesstarget.nextPage }')" href="javascript:;">&gt;&gt;</a>
+	          <a class="prev" onclick="aa('${assesstarget.lastPage }')" href="javascript:;">尾页</a>
+	      </c:if>    
     </div>
     <script>
+    function aa(pageNum){
+
+var url="offtargetctrl/search.do?pageNum="+pageNum+"&target="+$("#target").val();
+     window.location.href=url;
+     }
     /*用户-删除*/
       function target_del(obj,id){
           layer.confirm('确认删除吗？',function(index){
