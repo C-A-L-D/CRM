@@ -193,7 +193,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
+              <button onclick="return check()" class="layui-btn" lay-filter="add" lay-submit="">
                   添加
               </button>
           </div>
@@ -241,13 +241,14 @@ layui.use(['form','layer'], function(){
     });
 
    function check(){
-       var a=document.getElementById("mail");
-       var b=document.getElementById("mbphone");
+       var a=document.getElementById("mail").value;
+      
        var f=/^\d{10}@qq.com$/;
        if(a.test(f)){
        
        }else{
-         alert("邮箱格式错误，请重新输入！")    
+         alert("邮箱格式错误，请重新输入！");
+         return false;    
        }
        
    }

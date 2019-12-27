@@ -1,6 +1,7 @@
 package com.sc.controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public class JhGysxxController {
 		
 		//查询list集合-分页     ${page.list}
 		mav.addObject("p", jhGysxxService.selectpage(pageNum, pageSize,u));
-		
+		mav.addObject("a", u);
 		mav.setViewName("jh/gysxxlistpage");// 路径是：/WEB-INF/jh/gysxxlistpage.jsp
 		return mav;
 	}
@@ -98,6 +99,21 @@ public class JhGysxxController {
 	
 	}
 	
+	    //删除所有供应商
+		@RequestMapping("/gysdeleteall.do")
+		@ResponseBody
+		public void gysdelete(ModelAndView mav,String aa){
+			System.out.println("供应商删除！"+aa);
+			
+			String[] ss = aa.split(",");
+						
+			for (String xx : ss) {
+				JhGysxx info = this.jhGysxxService.get(new BigDecimal(xx));
+				this.jhGysxxService.delete(info);;
+			}
+			
+			
+		}
 
 	
 }

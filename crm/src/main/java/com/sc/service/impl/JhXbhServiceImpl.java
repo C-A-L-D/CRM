@@ -21,15 +21,21 @@ public class JhXbhServiceImpl implements JhXbhService {
 	
 	
 	@Override
-	public PageInfo<JhXbh> selectpage(Integer pageNum, Integer pageSize) {
+	public PageInfo<JhXbh> selectpage(Integer pageNum, Integer pageSize,JhXbh jc) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		JhXbhExample ex=new JhXbhExample();
 		ex.setOrderByClause("ID asc");		
 		//查询当前页的集合数据
-		List<JhXbh> list = this.jhXbhMapper.selectByExample(ex);
-		//封装成pageinfo对象
-		PageInfo<JhXbh> page=new PageInfo<JhXbh>(list);
+		if(jc!=null){
+	        if(jc.getCpId()!=null&&!jc.getCpId().equals("")){
+	        	Criteria criteria = ex.createCriteria();
+				criteria.andCpIdEqualTo(jc.getCpId());
+					
+			}
+			}
+				List<JhXbh> list = this.jhXbhMapper.selectByExample(ex);
+				PageInfo<JhXbh>page=new PageInfo<JhXbh>(list);
 		
 		return page;
 	}

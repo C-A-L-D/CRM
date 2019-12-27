@@ -47,7 +47,7 @@ public class JhCgdController {
 			
 		//查询list集合-分页     ${page.list}
 		mav.addObject("p", jhCgdService.selectpage(pageNum, pageSize,jc));
-		
+		mav.addObject("a", jc);
 		mav.setViewName("jh/cgdlistpage");// 路径是：/WEB-INF/jh/gysxxlistpage.jsp
 		return mav;
 	}
@@ -76,7 +76,7 @@ public class JhCgdController {
 			jc.setLtime(new Date());
 			jc.setJhtime(jhXbh.getJhTime());
 			jc.setCgTime(new Date());
-			jhCgdService.add(jc);
+			jhCgdService.add(jc);			
 			StoreGinfo storeGinfo = storeGinfoService.getsgi(new BigDecimal(jhXbh.getCpId()));
 			System.out.println(storeGinfo);
 			System.out.println("开始添加采购单"+jc);			
