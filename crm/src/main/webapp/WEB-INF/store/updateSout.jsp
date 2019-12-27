@@ -29,79 +29,79 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
 <body>
-    <div class="layui-card-header"><h2>核对信息</h2></div>
+    <div class="layui-card-header"><h2>修改信息</h2></div>
     <div class="layui-card">
          <form class="layui-form" action="http://localhost:8080/CRM/storeSout/updateSout.do" method="post">
                 <div class="layui-form-item">
                     <label class="layui-form-label" >销售单编号</label>
                     <div class="layui-input-block">
-                        <input type="text" id="sid" readonly="readonly" value="${selected.sid }"  autocomplete="off" class="layui-input">
+                        <input type="text" name="sid" readonly="readonly" value="${selected.sid }"  autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">制单日期</label>
                     <div class="layui-input-block">
-                        <input type="text" id="maketime" class="layui-input">
+                        <input type="text" name="maketime" id="maketime" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">发票编号</label>
                     <div class="layui-input-block">
-                        <input type="text" id="tid" placeholder="${selected.tid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="tid" placeholder="${selected.tid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户编号</label>
                     <div class="layui-input-block">
-                        <input type="text" id="guid" placeholder="${selected.guid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="guid" placeholder="${selected.guid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">销售金额</label>
                     <div class="layui-input-block">
-                        <input type="text" id="sprice" placeholder="${selected.sprice}" autocomplete="off" class="layui-input">
+                        <input type="text" name="sprice" placeholder="${selected.sprice}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">出库状态</label>
                     <div class="layui-input-block">
-                        <input type="text" id="sstatus" placeholder="${selected.sstatus}" autocomplete="off" class="layui-input">
+                        <input type="text" name="sstatus" placeholder="${selected.sstatus}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">是否返利</label>
                     <div class="layui-input-block">
-                        <input type="text" id="isanti" placeholder="${selected.isanti}" autocomplete="off" class="layui-input">
+                        <input type="text" name="isanti" placeholder="${selected.isanti}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">订单状态</label>
                     <div class="layui-input-block">
-                        <input type="text" id="lstatus" placeholder="${selected.lstatus}" autocomplete="off" class="layui-input">
+                        <input type="text" name="lstatus" placeholder="${selected.lstatus}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">备注信息</label>
                     <div class="layui-input-block">
-                        <textarea id="remark" placeholder="请输入备注信息......." class="layui-textarea"></textarea>
+                        <textarea id="remark" name="remark" placeholder="请输入备注信息......." class="layui-textarea"></textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">公司编号</label>
                     <div class="layui-input-block">
-                        <input type="text" id="cid" required readonly="readonly"  value="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="cid" required readonly="readonly"  value="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">修改时间</label>
                     <div class="layui-input-block">
-                        <input type="text" id="lastdate" readonly="readonly" value="<fmt:formatDate value="${selected.lastdate }" pattern="yyyy-MM-dd HH:mm:ss"/>" autocomplete="off" class="layui-input">
+                        <input type="text" name="lastdate" readonly="readonly" value="<fmt:formatDate value="${selected.lastdate }" pattern="yyyy-MM-dd HH:mm:ss"/>" autocomplete="off" class="layui-input">
                     		
                     </div>
                 </div>
                 <div class="layui-form-item">
                      <div class="layui-input-block">
-                         <button class="layui-btn" lay-submit lay-filter="formDemo">确定出库</button>
+                         <button class="layui-btn" lay-submit lay-filter="formDemo">确定</button>
                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                      </div>
                 </div>

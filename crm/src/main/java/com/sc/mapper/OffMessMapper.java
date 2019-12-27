@@ -7,11 +7,14 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OffMessMapper {
-	 //回复短消息
+	 //回复短消息   1
     int huifu(OffMess mess);
 
      //查看已发送短信
     List<OffMess> selectByExample(OffMessExample example);
+    
+  //模糊查询
+    public List<OffMess> selectby(OffMess offmess);
 
     int countByExample(OffMessExample example);
 

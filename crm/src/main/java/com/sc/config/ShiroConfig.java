@@ -58,7 +58,7 @@ public class ShiroConfig {
 		shiroFilter.setSecurityManager(this.securityManager());
 		shiroFilter.setLoginUrl("/login.jsp");
 		shiroFilter.setSuccessUrl("/loginController/index.do");//登陆成功成功跳转页面
-		shiroFilter.setUnauthorizedUrl("/error.jsp");//没有权限默认跳转的页面
+		shiroFilter.setUnauthorizedUrl("/noPer.jsp");//没有权限默认跳转的页面
 		
 		Map<String, Filter> filters=new HashMap<String, Filter>();
 		filters.put("authc", form);//
@@ -100,13 +100,14 @@ public class ShiroConfig {
 			for (SysPowerinfo s : allPower) {
 				String pdescribe = s.getPdescribe();
 				String ppower = s.getPpower();
-				if (pdescribe != null && pdescribe.equals("") && ppower != null && ppower.equals("")) {
+				if (pdescribe != null && !pdescribe.equals("") && ppower != null && !ppower.equals("")) {
 					filterMap.put(pdescribe, "perms["+ppower+"]");
 				}
 			}
 		}
 		
 		filterMap.put("/**", "authc");
+
 		//将匿名用户可访问页面的map集合放入过滤器链
 		shiroFilter.setFilterChainDefinitionMap(filterMap);
 		

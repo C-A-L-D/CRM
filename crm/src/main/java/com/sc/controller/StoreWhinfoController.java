@@ -51,7 +51,7 @@ public class StoreWhinfoController {
 		return mav;
 	}
 	
-	
+	  
 	
 	@RequestMapping("/selectSwi.do")
 	public ModelAndView selectSwi(ModelAndView mav,Integer whid) {

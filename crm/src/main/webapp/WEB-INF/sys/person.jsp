@@ -30,7 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <legend>个人信息</legend>
             <div class="layui-field-box">
             	<div align="center">
-           			<img src="../upload/${one.sysUsersInfo.sphoto }" alt="照片尚未加载出来..." id="test1" title="修改照片..." class="img-circle" style="width: 17%;">
+            		<c:if test="${not empty one.sysUsersInfo.sphoto }">
+            			<img src="../upload/${one.sysUsersInfo.sphoto }" alt="照片尚未加载出来..." id="test1" title="修改照片..." class="img-circle" style="width: 17%;">
+            		</c:if>
+           			<c:if test="${empty one.sysUsersInfo.sphoto }">
+            			<img src="../images/陈意涵1.jpg" alt="照片尚未加载出来..." id="test1" title="修改照片..." class="img-circle" style="width: 17%;">
+            		</c:if>
            			<span style="vertical-align: bottom;opacity: 0.4;margin-left: -40px;">(上传照片...)</span>
            			<a onclick="x_admin_show('修改','goUpdatePassword.do')" href="javascript:;">
            				<button class="layui-btn layui-btn-warm" style="float: right;">修改密码</button>

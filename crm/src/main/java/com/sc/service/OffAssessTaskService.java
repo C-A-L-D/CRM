@@ -12,10 +12,10 @@ public interface OffAssessTaskService {
 		public void updatestate();
 		
 	    //查询任务
-		public List<OffAssesstask> select();
+		public List<OffAssesstask> select(Long cid);
 		
 	    //分页查询
-        public PageInfo<OffAssesstask> selectpage(Integer pageNum,Integer pageSize); 
+        public PageInfo<OffAssesstask> selectpage(Integer pageNum,Integer pageSize,Long cid); 
         
         //删除任务
         public void delete(Long taskid);
@@ -30,16 +30,16 @@ public interface OffAssessTaskService {
         public void insert(OffAssesstask task);
         
         //分页查询-标题
-        public PageInfo<OffAssesstask> selectpagetitle(Integer pageNum,Integer pageSize,String tasktitle); 
+        public PageInfo<OffAssesstask> selectpagetitle(Integer pageNum,Integer pageSize,String tasktitle,Long cid); 
         
         //分页查询-内容
-        public PageInfo<OffAssesstask> selectpagecontent(Integer pageNum,Integer pageSize,String taskdetail); 
+        public PageInfo<OffAssesstask> selectpagecontent(Integer pageNum,Integer pageSize,String taskdetail,Long cid); 
        
         //分页查询-任务发布人
-        public PageInfo<OffAssesstask> selectpageu(Integer pageNum,Integer pageSize,String taskpublisher); 
+        public PageInfo<OffAssesstask> selectpageu(Integer pageNum,Integer pageSize,String taskpublisher,Long cid); 
         
         //分页查询-考核指标
-        public PageInfo<OffAssesstask> selectpagetarget(Integer pageNum,Integer pageSize,String assesstarget); 
+        public PageInfo<OffAssesstask> selectpagetarget(Integer pageNum,Integer pageSize,String assesstarget,Long cid); 
 
 
 }

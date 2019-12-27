@@ -42,51 +42,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">制单日期</label>
-                    <div class="layui-input-block">
-                        <input type="text" id="maketime" placeholder="请选择时间......" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
                     <label class="layui-form-label">发票编号</label>
                     <div class="layui-input-block">
-                        <input type="text" id="tid" placeholder="${selected.tid}" autocomplete="off" class="layui-input">
+                        <input type="text" id="tid" readonly="readonly" value="${selected.tid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">用户编号</label>
                     <div class="layui-input-block">
-                        <input type="text" id="guid" placeholder="${selected.guid}" autocomplete="off" class="layui-input">
+                        <input type="text" id="guid" value="${selected.guid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">销售金额</label>
                     <div class="layui-input-block">
-                        <input type="text" id="sprice" placeholder="${selected.sprice}" autocomplete="off" class="layui-input">
+                        <input type="text" id="sprice" value="${selected.sprice}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">出库状态</label>
                     <div class="layui-input-block">
-                        <input type="text" id="sstatus" placeholder="${selected.sstatus}" autocomplete="off" class="layui-input">
+                        <input type="text" id="sstatus" readonly="readonly" value="${selected.sstatus}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">是否返利</label>
                     <div class="layui-input-block">
-                        <input type="text" id="isanti" placeholder="${selected.isanti}" autocomplete="off" class="layui-input">
+                        <input type="text" id="isanti" readonly="readonly" value="${selected.isanti}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">订单状态</label>
                     <div class="layui-input-block">
-                        <input type="text" id="lstatus" placeholder="${selected.lstatus}" autocomplete="off" class="layui-input">
+                        <input type="text" id="lstatus" readonly="readonly" value="${selected.lstatus}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">备注信息</label>
                     <div class="layui-input-block">
-                        <textarea id="remark" placeholder="请输入备注信息......." class="layui-textarea"></textarea>
+                        <textarea id="remark" readonly="readonly" class="layui-textarea">${selected.remark }</textarea>
                     </div>
                 </div>
                 <div class="layui-form-item layui-form-text">
@@ -102,24 +96,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		
                     </div>
                 </div>
-                <div class="layui-form-item">
-                     <div class="layui-input-block">
-                         <button class="layui-btn" lay-submit lay-filter="formDemo">入库</button>
-                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                     </div>
-                </div>
         </form>
   
 </div>
 </body>
-<script type="text/javascript">
-layui.use('laydate', function(){
-  var laydate = layui.laydate;
-  laydate.render({ 
-  elem: '#maketime'
-  ,type: 'datetime'
-});
-});
-</script>
 
 </html>

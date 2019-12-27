@@ -3,6 +3,7 @@ package com.sc.controller;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.OffAssesstarget;
 import com.sc.entity.Result;
+import com.sc.entity.SysUsers;
 import com.sc.service.OffAssessTargetService;
 
 
@@ -27,10 +29,13 @@ public class OffTargetController {
 		@RequestMapping("/targetlist.do")
 		public ModelAndView listpage(ModelAndView mav,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
+				@RequestParam(defaultValue="5")Integer pageSize,HttpSession session){
 			System.out.println("查看指标！");
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
+			Long cid=s.getGongsiid().longValue();
 			//查询list集合-分页    ${page.list}
-			mav.addObject("assesstarget", offAssessTargetService.selectpage(pageNum,pageSize));
+			mav.addObject("stat","1");
+			mav.addObject("assesstarget", offAssessTargetService.selectpage(pageNum,pageSize,cid));
 			mav.setViewName("off/assesstarget");//路径是：/WEB-INF/off/offmesslist.jsp
 			return mav;
 	     }
@@ -75,7 +80,10 @@ public class OffTargetController {
 		//添加考核指标
 		@RequestMapping("/add.do")
 		 @ResponseBody
-		public Result add(ModelAndView mav,OffAssesstarget target){
+		public Result add(ModelAndView mav,OffAssesstarget target,HttpSession session){
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
+			Long cid=s.getGongsiid().longValue();
+			target.setCompanyid(cid);
 			target.setLasttime(new Date());
 			this.offAssessTargetService.insert(target);
 			 return new Result(200,"添加成功！");	
@@ -85,13 +93,14 @@ public class OffTargetController {
 		@RequestMapping("/search.do")
 			public ModelAndView search(ModelAndView mav,HttpServletRequest req,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
+				@RequestParam(defaultValue="5")Integer pageSize,String target){
 			    System.out.println("模糊查询-分页！");
-				String assesstarget=req.getParameter("assesstarget");
-				System.out.println("关键字"+assesstarget);
+				System.out.println("关键字"+target);
 				PageInfo<OffAssesstarget> list=null;
-					list=this.offAssessTargetService.selectpageassesstarget(pageNum, pageSize, assesstarget);
+					list=this.offAssessTargetService.selectpageassesstarget(pageNum, pageSize, target);
 					System.out.println("模糊查询"+list);
+				mav.addObject("stat","2");
+				mav.addObject("target",target);
 				mav.addObject("assesstarget",list);
 				mav.setViewName("off/assesstarget");//路径是：/WEB-INF/off/assesstarget.jsp
 				return mav;

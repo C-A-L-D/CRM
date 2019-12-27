@@ -229,32 +229,12 @@
     where MESSID = #{messid,jdbcType=DECIMAL}
   </update>
   
-  <!-- 
-     结果映射
-  <resultMap type="OffMess" id="offmessMap2" autoMapping="true">
-  <id column="MESSID" property="messid"></id>
-  一对一的配置start 
-  <association property="offMessdetail" javaType="OffMessdetail" autoMapping="true">
-  <id column="DETAILID" property="detailid"></id>
-  </association>
-   一对一的配置end 
-   
-  </resultMap>
-  
-  <select id="selectsend" resultMap="offmessMap2" >
-    select * from OFF_MESS 
-LEFT JOIN OFF_MESSDETAIL on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
-LEFT JOIN SYS_USERSINFO on SYS_USERSINFO.SNAME=OFF_MESS.SENDER
-where SYS_USERSINFO."SID"=37 
-and 
-   OFF_MESSDETAIL.MESSSTATE!=0
-</select>
-
- -->
+ 
    <!-- 结果映射 -->
   <resultMap type="OffMess" id="offmessMap1" autoMapping="true">
   <id column="MESSID" property="messid"></id>
   </resultMap>
+  <!-- 1 -->
   <insert id="huifu" parameterType="com.sc.entity.OffMess" >
   <!-- 在插入语句之后获取当前id -->
         <selectKey keyProperty="messid" resultType="java.lang.Long" order="AFTER">

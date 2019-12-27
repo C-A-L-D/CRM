@@ -3,6 +3,7 @@ package com.sc.controller;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -250,8 +251,32 @@ public class SysUsersController {
 	@RequestMapping("/goUpdateUser.do")
 	public ModelAndView goUpdateUserOne(ModelAndView mav, SysUsers sysUsers){
 		SysUsers userOne = sysUsersServiceImpl.selectUsersAndRoleAndUsersInfoOne(sysUsers.getUserId());
-		System.out.println(userOne);
 		List<SysRole> selectAllRole = sysRoleServiceImpl.selectAllRole();
+		ArrayList<SysUsersInfo> list = sysUsersInfoService.selectAllUsersInfoByGsid(userOne.getGongsiid());
+		ArrayList<SysUsers> allUsers = sysUsersServiceImpl.selectAllUsers(userOne.getGongsiid());
+		ArrayList<SysUsersInfo> al = new ArrayList<SysUsersInfo>();
+		for (SysUsersInfo s : list) {
+			System.out.println("list----->"+s);
+			boolean b = false;
+			for (SysUsers aus : allUsers) {
+				System.out.println("all---"+aus);
+				if (s.getSid() != aus.getSid()) {
+					b = false;
+				}
+				else {
+					b = true;
+					break;
+				}
+			}
+			if (b == false) {
+				al.add(s);
+				System.out.println("添加："+s);
+			}
+		}
+		for (int i = 0; i < al.size(); i++) {
+			System.out.println("========----"+al.get(i));
+		}
+		mav.addObject("list", list);
 		mav.addObject("user", userOne);
 		mav.addObject("allRole", selectAllRole);
 		mav.setViewName("sys/updateUser");
@@ -266,9 +291,10 @@ public class SysUsersController {
 	@ResponseBody
 	@RequestMapping("/getNewValue.do")
 	public Result getNewValue(SysUsersInfo sysUsersInfo) {
-		SysUsersInfo selectUsersInfoOne = sysUsersServiceImpl.selectUsersInfoOne(sysUsersInfo.getSid());
+		System.out.println(sysUsersInfo);
+		SysUsersInfo selectUsersInfoOne = sysUsersServiceImpl.selectu(sysUsersInfo.getSname());
 		if (selectUsersInfoOne != null) {
-			return new Result(200, selectUsersInfoOne.getSname());
+			return new Result(200, selectUsersInfoOne.getSid()+"");
 		}
 		return new Result(400, "");
 	}
@@ -322,7 +348,7 @@ public class SysUsersController {
 	@ResponseBody
 	@RequestMapping("/getUsersInfoGSValue.do")
 	public Result getUsersInfoGSValue(SysUsersInfo sysUsersInfo) {
-		SysUsersInfo ui = sysUsersServiceImpl.selectUsersInfoOne(sysUsersInfo.getSid());
+		SysUsersInfo ui = null;/*sysUsersServiceImpl.selectUsersInfoOne(sysUsersInfo.getSid());*/
 		if (ui != null) {
 			SysGongsiinfo gs = sysUsersServiceImpl.selectSysGongsiinfoOne(ui.getGongsiid());
 			return new Result(200, ui.getSname()+","+ui.getGongsiid()+","+gs.getGname());

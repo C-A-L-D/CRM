@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
 <body>
     <div class="layui-card">
-        <div class="layui-card-header"><h2>入库信息</h2></div>
+        <div class="layui-card-header"><h2>修改信息</h2></div>
         <form class="layui-form" action="http://localhost:8080/CRM/storeSinfo/updateSinfo.do" method="post">
                 <div class="layui-form-item">
                     <label class="layui-form-label">采购详情编号</label>
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="layui-form-item">
                     <label class="layui-form-label">是否入库</label>
                     <div class="layui-input-block">
-                        <input type="text" name="pricesold"  placeholder="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="hidden" name="pricesold"  placeholder="${selected.cid}" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="layui-form-item">
                      <div class="layui-input-block">
-                         <button class="layui-btn" lay-submit lay-filter="formDemo">确定入库</button>
+                         <button class="layui-btn" lay-submit lay-filter="formDemo">确定</button>
                          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                      </div>
                 </div>

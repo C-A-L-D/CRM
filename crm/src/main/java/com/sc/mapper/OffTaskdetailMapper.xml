@@ -254,42 +254,47 @@
    <!--  一对一的配置end -->
   </resultMap>
  
-   <select id="selectaccept" resultMap="offtaskMap1"  >
+   <select id="selectaccept" resultMap="offtaskMap1" parameterType="java.lang.Long">
   select *
     from OFF_TASKDETAIL
     LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
-    where OFF_TASKDETAIL.ACCEPTUSERID=37
+    where OFF_TASKDETAIL.ACCEPTUSERID=#{acceptuserid,jdbcType=DECIMAL}
+    ORDER BY OFF_TASKDETAIL.LASTTIME DESC
   </select>
   
-   <select id="selectbytitle" resultMap="offtaskMap1"  >
+   <select id="selectbytitle" resultMap="offtaskMap1" parameterType="map" >
   select *
     from OFF_TASKDETAIL
     LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
-    where OFF_TASKDETAIL.ACCEPTUSERID=37
-    AND OFF_ASSESSTASK.TASKTITLE LIKE concat(concat('%',#{tasktitle,jdbcType=VARCHAR}),'%')
+    where  OFF_ASSESSTASK.TASKTITLE LIKE concat(concat('%',#{tasktitle,jdbcType=VARCHAR}),'%')
+     AND OFF_TASKDETAIL.ACCEPTUSERID=#{cid}
+     ORDER BY OFF_TASKDETAIL.LASTTIME DESC
   </select>
   
-     <select id="selectbycontent" resultMap="offtaskMap1"  >
+     <select id="selectbycontent" resultMap="offtaskMap1"  parameterType="map"  >
   select *
     from OFF_TASKDETAIL
     LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
-    where OFF_TASKDETAIL.ACCEPTUSERID=37
-    AND OFF_ASSESSTASK.TASKDETAIL LIKE concat(concat('%',#{taskdetail,jdbcType=VARCHAR}),'%')
+    where OFF_ASSESSTASK.TASKDETAIL LIKE concat(concat('%',#{taskdetail,jdbcType=VARCHAR}),'%')
+    AND OFF_TASKDETAIL.ACCEPTUSERID=#{cid}
+    ORDER BY OFF_TASKDETAIL.LASTTIME DESC
   </select>
   
-   <select id="selectbyuser" resultMap="offtaskMap1"  >
+   <select id="selectbyuser" resultMap="offtaskMap1"  parameterType="map"  >
   select *
     from OFF_TASKDETAIL
     LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
-    where OFF_TASKDETAIL.ACCEPTUSERID=37
-    AND OFF_ASSESSTASK.TASKPUBLISHER LIKE concat(concat('%',#{taskpublisher,jdbcType=VARCHAR}),'%')
+    where OFF_ASSESSTASK.TASKPUBLISHER LIKE concat(concat('%',#{taskpublisher,jdbcType=VARCHAR}),'%')
+    AND OFF_TASKDETAIL.ACCEPTUSERID=#{cid}
+    ORDER BY OFF_TASKDETAIL.LASTTIME DESC
   </select>
   
-  <select id="selectbytarget" resultMap="offtaskMap1"  >
+  <select id="selectbytarget" resultMap="offtaskMap1"  parameterType="map"  >
   select *
     from OFF_TASKDETAIL
     LEFT JOIN OFF_ASSESSTASK ON OFF_TASKDETAIL.TASKID=OFF_ASSESSTASK.TASKID
-    where OFF_TASKDETAIL.ACCEPTUSERID=37
-    AND OFF_ASSESSTASK.ASSESSTARGET LIKE concat(concat('%',#{assesstarget,jdbcType=VARCHAR}),'%')
+    where OFF_ASSESSTASK.ASSESSTARGET LIKE concat(concat('%',#{assesstarget,jdbcType=VARCHAR}),'%')
+    AND OFF_TASKDETAIL.ACCEPTUSERID=#{cid}
+    ORDER BY OFF_TASKDETAIL.LASTTIME DESC
   </select>
 </mapper>

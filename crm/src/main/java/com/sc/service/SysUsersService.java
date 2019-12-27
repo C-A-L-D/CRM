@@ -1,6 +1,7 @@
 package com.sc.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
@@ -50,8 +51,8 @@ public interface SysUsersService {
 	//修改账户信息
 	public void updateUsers(SysUsers sysUsers);
 	
-	//查询员工ID对应的员工信息
-	public SysUsersInfo selectUsersInfoOne(BigDecimal sid);
+	//查询员工姓名对应的员工信息
+	public SysUsersInfo selectu(String sname);
 	
 	//修改用户角色中间表
 	public void updateUsersRole(SysUsersRole sysUsersRole);
@@ -71,5 +72,5 @@ public interface SysUsersService {
 	//删除ID对应的用户角色表记录
 	public void delUserRole(SysUsers sysUsers);
 	
-	
+	public ArrayList<SysUsers> selectAllUsers(BigDecimal gongsiid);
 }

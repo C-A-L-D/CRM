@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body style="background-image: url('images/error1.jpg');">
-  
+  <body style="background-image: url('images/noPer.jpg'); background-repeat: no-repeat;background-size: cover;">
+    <%--  <%response.setHeader("refresh", "5;url=index.jsp"); %> --%>
   </body>
 </html>

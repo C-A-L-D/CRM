@@ -2,6 +2,7 @@ package com.sc.service.impl;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +45,12 @@ SysUsersInfoService sysUsersInfoService;
 	@Override
 	public List<SysUsersInfo> selectuser(BigDecimal sid) {
 		return this.sysUsersInfoMapper.selectuser(sid);
+	}
+	
+	//办公
+	@Override
+	public List<SysUsersInfo> selectusergc(SysUsersInfo info) {
+		return this.sysUsersInfoMapper.selectusergc(info);
 	}
 
 
@@ -197,5 +204,16 @@ SysUsersInfoService sysUsersInfoService;
         return wb;
     }
 
+
+	@Override
+	public ArrayList<SysUsersInfo> selectAllUsersInfoByGsid(BigDecimal gongsiid) {
+		// TODO Auto-generated method stub
+		SysUsersInfoExample example = new SysUsersInfoExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andGongsiidEqualTo(gongsiid);
+		return (ArrayList<SysUsersInfo>) sysUsersInfoMapper.selectByExample(example);
+	}
+		
+	
 
 }
