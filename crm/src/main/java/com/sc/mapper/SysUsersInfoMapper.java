@@ -9,9 +9,14 @@ import org.apache.ibatis.annotations.Param;
 public interface SysUsersInfoMapper {
 	//查询员工信息-	办公
 	List<SysUsersInfo> selectuser(BigDecimal sid);
+	
+	//查询同公司员工信息-办公
+	List<SysUsersInfo> selectusergc(SysUsersInfo record);
 
 	//查询接受者姓名-办公
 	SysUsersInfo selectu(String sname);
+
+	
 	
     int countByExample(SysUsersInfoExample example);
 
@@ -34,4 +39,5 @@ public interface SysUsersInfoMapper {
     int updateByPrimaryKeySelective(SysUsersInfo record);
 
     int updateByPrimaryKey(SysUsersInfo record);
+    
 }

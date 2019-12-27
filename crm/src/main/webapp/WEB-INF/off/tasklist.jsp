@@ -44,21 +44,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="layui-row">
          <form   class="layui-form layui-col-md12 x-so" method="post" action="offtaskctrl/search.do">
           <div class="layui-input-inline">
-              <select  name="select">           
+              <select name="tiaojian" id="tiaojian">           
                     <option value="">选择查询条件</option>  
-                     <option value="1">任务标题</option> 
-                     <option value="2">任务内容</option>
-                     <option value="3">任务发布人</option>
-                     <option value="4">考核指标</option>
+                     <option value="1" <c:if test="${tiaojian==1}">selected="selected"</c:if>>任务标题</option> 
+                     <option value="2" <c:if test="${tiaojian==2}">selected="selected"</c:if>>任务内容</option>
+                     <option value="3" <c:if test="${tiaojian==3}">selected="selected"</c:if>>任务发布人</option>
+                     <option value="4" <c:if test="${tiaojian==4}">selected="selected"</c:if>>考核指标</option>
                 </select>
               </div>
-          <input type="text" name="search"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
+          <input type="text" name="search" id="search"  value="${search}" placeholder="请输入关键字" autocomplete="off" class="layui-input">
           <button class="layui-btn"  type="submit"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('新建考核任务','offtaskctrl/goadd.do',620,500)"><i class="layui-icon"></i>添加考核任务</button>
+              <button class="layui-btn" onclick="x_admin_show('新建考核任务','offtaskctrl/goadd.do',620,500)"><i class="layui-icon"></i>添加考核任务</button>
         <span class="x-right" style="line-height:40px">共有数据：${tasklist.total }条</span>
       </xblock>
       <table class="layui-table">
@@ -111,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </c:forEach>
         </tbody>
       </table>
-      
+       <c:if test="${stat=='1'}">
         <div class="page">
           <a class="prev" href="offtaskctrl/tasklist.do?pageNum=${tasklist.firstPage}">首页</a>
           <a class="num" href="offtaskctrl/tasklist.do?pageNum=${tasklist.prePage}">&lt;&lt;</a>
@@ -119,8 +118,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <a class="next" href="offtaskctrl/tasklist.do?pageNum=${tasklist.nextPage}">&gt;&gt;</a>
           <a class="prev" href="offtaskctrl/tasklist.do?pageNum=${tasklist.lastPage }">尾页</a>       
          </div>
-
+  </c:if>
+   <c:if test="${stat=='2'}">
+	        <div class="page">
+	         <a class="prev" onclick="aa('${tasklist.firstPage }')" href="javascript:;">首页</a>
+	         <a class="num" onclick="aa('${tasklist.prePage }')" href="javascript:;">&lt;&lt;</a>
+	          <span class="current"> 当前${tasklist.pageNum }/${tasklist.pages }页</span>
+	         <a class="next" onclick="aa('${tasklist.nextPage }')" href="javascript:;">&gt;&gt;</a>
+	          <a class="prev" onclick="aa('${tasklist.lastPage }')" href="javascript:;">尾页</a>
+	        </c:if> 
     <script>
+     function aa(pageNum){
+
+var url="offtaskctrl/search.do?pageNum="+pageNum+"&tiaojian="+$("#tiaojian").val()+"&search="+$("#search").val();
+     window.location.href=url;
+     }
      /*用户-删除*/
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
@@ -128,7 +140,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               location.href="offtaskctrl/delete.do?taskid="+id;
               $(obj).parents("tr").remove();
               layer.msg('已删除!',{icon:1,time:1000});
-             
           });
       }
       layui.use('laydate', function(){

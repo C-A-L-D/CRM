@@ -102,14 +102,14 @@ public class KehuxinxiController {
 	};
 	
 	@RequestMapping("/KehuxinxiHuifu.do")
-	@ResponseBody
-	public Result KehuxinxiHuifu(ModelAndView mav,XiaoshouKehuxinxi xsk){
+	public ModelAndView KehuxinxiHuifu(ModelAndView mav,XiaoshouKehuxinxi xsk){
 		System.out.println("恢复"+xsk.getKname()+"信息");
 		XiaoshouKehuxinxi xsk1=this.kehuxinxiService.getKehuxiangxi(xsk.getKid());
 		xsk1.setKehuzhuangtai("正在合作");
 		xsk1.setLasttime(new Date());
 		kehuxinxiService.updateKehuxinxi(xsk1);
-		return new Result(200,"修改成功！");
+		mav.setViewName("redirect:KehuliushiPage.do");
+		return mav;
 	}
 	
 	@RequestMapping("/deleteKehuxinxi.do")

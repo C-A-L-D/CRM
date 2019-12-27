@@ -123,16 +123,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div>
           
-            <div class="layui-form-item">
+          
+           <div class="layui-form-item">
               <label  class="layui-form-label">
-                                        开户银行：
+           <span class="x-red">*</span>     开户银行：
               </label>
               <div class="layui-input-inline">
-                  <input type="text" value="${u.khbank }" name="khbank" required 
-                  autocomplete="off" class="layui-input">
-              </div>
+              <select id="khbank" name="khbank" class="layui-input" > 
+              <option>中国人民银行</option>             
+              <option>中国工商银行</option>
+               <option>中国农业银行</option>
+               <option>中国建设银行</option>
+               <option>中国邮政储蓄银行</option>
+               <option>中国交通银行</option>          
+              </select>
+               </div>
+           
           </div>
           
+          
+          
+          
+          
+    
               <div class="layui-form-item">
               <label  class="layui-form-label">
                                         银行账号：

@@ -144,7 +144,6 @@ layui.use(['form','layer'], function(){
           
           //监听值的改变
           form.on('select(pp)', function(data){
-            console.log("1234"+data);
             $.ajax({
 		        type: 'post',
 		        url: "getColumnPower.do?cid="+$("#sssid").val()+"&rid="+${RPOne.rid },
@@ -157,10 +156,10 @@ layui.use(['form','layer'], function(){
             	  var list22=list.list2;
             	  var str = "";
             	  if(list11.length!=0){
-            	  	str = str +"<input type='radio' name='' value='' title='全选'>"
+            	  	str = str +"<div class='layui-row'align='right'> <input type='checkbox' name='' id='allchecked' lay-skin='primary' lay-filter='ac' title='全选'></div>"
             	  }
             	  for(var i=0;i<list11.length;i++){
-            	      str=str+"<input type='checkbox' value='"+list11[i].pid+"'"+" name='pname' title='"+list11[i].pname+"' ";
+            	      str=str+"<input type='checkbox' lay-filter='pp' class='pp' value='"+list11[i].pid+"'"+" name='pname' title='"+list11[i].pname+"'";
             	     for(var j=0;j<list22.length;j++){
 	            	  	if(list22[j].pid==list11[i].pid){
 							 str=str+" checked='checked' ";
@@ -169,21 +168,8 @@ layui.use(['form','layer'], function(){
 	            	  }  
             	      str=str+">";
             	  }
-            	   console.log(str);
-            	  
-            	  
-            	  /* for(var i=0;i<list11.length;i++){
-            	     $("#Plist").append("<input type='checkbox' value='"+list11[i].pid+"'"+" name='pname' title="+list11[i].pname);
-            	     for(var j=0;j<list22.length;j++){
-	            	  	if(list22[j].pid==list11[i].pid){
-	            	  		$('#Plist').append("checked='checked'");
-	            	  	}
-	            	  }  
-            	     $('#Plist').append(">");
-            	  } */
-            	  
- 
-            	  
+            	   console.log("打印字符串"+str);
+	  
             	  console.log($("#Plist").html(str));	
                   form.render('checkbox');
 		        }
@@ -191,10 +177,86 @@ layui.use(['form','layer'], function(){
 		    return false;
           });
           
-          
+          //全选和全不选
+           form.on('checkbox(ac)', function(data){
+           		var a = data.elem.checked;
+           		if (a == true) {
+	                $('input[name="pname"]').prop('checked', true);
+	               	form.render('checkbox');
+	               	var str = submitCheckboxChecked();
+	           		$.ajax({
+				        type: 'post',
+				        url: "updatePowers.do?rid="+${RPOne.rid }+"&str="+str+"&cid="+$('#sssid').val(),
+				        data: data.field,
+				        success: function (res) {
+				            if (res.status == 200) {
+				                
+				            } else {
+				               
+				            }
+				        }
+				    });
+	            } else {
+	                $('input[name="pname"]').prop('checked', false);
+	                form.render('checkbox');
+	                var str = submitCheckboxChecked();
+	           		$.ajax({
+				        type: 'post',
+				        url: "updatePowers.do?rid="+${RPOne.rid }+"&str="+str+"&cid="+$('#sssid').val(),
+				        data: data.field,
+				        success: function (res) {
+				            if (res.status == 200) {
+				                
+				               
+				            } else {
+				               
+				            }
+				        }
+				    });
+	            }
+           });
+           
+           
+           
+           //点击某一个复选框监听
+			$(document).on("click","#Plist",function(data){
+			    var str = submitCheckboxChecked();
+           		$.ajax({
+		        type: 'post',
+		        url: "updatePowers.do?rid="+${RPOne.rid }+"&str="+str+"&cid="+$('#sssid').val(),
+		        data: data.field,
+		        success: function (res) {
+		            if (res.status == 200) {
+		                
+		               
+		            } else {
+		               
+		            }
+		        }
+		    });
+		    return false;
+			});
+           
+			//自定义查询哪些已选中
+           window.submitCheckboxChecked = function (){
+           		 var p = $('input[name="pname"]');
+           		 var arr_box = []
+           		 $("input:checkbox[name='pname']:checked").each(function() { // 遍历name=standard的多选框
+					  var pid = $(this).val();//权限ID
+					  var pname = $(this).attr('title');//权限名
+					  arr_box.push(pid)
+					  console.log(pid+"-------"+pname)
+				 });
+           		 
+    			 console.log(arr_box)
+    			 return arr_box;
+           }
         });
+     
   </script>
+<script type="text/javascript">
 
+</script>
 
 <style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}</style>
 </body>

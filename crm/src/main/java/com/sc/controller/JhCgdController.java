@@ -17,10 +17,12 @@ import com.sc.entity.JhCgdxq;
 import com.sc.entity.JhGysxx;
 import com.sc.entity.JhXbh;
 import com.sc.entity.Result;
+import com.sc.entity.StoreGinfo;
 import com.sc.service.JhCgdService;
 import com.sc.service.JhCgdxqService;
 import com.sc.service.JhGysxxService;
 import com.sc.service.JhXbhService;
+import com.sc.service.StoreGinfoService;
 @RequestMapping("/cgdctrl")
 @Controller
 public class JhCgdController {
@@ -33,6 +35,8 @@ public class JhCgdController {
 	JhGysxxService jhGysxxService;
 	@Autowired
 	JhXbhService jhXbhService;
+	@Autowired
+	StoreGinfoService storeGinfoService;
 	@RequestMapping("/cgdlistpage.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
@@ -43,7 +47,7 @@ public class JhCgdController {
 			
 		//查询list集合-分页     ${page.list}
 		mav.addObject("p", jhCgdService.selectpage(pageNum, pageSize,jc));
-		
+		mav.addObject("a", jc);
 		mav.setViewName("jh/cgdlistpage");// 路径是：/WEB-INF/jh/gysxxlistpage.jsp
 		return mav;
 	}
@@ -72,9 +76,11 @@ public class JhCgdController {
 			jc.setLtime(new Date());
 			jc.setJhtime(jhXbh.getJhTime());
 			jc.setCgTime(new Date());
-			jhCgdService.add(jc);	
+			jhCgdService.add(jc);			
+			StoreGinfo storeGinfo = storeGinfoService.getsgi(new BigDecimal(jhXbh.getCpId()));
+			System.out.println(storeGinfo);
 			System.out.println("开始添加采购单"+jc);			
-			List<JhCgdxq> list = jhCgdxqService.getall(jc.getCgdId());
+			List<JhCgdxq> list = jhCgdxqService.getall(jc.getCgdId());			
 			System.out.println(list);
 			if(list!=null){
 				if(list.size()==0){
@@ -87,6 +93,8 @@ public class JhCgdController {
 					jhCgdxq.setOperator(jhXbh.getOperator());
 					jhCgdxq.setRemark(jhXbh.getRemark());
 					jhCgdxq.setLtime(new Date());
+					jhCgdxq.setIsrk("未入库");
+					jhCgdxq.setCpPrice(storeGinfo.getPricesold().longValue());
 					jhCgdxqService.add(jhCgdxq);
 				}
 				   				

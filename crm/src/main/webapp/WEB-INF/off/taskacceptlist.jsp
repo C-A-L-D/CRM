@@ -44,20 +44,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="layui-row">
          <form   class="layui-form layui-col-md12 x-so" method="post" action="offtaskctrl/searchaccept.do">
           <div class="layui-input-inline">
-              <select  name="select1">           
+              <select  name="tiaojian" id="tiaojian">           
                     <option value="">选择查询条件</option>  
-                     <option value="1">任务标题</option> 
-                     <option value="2">任务内容</option>
-                     <option value="3">任务发布人</option>
-                     <option value="4">考核指标</option>
+                     <option value="1" <c:if test="${tiaojian==1}">selected="selected"</c:if>>任务标题</option> 
+                     <option value="2" <c:if test="${tiaojian==2}">selected="selected"</c:if>>任务内容</option>
+                     <option value="3" <c:if test="${tiaojian==3}">selected="selected"</c:if>>任务发布人</option>
+                     <option value="4" <c:if test="${tiaojian==4}">selected="selected"</c:if>>考核指标</option>
                 </select>
               </div>
-          <input type="text" name="search1"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
+          <input type="text" name="search" id="search"  value="${search}"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
           <button class="layui-btn"  type="submit"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
          <span class="x-right" style="line-height:40px">共有数据：${taskacceptlist.total }条</span>
       </xblock>
       <table class="layui-table">
@@ -102,7 +101,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </td>
             <td class="td-status">
 		   <c:if test="${u.isfinish=='1' }">
-           <span class="layui-btn layui-btn-normal layui-btn-mini" style="background-color:#FF0000">未完成</span>
+           <span class="layui-btn  layui-btn-danger" >未完成</span>
            </c:if>
            <c:if test="${u.isfinish=='2' }">
            <span class="layui-btn layui-btn-normal layui-btn-mini"  style="background-color:rgb(13,195,22) ">已完成</span>
@@ -114,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <i class="icon iconfont">&#xe71d;</i>
               </a>
                </c:if>
-                <c:if test="${u.state=='2' }">
+                <c:if test="${u.state=='2'&&u.isfinish=='1' }">
                                                任务已超时
                 </c:if>
                   <c:if test="${u.isfinish=='2' }">
@@ -125,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </c:forEach>
         </tbody>
       </table>
-      
+       <c:if test="${stat=='3'}">
         <div class="page">
           <a class="prev" href="offtaskctrl/taskacceptlist.do?pageNum=${taskacceptlist.firstPage}">首页</a>
           <a class="num" href="offtaskctrl/taskacceptlist.do?pageNum=${taskacceptlist.prePage}">&lt;&lt;</a>
@@ -133,8 +132,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <a class="next" href="offtaskctrl/taskacceptlist.do?pageNum=${taskacceptlist.nextPage}">&gt;&gt;</a>
           <a class="prev" href="offtaskctrl/taskacceptlist.do?pageNum=${taskacceptlist.lastPage }">尾页</a>       
          </div>
-
+ </c:if>
+  <c:if test="${stat=='4'}">
+   <div class="page">
+	        <div class="page">
+	         <a class="prev" onclick="aa('${taskacceptlist.firstPage }')" href="javascript:;">首页</a>
+	         <a class="num" onclick="aa('${taskacceptlist.prePage }')" href="javascript:;">&lt;&lt;</a>
+	          <span class="current"> 当前${taskacceptlist.pageNum }/${taskacceptlist.pages }页</span>
+	         <a class="next" onclick="aa('${taskacceptlist.nextPage }')" href="javascript:;">&gt;&gt;</a>
+	          <a class="prev" onclick="aa('${taskacceptlist.lastPage }')" href="javascript:;">尾页</a>
+	      </div>
+	       </c:if>    
     <script>
+    function aa(pageNum){
+var url="offtaskctrl/searchaccept.do?pageNum="+pageNum+"&tiaojian="+$("#tiaojian").val()+"&search="+$("#search").val();
+     window.location.href=url;
+     }
      /*用户-提交*/
       function member_del(obj,id){
           layer.confirm('确认提交？',function(index){

@@ -10,6 +10,10 @@
 	 </select>
 	
 
+<select id="selectAllUsers" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+	select * from SYS_USERS where GONGSIID = #{gongsiid,jdbcType=DECIMAL} 
+</select>
+
 	<resultMap type="SysUsers" id="sysAllUsersMapper" autoMapping="true">
       <id column="USER_ID" property="userId"/>
       <association property="sysRole" javaType="SysRole" autoMapping="true">

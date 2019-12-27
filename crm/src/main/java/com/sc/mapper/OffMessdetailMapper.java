@@ -2,33 +2,30 @@ package com.sc.mapper;
 
 import com.sc.entity.OffMessdetail;
 import com.sc.entity.OffMessdetailExample;
-import com.sc.entity.SysUsersInfo;
-
-import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OffMessdetailMapper {
-	//查询短消息-已接收
-	public List<OffMessdetail> select();
+	//查询短消息-已接收   1
+	public List<OffMessdetail> select(OffMessdetail detail);
 	
-	//更改短消息状态
+	//更改短消息状态   1
 	int updatestate(Long detailid);
 	
-	//删除短信
+	//删除短信  1
     int deleteByPrimaryKey(Long detailid);
 	
-    //查看短消息详情
+    //查看短消息详情   1
     public OffMessdetail showdetail(Long detailid);
     
-    //回复短消息
+    //回复短消息  1
     int  huifuone(OffMessdetail detail);
     
-    //模糊查询-标题
-    public List<OffMessdetail> selectbytitle(String title);
+    //模糊查询-标题   1
+    public List<OffMessdetail> selectbytitle(@Param("title")String title,@Param("uid")Long uid);
     
-    //模糊查询-内容
-    public List<OffMessdetail> selectbycontent(String content);
+    //模糊查询-内容  1
+    public List<OffMessdetail> selectbycontent(@Param("content")String content,@Param("uid")Long uid);
     
     int countByExample(OffMessdetailExample example);
 
@@ -49,6 +46,7 @@ public interface OffMessdetailMapper {
     int updateByExample(@Param("record") OffMessdetail record, @Param("example") OffMessdetailExample example);
 
     int updateByPrimaryKeySelective(OffMessdetail record);
-
+    
+    //1
     int updateByPrimaryKey(OffMessdetail record);
 }

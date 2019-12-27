@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <head>
     <meta charset="UTF-8">
-    <title>用户管理</title>
+    <title>账户管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -85,9 +85,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td>${all.sysUsersInfo.sdescribe }</td>
             <td><fmt:formatDate value="${all.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'${all.userId }')" href="javascript:;"  title="${all.ustate=='on' ? '停用':'启用' }">
-                <i class="layui-icon">${all.ustate=='on' ? '&#xe601;' : '&#xe62f;' }</i>
-              </a>
+           	  <c:choose>
+           	  	<c:when test="${nowuser.userId == all.userId || all.sysRole.rname == '超级管理员' }">
+           	  	</c:when>
+           	  	<c:otherwise>
+           	  		<a onclick="member_stop(this,'${all.userId }')" href="javascript:;"  title="${all.ustate=='on' ? '停用':'启用' }">
+                		<i class="layui-icon">${all.ustate=='on' ? '&#xe601;' : '&#xe62f;' }</i>
+              		</a>
+           	  	</c:otherwise>
+           	  </c:choose>
               <a title="编辑"  onclick="x_admin_show('修改账户','goUpdateUser.do?userId='+${all.userId })" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>

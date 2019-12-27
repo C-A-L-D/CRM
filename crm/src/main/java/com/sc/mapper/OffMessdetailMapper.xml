@@ -239,22 +239,25 @@
   </association>
    <!--  一对一的配置end -->
   </resultMap>
-
-  <select id="select" resultMap="offmessMap1" >
+  
+<!-- 1 -->
+  <select id="select" resultMap="offmessMap1" parameterType="com.sc.entity.OffMessdetail" >
    select * from OFF_MESSDETAIL 
 LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
-LEFT JOIN SYS_USERSINFO on SYS_USERSINFO."SID"=OFF_MESSDETAIL.RECEIVERID
-where SYS_USERSINFO."SID"=37
-and OFF_MESSDETAIL.MESSSTATE!=0
-AND SYS_USERSINFO.GONGSIID=OFF_MESS.COMPANYID
-AND OFF_MESS.COMPANYID=OFF_MESSDETAIL.COMPANYID
+where OFF_MESSDETAIL.RECEIVERID=#{receiverid,jdbcType=DECIMAL}
+AND OFF_MESSDETAIL.COMPANYID=#{companyid,jdbcType=DECIMAL}
+AND OFF_MESSDETAIL.MESSSTATE!=0
+ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
+
+<!-- 1 -->
 <select id="showdetail" resultMap="offmessMap1" parameterType="java.lang.Long">
     select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
     where  OFF_MESSDETAIL.MESSSTATE!=0 
     and OFF_MESSDETAIL.DETAILID=#{detailid,jdbcType=DECIMAL}
+    ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
- 
+ <!-- 1 -->
   <insert id="huifuone" parameterType="com.sc.entity.OffMessdetail" >
     insert into OFF_MESSDETAIL (DETAILID, MESSID, RECEIVERID, 
       MESSSTATE, COMPANYID, LASTTIME
@@ -268,24 +271,24 @@ AND OFF_MESS.COMPANYID=OFF_MESSDETAIL.COMPANYID
  UPDATE OFF_MESSDETAIL SET OFF_MESSDETAIL.MESSSTATE=2 WHERE OFF_MESSDETAIL.DETAILID=#{detailid,jdbcType=DECIMAL}
   </delete>
   
-  <select id="selectbytitle" resultMap="offmessMap1" parameterType="java.lang.String">
-     select * from OFF_MESSDETAIL 
+  <!-- 1 -->
+  <select id="selectbytitle" resultMap="offmessMap1" parameterType="map">
+   select * from OFF_MESSDETAIL 
 LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
-LEFT JOIN SYS_USERSINFO on SYS_USERSINFO."SID"=OFF_MESSDETAIL.RECEIVERID
-where SYS_USERSINFO."SID"=37
-and 
-   OFF_MESSDETAIL.MESSSTATE!=0
-and OFF_MESS.TITLE LIKE concat(concat('%',#{title,jdbcType=VARCHAR}),'%')
+where OFF_MESS.TITLE LIKE concat(concat('%',#{title,jdbcType=VARCHAR}),'%') 
+ and  OFF_MESSDETAIL.MESSSTATE!=0
+and OFF_MESSDETAIL.RECEIVERID=#{uid,jdbcType=DECIMAL}
+ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
-
-  <select id="selectbycontent" resultMap="offmessMap1" parameterType="java.lang.String">
+<!-- 1 -->
+  <select id="selectbycontent" resultMap="offmessMap1" parameterType="map">
      select * from OFF_MESSDETAIL 
 LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
-LEFT JOIN SYS_USERSINFO on SYS_USERSINFO."SID"=OFF_MESSDETAIL.RECEIVERID
-where SYS_USERSINFO."SID"=37
+where  OFF_MESS.CONTENT LIKE concat(concat('%',#{content,jdbcType=VARCHAR}),'%')
 and 
    OFF_MESSDETAIL.MESSSTATE!=0
-and OFF_MESS.CONTENT LIKE concat(concat('%',#{content,jdbcType=VARCHAR}),'%')
+and OFF_MESSDETAIL.RECEIVERID=#{uid,jdbcType=DECIMAL}
+ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
 
 </mapper>

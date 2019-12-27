@@ -4,14 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.SysPowerRole;
 import com.sc.entity.SysPowercolumn;
 import com.sc.entity.SysPowerinfo;
 import com.sc.entity.SysRole;
-import com.sc.mapper.SysPowerinfoMapper;
-import com.sc.mapper.SysRoleMapper;
 
 public interface SysRoleService {
 
@@ -27,6 +24,10 @@ public interface SysRoleService {
 	
 	public void delRole(BigDecimal rid);
 	
+	public void delPowerColumn(BigDecimal roleId);
+	
+	public void insertPowerColumn(SysPowerRole sysPowerRole);
+	
 	//查询全部分栏
 	public ArrayList<SysPowercolumn> selectAllColumn();
 	
@@ -34,4 +35,8 @@ public interface SysRoleService {
 	public ArrayList<SysPowerinfo> selectAllPower(BigDecimal pcolumnId);
 	
 	public ArrayList<SysPowerinfo> selectPowerChecked(BigDecimal rid);
+	
+	public ArrayList<SysPowerRole> selectPower(BigDecimal roleId);
+	
+	public ArrayList<SysPowerRole> selectRP(BigDecimal roleId, BigDecimal pcolumnId);
 }

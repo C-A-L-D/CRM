@@ -4,14 +4,13 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.OffAssesstarget;
-import com.sc.entity.OffMessdetail;
 
 public interface OffAssessTargetService {
 	//查询指标
-		public List<OffAssesstarget> select();
+		public List<OffAssesstarget> select(Long cid);
    
-	//分页查询
-        public PageInfo<OffAssesstarget> selectpage(Integer pageNum,Integer pageSize); 
+	//分页查询指标
+        public PageInfo<OffAssesstarget> selectpage(Integer pageNum,Integer pageSize,Long cid); 
    
     //删除指标
  	    public void deleteTarget(OffAssesstarget target);

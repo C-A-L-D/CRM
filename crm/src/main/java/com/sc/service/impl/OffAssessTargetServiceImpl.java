@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.OffAssesstarget;
-import com.sc.entity.OffMessdetail;
 import com.sc.mapper.OffAssesstargetMapper;
 import com.sc.service.OffAssessTargetService;
 @Service
@@ -19,17 +18,17 @@ public class OffAssessTargetServiceImpl implements OffAssessTargetService {
 	
    //查询指标
 	@Override
-	public List<OffAssesstarget> select() {
-		return this.offAssesstargetMapper.select();
+	public List<OffAssesstarget> select(Long cid) {
+		return this.offAssesstargetMapper.select(cid);
 	}
 	
-	//分页查询
+	//分页查询指标
 	@Override
-	public PageInfo<OffAssesstarget> selectpage(Integer pageNum, Integer pageSize) {
+	public PageInfo<OffAssesstarget> selectpage(Integer pageNum, Integer pageSize,Long cid) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 	    //查询当前页的集合数据	
-		List<OffAssesstarget> list = this.offAssesstargetMapper.select();
+		List<OffAssesstarget> list = this.offAssesstargetMapper.select(cid);
 	   System.out.println("11"+list);
 		//封装成pageinfo对象
 	   PageInfo<OffAssesstarget> page=new PageInfo<OffAssesstarget>(list);

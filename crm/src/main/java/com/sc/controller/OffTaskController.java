@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.sc.entity.OffAssesstarget;
 import com.sc.entity.OffAssesstask;
 import com.sc.entity.OffTaskdetail;
 import com.sc.entity.Result;
+import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersInfo;
 import com.sc.service.OffAssessTargetService;
 import com.sc.service.OffAssessTaskService;
@@ -41,14 +43,18 @@ public class OffTaskController {
 		@RequestMapping("/tasklist.do")
 		public ModelAndView listpage(ModelAndView mav,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
-			System.out.println("查看任务！");
+				@RequestParam(defaultValue="5")Integer pageSize,HttpSession session){
+			System.out.println("查看当前公司所有任务！");
+			//---需要获取公司id
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
+			Long cid=s.getGongsiid().longValue();
 			//查询list集合-分页    ${page.list}
-			 PageInfo<OffAssesstask> page=offAssessTaskService.selectpage(pageNum,pageSize);
+			 PageInfo<OffAssesstask> page=offAssessTaskService.selectpage(pageNum,pageSize,cid);
 			 for (OffAssesstask task : page.getList()) {
 				 List<OffTaskdetail> l=this.offTaskDetailService.taskdetail(task.getTaskid());
 				 task.setState(l.get(0).getState());			
 			}
+			mav.addObject("stat","1");
 			mav.addObject("tasklist", page);
 			mav.setViewName("off/tasklist");//路径是：/WEB-INF/off/tasklist.jsp
 			return mav;
@@ -63,19 +69,20 @@ public class OffTaskController {
 			return mav;
 	     }
 		
-		//显示任务详情
+		//显示任务详情  
 		@RequestMapping("/taskdetail.do")
 		public ModelAndView showdetail(ModelAndView mav,Long taskid){
 			System.out.println("查看任务详情！"+taskid);
 			//查询任务详情
 			OffAssesstask task=this.offAssessTaskService.selectbyid(taskid);
+			
 			List<OffTaskdetail> list=this.offTaskDetailService.taskdetail(taskid);
 			for (OffTaskdetail offTaskdetail : list) {
 				BigDecimal b=new BigDecimal(offTaskdetail.getAcceptuserid());
 			   SysUsersInfo s=this.offAssessTaskService.selectbyidu(b);
+			   System.out.println("用户"+s);
 				offTaskdetail.setUname(s.getSname());
 			}
-			
 			System.out.println("任务详情"+list);	
 			System.out.println("任务对象"+task);	
 			mav.addObject("taskdetail",list);
@@ -84,14 +91,18 @@ public class OffTaskController {
 			return mav;
 		  }
 		
-		 //新建任务
+		 //新建任务-同公司
 		@RequestMapping("/goadd.do")
-		public ModelAndView goadd(ModelAndView mav){
+		public ModelAndView goadd(ModelAndView mav,HttpSession session){
 			 System.out.println("新建任务");
-			List<OffAssesstarget> list=this.offAssessTargetService.select();
+			//---需要获取用户id和公司id---start
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
+             SysUsersInfo info=new SysUsersInfo();
+             info.setSid(s.getSid());
+             info.setGongsiid(s.getGongsiid());
+			List<OffAssesstarget> list=this.offAssessTargetService.select(s.getGongsiid().longValue());
 			//查询员工信息-用于发送短信 
-			BigDecimal c = new BigDecimal(37);
-			List<SysUsersInfo> listuser=this.sysUsersInfoService.selectuser(c);
+			List<SysUsersInfo> listuser=this.sysUsersInfoService.selectusergc(info);
 			System.out.println("被考核人"+listuser);
 			mav.addObject("sysusers", listuser);
 			mav.addObject("targetlist", list);
@@ -103,13 +114,15 @@ public class OffTaskController {
 		//发布任务
 		@RequestMapping("/add.do")
 		 @ResponseBody
-			public Result add(ModelAndView mav,String uids,OffAssesstask task){
+			public Result add(ModelAndView mav,String uids,OffAssesstask task,HttpSession session){
 			System.out.println("发布任务");
 			System.out.println("获取的任务信息"+task);
 			System.out.println("获取的用户ID"+uids);
-			task.setTaskpublisher("彭俊");
-			Long l=new Long("1");
-			task.setCompanyid(l);
+			//---需要获取用户id和公司id---start
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
+			SysUsersInfo userinfo=this.sysUsersInfoService.get(s.getSid());
+			task.setTaskpublisher(userinfo.getSname());
+			task.setCompanyid(userinfo.getGongsiid().longValue());
 			task.setLasttime(new Date());
 			task.setState("1");
 			this.offAssessTaskService.insert(task);
@@ -118,13 +131,13 @@ public class OffTaskController {
 				uids+=",";
 				String[] split = uids.split(",");
 			    for (String u : split) {
-				   Long receiverid = new Long(u);
 				  OffTaskdetail detail=new OffTaskdetail();
 				  detail.setTaskid(task.getTaskid());
-				  detail.setAcceptuserid(receiverid);
+				  BigDecimal b=new BigDecimal(u);
+					SysUsersInfo userinfo2=this.sysUsersInfoService.get(b);
+				  detail.setAcceptuserid(userinfo2.getSid().longValue());
 				  detail.setIsfinish("1");
-				  Long lc=new Long("1");
-				  detail.setCompanyid(lc);
+				  detail.setCompanyid(userinfo2.getGongsiid().longValue());
 			      detail.setLasttime(new Date());
 			      detail.setState("1");
 					this.offTaskDetailService.insert(detail);
@@ -137,37 +150,54 @@ public class OffTaskController {
 		@RequestMapping("/search.do")
 		public ModelAndView search(ModelAndView mav,HttpServletRequest req,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
+				@RequestParam(defaultValue="5")Integer pageSize,String tiaojian,String search,HttpSession session){
 			System.out.println("模糊查询-分页！");
-			String i=req.getParameter("select");
-			System.out.println("查询条件"+i);
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
+			System.out.println("查询条件"+tiaojian);
 			//关键字
-			String search=req.getParameter("search");
 			System.out.println("关键字"+search);
 			PageInfo<OffAssesstask> list=null;
 			//任务标题
-			if(i.equals("1")){
-				list=this.offAssessTaskService.selectpagetitle(pageNum, pageSize, search);
+			if(tiaojian.equals("1")){
+				list=this.offAssessTaskService.selectpagetitle(pageNum, pageSize, search,s.getGongsiid().longValue());
+				 for (OffAssesstask task : list.getList()) {
+					 List<OffTaskdetail> l=this.offTaskDetailService.taskdetail(task.getTaskid());
+					 task.setState(l.get(0).getState());			
+				}
 				System.out.println("模糊查询"+list);
 			}
-			
 			//任务内容
-			if(i.equals("2")){
-				list=this.offAssessTaskService.selectpagecontent(pageNum, pageSize, search);
+			if(tiaojian.equals("2")){
+				list=this.offAssessTaskService.selectpagecontent(pageNum, pageSize, search,s.getGongsiid().longValue());
+				for (OffAssesstask task : list.getList()) {
+					 List<OffTaskdetail> l=this.offTaskDetailService.taskdetail(task.getTaskid());
+					 task.setState(l.get(0).getState());			
+				}
 				System.out.println("模糊查询"+list);
 			}
 			//任务发布人
-			if(i.equals("3")){
-				list=this.offAssessTaskService.selectpageu(pageNum, pageSize, search);
+			if(tiaojian.equals("3")){
+				list=this.offAssessTaskService.selectpageu(pageNum, pageSize, search,s.getGongsiid().longValue());
+				for (OffAssesstask task : list.getList()) {
+					 List<OffTaskdetail> l=this.offTaskDetailService.taskdetail(task.getTaskid());
+					 task.setState(l.get(0).getState());			
+				}
 				System.out.println("模糊查询"+list);
 			}
 			//考核指标
-			if(i.equals("4")){
-				list=this.offAssessTaskService.selectpagetarget(pageNum, pageSize, search);
+			if(tiaojian.equals("4")){
+				list=this.offAssessTaskService.selectpagetarget(pageNum, pageSize, search,s.getGongsiid().longValue());
+				for (OffAssesstask task : list.getList()) {
+					 List<OffTaskdetail> l=this.offTaskDetailService.taskdetail(task.getTaskid());
+					 task.setState(l.get(0).getState());			
+				}
 				System.out.println("模糊查询"+list);
 			}
+			mav.addObject("stat","2");
+			mav.addObject("tiaojian", tiaojian);
+			mav.addObject("search", search);
 			mav.addObject("tasklist", list);
-			mav.setViewName("off/tasklist");//路径是：/WEB-INF/off/offmesslist.jsp
+			mav.setViewName("off/tasklist");//路径是：/WEB-INF/off/tasklist.jsp
 			return mav;
 		}
 		
@@ -175,10 +205,12 @@ public class OffTaskController {
 		@RequestMapping("/taskacceptlist.do")
 		public ModelAndView listpageaccept(ModelAndView mav,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
+				@RequestParam(defaultValue="5")Integer pageSize, HttpSession session){
 			System.out.println("查看已接收任务！");
+			SysUsers s=(SysUsers)session.getAttribute("nowuser");
 			//查询list集合-分页    ${page.list}
-			PageInfo<OffTaskdetail> page=this.offTaskDetailService.selectpageaccept(pageNum, pageSize);
+			PageInfo<OffTaskdetail> page=this.offTaskDetailService.selectpageaccept(pageNum, pageSize,s.getSid().longValue());
+			mav.addObject("stat","3");
 			mav.addObject("taskacceptlist", page);
 			mav.setViewName("off/taskacceptlist");//路径是：/WEB-INF/off/taskacceptlist.jsp
 			return mav;
@@ -195,38 +227,40 @@ public class OffTaskController {
 			return mav;
     }
 		
-		//模糊查询-接收任务
+		//模糊查询-接收任务  
 		@RequestMapping("/searchaccept.do")
 		public ModelAndView searchaccept(ModelAndView mav,HttpServletRequest req,
 				@RequestParam(defaultValue="1")Integer pageNum,
-				@RequestParam(defaultValue="5")Integer pageSize){
+				@RequestParam(defaultValue="5")Integer pageSize,String tiaojian,String search,HttpSession session){
 				System.out.println("模糊查询-分页！");
-				String i=req.getParameter("select1");
-				System.out.println("查询条件"+i);
+				SysUsers s=(SysUsers)session.getAttribute("nowuser");
+				System.out.println("查询条件"+tiaojian);
 				//关键字
-				String search=req.getParameter("search1");
 				System.out.println("关键字"+search);
 				PageInfo<OffTaskdetail> list=null;
 				//任务标题
-				if(i.equals("1")){
-					list=this.offTaskDetailService.selectpagetitle(pageNum, pageSize, search);
+				if(tiaojian.equals("1")){
+					list=this.offTaskDetailService.selectpagetitle(pageNum, pageSize, search,s.getSid().longValue());
 					System.out.println("模糊查询"+list);
 				}
 				//任务内容
-				if(i.equals("2")){
-					list=this.offTaskDetailService.selectpagecontent(pageNum, pageSize, search);
+				if(tiaojian.equals("2")){
+					list=this.offTaskDetailService.selectpagecontent(pageNum, pageSize, search,s.getSid().longValue());
 					System.out.println("模糊查询"+list);
 					}
 				//任务发布人
-				if(i.equals("3")){
-					list=this.offTaskDetailService.selectpageu(pageNum, pageSize, search);
+				if(tiaojian.equals("3")){
+					list=this.offTaskDetailService.selectpageu(pageNum, pageSize, search,s.getSid().longValue());
 					System.out.println("模糊查询"+list);
 				}
 				//考核指标
-				if(i.equals("4")){
-					list=this.offTaskDetailService.selectpagetarget(pageNum, pageSize, search);
+				if(tiaojian.equals("4")){
+					list=this.offTaskDetailService.selectpagetarget(pageNum, pageSize, search,s.getSid().longValue());
 					System.out.println("模糊查询"+list);
 				}
+				mav.addObject("stat","4");
+				mav.addObject("tiaojian", tiaojian);
+				mav.addObject("search", search);
 				mav.addObject("taskacceptlist", list);
 				mav.setViewName("off/taskacceptlist");//路径是：/WEB-INF/off/taskacceptlist.jsp
 				return mav;

@@ -9,7 +9,7 @@ import com.sc.entity.StoreGinfo;
 public interface JhXbhService {
 
 	
-	 public PageInfo<JhXbh> selectpage(Integer pageNum,Integer pageSize);
+	 public PageInfo<JhXbh> selectpage(Integer pageNum,Integer pageSize,JhXbh jc);
 	 
 	 public void add(JhXbh jx);
 	 

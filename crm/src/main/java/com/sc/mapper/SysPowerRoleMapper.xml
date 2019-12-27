@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sc.mapper.SysPowerRoleMapper" >
+<resultMap type="SysPowerRole" id="sysRPMapper" autoMapping="true">
+      <id column="ID" property="id"/>
+      <collection property="sysPowerinfo" ofType="SysPowerinfo" autoMapping="true">
+          <id column="PID" property="pid"/>
+      </collection>
+   </resultMap>
+	<select id="selectRP" resultMap="sysRPMapper">
+		SELECT * FROM SYS_POWER_ROLE pr
+		LEFT JOIN SYS_POWERINFO p
+		ON pr.PID=p.PID
+		WHERE pr.ROLE_ID=#{roleId } AND p.PCOLUMN_ID=#{pcolumnId }
+   </select>
+
+	<delete id="delPow" parameterType="java.math.BigDecimal" >
+	    delete from SYS_POWER_ROLE
+	    where PID = #{pid,jdbcType=DECIMAL}
+ 	 </delete>
+
+
   <resultMap id="BaseResultMap" type="com.sc.entity.SysPowerRole" >
     <constructor >
       <idArg column="ID" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
