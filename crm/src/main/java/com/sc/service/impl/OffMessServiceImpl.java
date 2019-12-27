@@ -107,11 +107,13 @@ public class OffMessServiceImpl implements OffMessService {
 			PageHelper.startPage(pageNum, pageSize);
 		    //查询当前页的集合数据	
 			OffMessExample e=new OffMessExample();
+			e.setOrderByClause("LASTTIME desc");
 	        Criteria c=e.createCriteria();
 	        if(name!=null){
 	        	c.andSenderEqualTo(name);
 	        }
 	        List<OffMess> list =  this.offMessMapper.selectByExample(e);
+	  
 			//封装成pageinfo对象
 			PageInfo<OffMess> page=new PageInfo<OffMess>(list);
 			System.out.println("11"+page);

@@ -283,6 +283,7 @@
  
   <select id="select" resultMap="BaseResultMap"  parameterType="java.lang.Long"  >
    select * from  OFF_ASSESSTASK WHERE  COMPANYID=#{companyid,jdbcType=DECIMAL}
+   ORDER BY OFF_ASSESSTASK.LASTTIME DESC
 </select>
  <update id="updatestate" parameterType="com.sc.entity.OffAssesstask" >
 UPDATE 

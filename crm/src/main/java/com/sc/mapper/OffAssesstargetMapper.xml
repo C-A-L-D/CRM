@@ -213,10 +213,12 @@
   </update>
   <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Long" >
   SELECT * FROM OFF_ASSESSTARGET WHERE  COMPANYID = #{companyid,jdbcType=DECIMAL}
+  ORDER BY OFF_ASSESSTARGET.LASTTIME DESC
   </select>
   
   <select id="selectbyassesstarget" resultMap="BaseResultMap" parameterType="java.lang.String">
      select * from OFF_ASSESSTARGET 
 where ASSESSTARGET LIKE concat(concat('%',#{assesstarget,jdbcType=VARCHAR}),'%')
+ORDER BY OFF_ASSESSTARGET.LASTTIME DESC
 </select>
 </mapper>

@@ -247,6 +247,7 @@ LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID
 where OFF_MESSDETAIL.RECEIVERID=#{receiverid,jdbcType=DECIMAL}
 AND OFF_MESSDETAIL.COMPANYID=#{companyid,jdbcType=DECIMAL}
 AND OFF_MESSDETAIL.MESSSTATE!=0
+ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
 
 <!-- 1 -->
@@ -254,6 +255,7 @@ AND OFF_MESSDETAIL.MESSSTATE!=0
     select * from OFF_MESSDETAIL LEFT JOIN OFF_MESS ON OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID 
     where  OFF_MESSDETAIL.MESSSTATE!=0 
     and OFF_MESSDETAIL.DETAILID=#{detailid,jdbcType=DECIMAL}
+    ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
  <!-- 1 -->
   <insert id="huifuone" parameterType="com.sc.entity.OffMessdetail" >
@@ -276,6 +278,7 @@ LEFT JOIN OFF_MESS on OFF_MESS.MESSID=OFF_MESSDETAIL.MESSID
 where OFF_MESS.TITLE LIKE concat(concat('%',#{title,jdbcType=VARCHAR}),'%') 
  and  OFF_MESSDETAIL.MESSSTATE!=0
 and OFF_MESSDETAIL.RECEIVERID=#{uid,jdbcType=DECIMAL}
+ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
 <!-- 1 -->
   <select id="selectbycontent" resultMap="offmessMap1" parameterType="map">
@@ -285,6 +288,7 @@ where  OFF_MESS.CONTENT LIKE concat(concat('%',#{content,jdbcType=VARCHAR}),'%')
 and 
    OFF_MESSDETAIL.MESSSTATE!=0
 and OFF_MESSDETAIL.RECEIVERID=#{uid,jdbcType=DECIMAL}
+ORDER BY OFF_MESSDETAIL.LASTTIME DESC
 </select>
 
 </mapper>

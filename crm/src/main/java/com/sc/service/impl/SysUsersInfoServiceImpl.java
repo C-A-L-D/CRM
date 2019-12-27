@@ -211,11 +211,6 @@ SysJobinfoMapper sysJobinfoMapper;
 		return (ArrayList<SysUsersInfo>) sysUsersInfoMapper.selectByExample(example);
 	}
 		
-	//办公
-	@Override
-	public List<SysUsersInfo> selectusergc(SysUsersInfo info) {
-		return this.sysUsersInfoMapper.selectusergc(info);
-	}
-
+	
 
 }

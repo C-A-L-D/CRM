@@ -24,8 +24,6 @@ public interface SysUsersInfoService {
 	//查询除了当前用户的其他所有用户信息-办公
 	public List<SysUsersInfo> selectuser(BigDecimal sid);
 
-	//查询除了同公司其他所有用户信息-办公
-	public List<SysUsersInfo> selectusergc(SysUsersInfo u);
 		
 	//添加
 	public void add(SysUsersInfo u);
