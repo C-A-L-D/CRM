@@ -43,19 +43,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <div class="layui-row">
           <form  class="layui-form layui-col-md12 x-so" method="post" action="offmessctrl/search.do">
           <div class="layui-input-inline">
-              <select  name="select">           
-                    <option value="">选择查询条件</option>  
-                     <option value="1">标题</option> 
-                     <option value="2">内容</option>             
-                </select>
+            <select  name="tiaojian" id="tiaojian">   
+                 <option value="">选择查询条件</option>  
+                  <option value="1" <c:if test="${tiaojian==1}">selected="selected"</c:if> >标题</option> 
+                  <option value="2" <c:if test="${tiaojian==2}">selected="selected"</c:if>>内容</option>             
+             </select>
               </div>
-          <input type="text" name="search"  placeholder="请输入关键字" autocomplete="off" class="layui-input">
+          <input type="text" name="search" id="search"  value="${search }" placeholder="搜索已接收短消息" autocomplete="off" class="layui-input">
           <button class="layui-btn"  type="submit"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
         <button class="layui-btn" onclick="x_admin_show('发送短信','offmessctrl/goadd.do',530,400)" href="javascript:;"><i class="layui-icon"></i>发送信息</button>
-         <c:if test="${stat=='2'}">
+         <c:if test="${stat=='2'||stat=='3'}">
          <button id="change" class="layui-btn" onclick="send()"><i class="layui-icon">&#xe615;</i>查看已发送信息</button>
           </c:if>
           <c:if test="${stat=='1'}">
@@ -88,16 +88,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 	        </td>
             <td class="td-status">
-            <c:if test="${u.messstate=='1'}"><span id="weidu" class="layui-btn layui-btn-normal layui-btn-mini" style="background-color:#FF0000">未读</span></c:if>
+            <c:if test="${u.messstate=='1'}"><span id="weidu" class="layui-btn layui-btn-warm">未读</span></c:if>
             <c:if test="${u.messstate=='2'}"><span id="yidu" class="layui-btn layui-btn-normal layui-btn-mini" style="background-color:rgb(13,195,22) ">已读</span></c:if>
             
               </td>
             <td class="td-manage"> 
-            <a title="查看详情"  onclick="x_admin_show1('查看详情','offmessctrl/showdetail.do?detailid=${u.detailid}',600,600)" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>查看详情
+            <a title="查看详情" class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show1('查看详情','offmessctrl/showdetail.do?detailid=${u.detailid}',600,600)" href="javascript:;">
+               查看详情
               </a>
-              <a title="删除" onclick="mess_del(this,'${u.detailid}')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>删除
+              <a title="删除"  class="layui-btn layui-btn-sm layui-btn-danger"  onclick="mess_del(this,'${u.detailid}')" href="javascript:;">
+              删除
               </a>
             </td>
           </tr>
@@ -118,11 +118,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        
         <c:if test="${stat=='3'}">
 	        <div class="page">
+	         <a class="prev" onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+	         <a class="num" onclick="aa('${p.prePage }')" href="javascript:;">&lt;&lt;</a>
+	          <span class="current"> 当前${p.pageNum }/${p.pages }页</span>
+	         <a class="next" onclick="aa('${p.nextPage }')" href="javascript:;">&gt;&gt;</a>
+	          <a class="prev" onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>
+	           <!--  
 	          <a class="prev" href="offmessctrl/search.do?pageNum=${p.firstPage}">首页</a>
 	          <a class="num" href="offmessctrl/search.do?pageNum=${p.prePage}">&lt;&lt;</a>
 	          <span class="current"> 当前${p.pageNum }/${p.pages }页</span>
 	          <a class="next" href="offmessctrl/search.do?pageNum=${p.nextPage}">&gt;&gt;</a>
-	          <a class="prev" href="offmessctrl/search.do?pageNum=${p.lastPage }">尾页</a>       
+	          <a class="prev" href="offmessctrl/search.do?pageNum=${p.lastPage }">尾页</a>     
+	          -->  
 	      </div>
      </c:if>
  </div>
@@ -156,8 +163,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </td>
         
             <td class="td-manage">
-              <a title="查看详情"  onclick="x_admin_show('查看详情','offmessctrl/showdetailsend.do?messid=${s.messid}',600,400)"  href="javascript:;">
-                <i class="icon iconfont">&#xe6f7;</i>查看详情
+              <a title="查看详情" class="layui-btn layui-btn-sm layui-btn-normal" onclick="x_admin_show('查看详情','offmessctrl/showdetailsend.do?messid=${s.messid}',600,400)"  href="javascript:;">
+             查看详情
               </a>
              
             </td>
@@ -178,6 +185,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 
     <script>
+       function aa(pageNum){
+
+var url="offmessctrl/search.do?pageNum="+pageNum+"&tiaojian="+$("#tiaojian").val()+"&search="+$("#search").val();
+     window.location.href=url;
+     }
     
      function x_admin_show1(title,url,w,h){
 	    if (title == null || title == '') {

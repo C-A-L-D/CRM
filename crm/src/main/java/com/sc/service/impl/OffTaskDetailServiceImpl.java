@@ -39,12 +39,12 @@ public class OffTaskDetailServiceImpl implements OffTaskDetailService {
 
 	//查询已接收任务
 	@Override
-	public PageInfo<OffTaskdetail> selectpageaccept(Integer pageNum, Integer pageSize) {
+	public PageInfo<OffTaskdetail> selectpageaccept(Integer pageNum, Integer pageSize,Long uid) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 	    //查询当前页的集合数据	
 		this.offAssesstaskMapper.updatestate();
-		List<OffTaskdetail> list=this.offTaskdetailMapper.selectaccept();
+		List<OffTaskdetail> list=this.offTaskdetailMapper.selectaccept(uid);
 		//封装成pageinfo对象
 		   PageInfo<OffTaskdetail> page=new PageInfo<OffTaskdetail>(list);				
 			return page;
@@ -64,11 +64,11 @@ public class OffTaskDetailServiceImpl implements OffTaskDetailService {
 	
 	//分页查询-标题
 		@Override
-		public PageInfo<OffTaskdetail> selectpagetitle(Integer pageNum, Integer pageSize, String tasktitle) {
+		public PageInfo<OffTaskdetail> selectpagetitle(Integer pageNum, Integer pageSize, String tasktitle,Long cid) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 		    //查询当前页的集合数据	
-				List<OffTaskdetail> list=this.offTaskdetailMapper.selectbytitle(tasktitle);		
+				List<OffTaskdetail> list=this.offTaskdetailMapper.selectbytitle(tasktitle,cid);		
 			//封装成pageinfo对象
 			   PageInfo<OffTaskdetail> page=new PageInfo<OffTaskdetail>(list);				
 				return page;		
@@ -77,11 +77,11 @@ public class OffTaskDetailServiceImpl implements OffTaskDetailService {
 		
 		//分页查询-内容
 		@Override
-		public PageInfo<OffTaskdetail> selectpagecontent(Integer pageNum, Integer pageSize, String taskdetail) {
+		public PageInfo<OffTaskdetail> selectpagecontent(Integer pageNum, Integer pageSize, String taskdetail,Long cid) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 		    //查询当前页的集合数据	
-			List<OffTaskdetail> list=this.offTaskdetailMapper.selectbycontent(taskdetail);
+			List<OffTaskdetail> list=this.offTaskdetailMapper.selectbycontent(taskdetail,cid);
 		    //封装成pageinfo对象
 			PageInfo<OffTaskdetail> page=new PageInfo<OffTaskdetail>(list);				
 			return page;
@@ -89,11 +89,11 @@ public class OffTaskDetailServiceImpl implements OffTaskDetailService {
 		
 		//分查询-任务发布人
 		@Override
-		public PageInfo<OffTaskdetail> selectpageu(Integer pageNum, Integer pageSize, String taskpublisher) {
+		public PageInfo<OffTaskdetail> selectpageu(Integer pageNum, Integer pageSize, String taskpublisher,Long cid) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 		    //查询当前页的集合数据	
-			List<OffTaskdetail> list=this.offTaskdetailMapper.selectbyuser(taskpublisher);
+			List<OffTaskdetail> list=this.offTaskdetailMapper.selectbyuser(taskpublisher,cid);
 			//封装成pageinfo对象
 			PageInfo<OffTaskdetail> page=new PageInfo<OffTaskdetail>(list);				
 			return page;
@@ -101,11 +101,11 @@ public class OffTaskDetailServiceImpl implements OffTaskDetailService {
 		
 		//分页查询-考核指标
 		@Override
-		public PageInfo<OffTaskdetail> selectpagetarget(Integer pageNum, Integer pageSize, String assesstarget) {
+		public PageInfo<OffTaskdetail> selectpagetarget(Integer pageNum, Integer pageSize, String assesstarget,Long cid) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 			//查询当前页的集合数据	
-			List<OffTaskdetail> list=this.offTaskdetailMapper.selectbytarget(assesstarget);
+			List<OffTaskdetail> list=this.offTaskdetailMapper.selectbytarget(assesstarget,cid);
 			//封装成pageinfo对象
 			PageInfo<OffTaskdetail> page=new PageInfo<OffTaskdetail>(list);				
 			return page;

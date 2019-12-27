@@ -2,14 +2,13 @@ package com.sc.mapper;
 
 import com.sc.entity.OffAssesstarget;
 import com.sc.entity.OffAssesstargetExample;
-import com.sc.entity.OffMessdetail;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OffAssesstargetMapper {
 	//查询指标
-	public List<OffAssesstarget> select();
+	public List<OffAssesstarget> select(Long cid);
 
 	//删除指标
 	 int deleteByPrimaryKey(Long targetid);

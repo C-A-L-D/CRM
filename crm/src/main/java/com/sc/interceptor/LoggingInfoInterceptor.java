@@ -43,7 +43,7 @@ public class LoggingInfoInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {		
 		SysUsers user = (SysUsers) arg0.getSession().getAttribute("nowuser");
 		System.out.println("session："+user);
-		System.out.println(getRealIP(arg0));
+//		System.out.println(getRealIP(arg0));
 		String uri = arg0.getRequestURI();//请求路径
 		String u = uri.substring(4);
 		System.out.println(u);//访问路径对应的所需权限
@@ -85,27 +85,27 @@ public class LoggingInfoInterceptor implements HandlerInterceptor {
 		}
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
-			System.out.println("Proxy-Client-IP ip: " + ip);
+//			System.out.println("Proxy-Client-IP ip: " + ip);
 		}
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getHeader("WL-Proxy-Client-IP");
-			System.out.println("WL-Proxy-Client-IP ip: " + ip);
+//			System.out.println("WL-Proxy-Client-IP ip: " + ip);
 		}
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_CLIENT_IP");
-			System.out.println("HTTP_CLIENT_IP ip: " + ip);
+//			System.out.println("HTTP_CLIENT_IP ip: " + ip);
 		}
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-			System.out.println("HTTP_X_FORWARDED_FOR ip: " + ip);
+//			System.out.println("HTTP_X_FORWARDED_FOR ip: " + ip);
 		}
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getHeader("X-Real-IP");
-			System.out.println("X-Real-IP ip: " + ip);
+//			System.out.println("X-Real-IP ip: " + ip);
 		}
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getRemoteAddr();
-			System.out.println("getRemoteAddr ip: " + ip);
+//			System.out.println("getRemoteAddr ip: " + ip);
 		}
 		return ip;
 	}

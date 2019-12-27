@@ -14,11 +14,11 @@ layui.use(['form','layer'], function(){
 			if (res.status == 200) {
 				layer.msg('添加成功！', {icon: 1,time:1000});
 				setTimeout(function(){layer.load(1);},1000);
-				setTimeout(function(){parent.location.href="storeWhinfo/listpageSwi.do";},1500);
+				setTimeout(function(){window.location.href="storeWhinfo/listpageSwi.do";},1500);
 		      //  parent.location.reload();
 			} else {
 				layer.msg('添加失败！', {icon: 2,time:1000});
-		        parent.location.reload();
+		        window.location.reload();
 			}
 		}
 	});

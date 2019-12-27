@@ -1,6 +1,7 @@
 package com.sc.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,9 +15,16 @@ import com.sc.entity.SysUsersInfo;
 
 public interface SysUsersInfoService {
 	
+
+	//查询除了同公司其他所有用户信息-办公
+	public List<SysUsersInfo> selectusergc(SysUsersInfo u);
+
+
+	
 	//查询除了当前用户的其他所有用户信息-办公
 	public List<SysUsersInfo> selectuser(BigDecimal sid);
 
+		
 	//添加
 	public void add(SysUsersInfo u);
 	
@@ -43,6 +51,8 @@ public interface SysUsersInfoService {
     public List<SysJobinfo> gszw(SysUsersInfo info1);
 
     public PageInfo<SysUsersInfo> selectpage(Integer pageNum,Integer pageSize,SysUsersInfo info1);
+    
+    public ArrayList<SysUsersInfo> selectAllUsersInfoByGsid(BigDecimal gongsiid);
 }
 
 	

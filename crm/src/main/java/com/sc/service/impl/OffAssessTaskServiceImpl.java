@@ -24,18 +24,18 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 	SysUsersInfoMapper sysUsersInfoMapper;
 	//查询任务
 	@Override
-	public List<OffAssesstask> select() {
-		return this.offAssesstaskMapper.select();
+	public List<OffAssesstask> select(Long cid) {
+		return this.offAssesstaskMapper.select(cid);
 	}
 	
 	//分页查询
 	@Override
-		public PageInfo<OffAssesstask> selectpage(Integer pageNum, Integer pageSize) {
+		public PageInfo<OffAssesstask> selectpage(Integer pageNum, Integer pageSize,Long cid) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 		    //查询当前页的集合数据	
 			this.offAssesstaskMapper.updatestate();
-			List<OffAssesstask> list = this.offAssesstaskMapper.select();
+			List<OffAssesstask> list = this.offAssesstaskMapper.select(cid);
 			
 		   System.out.println("11"+list);
 			//封装成pageinfo对象
@@ -69,7 +69,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 	
 	//分页查询-标题
 	@Override
-	public PageInfo<OffAssesstask> selectpagetitle(Integer pageNum, Integer pageSize, String tasktitle) {
+	public PageInfo<OffAssesstask> selectpagetitle(Integer pageNum, Integer pageSize, String tasktitle,Long cid) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 	    //查询当前页的集合数据	
@@ -79,6 +79,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 		if(tasktitle!=null){
 			title="%"+tasktitle+"%";
 			c.andTasktitleLike(title);
+			c.andCompanyidEqualTo(cid);
 		}
 		List<OffAssesstask> list=this.offAssesstaskMapper.selectByExample(e);
 		//封装成pageinfo对象
@@ -88,7 +89,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 	
 	//分页查询-内容
 	@Override
-	public PageInfo<OffAssesstask> selectpagecontent(Integer pageNum, Integer pageSize, String taskdetail) {
+	public PageInfo<OffAssesstask> selectpagecontent(Integer pageNum, Integer pageSize, String taskdetail,Long cid) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 	    //查询当前页的集合数据	
@@ -98,6 +99,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 		if(taskdetail!=null){
 			content="%"+taskdetail+"%";
 			c.andTaskdetailLike(content);
+			c.andCompanyidEqualTo(cid);
 		}
 		List<OffAssesstask> list=this.offAssesstaskMapper.selectByExample(e);
 	    //封装成pageinfo对象
@@ -107,7 +109,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 	
 	//分查询-任务发布人
 	@Override
-	public PageInfo<OffAssesstask> selectpageu(Integer pageNum, Integer pageSize, String taskpublisher) {
+	public PageInfo<OffAssesstask> selectpageu(Integer pageNum, Integer pageSize, String taskpublisher,Long cid) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 	    //查询当前页的集合数据	
@@ -118,6 +120,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 		if(taskpublisher!=null){
 			uname="%"+taskpublisher+"%";
 			c.andTaskpublisherLike(uname);
+			c.andCompanyidEqualTo(cid);
 		}
 		List<OffAssesstask> list=this.offAssesstaskMapper.selectByExample(e);
 		//封装成pageinfo对象
@@ -127,7 +130,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 	
 	//分页查询-考核指标
 	@Override
-	public PageInfo<OffAssesstask> selectpagetarget(Integer pageNum, Integer pageSize, String assesstarget) {
+	public PageInfo<OffAssesstask> selectpagetarget(Integer pageNum, Integer pageSize, String assesstarget,Long cid) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		//查询当前页的集合数据	
@@ -137,6 +140,7 @@ public class OffAssessTaskServiceImpl implements OffAssessTaskService {
 		if(assesstarget!=null){
 			target="%"+assesstarget+"%";
 			c.andAssesstargetLike(target);
+			c.andCompanyidEqualTo(cid);
 		}
 		List<OffAssesstask> list=this.offAssesstaskMapper.selectByExample(e);
 		//封装成pageinfo对象

@@ -287,7 +287,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 var fend = $.fullCalendar.formatDate(event.end, "HH:mm");
 
                 var confbg = '';
-                if (event.confid == 1) {
+                
+                /* if (event.confid == 1) {
                     confbg = confbg + '<span class="fc-event-bg"></span>';
                 } else if (event.confid == 2) {
                     confbg = confbg + '<span class="fc-event-bg"></span>';
@@ -301,7 +302,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     confbg = confbg + '<span class="fc-event-bg"></span>';
                 } else {
                     confbg = confbg + '<span class="fc-event-bg"></span>';
-                }
+                } */
+                
 
               //  var titlebg = '<span class="fc-event-conf" style="background:' + event.confcolor + '">' + event.confshortname + '</span>';
 
@@ -312,7 +314,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 if (view.name == "month") {//按月份
                     var evtcontent = '<div class="fc-event-vert"><a>';
                     evtcontent = evtcontent + confbg;
-                    evtcontent = evtcontent + '<span class="fc-event-titlebg">' + fstart + " - " + fend +"&nbsp;"+ event.fullname + '</span>';
+                    evtcontent = evtcontent + '<span class=';
+                     if (event.confname == "重要") {
+	                    evtcontent = evtcontent + '"fc-event-titlebg"';
+	                } else if (event.confname == "一般") {
+	                    evtcontent = evtcontent + '"fc-event-titlebg1"';
+	                } else if (event.confname == "紧急") {
+	                    evtcontent = evtcontent + '"fc-event-titlebg2"';
+	                } else {
+	                    evtcontent = evtcontent + '"fc-event-titlebg1"';
+	                } 
+	                evtcontent = evtcontent + '>' + fstart + " - " + fend +"&nbsp;"+ event.fullname + '</span>';
+	                    
                     //alert(evtcontent);
                     element.html(evtcontent);
                 } else if (view.name == "agendaWeek") {//按周

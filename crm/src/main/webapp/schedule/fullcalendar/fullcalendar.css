@@ -760,7 +760,23 @@ table.fc-border-separate {
 .fc-event-vert span.fc-event-titlebg{
 	width: 100%;
 	height: 100%;
-	background: #2C67B3;
+	background:#E0E0E0;
+	opacity: .8;
+	filter: alpha(opacity=70); /* for IE */
+}	
+
+.fc-event-vert span.fc-event-titlebg1{
+	width: 100%;
+	height: 100%;
+	background:#46A3FF;
+	opacity: .8;
+	filter: alpha(opacity=70); /* for IE */
+}	
+
+.fc-event-vert span.fc-event-titlebg2{
+	width: 100%;
+	height: 100%;
+	background: #FF3333;
 	opacity: .8;
 	filter: alpha(opacity=70); /* for IE */
 }	

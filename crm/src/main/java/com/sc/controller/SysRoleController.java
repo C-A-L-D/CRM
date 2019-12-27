@@ -94,14 +94,18 @@ public class SysRoleController {
 	 */
 	@RequestMapping("/updatePowers.do")
 	@ResponseBody
-	public void updatePowers(SysRole sysRole, BigDecimal[] str,BigDecimal cid, HttpSession session){
+	public void updatePowers(SysRole sysRole, BigDecimal[] str, BigDecimal cid, HttpSession session){
 		System.out.println(sysRole+"\n数组：");
 		for (BigDecimal i : str) {
 			System.out.println("---"+i);
 		}
 		System.out.println("分栏编号："+cid);
+		//从数据库查到该角色该分栏已有的权限
 		ArrayList<SysPowerRole> selectRP = sysRoleServiceImpl.selectRP(sysRole.getRid(), cid);
-		System.out.println(selectRP);
+		System.out.println("该角色该分栏已有的权限：");
+		for (SysPowerRole s : selectRP) {
+			System.out.println(s+"-----");
+		}
 		if (selectRP.size() != 0) {
 			System.out.println("进4");
 			if (str.length == 0) {
