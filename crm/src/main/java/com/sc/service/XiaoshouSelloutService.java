@@ -12,4 +12,5 @@ public interface XiaoshouSelloutService {
 	public XiaoshouSellout selectObj(BigDecimal id);
 	public void update(XiaoshouSellout xiaoshouSellout);
 	public void delete(BigDecimal id);
+	public void add(XiaoshouSellout xiaoshouSellout);
 }

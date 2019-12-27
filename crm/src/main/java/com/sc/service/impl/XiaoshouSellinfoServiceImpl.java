@@ -73,5 +73,11 @@ public class XiaoshouSellinfoServiceImpl implements XiaoshouSellinfoService {
 		xiaoshouSellinfoMapper.deleteByPrimaryKey(id);
 		
 	}
+
+	@Override
+	public void add(XiaoshouSellinfo xiaoshouSellinfo) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

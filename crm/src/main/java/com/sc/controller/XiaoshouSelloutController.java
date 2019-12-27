@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
+import com.sc.entity.Result;
 import com.sc.entity.XiaoshouSellinfo;
 import com.sc.entity.XiaoshouSellout;
 import com.sc.service.XiaoshouSellinfoService;
@@ -23,6 +25,19 @@ public class XiaoshouSelloutController {
 	
 	@Autowired
 	XiaoshouSellinfoService xiaoshouSellinfoService;
+	
+	@RequestMapping("/addSout.do")
+	@ResponseBody
+	public Result addSout(ModelAndView mav,XiaoshouSellout xiaoshouSellout) {
+		if(xiaoshouSellout==null||xiaoshouSellout.getSid()==null) {
+			System.err.println(xiaoshouSellout+"空指针！");
+			return new Result(500,"status");
+		}
+		xiaoshouSellout.setLastdate(new Date());
+		xiaoshouSelloutService.add(xiaoshouSellout);
+		System.err.println("service:添加"+xiaoshouSellout);
+		return new Result(200,"status");
+	}
 	
 	@RequestMapping("/listpageSout.do")
 	public ModelAndView listpageSwi(ModelAndView mav,

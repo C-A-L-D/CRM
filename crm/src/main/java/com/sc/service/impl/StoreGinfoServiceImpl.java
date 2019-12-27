@@ -102,6 +102,27 @@ public class StoreGinfoServiceImpl implements StoreGinfoService{
 		}
 		return idlist;
 	}
+
+	@Override
+	public boolean hasSgi(BigDecimal whid) {
+		ArrayList<StoreGinfo> list = this.selectAll();
+		for(StoreGinfo sgi:list) {
+			if(sgi.getWhid().equals(whid)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public ArrayList<StoreGinfo> selectByWhid(BigDecimal whid) {
+		if(whid==null) {
+			System.err.println("发生查询错误！");
+			System.err.println(whid);
+		}
+		ArrayList<StoreGinfo> list = (ArrayList<StoreGinfo>) storeGinfoMapper.selectByWhid(whid);
+		return list;
+	}
 	
 	
 }

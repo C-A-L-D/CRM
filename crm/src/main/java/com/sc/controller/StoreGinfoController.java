@@ -1,6 +1,7 @@
 package com.sc.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,7 @@ public class StoreGinfoController {
 		System.err.println(mav.getViewName());
 		return mav;
 	}
+	
 	
 	@RequestMapping("/selectInfo.do")
 	public ModelAndView selectinfo(ModelAndView mav,Integer gid) {

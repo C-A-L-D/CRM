@@ -243,8 +243,11 @@ public class XiaoshouSellinfoController {
 				list.add(ssid);
 			}else {
 				list=(ArrayList<Integer>) session.getAttribute("outofwh");
-				list.add(ssid);
+				if(!list.contains(ssid)) {
+					list.add(ssid);
+				}
 			}
+			System.err.println("list--->"+list);
 			session.setAttribute("outofwh", list);
 			return new Result(200,"status");
 		}catch (NullPointerException e) {

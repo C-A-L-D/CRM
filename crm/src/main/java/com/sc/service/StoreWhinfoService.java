@@ -1,6 +1,7 @@
 package com.sc.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 import com.github.pagehelper.PageInfo;
 import com.sc.entity.StoreGinfo;
@@ -13,4 +14,5 @@ public interface StoreWhinfoService {
 	public StoreWhinfo selectObj(BigDecimal whid);
 	public void del(BigDecimal whid);
 	public PageInfo<StoreGinfo> selectSgi(BigDecimal whid,Integer pageNum,Integer pageSize);
+	public ArrayList<BigDecimal> selectWhid();
 }
