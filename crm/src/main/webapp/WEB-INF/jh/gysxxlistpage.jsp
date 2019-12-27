@@ -29,23 +29,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  
+   
        <div class="layui-row">
        
       
         <form class="layui-form layui-col-md12 x-so" action="../gysxxctrl/gyslistpage.do">
-        <input type="text" name="gysName"  placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
+       
+        <input type="text" id="gysName" name="gysName" value="${a.gysName }" placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
         <button class="layui-btn"  lay-submit="" lay-filter="submit"><i class="layui-icon">&#xe615;</i></button>
         &emsp;&emsp;
-         <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','gysgoadd.do',650,650)" >
-       <i class="layui-icon"></i>	添加供应商</a>
+       
           
         </form>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+       <a  class="layui-btn" title="添加" onclick="x_admin_show('添加','gysgoadd.do',650,650)" >
+       <i class="layui-icon"></i>	添加供应商</a>
       </div>
   
 
       <table class="layui-table">    
           <tr>
+            <th> <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div></th>
             <th>供应商编号</th>
             <th>供应商名称</th>
             <th>联系人</th>
@@ -58,11 +62,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
           <c:forEach items="${p.list }" var="u">
             <tr>
-           
+          <td>
+           <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${u.gysId  }'><i class="layui-icon">&#xe605;</i></div>
+             </td>
                <td>
                  ${u.gysId }
                </td>
                <td>
+               
                 ${u.gysName }
                </td>
                <td>
@@ -97,10 +104,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </c:forEach>
             <tr>
              <td style="text-align: center;" colspan="10">
-                <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.firstPage }">首页</a>
+               <%--  <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.firstPage }">首页</a>
                 <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.prePage }">上一页</a>
                 <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.lastPage }">尾页</a>
+                <a href="../gysxxctrl/gyslistpage.do?pageNum=${p.lastPage }">尾页</a> --%>
+                <a onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+                <a onclick="aa('${p.prePage }')" href="javascript:;">上一页</a>
+                <a onclick="aa('${p.nextPage }')" href="javascript:;">下一页</a>
+                <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>                         
+                                       
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr> 
@@ -114,6 +126,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
    </html>  
     <script>
+      function aa(pageNum){
+     /* var gname=document.getElementById("gname").value; */
+    /*  console.log(gname); */
+
+   var url="../gysxxctrl/gyslistpage.do?pageNum="+pageNum+"&gysName="+$("#gysName").val();
+   console.log(url);
+     window.location.href=url;
+ 
+     }
+    
+    
+    
       function member_del(obj,gysId){
       
           layer.confirm('确认要删除吗？',function(index){
@@ -132,6 +156,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    });
           });
       }
+      
+        function delAll (argument) {
+
+        var data = tableCheck.getData();
+      console.log(data);
+         layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            
+            layer.msg('删除成功', {icon: 1});
+            $.ajax({
+		        type: 'post',
+		        url: "gysdeleteall.do",
+		        data: "aa="+data,
+		        success: function (res) {
+		           location.reload();
+		        }
+		    });
+             $(".layui-form-checked").not('.header').parents('tr').remove(); 
+        }); 
+        
+        
+       } 
+    
     
     </script>
      

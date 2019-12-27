@@ -29,7 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  
+       <div class="layui-row">
+       
+        <form class="layui-form layui-col-md12 x-so" action="../xbhctrl/xbhlistpage.do">
+        <input type="text" name="cpId" id="cpId" value="${a.cpId }" placeholder="请输入产品编号" autocomplete="off" class="layui-input">
+        <button class="layui-btn"  lay-submit="" lay-filter="submit"><i class="layui-icon">&#xe615;</i></button>
+        
+        </form>
+        </div>
    
   
   
@@ -78,7 +85,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <td  class="td-status">                            
                  <a onclick="x_admin_show('','../cgdctrl/cgdgoadd.do?id=${u.id }',650,650)" >
                  <span class="layui-btn layui-btn-normal layui-btn-mini">生成采购单</span>
-                 </a>     
+             
+             
+               <a title="删除" onclick="member_del(this,${u.id })" >
+              <i class="layui-icon">&#xe640;</i>  </a>     
+                          
                            
                </td>
                 
@@ -88,10 +99,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </c:forEach>
             <tr>
              <td style="text-align: center;" colspan="17">
-                <a href="../xbhctrl/xbhlistpage.do?pageNum=${p.firstPage }">首页</a>
+               <%--  <a href="../xbhctrl/xbhlistpage.do?pageNum=${p.firstPage }">首页</a>
                 <a href="../xbhctrl/xbhlistpage.do?pageNum=${p.prePage }">上一页</a>
                 <a href="../xbhctrl/xbhlistpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../xbhctrl/xbhlistpage.do?pageNum=${p.lastPage }">尾页</a>
+                <a href="../xbhctrl/xbhlistpage.do?pageNum=${p.lastPage }">尾页</a> --%>
+                <a onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+                <a onclick="aa('${p.prePage }')" href="javascript:;">上一页</a>
+                <a onclick="aa('${p.nextPage }')" href="javascript:;">下一页</a>
+                <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>                                                      
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr> 
@@ -104,6 +119,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </body>
      
    </html>  
+   <script>
     	 
+    function aa(pageNum){
+     /* var gname=document.getElementById("gname").value; */
+    /*  console.log(gname); */
+
+   var url="../xbhctrl/xbhlistpage.do?pageNum="+pageNum+"&cpId="+$("#cpId").val();
+   console.log(url);
+     window.location.href=url;
+ 
+     } 
+    	 
+    	 
+      function member_del(obj,id){
+      
+          layer.confirm('确认要删除吗？',function(index){
+              //发异步删除数据
+              $.ajax({
+		        type: 'post',
+		        url: "xbhdelete.do",
+		        data: "id="+id,
+		        success: function (res) {
+		           //$(obj).parents("tr").remove();
+		           layer.msg('已删除!',{icon:1,time:1000},function () {
+		              //刷新页面
+		              location.reload();
+		           });
+		        }
+		    });
+          });
+      } 
+    	 
+    	 
+</script> 	 
     
     

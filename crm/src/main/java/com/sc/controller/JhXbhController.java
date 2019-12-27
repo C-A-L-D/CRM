@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.JhXbh;
@@ -28,9 +29,10 @@ public class JhXbhController {
 	@RequestMapping("/xbhlistpage.do")
 	public ModelAndView listpage(ModelAndView mav,
 			@RequestParam(defaultValue="1")Integer pageNum,
-			@RequestParam(defaultValue="10")Integer pageSize){
-		System.out.println("查询用户列表-分页！");					
-		mav.addObject("p", jhXbhService.selectpage(pageNum, pageSize));		
+			@RequestParam(defaultValue="10")Integer pageSize,JhXbh u){
+		System.out.println("查询用户列表-分页！");
+		mav.addObject("a", u);
+		mav.addObject("p", jhXbhService.selectpage(pageNum, pageSize,u));		
 		//查询list集合-分页     ${page.list}	
 		ArrayList<StoreGinfo> list2 = storeGinfoService.selectAll();
 		if(list2!=null){
@@ -58,7 +60,8 @@ public class JhXbhController {
 							 jx.setState("缺货");
 							 jx.setRemark("加急采购");
 							 jx.setOperator("啦啦啦");
-							 jhXbhService.add(jx);			
+							 jhXbhService.add(jx);
+							 
 					
 						
 					}
@@ -72,7 +75,15 @@ public class JhXbhController {
 		return mav;
 	}
 	
-
+	//删除供应商
+		@RequestMapping("/xbhdelete.do")
+		@ResponseBody
+		public void xbhdelete(ModelAndView mav,JhXbh u){
+			System.out.println("需补货删除！"+u);
+			JhXbh u1 = this.jhXbhService.get(u.getId());
+			this.jhXbhService.delete(u1);
+		
+		}
 		
 		
 	

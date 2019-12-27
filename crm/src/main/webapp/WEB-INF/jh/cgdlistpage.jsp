@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <div class="layui-row">
        
         <form class="layui-form layui-col-md12 x-so" action="../cgdctrl/cgdlistpage.do">
-        <input type="text" name="cgTheme"  placeholder="请输入采购单主题" autocomplete="off" class="layui-input">
+        <input type="text" name="cgTheme" id="cgTheme" value="${a.cgTheme }" placeholder="请输入采购单主题" autocomplete="off" class="layui-input">
         <button class="layui-btn"  lay-submit="" lay-filter="submit"><i class="layui-icon">&#xe615;</i></button>
         
         </form>
@@ -137,10 +137,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          </c:forEach>
             <tr>
              <td style="text-align: center;" colspan="17">
-                <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.firstPage }">首页</a>
+               <%--  <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.firstPage }">首页</a>
                 <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.prePage }">上一页</a>
                 <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.lastPage }">尾页</a>
+                <a href="../cgdctrl/cgdlistpage.do?pageNum=${p.lastPage }">尾页</a> --%>
+                 <a onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
+                <a onclick="aa('${p.prePage }')" href="javascript:;">上一页</a>
+                <a onclick="aa('${p.nextPage }')" href="javascript:;">下一页</a>
+                <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>                                   
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr> 
@@ -153,6 +157,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </body>
      
    </html>  
+<script>
     	 
+    function aa(pageNum){
+     /* var gname=document.getElementById("gname").value; */
+    /*  console.log(gname); */
+
+   var url="../cgdctrl/cgdlistpage.do?pageNum="+pageNum+"&cgTheme="+$("#cgTheme").val();
+   console.log(url);
+     window.location.href=url;
+ 
+     } 
+    	 
+    	 
+    	 
+    	 
+</script>
     
     
