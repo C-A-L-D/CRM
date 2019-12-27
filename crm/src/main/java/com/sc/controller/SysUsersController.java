@@ -256,27 +256,21 @@ public class SysUsersController {
 		ArrayList<SysUsers> allUsers = sysUsersServiceImpl.selectAllUsers(userOne.getGongsiid());
 		ArrayList<SysUsersInfo> al = new ArrayList<SysUsersInfo>();
 		for (SysUsersInfo s : list) {
-			System.out.println("list----->"+s);
-			boolean b = false;
+			String b = "false";
 			for (SysUsers aus : allUsers) {
-				System.out.println("all---"+aus);
-				if (s.getSid() != aus.getSid()) {
-					b = false;
+				if (!s.getSid().equals(aus.getSid())) {
+					b = "false";
 				}
 				else {
-					b = true;
+					b = "true";
 					break;
 				}
 			}
-			if (b == false) {
+			if (b == "false") {
 				al.add(s);
-				System.out.println("添加："+s);
 			}
 		}
-		for (int i = 0; i < al.size(); i++) {
-			System.out.println("========----"+al.get(i));
-		}
-		mav.addObject("list", list);
+		mav.addObject("list", al);
 		mav.addObject("user", userOne);
 		mav.addObject("allRole", selectAllRole);
 		mav.setViewName("sys/updateUser");
@@ -334,7 +328,27 @@ public class SysUsersController {
 	 * @return
 	 */
 	@RequestMapping("/addUser.do")
-	public ModelAndView addUser(ModelAndView mav){
+	public ModelAndView addUser(ModelAndView mav, HttpSession session){
+		SysUsers user = (SysUsers) session.getAttribute("nowuser");
+		ArrayList<SysUsersInfo> list = sysUsersInfoService.selectAllUsersInfoByGsid(user.getGongsiid());
+		ArrayList<SysUsers> allUsers = sysUsersServiceImpl.selectAllUsers(user.getGongsiid());
+		ArrayList<SysUsersInfo> al = new ArrayList<SysUsersInfo>();
+		for (SysUsersInfo s : list) {
+			String b = "false";
+			for (SysUsers aus : allUsers) {
+				if (!s.getSid().equals(aus.getSid())) {
+					b = "false";
+				}
+				else {
+					b = "true";
+					break;
+				}
+			}
+			if (b == "false") {
+				al.add(s);
+			}
+		}
+		mav.addObject("list", al);
 		mav.setViewName("sys/addUser");
 		return mav;
 	}
@@ -348,10 +362,10 @@ public class SysUsersController {
 	@ResponseBody
 	@RequestMapping("/getUsersInfoGSValue.do")
 	public Result getUsersInfoGSValue(SysUsersInfo sysUsersInfo) {
-		SysUsersInfo ui = null;/*sysUsersServiceImpl.selectUsersInfoOne(sysUsersInfo.getSid());*/
+		System.out.println("-+--+-----"+sysUsersInfo);
+		SysUsersInfo ui = sysUsersInfoService.selectUsersInfoOne(sysUsersInfo.getSname());
 		if (ui != null) {
-			SysGongsiinfo gs = sysUsersServiceImpl.selectSysGongsiinfoOne(ui.getGongsiid());
-			return new Result(200, ui.getSname()+","+ui.getGongsiid()+","+gs.getGname());
+			return new Result(200, ui.getSid()+","+ui.getGongsiid()+","+ui.getSysGongsiinfo().getGname());
 		}
 		return new Result(400, "");
 	}

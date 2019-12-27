@@ -16,6 +16,9 @@ import com.sc.entity.Result;
 import com.sc.entity.SysPowercolumn;
 import com.sc.entity.SysPowerinfo;
 import com.sc.entity.SysRole;
+import com.sc.mapper.SysPowercolumnMapper;
+import com.sc.service.SysPowerRoleService;
+import com.sc.service.SysPowercolumnService;
 import com.sc.service.SysPowerinfoService;
 import com.sc.service.impl.SysRoleServiceImpl;
 
@@ -27,7 +30,10 @@ public class SysPowerinfoController {
 	SysPowerinfoService sysPowerinfoService;
 	@Autowired
 	SysRoleServiceImpl sysRoleServiceImpl;
-	
+	@Autowired
+	SysPowerRoleService sysPowerRoleService;
+	@Autowired
+	SysPowercolumnService sysPowercolumnService;
 	/**
 	 * 权限列表
 	 * @param mav
@@ -72,6 +78,36 @@ public class SysPowerinfoController {
 		return new Result(200, "修改成功");
 	}
 	
+	/**
+	 * 删除权限分栏弹窗
+	 * @param mav
+	 * @return
+	 */
+	@RequestMapping("/goDelPColumn.do")
+	public ModelAndView goDelPColumn(ModelAndView mav) {
+		ArrayList<SysPowercolumn> column = sysRoleServiceImpl.selectAllColumn();
+		mav.addObject("column", column);
+		mav.setViewName("sys/delPColumn");
+		return mav;
+	}
+	
+	/**
+	 * 删除分栏
+	 * @param sysPowerinfo
+	 * @return
+	 */
+	@RequestMapping("/delColumn.do")
+	@ResponseBody
+	public Result delColumn(SysPowercolumn sysPowercolumn) {
+		ArrayList<SysPowerinfo> allPowers = sysPowerinfoService.selectPowerBycolumnId(sysPowercolumn.getCid());
+		sysPowercolumnService.delColumn(sysPowercolumn.getCid());
+		sysPowerinfoService.delPowerAndPR(sysPowercolumn.getCid());
+		for (SysPowerinfo p : allPowers) {
+			sysPowerRoleService.delPR(p.getPid());
+		}
+		return new Result(200, "删除成功");
+	}
+		
 	/**
 	 * 单个删除
 	 * @param sysPowerinfo
@@ -142,6 +178,7 @@ public class SysPowerinfoController {
 		mav.setViewName("sys/addPower");
 		return mav;
 	}
+	
 	
 	@RequestMapping("/addNewPower.do")
 	@ResponseBody

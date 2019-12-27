@@ -45,6 +45,8 @@ public class SysUsersInfo implements Serializable {
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date lasttime;
+    
+    private SysGongsiinfo sysGongsiinfo;
 
     private static final long serialVersionUID = 1L;
 
@@ -69,8 +71,47 @@ public class SysUsersInfo implements Serializable {
         this.gongsiid = gongsiid;
         this.lasttime = lasttime;
     }
+    
 
-    public SysUsersInfo() {
+    public SysUsersInfo(BigDecimal sid, String sname, String ssex, String sphoto, String sidcard, String saddressHome,
+			String saddressNow, String sxl, String szzmm, String sschool, String sphone, String sphoneLine,
+			String schatLine, String sshStatus, BigDecimal sjobid, String sstatus, String sdescribe,
+			BigDecimal gongsiid, Date lasttime, SysGongsiinfo sysGongsiinfo) {
+		super();
+		this.sid = sid;
+		this.sname = sname;
+		this.ssex = ssex;
+		this.sphoto = sphoto;
+		this.sidcard = sidcard;
+		this.saddressHome = saddressHome;
+		this.saddressNow = saddressNow;
+		this.sxl = sxl;
+		this.szzmm = szzmm;
+		this.sschool = sschool;
+		this.sphone = sphone;
+		this.sphoneLine = sphoneLine;
+		this.schatLine = schatLine;
+		this.sshStatus = sshStatus;
+		this.sjobid = sjobid;
+		this.sstatus = sstatus;
+		this.sdescribe = sdescribe;
+		this.gongsiid = gongsiid;
+		this.lasttime = lasttime;
+		this.sysGongsiinfo = sysGongsiinfo;
+	}
+
+
+	public SysGongsiinfo getSysGongsiinfo() {
+		return sysGongsiinfo;
+	}
+
+
+	public void setSysGongsiinfo(SysGongsiinfo sysGongsiinfo) {
+		this.sysGongsiinfo = sysGongsiinfo;
+	}
+
+
+	public SysUsersInfo() {
         super();
     }
 
@@ -227,13 +268,15 @@ public class SysUsersInfo implements Serializable {
         this.lasttime = lasttime;
     }
 
+
 	@Override
 	public String toString() {
 		return "SysUsersInfo [sid=" + sid + ", sname=" + sname + ", ssex=" + ssex + ", sphoto=" + sphoto + ", sidcard="
 				+ sidcard + ", saddressHome=" + saddressHome + ", saddressNow=" + saddressNow + ", sxl=" + sxl
 				+ ", szzmm=" + szzmm + ", sschool=" + sschool + ", sphone=" + sphone + ", sphoneLine=" + sphoneLine
 				+ ", schatLine=" + schatLine + ", sshStatus=" + sshStatus + ", sjobid=" + sjobid + ", sstatus="
-				+ sstatus + ", sdescribe=" + sdescribe + ", gongsiid=" + gongsiid + ", lasttime=" + lasttime + "]";
+				+ sstatus + ", sdescribe=" + sdescribe + ", gongsiid=" + gongsiid + ", lasttime=" + lasttime
+				+ ", sysGongsiinfo=" + sysGongsiinfo + "]";
 	}
     
 }

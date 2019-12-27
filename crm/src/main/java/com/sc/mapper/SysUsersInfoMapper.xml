@@ -5,14 +5,28 @@
 	select * from SYS_USERSINFO where SID != #{sid,jdbcType=DECIMAL} 
 </select>
 
+<select id="selectu" parameterType="java.lang.String" resultMap="BaseResultMap">
+	select * from SYS_USERSINFO where SNAME = #{sname,jdbcType=VARCHAR} 
+</select>
+
 <select id="selectusergc" parameterType="com.sc.entity.SysUsersInfo" resultMap="BaseResultMap">
 	select * from SYS_USERSINFO where SID != #{sid,jdbcType=DECIMAL} 
 	AND GONGSIID=#{gongsiid,jdbcType=DECIMAL}
 </select>
 
-<select id="selectu" parameterType="java.lang.String" resultMap="BaseResultMap">
-	select * from SYS_USERSINFO where SNAME = #{sname,jdbcType=VARCHAR} 
-</select>
+	<resultMap type="SysUsersInfo" id="sysUsersInfoMapper" autoMapping="true">
+      <id column="SID" property="sid"/>
+      <association property="sysGongsiinfo" javaType="SysGongsiinfo" autoMapping="true">
+          <id column="ID" property="id"/>
+      </association>
+   </resultMap>
+	<select id="selectUsersInfoOne" resultMap="sysUsersInfoMapper">
+		SELECT * FROM SYS_USERSINFO ui
+		LEFT JOIN SYS_GONGSIINFO gi
+		ON ui.GONGSIID=gi.ID
+		WHERE ui.SNAME=#{sname }
+   </select>
+   
 
 
 

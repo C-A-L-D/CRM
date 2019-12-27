@@ -40,4 +40,6 @@ public interface SysUsersInfoMapper {
 
     int updateByPrimaryKey(SysUsersInfo record);
     
+    List<SysUsersInfo> selectUsersInfoOne(String sname);
+    
 }

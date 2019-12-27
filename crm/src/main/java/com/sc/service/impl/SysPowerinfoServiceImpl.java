@@ -12,6 +12,9 @@ import com.github.pagehelper.PageInfo;
 import com.sc.entity.SysPowerRole;
 import com.sc.entity.SysPowercolumn;
 import com.sc.entity.SysPowerinfo;
+import com.sc.entity.SysPowerinfoExample;
+import com.sc.entity.SysPowerinfoExample.Criteria;
+import com.sc.entity.SysUsersInfoExample;
 import com.sc.mapper.SysPowerRoleMapper;
 import com.sc.mapper.SysPowercolumnMapper;
 import com.sc.mapper.SysPowerinfoMapper;
@@ -87,6 +90,24 @@ public class SysPowerinfoServiceImpl implements SysPowerinfoService {
 	public ArrayList<SysPowerinfo> selectPowerInfo(BigDecimal rid) {
 		// TODO Auto-generated method stub
 		return (ArrayList<SysPowerinfo>) sysPowerinfoMapper.selectPowerChecked(rid);
+	}
+
+	@Override
+	public void delPowerAndPR(BigDecimal pcolumnId) {
+		// TODO Auto-generated method stub
+		SysPowerinfoExample example = new SysPowerinfoExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andPcolumnIdEqualTo(pcolumnId);
+		sysPowerinfoMapper.deleteByExample(example);
+	}
+
+	@Override
+	public ArrayList<SysPowerinfo> selectPowerBycolumnId(BigDecimal pcolumnId) {
+		// TODO Auto-generated method stub
+		SysPowerinfoExample example = new SysPowerinfoExample(); 
+		Criteria criteria = example.createCriteria();
+		criteria.andPcolumnIdEqualTo(pcolumnId);
+		return (ArrayList<SysPowerinfo>) sysPowerinfoMapper.selectByExample(example);
 	}
 
 }

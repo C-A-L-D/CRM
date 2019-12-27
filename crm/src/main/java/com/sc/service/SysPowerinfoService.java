@@ -29,4 +29,8 @@ public interface SysPowerinfoService {
 	List<SysPowerinfo> selectAllPower();
 	
 	public ArrayList<SysPowerinfo> selectPowerInfo(BigDecimal rid);
+	
+	void delPowerAndPR(BigDecimal pcolumnId);
+	
+	ArrayList<SysPowerinfo> selectPowerBycolumnId(BigDecimal pcolumnId);
 }

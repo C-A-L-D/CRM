@@ -34,21 +34,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="layui-card-header"><span style="color: red;">小提示：</span>默认初始密码为 123456，登录后请及时更换密码！</div>
       <div class="layui-card-body" style="padding: 15px;">
         <form class="layui-form" action="" method="post" lay-filter="component-form-group">        
-          <div class="layui-form-item">
+
+          <div class="layui-form toolbar layui-form-item">
           	<div class="layui-inline">
-              <label class="layui-form-label">
-              	<span class="x-red">*</span>持有者编号
-              </label>
-              <div class="layui-input-inline">
-                <input type="text" name="sid" id="sssid" value="" autocomplete="on" class="layui-input">
-              </div>
-            </div>
-            <div class="layui-inline">
               <label class="layui-form-label">
               	<span class="x-red">*</span>持有者姓名
               </label>
               <div class="layui-input-inline">
-                <input type="text" name="sname" id="sname" value="" lay-verify="ssname" autocomplete="on" class="layui-input" readonly="readonly">
+              	<select id="branchCompanyId" name="sname" id="sssid" class="layui-select" lay-filter="pp" lay-search>
+     				<option value="${user.sysUsersInfo.sname }">${user.sysUsersInfo.sname }</option>
+     				<c:forEach items="${list }" var="l">
+     					<option value="${l.sname }">${l.sname }</option>
+     				</c:forEach>
+				</select>
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">
+              	<span class="x-red">*</span>持有者编号
+              </label>
+              <div class="layui-input-inline">
+                <input type="text" name="sid" id="ssid" value="${user.sysUsersInfo.sid }" lay-verify="ssname" autocomplete="on" class="layui-input" readonly="readonly" required="required">
               </div>
             </div>
           </div>
@@ -155,16 +161,16 @@ layui.use(['form','layer'], function(){
           
           
           //监听值的改变
-          $("#sssid").on('input propertychange', function(data){
-            console.log(data);
+         form.on('select(pp)', function(data){
+            console.log("数据："+data);
             $.ajax({
 		        type: 'post',
-		        url: "getUsersInfoGSValue.do?sid="+$("#sssid").val(),
+		        url: "getUsersInfoGSValue.do?sname="+data.value,
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
 		            	var msg = res.msg.split(",");
-		                $("#sname").val(msg[0])
+		                $("#ssid").val(msg[0])
 		            	$("#gongsiid").val(msg[1])
 		            	$("#gname").val(msg[2])
 		            }
