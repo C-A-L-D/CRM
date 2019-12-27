@@ -38,6 +38,8 @@ SysUsersInfoMapper sysUsersInfoMapper;
 SysGongsiinfoMapper sysGongsiinfoMapper;
 @Autowired
 SysJobinfoMapper sysJobinfoMapper;
+@Autowired
+SysUsersInfoService sysUsersInfoService;
 	
 	//办公
 	@Override
@@ -121,7 +123,8 @@ SysJobinfoMapper sysJobinfoMapper;
 		 System.out.println(list);
 		 return list;
    }
-
+	
+	  
 	
 	@Override
 	public PageInfo<SysUsersInfo> selectpage(Integer pageNum, Integer pageSize,SysUsersInfo info1) {

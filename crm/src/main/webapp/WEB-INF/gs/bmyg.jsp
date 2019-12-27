@@ -31,31 +31,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   
     <body class="layui-anim layui-anim-up">
-    <div class="x-nav">
-      <span class="layui-breadcrumb">
-        <a href="">首页</a>
-        <a href="">公司部门管理</a>
-        <a>
-          <cite>公司部门信息列表</cite></a>
-      </span>
-      <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="layui-icon" style="line-height:38px">ဂ</i></a>
-    </div>
+  
     <div class="x-body">
-      <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" action="bmpage.do">
-        <!--   <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end"> -->
-          <input type="text" name="dname" id="dname"  value="${info1.dname }" placeholder="请输入部门名称" autocomplete="off" class="layui-input" >
-          <button type="submit" class="layui-btn"  lay-submit="" lay-filter="sreach" ><i class="layui-icon">&#xe615;</i></button>
-        </form>
-      </div>
-      <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','bmgotj.do',500,370)"><i class="layui-icon"></i>添加</button>
-    <a href="bmexcel.do">   
-    <button class="layui-btn layui-btn-warm"   >导出excel</button>
-    </a>
+     
+      <xblock>   
         <span class="x-right" style="line-height:40px">共有数据：${p.total } 条</span>
       </xblock>
       <table class="layui-table">
@@ -64,86 +43,114 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th>部门编号</th>
-            <th>部门名</th>
-            <th>备注说明</th>
+            <th>员工编号</th>
+            <th>员工姓名</th>
+            <th>职务名称</th>
+            <th>员工性别</th>
+            <th>员工照片</th>
+            <th>身份证件</th>
+ <!--       <th>家庭地址</th>
+            <th>现在地址</th>
+            <th>员工简历</th>
+            <th>政治面貌</th>
+            <th>毕业学校</th> -->
+            <th>联系电话</th>
+        <!--     <th>网上联系方式</th>
+            <th>网上联系详情</th>
+            <th>审核状态</th> -->
+            <th>职务编号</th>
+            <th>员工状态</th>
+         <!--    <th>备注</th> -->
             <th>公司编号</th>
-            <th>查看员工</th>
             <th>最后修改时间</th>
-            <th>操作</th>
-          <!-- 6 -->
+          <!--   <th>操作</th> -->
+          <!-- 20 -->
     </tr>
         </thead>
-        <c:forEach items="${p.list }" var="u">
+        <c:forEach items="${p.list }" var="u2">
         
+        <c:set var="i" value="-1"></c:set>
+        <c:forEach items="${u2.sysUsersInfos }" var="u">
+        
+       
            <tr>
-                            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${u.did }'><i class="layui-icon">&#xe605;</i></div>
+                 <td>
+              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${u.sid }'><i class="layui-icon">&#xe605;</i></div>
             </td>
            <td>
-           ${u.did }
+           ${u.sid }
            </td>
             <td>
              
-           
-                ${u.dname }
-           
+             <a title="查看详情"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('详情信息','ygxxlist.do?sid=${u.sid }',900,670)" href="javascript:;">
+                ${u.sname }
+            </a>
             </td>
+           <!-- 职务名称 -->
             <td>
-             ${u.ddescribe }
+           
+           
+            ${u2.sysJobinfos[i=i+1].jname }
+      
             </td>
-             <td>
-             ${u.gongsiid }
-            </td>
+            
             <td>
-      <a title="查看员工"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('查看员工','bmyg.do?did=${u.did } ',600,600)" href="javascript:;">
-                员工详情
-    </a>        
+             ${u.ssex }
             </td>
            <td>
-      <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
+             
+                <img alt="暂无图片" src="<%=basePath %>upload/${u.sphoto }" 
+                    width="40px" height="40px">
+            </td>
+            <td>
+             ${u.sidcard }
+            </td>
+            <td>
+             ${u.sphone }
+            </td>
+             <td>
+             ${u.sjobid }
+            </td>
+             <td>
+             ${u.sstatus }
+            </td>
+            
+            <td>
+             ${u.gongsiid }
+            </td>
+           
+            <td>
+           
+           <fmt:formatDate value="${u.lasttime }" pattern="yyyy-MM-dd HH:mm:ss"/>
             </td>
             
          
-            <td class="td-manage">
   
-    <a title="修改"  class="layui-btn layui-btn-sm layui-btn-normal"  onclick="x_admin_show('修改','bmgoupdate.do?did=${u.did } ',500,370)" href="javascript:;">
-                修改
-    </a>
-  
-   
-  <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="member_del(this,${u.did })" href="javascript:;">
-         <%-- <a title="删除" style="margin-left: 7px;top:5px;" class="layui-btn layui-btn-sm layui-btn-danger" onclick="return gsdel()" href="gsdelete.do?id=${u.id }"> --%>      
-                删除
-  </a>
-  
-            </td>
           </tr>
-          
-        </c:forEach>
-       
+           </c:forEach>
+     
+      </c:forEach>
               <tr>
-             <td style="text-align: center;" colspan="11">
- <%--                <a href="../sysbmctrl/bmpage.do?pageNum=${p.firstPage }">首页</a>
-                <a href="../sysbmctrl/bmpage.do?pageNum=${p.prePage }">上一页</a>
-                <a href="../sysbmctrl/bmpage.do?pageNum=${p.nextPage }">下一页</a>
-                <a href="../sysbmctrl/bmpage.do?pageNum=${p.lastPage }">尾页</a> --%>
+             <td style="text-align: center;" colspan="12">
+      <%--           <a href="../sysygctrl/ygpage.do?pageNum=${p.firstPage }">首页</a>
+                <a href="../sysygctrl/ygpage.do?pageNum=${p.prePage }">上一页</a>
+                <a href="../sysygctrl/ygpage.do?pageNum=${p.nextPage }">下一页</a>
+                <a href="../sysygctrl/ygpage.do?pageNum=${p.lastPage }">尾页</a> --%>
                 <a onclick="aa('${p.firstPage }')" href="javascript:;">首页</a>
                 <a onclick="aa('${p.prePage }')" href="javascript:;">上一页</a>
                 <a onclick="aa('${p.nextPage }')" href="javascript:;">下一页</a>
-                <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>                         
+                <a onclick="aa('${p.lastPage }')" href="javascript:;">尾页</a>                                                                 
                                        当前${p.pageNum }/${p.pages }页，共${p.total }条
              </td>
           </tr>  
-         
+         </table>
   </body>
      <script>
-         function aa(pageNum){
-var url="../sysbmctrl/bmpage.do?pageNum="+pageNum+"&dname="+$("#dname").val();
-     console.log(url);
+       function aa(pageNum){
+var url="../sysygctrl/ygpage.do?pageNum="+pageNum+"&sname="+$("#sname").val();
+   console.log(url);
      window.location.href=url;
      }
-     
      
      
      //自定义样式
@@ -152,10 +159,6 @@ var url="../sysbmctrl/bmpage.do?pageNum="+pageNum+"&dname="+$("#dname").val();
     ,count: 100
     ,theme: '#1E9FFF'
   });
-     
-     
-     
-     
      
      
       layui.use('laydate', function(){
@@ -197,18 +200,21 @@ var url="../sysbmctrl/bmpage.do?pageNum="+pageNum+"&dname="+$("#dname").val();
       }
 
       /*用户-删除*/
-      function member_del(obj,did){
-      
+      function member_del(obj,sid){
+       
+        console.log(sid);
+        
           layer.confirm('确认要删除吗？',function(index){
               //发异步删除数据
               $.ajax({
 		        type: 'post',
-		        url: "bmdelete.do",
-		        data: "did="+did,
+		        url: "ygdelete.do",
+		        data: "sid="+sid,
 		        success: function (res) {
 		           //$(obj).parents("tr").remove();
 		           layer.msg('已删除!',{icon:1,time:1000},function () {
 		              //刷新页面
+		             
 		              location.reload();
 		           });
 		        }
@@ -228,7 +234,7 @@ var url="../sysbmctrl/bmpage.do?pageNum="+pageNum+"&dname="+$("#dname").val();
             layer.msg('删除成功', {icon: 1});
             $.ajax({
 		        type: 'post',
-		        url: "bmdeletesy.do",
+		        url: "ygdeletesy.do",
 		        data: "aa="+data,
 		        success: function (res) {
 		           //$(obj).parents("tr").remove();

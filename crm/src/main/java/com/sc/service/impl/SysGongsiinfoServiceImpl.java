@@ -76,7 +76,15 @@ public class SysGongsiinfoServiceImpl implements SysGongsiinfoService {
 			     Criteria c = example.createCriteria();
 			     if(info1.getGname()!=null&&!info1.getGname().equals("")){
 			        c.andGnameLike("%"+info1.getGname() +"%");
+			        
 			     }
+			     //或者关系
+			     Criteria c1=example.or();
+			     if(info1.getGname()!=null&&!info1.getGname().equals("")){
+			    	 c1.andGcodeLike("%"+info1.getGname() +"%");
+			    	 
+				  }
+			     
 		     }
 			//查询当前页的集合数据
 			List<SysGongsiinfo> list = this.sysGongsiinfoMapper.selectByExample(example);

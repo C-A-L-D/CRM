@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +24,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sc.entity.Result;
+import com.sc.entity.Ssq;
 import com.sc.entity.SysDepartment;
 import com.sc.entity.SysJobinfo;
 import com.sc.entity.SysUsersInfo;
 import com.sc.entity.Ygexcel;
+
 import com.sc.service.SysUsersInfoService;
 
 @Service
@@ -80,10 +84,14 @@ public ModelAndView gsgotj(ModelAndView mav){
 public Result gsadd(ModelAndView mav,
 		HttpServletRequest req,
 		MultipartFile upload,
-		SysUsersInfo info)throws IllegalStateException, IOException {
+		SysUsersInfo info,Ssq ssq)throws IllegalStateException, IOException {
 	System.out.println("开始添加公司"+info);
-	System.out.println("开始上传文件111:"+upload);
 	
+	System.out.println("开始上传文件111:"+upload);
+	/*String ssq=province+"-"+city+"-"+area;
+	System.out.println(ssq);*/	
+	info.setSaddressHome(ssq.toString());
+	System.out.println(ssq.toString()+"1111111");
 	//如果用户选择文件，那么执行上传代码
 	if(upload!=null){
 		String filename=upload.getOriginalFilename();//文件名
@@ -116,10 +124,24 @@ public ModelAndView goupdate(ModelAndView mav,SysUsersInfo info1,MultipartFile u
 	System.out.println("跳转到修改页面！"+info1);
 	SysUsersInfo info = this.sysUsersInfoService.get(info1.getSid());
 	System.out.println("原有的数据"+info);
-	
+	String ssq1=info.getSaddressHome();
+	String[] ssq2=ssq1.split("-");
+	System.out.println(Arrays.toString(ssq2));
+	Ssq ssq=new Ssq(ssq2[0], ssq2[1], ssq2[2], ssq2[3]);
+	System.out.println(ssq.getprovince());
+//	System.out.println(ssq+"00");
+	/*System.out.println(ssq1);
+	String[] ssq=ssq1.split("-");
+	List list=new ArrayList();
+	for (String ss : ssq) {
+		list.add(ss);
+	}*/
+	/*System.out.println("list"+list);
+	System.out.println(Arrays.toString(ssq));*/
 	mav.addObject("p1", sysUsersInfoService.select1());
 	mav.addObject("p3", sysUsersInfoService.select3(info));
 	mav.addObject("u", info);
+	mav.addObject("ssq", ssq);
 	mav.setViewName("gs/ygupdate");
 	return mav;
 }
@@ -130,10 +152,11 @@ public ModelAndView goupdate(ModelAndView mav,SysUsersInfo info1,MultipartFile u
 public Result update(ModelAndView mav,
 		SysUsersInfo info,
 		MultipartFile upload,
-		HttpServletRequest req) throws IllegalStateException, IOException{
+		HttpServletRequest req,Ssq ssq) throws IllegalStateException, IOException{
 	System.out.println("修改"+info);
 	System.out.println("开始上传文件"+info);
 	System.out.println("开始上传文件111:"+upload);
+	info.setSaddressHome(ssq.toString());
 	//如果用户选择文件，那么执行上传代码
 	if(upload!=null){
 		String filename=upload.getOriginalFilename();//文件名

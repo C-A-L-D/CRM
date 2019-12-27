@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+   <!--  <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/> -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../css/font.css">
     <link rel="stylesheet" href="../css/xadmin.css">
@@ -98,33 +99,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           </div>
           
-          <!-- 3 -->
-           <div class="layui-row ">
-          <div class="layui-form-item layui-col-sm6" style="clear: none;">
-              <label for="L_pass" class="layui-form-label">
+          <!-- 111111111 -->
+<div class="layui-row ">
+      <div class="layui-form-item layui-col-sm12" style="clear: none;">
+            <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>家庭地址
               </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="saddressHome" name="saddressHome" required lay-verify="required"
-                  autocomplete="off" class="layui-input" >
-              </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
-          
-           <div class="layui-form-item layui-col-sm6" style="clear: none;">
+             <div class="layui-input-inline">
+              <select name="province" id="province" lay-filter="sf" lay-select="">
+                <option value="">请选择省份</option>
+              </select>
+            </div>     
+       <div class="layui-input-inline">
+              <select name="city" id="city" lay-filter="cs" lay-select="">
+                <option value="">请选择城市</option>
+              </select>
+       </div>
+           
+      <div class="layui-input-inline">
+              <select name="area" id="area" lay-filter="qu" lay-select="">
+                <option value="">请选择区</option>
+              </select>
+            </div>
+        
+</div>
+<!-- 2222 -->
+<div class="layui-row ">
+      <div class="layui-form-item layui-col-sm12" style="clear: none;">
+       <label for="L_email" class="layui-form-label">
+        <span class="x-red">*</span>详细地址
+       </label>
+       <div class="layui-input-inline">
+                  <input type="text" id="xxdz" name="xxdz" required lay-verify=""
+                  autocomplete="off" class="layui-input" style="width:500px" placeholder="请输入详细地址">
+        </div>
+        
+      </div>
+</div>
+
+          <!-- 11111111 -->
+          <!-- 3 -->
+           <div class="layui-row ">
+          <div class="layui-form-item layui-col-sm12" style="clear: none;">
+  
+           
               <label for="L_pass" class="layui-form-label">
                   <span class="x-red">*</span>现在地址
               </label>
               <div class="layui-input-inline">
                   <input type="text" id="saddressNow" name="saddressNow" required lay-verify="required"
-                  autocomplete="off" class="layui-input" >
+                  autocomplete="off" class="layui-input" style="width:500px">
               </div>
-              <div class="layui-form-mid layui-word-aux">
-                  <span class="x-red">*</span>
-              </div>
-          </div>
+              
+         
           </div>
           
           <!-- 4 -->
@@ -273,6 +300,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </div>
           </div> 
           
+          
+     
+          
                        <div class="layui-form-item layui-col-sm6" style="clear: none;">
               <label for="L_pass" class="layui-form-label">
                    		备注
@@ -310,8 +340,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        </div>   
       </form>
     </div>
+   
     
 <script type="text/javascript">
+//开局就把省到的内容传进去
+$(document).ready(function() {	
+	  $.ajax({
+            type: 'get',
+		    url: "<%=basePath %>js/city.json",
+		     dataType: "json",
+		     contentType:"application/json;charset=utf-8",
+            success: function (list) {
+           $.each(list, function(k, v) {
+           	
+           	 $("#province").append("<option value='"+v.name+"'>"+v.name+"</option>")
+           })
+          /*   console.log($("#province").html());  */
+           //渲染，相当于更新
+             form.render('select');
+                        }
+          }); 
+              
+         }); 
+
+
   layui.use(['form','layer'], function(){
             $ = layui.jquery;
           var form = layui.form
@@ -339,52 +391,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var fileobj = $("#upload")[0].files[0];
             var formData = new FormData();
             formData.append("upload", fileobj);
+            /*  var sf = $("#province").find("option:selected").val();
+             var cs = $("#city").find("option:selected").val();
+             var qu = $("#area").find("option:selected").val();
+             formData.append("sf", sf);
+             formData.append("cs", cs);
+             formData.append("qu", qu); */
             var  params=data.field;
             Object.keys(params).forEach((key) => {
 		        formData.append(key, params[key]);
 		        
 		    });
+		    console.log(formData)
 		    /* var jsonData = {};
             formData.forEach((value, key) => jsonData[key] = value);
             console.log(jsonData); */
-             $.ajax({
-		        type: 'post',
-		        url: "ygtj.do",
-		        data: formData,
-		        processData: false,//用于对data参数进行序列化处理 这里必须false
-                contentType: false, //必须
-		        success: function (res) {
-		            if (res.status == 200) {
-		                layer.alert(res.msg, {icon: 6}, function () {
-		                    // 获得frame索引
-		                    var index = parent.layer.getFrameIndex(window.name);
-		                    //关闭当前frame
-		                    parent.layer.close(index);
-		                   //刷新页面
-		                    parent.location.reload();
-		                });
-		                 //parent.layer.reload();
-		               
-		            } else {
-		                layer.alert(res.msg, {icon: 5}, function () {
-		                    // 获得frame索引
-		                    var index = parent.layer.getFrameIndex(window.name);
-		                    //关闭当前frame
-		                    parent.layer.close(index);
-		                    //刷新页面
-		                    parent.location.reload();
-		                });
-		            }
-		        }
-		    }); 
+           $.ajax({
+        type: 'post',
+        url: "ygtj.do",
+        data: formData,
+        processData: false,//用于对data参数进行序列化处理 这里必须false
+        contentType: false, //必须
+        success: function (res) {
+            if (res.status == 200) {
+                layer.alert(res.msg, {icon: 6}, function () {
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+                   //刷新页面
+                    parent.location.reload();
+                });
+                 //parent.layer.reload();
+               
+            } else {
+                layer.alert(res.msg, {icon: 5}, function () {
+                    // 获得frame索引
+                    var index = parent.layer.getFrameIndex(window.name);
+                    //关闭当前frame
+                    parent.layer.close(index);
+                    //刷新页面
+                    parent.location.reload();
+                });
+            }
+        }
+    }); 
 		    
 		    return false;
           });
           
-          //
+          //职务选择根据公司的改变而改变
          form.on('select(gs)', function(data){
          console.log(data);
-       
+           
           layer.msg($("#gongsiid").val()); 
         var   id=$("#gongsiid").val(); 
        /*  alert($("#gongsiid").val()) */
@@ -407,7 +466,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            }); 
               
          }); 
-          
+         
+         
+         //市
+         form.on('select(sf)', function(data){
+           $("#area").html("")            
+            $("#area").append("<option value=''>请选择区域</option>")
+         
+            var sf = $("#province").find("option:selected").val();
+            /*  console.log(sf); */
+          $.ajax({
+            type: 'get',
+		    url: "<%=basePath %>js/city.json",
+		     dataType: "json",
+		     contentType:"application/json;charset=utf-8",
+            success: function (list) {
+            $("#city").html("")            
+            $("#city").append("<option value=''>请选择城市</option>")
+            $.each(list, function(k, v) {
+           	$.each(v.cityList, function(i, v1) {
+           	if(v.name==sf){
+           	console.log(v1.name)
+           	$("#city").append("<option value='"+v1.name+"'>"+v1.name+"</option>")
+           	}
+           		
+           	})
+
+           
+           }) 
+             form.render('select');
+            
+     
+               }
+          }); 
+              
+         }); 
+         
+         //区
+        form.on('select(cs)', function(data){        
+            var cs = $("#city").find("option:selected").val();
+             console.log(cs);
+           $.ajax({
+            type: 'get',
+		    url: "<%=basePath %>js/city.json",
+		     dataType: "json",
+		     contentType:"application/json;charset=utf-8",
+            success: function (list) {
+            $("#area").html("")            
+            $("#area").append("<option value=''>请选择区域</option>")
+            $.each(list, function(k, v) {
+           	$.each(v.cityList, function(i, v1) {
+           	if(v1.name==cs){
+           	console.log(v1.areaList)
+           	for(a in v1.areaList){
+           	 $("#area").append("<option value='"+v1.areaList[a]+"'>"+v1.areaList[a]+"</option>")
+           	}
+           /* 	$("#city").append("<option value='"+v1.name+"'>"+v1.name+"</option>") */
+           	}
+           		
+           	})
+
+           
+           }) 
+             form.render('select');
+            
+     
+               }
+          });  
+              
+         }); 
+           
         });
 </script>
   </body>

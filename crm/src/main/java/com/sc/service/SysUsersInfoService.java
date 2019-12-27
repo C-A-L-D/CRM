@@ -43,6 +43,7 @@ public interface SysUsersInfoService {
     public List<SysGongsiinfo > select1();
     //查询职务
     public List<SysJobinfo > select3(SysUsersInfo info);
+  
     //登录
     public SysUsersInfo  login(SysUsersInfo u);
     //导出excel

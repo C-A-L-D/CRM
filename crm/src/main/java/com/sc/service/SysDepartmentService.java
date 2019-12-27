@@ -23,10 +23,12 @@ public interface SysDepartmentService {
     //获取对象
     public SysDepartment get(BigDecimal did);
     
-    //查询
+    //查询部门
     public List<SysDepartment > select();
-
+    //查询公司
     public List<SysGongsiinfo > select1();
+   
+    public PageInfo<SysDepartment> selectbmzwyg(Integer pageNum,Integer pageSize,BigDecimal did);
     
   //导出excel
     public XSSFWorkbook show();

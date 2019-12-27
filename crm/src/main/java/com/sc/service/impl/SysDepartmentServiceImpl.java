@@ -74,6 +74,14 @@ SysGongsiinfoMapper sysGongsiinfoMapper;
 	
 		return	this.sysGongsiinfoMapper.selectByExample(null);
 	}
+	
+	@Override
+	public PageInfo<SysDepartment> selectbmzwyg(Integer pageNum, Integer pageSize,BigDecimal did){
+		List<SysDepartment> list =this.sysDepartmentMapper.selectbmzwyg(did);
+		 PageInfo<SysDepartment> page=new PageInfo<SysDepartment>(list);			
+			return page;
+		
+	}
 
 	@Override
 	public PageInfo<SysDepartment> selectpage(Integer pageNum, Integer pageSize,SysDepartment info1) {
@@ -95,7 +103,10 @@ SysGongsiinfoMapper sysGongsiinfoMapper;
 		
 		return page;
 	}
-	//导出excel
+	
+	
+	
+	 //导出excel
 	@Override
     public XSSFWorkbook show() {
         List<SysDepartment> list = sysDepartmentMapper.selectByExample(null);//查出数据库数据
