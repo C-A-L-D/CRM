@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="<%=basePath %>css/font.css">
     <link rel="stylesheet" href="<%=basePath %>css/xadmin.css">
+    <link rel="stylesheet" href="<%=basePath %>css/layuiadmin.css">
     <script src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="<%=basePath %>lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="<%=basePath %>js/xadmin.js"></script>
@@ -73,25 +74,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
           
           
-          <div class="layui-form-item">
+          <div class="layui-form toolbar layui-form-item">
           	<div class="layui-inline">
-              <label class="layui-form-label">
-              	<span class="x-red">*</span>持有者编号
-              </label>
-              <div class="layui-input-inline">
-                <input type="text" name="sid" id="sssid" value="${user.sid }" autocomplete="on" class="layui-input" required="required">
-              </div>
-            </div>
-            <div class="layui-inline">
               <label class="layui-form-label">
               	<span class="x-red">*</span>持有者姓名
               </label>
               <div class="layui-input-inline">
-                <input type="text" name="sname" id="sname" value="${user.sysUsersInfo.sname }" lay-verify="ssname" autocomplete="on" class="layui-input" readonly="readonly" required="required">
+              	<select id="branchCompanyId" name="sname" id="sssid" class="layui-select" lay-filter="pp" lay-search>
+     				<option value="${user.sysUsersInfo.sname }">${user.sysUsersInfo.sname }</option>
+     				<c:forEach items="${list }" var="l">
+     					<option value="${l.sname }">${l.sname }</option>
+     				</c:forEach>
+				</select>
+              </div>
+            </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">
+              	<span class="x-red">*</span>持有者编号
+              </label>
+              <div class="layui-input-inline">
+                <input type="text" name="sid" id="ssid" value="${user.sysUsersInfo.sid }" lay-verify="ssname" autocomplete="on" class="layui-input" readonly="readonly" required="required">
               </div>
             </div>
           </div>
           
+   
             <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
               <div class="layui-footer" style="left: 0;">
@@ -116,7 +123,7 @@ layui.use(['form','layer'], function(){
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);
-            if($("#uname").val()==""||$("#sssid").val()==""||$("#sname").val()=="") {
+            if($("#uname").val()==""||$("#sssid").val()==""||$("#ssid").val()=="") {
             	layer.alert("必填项不能为空！", {icon: 5});
             	return false;
             }
@@ -152,19 +159,18 @@ layui.use(['form','layer'], function(){
           
           
           //监听值的改变
-          $("#sssid").on('input propertychange', function(data){
+          form.on('select(pp)', function(data){
             console.log(data);
             $.ajax({
 		        type: 'post',
-		        url: "getNewValue.do?sid="+$("#sssid").val(),
+		        url: "getNewValue.do?sname="+data.value,
 		        data: data.field,
 		        success: function (res) {
 		            if (res.status == 200) {
-		                $("#sname").val(res.msg)
-		               
+		                $("#ssid").val(res.msg)
 		            }
 		            else {
-		            	$("#sname").val(res.msg)
+		            	$("#ssid").val(res.msg)
 		            }
 		        }
 		    });

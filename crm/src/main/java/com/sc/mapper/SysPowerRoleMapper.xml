@@ -3,9 +3,9 @@
 <mapper namespace="com.sc.mapper.SysPowerRoleMapper" >
 <resultMap type="SysPowerRole" id="sysRPMapper" autoMapping="true">
       <id column="ID" property="id"/>
-      <association property="sysPowerinfo" javaType="SysPowerinfo" autoMapping="true">
+      <collection property="sysPowerinfo" ofType="SysPowerinfo" autoMapping="true">
           <id column="PID" property="pid"/>
-      </association>
+      </collection>
    </resultMap>
 	<select id="selectRP" resultMap="sysRPMapper">
 		SELECT * FROM SYS_POWER_ROLE pr

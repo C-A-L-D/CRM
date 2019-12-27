@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <th>日志编号</th>
             <th>用户编号</th>
             <th>访问者IP</th>
-            <th>权限</th>
+            <th>执行操作权限</th>
             <th>访问时间</th>
             <th>公司编号</th>
             <th>操作</th>
@@ -98,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='${r.lid }'><i class="layui-icon">&#xe605;</i></div>
             </td>
             <td>${r.lid }</td>
-            <td>${r.uid }</td>
+            <td><fmt:formatNumber type="number" value="${r.uid%10 }" maxFractionDigits="0"/></td>
             <td style="width: 18%;">${r.ip }</td>
             <td style="width: 13%;">
             	${r.power }

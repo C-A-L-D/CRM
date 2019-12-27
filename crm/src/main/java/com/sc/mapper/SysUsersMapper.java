@@ -41,4 +41,6 @@ public interface SysUsersMapper {
     SysUsers selectUsersAndRoleAndUsersInfoOne(BigDecimal userId);
     
     SysUsers selectUsersAndRoleAndUsersInfoOne2(BigDecimal userId);
+    
+    List<SysUsers> selectAllUsers(@Param("gongsiid") BigDecimal gongsiid);
 }
