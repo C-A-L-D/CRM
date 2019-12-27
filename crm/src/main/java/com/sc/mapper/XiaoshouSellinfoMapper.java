@@ -28,4 +28,6 @@ public interface XiaoshouSellinfoMapper {
     int updateByPrimaryKeySelective(XiaoshouSellinfo record);
 
     int updateByPrimaryKey(XiaoshouSellinfo record);
+    
+    List<XiaoshouSellinfo> selectBySid(BigDecimal sid);
 }

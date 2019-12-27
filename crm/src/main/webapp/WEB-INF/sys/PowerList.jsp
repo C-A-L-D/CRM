@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <a title="添加分栏" class="layui-btn"  onclick="x_admin_show('创建','goAddPColumn.do')" href="javascript:;">
                <i class="layui-icon"></i>增加分栏
           </a>
-          <a title="添加分栏" class="layui-btn"  onclick="x_admin_show('创建','goAddPower.do')" href="javascript:;">
+          <a title="添加权限" class="layui-btn"  onclick="x_admin_show('创建','goAddPower.do')" href="javascript:;">
                <i class="layui-icon"></i>增加权限
           </a>
         </form>

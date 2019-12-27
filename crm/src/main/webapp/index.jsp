@@ -28,30 +28,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="index.html">L-admin v2.0</a></div>
+        <div class="logo"><a href="index.html">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;智慧--->未来</a></div>
         <div class="left_open">
             <i title="展开左侧栏" class="iconfont">&#xe699;</i>
         </div>
-        <ul class="layui-nav left fast-add" lay-filter="">
+        
+        <ul class="layui-nav right" lay-filter="" style="margin-right: 35px;">
           <li class="layui-nav-item">
-            <a href="javascript:;">+新增</a>
+            <a href="javascript:;">${nowuser.uname }</a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onClick="x_admin_show('资讯','http://www.baidu.com')"><i class="iconfont">&#xe6a2;</i>资讯</a></dd>
-              <dd><a onClick="x_admin_show('图片','http://www.baidu.com')"><i class="iconfont">&#xe6a8;</i>图片</a></dd>
-               <dd><a onClick="x_admin_show('用户','http://www.baidu.com')"><i class="iconfont">&#xe6b8;</i>用户</a></dd>
+              <dd><a  href="<%=basePath %>logout.do">切换帐号</a></dd>
+               <dd><a  href="<%=basePath %>logout.do">退出</a></dd>
             </dl>
           </li>
-        </ul>
-        <ul class="layui-nav right" lay-filter="">
-          <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a onClick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
-              <dd><a onClick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-              <dd><a href="login.html">退出</a></dd>
-            </dl>
-          </li>
-          <li class="layui-nav-item to-index"><a href="#">前台首页</a></li>
         </ul>
         
     </div>
@@ -68,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li><a _href="html/welcome.html"><i class="iconfont">&#xe6a7;</i><cite>控制台</cite></a></li >
+                    <li><a _href="welcome.jsp"><i class="iconfont">&#xe6a7;</i><cite>公司海报</cite></a></li >
                 </ul>
             </li>
              <li >
@@ -85,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
 
               <li>
-                <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>库存-陈卓越</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
+                <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>库存管理</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
                     <li><a _href="storeWhinfo/listpageSwi.do"><i class="iconfont">&#xe6a7;</i><cite>仓库信息</cite></a></li>
                     <li><a _href="storeGinfo/listpage.do"><i class="iconfont">&#xe6a7;</i><cite>仓库商品信息</cite></a></li>
@@ -95,13 +84,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
             
             
-            
-            
-            
              <li >
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
-                    <cite>客户管理-金鸣</cite>
+                    <cite>客户管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
@@ -113,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6f5;</i>
-                    <cite>办公管理-黄静怡</cite>
+                    <cite>办公管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
@@ -167,43 +153,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li >
                 </ul>
             </li>
-            <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>管理员管理</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="html/admin-list.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>管理员列表</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="html/admin-role.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>角色管理</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="html/admin-cate.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限分类</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="html/admin-rule.html">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>权限管理</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>            
+                 
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>
-                    <cite>公司管理-朱志远</cite>
+                    <cite>公司管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
@@ -265,7 +219,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </a>
                     </li>
                     <li>
-                        <a _href="html/echarts5.html">
+                        <a _href="log/listAll.do">
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>系统日志</cite>
                         </a>

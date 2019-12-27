@@ -48,9 +48,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="layui-row">
 		<form class="layui-form layui-col-md12 x-so">
 			<input type="text" id="whinfo" placeholder="请输入要查询的仓库信息......" autocomplete="off" class="layui-input" style="width:750px;">
-			<button type="button" class="btn layui-btn layui-btn-normal" onclick="postinfo($('#whinfo').val())"><i class="layui-icon">&#xe615;</i>查找</button>  
-			<button type="reset" class="layui-btn layui-btn-normal"><i class="layui-icon">&#xe669;</i>清空</button> 
-			<a  class="layui-btn" href="../CRM/store/jsp/addSwi.jsp" style="float:right"><i class="layui-icon">&#xe654;</i></a> 
+			<button type="button" class="btn layui-btn" onclick="postinfo($('#whinfo').val())"><i class="layui-icon">&#xe615;</i>查找</button>  
+			<button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
+			<a  class="layui-btn #5FB878" href="../CRM/store/jsp/addSwi.jsp" style="float:right"><i class="layui-icon">&#xe654;</i></a> 
 		</form>
 	</div>
 
@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      				<center>
 	      					<div class="layui-btn-group">
 	      						<a type="button" class="layui-btn layui-btn-sm layui-btn-normal" onclick="getGoods(${swi.whid })"><i class="layui-icon">&#xe65f;</i></a>
-	          					<a type="button" class="layui-btn layui-btn-sm" href="storeWhinfo/selectSwi.do?whid=${swi.whid }"><i class="layui-icon">&#xe642;</i></a>
+	          					<a type="button" class="layui-btn layui-btn-sm layui-btn-normal" href="storeWhinfo/selectSwi.do?whid=${swi.whid }"><i class="layui-icon">&#xe642;</i></a>
 	          					<button type="button" class="btn layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck(${swi.whid})"><i class="layui-icon">&#xe640;</i></button>
 	          				</div>
 	          			</center>

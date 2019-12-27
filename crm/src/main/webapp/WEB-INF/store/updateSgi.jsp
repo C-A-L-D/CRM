@@ -33,12 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="layui-card">
         <div class="layui-card-header"><h2>修改库存商品信息</h2></div>
         <form class="layui-form" action="storeGinfo/updateSgi.do">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">商品编号</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="gid" readonly="readonly" value="${selected.gid }" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
+        <input type="hidden" name="gid" readonly="readonly" value="${selected.gid }" autocomplete="off">
                 <div class="layui-form-item">
                     <label class="layui-form-label">商品名称</label>
                     <div class="layui-input-block">
@@ -102,13 +97,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="layui-form-item">
                     <label class="layui-form-label">公司编号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="cid" readonly="readonly" value="${selected.cid}" autocomplete="off" class="layui-input">
+                        <input type="text" name="cid" readonly="readonly"  placeholder="${selected.cid}（不允许更改）" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">最后修改时间</label>
                     <div class="layui-input-block">
-                        <input type="text" name="lattime" placeholder="${selected.lasttime}" autocomplete="off" class="layui-input">
+                        <input type="text" name="lattime" readonly="readonly" placeholder="${selected.lasttime}（修改后自动生成）" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">

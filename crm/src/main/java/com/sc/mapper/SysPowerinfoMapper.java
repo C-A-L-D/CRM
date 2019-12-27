@@ -32,4 +32,5 @@ public interface SysPowerinfoMapper {
     List<SysPowerinfo> selectAllPowerAndCol();
     
     List<SysPowerinfo> selectPowerChecked(BigDecimal rid);
+   
 }

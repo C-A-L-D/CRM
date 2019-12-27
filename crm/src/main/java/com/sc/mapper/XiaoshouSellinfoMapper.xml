@@ -174,6 +174,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  
+   <select id="selectBySid" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    	select * from XIAOSHOU_SELLINFO
+    	where SID = #{sid,jdbcType=DECIMAL}
+  </select>
+  
   <update id="updateByExampleSelective" parameterType="map" >
     update XIAOSHOU_SELLINFO
     <set >

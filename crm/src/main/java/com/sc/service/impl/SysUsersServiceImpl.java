@@ -1,6 +1,7 @@
 package com.sc.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.sc.entity.SysUsers;
 import com.sc.entity.SysUsersExample;
 import com.sc.entity.SysUsersExample.Criteria;
 import com.sc.entity.SysUsersInfo;
+import com.sc.entity.SysUsersInfoExample;
 import com.sc.entity.SysUsersRole;
 import com.sc.mapper.SysGongsiinfoMapper;
 import com.sc.mapper.SysUsersInfoMapper;
@@ -132,9 +134,9 @@ public class SysUsersServiceImpl implements SysUsersService{
 	}
 
 	@Override
-	public SysUsersInfo selectUsersInfoOne(BigDecimal sid) {
+	public SysUsersInfo selectu(String sname) {
 		// TODO Auto-generated method stub
-		return sysUsersInfoMapper.selectByPrimaryKey(sid);
+		return sysUsersInfoMapper.selectu(sname);
 	}
 
 	@Override
@@ -180,6 +182,12 @@ public class SysUsersServiceImpl implements SysUsersService{
 		Criteria criteria = example.createCriteria();
 		criteria.andUserIdEqualTo(sysUsers.getUserId());
 		sysUsersMapper.deleteByExample(example);
+	}
+
+	@Override
+	public ArrayList<SysUsers> selectAllUsers(BigDecimal gongsiid) {
+		// TODO Auto-generated method stub
+		return (ArrayList<SysUsers>) sysUsersMapper.selectAllUsers(gongsiid);
 	}
 
 }

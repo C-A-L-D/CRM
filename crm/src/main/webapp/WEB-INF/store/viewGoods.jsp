@@ -72,10 +72,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      		<td>
 	      		<center>
 	      			<div class="layui-btn-group">
-	      				<button type="button" onclick="postinfo(${sgi.gid},'${sgi.gname}')" class="layui-btn layui-btn-sm layui-btn-normal">
+	      				<button type="button" onclick="turninfo(${sgi.gid})" class="layui-btn layui-btn-sm layui-btn-normal">
 	          				<i class="layui-icon">&#xe65f;</i>
 	          			</button>
-	          			<a type="button" class="layui-btn layui-btn-sm" href="storeGinfo/selectSgi.do?gid=${sgi.gid}"><i class="layui-icon">&#xe642;</i></a>
+	          			<button type="button" class="layui-btn layui-btn-sm" onclick="postUpdate(${sgi.gid})"><i class="layui-icon">&#xe642;</i></button>
 	          			<button type="button" class="btn layui-btn layui-btn-sm layui-btn-danger" onclick="delCheck(${sgi.gid})">
 	          				<i class="layui-icon">&#xe640;</i>
 	          			</button>

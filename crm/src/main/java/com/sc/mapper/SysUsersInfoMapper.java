@@ -15,6 +15,10 @@ public interface SysUsersInfoMapper {
 
 	//查询接受者姓名-办公
 	SysUsersInfo selectu(String sname);
+		
+	//查询同公司员工信息-办公
+	List<SysUsersInfo> selectusergc(SysUsersInfo record);
+
 	
 	
     int countByExample(SysUsersInfoExample example);
@@ -38,4 +42,5 @@ public interface SysUsersInfoMapper {
     int updateByPrimaryKeySelective(SysUsersInfo record);
 
     int updateByPrimaryKey(SysUsersInfo record);
+    
 }
