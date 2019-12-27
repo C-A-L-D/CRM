@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <input type="text" id="searchinfo" placeholder="请输入要查询的订单的信息......" autocomplete="off" class="layui-input" style="width:750px;">
 <button type="button" class="layui-btn" onclick="postinfo($('#searchinfo').val())"><i class="layui-icon">&#xe615;</i>查找</button>  
 <button type="reset" class="layui-btn"><i class="layui-icon">&#xe669;</i>清空</button> 
-<a style="float:right;" class="layui-btn" href="../CRM/store/jsp/addSwi.jsp"><i class="layui-icon">&#xe654;</i></a> 
+<a style="float:right;" class="layui-btn" href="../CRM/store/jsp/addSout.jsp"><i class="layui-icon">&#xe654;</i></a> 
 </form>
 </div>
 

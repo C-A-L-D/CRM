@@ -81,13 +81,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 <c:forEach items="${listpage.list}" var="sinfo">
 		 
 		 <c:set var="flag" scope="session" value="false"/>
-		 <c:forEach items="${sessionScope.outofwh}" var="id" end="${exitId}">
+		 <c:forEach items="${sessionScope.outofwh}" var="id">
 		 	<c:if test="${id==sinfo.ssid}">
 	  			<c:set var="flag" scope="session" value="true"/>
-	          	<c:set var="exitId" value="0"></c:set>
 	        </c:if>
 	    </c:forEach>
-	        
 	  		<tr>
 		  		<td><center>${sinfo.ssid}</center></td>
 		  		<td><center>${sinfo.sid}</center></td>
@@ -109,12 +107,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      		<td>
 	      		<center>
 	      		<div class="layui-btn-container">
-	      			<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick="turnto(${sinfo.ssid })"><i class="layui-icon">&#xe642;</i></button>
+	      			
 	          		
 	          		<c:if test="${sessionScope.flag eq 'true'}">
+	          			<button type="button" class="layui-btn layui-btn-disabled layui-btn-sm" ><i class="layui-icon">&#xe642;</i></button>
 	          			<button type="button" class="layui-btn layui-btn-sm layui-btn-disabled"><i class="layui-icon">&#xe609;</i></button>
 	          		</c:if>
 	          		<c:if test="${sessionScope.flag eq 'false'}">
+	          			<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick="turnto(${sinfo.ssid })"><i class="layui-icon">&#xe642;</i></button>
 	          			<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick="postinfo(${sinfo.ssid},${sinfo.sid},${sinfo.gid },${sinfo.gnum})"><i class="layui-icon">&#xe609;</i></button>
 	          		</c:if>
 	          	</div>

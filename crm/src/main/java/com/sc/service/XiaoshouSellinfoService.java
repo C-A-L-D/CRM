@@ -12,4 +12,5 @@ public interface XiaoshouSellinfoService {
 	public PageInfo<XiaoshouSellinfo> selectSid(Integer pageNum,Integer pageSize,BigDecimal sid);
 	public void outSinfo(XiaoshouSellinfo xiaoshouSellinfo);
 	public void delete(BigDecimal id);
+	public void add(XiaoshouSellinfo xiaoshouSellinfo);
 }

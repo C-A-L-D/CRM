@@ -1,6 +1,7 @@
 package com.sc.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import com.sc.entity.Result;
 import com.sc.entity.StoreGinfo;
 import com.sc.entity.StoreWhinfo;
+import com.sc.service.StoreGinfoService;
 import com.sc.service.StoreWhinfoService;
 
 @Controller
@@ -21,6 +23,9 @@ import com.sc.service.StoreWhinfoService;
 public class StoreWhinfoController {
 	@Autowired
 	StoreWhinfoService storeWhinfoService;
+	
+	@Autowired
+	StoreGinfoService storeGinfoService;
 	
 	@RequestMapping("/listpageSwi.do")
 	@ResponseBody
@@ -35,6 +40,54 @@ public class StoreWhinfoController {
 		return mav;
 	}
 	
+	@RequestMapping("/hasSgi.do")
+	@ResponseBody
+	public Result hasSgi(Integer whid) {
+		if(storeGinfoService.hasSgi(BigDecimal.valueOf(whid))) {
+			return new Result(1,"hasSgi");
+		}
+		return new Result(0,"hasSgi");
+	}
+	
+	@RequestMapping("/moveSgi.do")
+	@ResponseBody
+	public Result moveSgi(ModelAndView mav,Integer rswhid,Integer towhid) {
+		if(rswhid==null||storeWhinfoService.selectObj(BigDecimal.valueOf(rswhid))==null) {
+			System.err.println("空指针！");
+			return new Result(500,"status"); //未知错误
+		}
+		ArrayList<StoreGinfo> listsgi = storeGinfoService.selectByWhid(BigDecimal.valueOf(rswhid));
+		ArrayList<BigDecimal> blist = storeWhinfoService.selectWhid();
+
+		if(towhid==null||!blist.contains(BigDecimal.valueOf(towhid))) {
+			blist.remove(BigDecimal.valueOf(rswhid));
+			if(blist.isEmpty()) {
+				System.err.println("没有可转移的仓库！");
+				return new Result(400,"status");  //没有新仓库
+			}else {
+				storeWhinfoService.del(BigDecimal.valueOf(rswhid));
+				for(StoreGinfo sgi:listsgi) {
+					sgi.setWhid(blist.get(0));
+					storeGinfoService.update(sgi);
+					System.err.print(sgi.getWhid()+"||");
+				}
+				if(towhid!=null&&!blist.contains(BigDecimal.valueOf(towhid))) {
+					System.err.println("自动转移到新仓库"+blist.get(0));
+					return new Result(301,"status");  //输入的仓库不存在，转移到新仓库
+				}
+				System.err.println("自动转移到新仓库"+blist.get(0));
+				return new Result(300,"status");  //转移到新仓库
+			}
+		}
+		storeWhinfoService.del(BigDecimal.valueOf(rswhid));
+		for(StoreGinfo sgi:listsgi) {
+			sgi.setWhid(BigDecimal.valueOf(towhid));
+			storeGinfoService.update(sgi);
+			System.err.print(sgi.getWhid()+"||");
+		}
+		System.err.println("将"+rswhid+"转移到"+towhid+"成功！");
+		return new Result(200,"status");
+	}
 	
 	@RequestMapping("/listpageSgi.do")
 	@ResponseBody

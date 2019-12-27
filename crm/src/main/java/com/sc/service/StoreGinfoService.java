@@ -15,4 +15,6 @@ public interface StoreGinfoService {
 	public StoreGinfo getsgi(BigDecimal gid);
 	public StoreGinfo selectObj(BigDecimal id);
 	public ArrayList<BigDecimal> selectGid();
+	public boolean hasSgi(BigDecimal whid);
+	public ArrayList<StoreGinfo> selectByWhid(BigDecimal whid);
 }

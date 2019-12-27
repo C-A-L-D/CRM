@@ -85,11 +85,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </li>
 
               <li>
-                <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>库存-陈卓越</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
+                <a href="javascript:;"><i class="iconfont">&#xe6f6;</i><cite>库存</cite><i class="iconfont nav_right">&#xe6a7;</i></a>
                 <ul class="sub-menu">
                     <li><a _href="storeWhinfo/listpageSwi.do"><i class="iconfont">&#xe6a7;</i><cite>仓库信息</cite></a></li>
                     <li><a _href="storeGinfo/listpage.do"><i class="iconfont">&#xe6a7;</i><cite>仓库商品信息</cite></a></li>
-                    <li><a _href="storeSinfo/listpageSinfo.do"><i class="iconfont">&#xe6a7;</i><cite>采购详情</cite></a></li>
+                    <li><a _href="storeSinfo/cgdlistpage.do"><i class="iconfont">&#xe6a7;</i><cite>采购详情</cite></a></li>
                     <li><a _href="storeSout/listpageSout.do"><i class="iconfont">&#xe6a7;</i><cite>销售详情</cite></a></li>
                 </ul>
             </li>

@@ -63,4 +63,12 @@ public class XiaoshouSelloutServiceImpl implements XiaoshouSelloutService {
 		xiaoshouSelloutMapper.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public void add(XiaoshouSellout xiaoshouSellout) {
+		if(xiaoshouSellout!=null) {
+			this.xiaoshouSelloutMapper.insert(xiaoshouSellout);
+		}
+		return;
+	}
+
 }
