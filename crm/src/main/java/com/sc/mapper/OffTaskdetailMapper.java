@@ -7,19 +7,19 @@ import org.apache.ibatis.annotations.Param;
 
 public interface OffTaskdetailMapper {
 	//查询接收的任务
-	public List<OffTaskdetail> selectaccept();
+	public List<OffTaskdetail> selectaccept(Long id);
 	
 	//模糊查询-标题
-	public List<OffTaskdetail> selectbytitle(String tasktitle);
+	public List<OffTaskdetail> selectbytitle(@Param("tasktitle")String tasktitle,@Param("cid")Long cid);
 	
 	//模糊查询-内容
-	public List<OffTaskdetail> selectbycontent(String taskdetail);
+	public List<OffTaskdetail> selectbycontent(@Param("taskdetail")String taskdetail,@Param("cid")Long cid);
 	
 	//模糊查询-发布人
-	public List<OffTaskdetail> selectbyuser(String taskdetail);
+	public List<OffTaskdetail> selectbyuser(@Param("taskpublisher")String taskpublisher,@Param("cid")Long cid);
 		
 	//模糊查询-考核指标
-	public List<OffTaskdetail> selectbytarget(String assesstarget);
+	public List<OffTaskdetail> selectbytarget(@Param("assesstarget")String assesstarget,@Param("cid")Long cid);
 	
     int countByExample(OffTaskdetailExample example);
 

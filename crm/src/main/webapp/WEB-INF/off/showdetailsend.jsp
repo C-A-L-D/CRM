@@ -45,9 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="n"  readonly="readonly"
-                        autocomplete="off" class="layui-input" >
+                        autocomplete="off" class="layui-input" style="width:450px">
                         
-                        <div id="name" style="margin-top:-30px;margin-left:10px">
+                        <div id="name" style="margin-top:-30px;margin-left:10px;width:400px" >
                         <c:forEach items="${offmess.offMessdetail}" var="d" varStatus="index">
                      ${d.uname}
                     <c:if test="${index.last==false}">

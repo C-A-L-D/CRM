@@ -31,7 +31,7 @@ public class OffMessServiceImpl implements OffMessService {
 	@Autowired
 	SysUsersInfoMapper sysUsersInfoMapper;
 	
-	//分页查询-短消息-已接收
+	//分页查询-短消息-已接收  1
 	@Override
 	public PageInfo<OffMessdetail> selectpage(Integer pageNum, Integer pageSize,OffMessdetail detail) {
 		//设置分页数据，开始分页
@@ -45,7 +45,7 @@ public class OffMessServiceImpl implements OffMessService {
 		return page;
 	}
 
-	//删除短信
+	//删除短信   1
 	@Override
 	public void deleteMess(OffMessdetail mess) {
 		if(mess!=null){
@@ -53,13 +53,13 @@ public class OffMessServiceImpl implements OffMessService {
 		}	
 	}
 
-    //查看短消息详情
-	@Override
+    //查看短消息详情  1
+	@Override 
 	public OffMessdetail showdetail(OffMessdetail mess) {
 		return this.offMessdetailMapper.showdetail(mess.getDetailid());
 	}
 
-    //回复短信
+    //回复短信   1
 	@Override
 	public void huifu(OffMess mess) {
 		if(mess!=null){
@@ -67,7 +67,7 @@ public class OffMessServiceImpl implements OffMessService {
 			}	
 	}
 
-    //回复短消息-详情
+    //回复短消息-详情  1
 	@Override
 	public void huifuone(OffMessdetail detail) {
 		if(detail!=null){
@@ -75,7 +75,7 @@ public class OffMessServiceImpl implements OffMessService {
 			}	
 	}
 
-    //更改短消息状态
+    //更改短消息状态   1
 	@Override
 	public void  updatestate(OffMessdetail detail) {
 		if(detail!=null){
@@ -83,7 +83,7 @@ public class OffMessServiceImpl implements OffMessService {
 		}
 	}
 
-    //查看发送人信息
+    //查看发送人信息   1
 	@Override
 	public SysUsersInfo selectByuid(BigDecimal sid) {
 		
@@ -91,7 +91,7 @@ public class OffMessServiceImpl implements OffMessService {
 	}
 
 	
-    //查看接收人信息
+    //查看接收人信息  1
 	@Override
 	public SysUsersInfo selectu(String uname){
 		SysUsersInfo user = this.sysUsersInfoMapper.selectu(uname);
@@ -100,24 +100,27 @@ public class OffMessServiceImpl implements OffMessService {
 		return user;
 	}
 
-	//分页查询-发送的短信
+	//分页查询-发送的短信   1
 		@Override
 		public PageInfo<OffMess> selectpagesend(Integer pageNum, Integer pageSize,String name) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 		    //查询当前页的集合数据	
 			OffMessExample e=new OffMessExample();
+			e.setOrderByClause("LASTTIME desc");
 	        Criteria c=e.createCriteria();
 	        if(name!=null){
 	        	c.andSenderEqualTo(name);
 	        }
 	        List<OffMess> list =  this.offMessMapper.selectByExample(e);
+	  
 			//封装成pageinfo对象
 			PageInfo<OffMess> page=new PageInfo<OffMess>(list);
 			System.out.println("11"+page);
 			return page;
 		}
 		
+		//  1
 		public List<OffMessdetail>  selectpagesend1(Long messid){
 			OffMessdetailExample e=new OffMessdetailExample();
              com.sc.entity.OffMessdetailExample.Criteria c=e.createCriteria();
@@ -140,39 +143,29 @@ public class OffMessServiceImpl implements OffMessService {
 	public SysUsersInfo receuser(BigDecimal receiverid) {
 		return sysUsersInfoMapper.selectByPrimaryKey(receiverid);		
 	}
+
 	
-	//模糊查询-标题
+	//分页-模糊查询-标题  1
 	@Override
-	public List<OffMessdetail> selectbytitle(String title) {	
-		return this.offMessdetailMapper.selectbytitle(title);
-	}
-	
-	//分页-模糊查询-标题
-	@Override
-	public PageInfo<OffMessdetail> selectpagetitle(Integer pageNum, Integer pageSize,String title) {
+	public PageInfo<OffMessdetail> selectpagetitle(Integer pageNum, Integer pageSize,String title,Long uid) {
 		//设置分页数据，开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		//查询当前页的集合数据	
-		List<OffMessdetail> list = this.offMessdetailMapper.selectbytitle(title);
+		List<OffMessdetail> list = this.offMessdetailMapper.selectbytitle(title,uid);
 				//封装成pageinfo对象
 				PageInfo<OffMessdetail> page=new PageInfo<OffMessdetail>(list);
 				System.out.println("11"+page);
 				return page;
 	}
 	
-	   //模糊查询-内容
+
+		//分页-模糊查询-内容    1
 		@Override
-		public List<OffMessdetail> selectbycontent(String content) {
-			return this.offMessdetailMapper.selectbycontent(content);
-		}
-		
-		//分页-模糊查询-内容
-		@Override
-		public PageInfo<OffMessdetail> selectpagecontent(Integer pageNum, Integer pageSize,String content) {
+		public PageInfo<OffMessdetail> selectpagecontent(Integer pageNum, Integer pageSize,String content,Long uid) {
 			//设置分页数据，开始分页
 			PageHelper.startPage(pageNum, pageSize);
 			//查询当前页的集合数据	
-			List<OffMessdetail> list = this.offMessdetailMapper.selectbycontent(content);
+			List<OffMessdetail> list = this.offMessdetailMapper.selectbycontent(content,uid);
 					//封装成pageinfo对象
 					PageInfo<OffMessdetail> page=new PageInfo<OffMessdetail>(list);
 					System.out.println("11"+page);
